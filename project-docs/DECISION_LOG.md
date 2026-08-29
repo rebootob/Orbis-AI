@@ -16,6 +16,7 @@
 | ADR-012 | Secrets and runtime credentials must never be stored in GitHub. | Accepted |
 | ADR-013 | Important sensitive/runtime data uses secure local backup rather than public Git storage. | Accepted |
 | ADR-014 | Codex Economy Principle | Accepted |
+| ADR-015 | Mandatory AI Control Plane | Accepted |
 
 ### ADR-014 — Codex Economy Principle
 
@@ -37,8 +38,6 @@ Every Codex work package should:
 **Default decision:** Do not invoke Codex unless execution is necessary.
 
 **Goal:** Minimize Codex credit consumption without reducing implementation quality or safety.
-
-| ADR-015 | Mandatory AI Control Plane | Accepted |
 
 ### ADR-015 — Mandatory AI Control Plane
 

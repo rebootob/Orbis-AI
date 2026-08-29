@@ -19,7 +19,7 @@ TARGET BRANCH:
 develop
 
 HEAD COMMIT:
-144367b938b5cf3b90dc7f987f3b5a3c1ee63e27
+1d6e071e10aeea7fccf3f2741847bde353b5d931
 
 BASE:
 develop
@@ -30,7 +30,7 @@ Record the validated Phase 1 and Phase 2 runtime baseline and prepare WP-003 for
 
 ## Implementation Summary
 
-Records the validated Hermes and private allowlisted Telegram baseline, selects WSL2 Ubuntu as the primary Hermes runtime, and defines the scoped WP-003 role-profile preparation task. No Hermes profile or runtime is modified.
+Records the validated Hermes and private allowlisted Telegram baseline, selects WSL2 Ubuntu as the primary Hermes runtime, defines the scoped WP-003 role-profile preparation task, and restores the complete Active Task contract. No Hermes profile or runtime is modified.
 
 ## Files Changed
 

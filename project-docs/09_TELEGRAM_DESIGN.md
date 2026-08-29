@@ -14,8 +14,8 @@ Telegram is the primary remote command interface. It transports requests to MAST
 
 1. Configure authorized IDs without recording them in Git.
 2. Verify an authorized Telegram → Hermes → Telegram exchange.
-3. Verify unauthorized access is denied.
-4. Verify dangerous actions still require explicit human approval.
+3. Unauthorized-user negative testing is deferred to Phase 6 security validation and was not executed as part of Phase 2.
+4. Dangerous-action negative testing is deferred to Phase 6 security validation and was not executed as part of Phase 2.
 
 ## Validated baseline
 

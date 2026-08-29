@@ -1,40 +1,58 @@
-# Active AI Task
+# ORBIS AI — ACTIVE TASK
 
-**PROJECT:**
+PROJECT:
 Orbis AI
 
-**CURRENT PHASE:**
+WORK PACKAGE:
+WP-000-CONTROL-PLANE-BOOTSTRAP
+
+STATUS:
+REVIEW_REQUESTED
+
+CONTROL PLANE:
+ChatGPT
+
+EXECUTION PLANE:
+Codex
+
+CURRENT PHASE:
 Phase 0 — Project Foundation
 
-**SUBPHASE:**
-Phase 0B — Git and Repository Baseline
+OBJECTIVE:
 
-**STATUS:**
-COMPLETED
+Establish the permanent ChatGPT → Codex → GitHub → ChatGPT governance and review workflow.
 
-**OFFICIAL REPOSITORY:**
-https://github.com/rebootob/Orbis-AI.git
+WHY:
 
-**STABLE BRANCH:**
-main
+Provide reliable project tracking, reduce Codex credit consumption, enforce security boundaries, and allow the Project Owner to request independent review using only `review`.
 
-**DEVELOPMENT BRANCH:**
+SCOPE:
+
+- `AGENTS.md`
+- `AI_CONTROL_PLANE.md`
+- Active Task contract
+- ADR-014
+- ADR-015
+- Review Gateway integration
+- stale governance documentation correction
+
+OUT OF SCOPE:
+
+- Hermes installation
+- Telegram configuration
+- n8n
+- Kintone
+- application implementation
+- production changes
+
+BASE BRANCH:
 develop
 
-**GIT STATUS:**
-CONNECTED
+WORKING BRANCH:
+ai/codex-review-gateway
 
-**BACKUP STATUS:**
-LOCAL PRE-GIT BASELINE CREATED
+TARGET:
+develop
 
-**SECURITY:**
-SECRET SCAN PASSED
-
-**CURRENT OBJECTIVE:**
-Establish architecture, governance, repository structure, and documentation.
-
-**CONSTRAINT:**
-DO NOT IMPLEMENT SOFTWARE YET.
-
-**NEXT PHASE:**
-Phase 1 — Hermes installation and baseline validation.
+NEXT GATE:
+ChatGPT Independent Review

@@ -1,0 +1,44 @@
+name: Auto PR for Codex Branches
+
+on:
+  push:
+    branches:
+      - 'ai/codex-**'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  ensure-pull-request:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Create PR if none exists
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          HEAD_BRANCH: ${{ github.ref_name }}
+        shell: bash
+        run: |
+          existing_pr="$(
+            gh pr list \
+              --repo "$REPO" \
+              --head "$HEAD_BRANCH" \
+              --base develop \
+              --state open \
+              --json number \
+              --jq '.[0].number // empty'
+          )"
+
+          if [ -n "$existing_pr" ]; then
+            echo "PR already exists: #$existing_pr"
+            exit 0
+          fi
+
+          gh pr create \
+            --repo "$REPO" \
+            --head "$HEAD_BRANCH" \
+            --base develop \
+            --title "Codex: ${HEAD_BRANCH}" \
+            --body "Automatically created for independent ChatGPT review."

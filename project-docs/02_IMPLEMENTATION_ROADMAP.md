@@ -3,8 +3,8 @@
 | Phase | Outcome | Exit condition |
 |---|---|---|
 | 0 | Repository, architecture, governance, documentation, Git baseline | Owner approves documentation baseline |
-| 1 | Hermes installed on Windows with one configured model | Basic Hermes chat is verified |
-| 2 | Private Telegram interface | Authorized-user Telegram → Hermes → Telegram test passes |
+| 1 | Hermes runtime baseline validated on WSL2 Ubuntu | systemd, `hermes doctor`, and basic chat validation pass |
+| 2 | Private allowlisted Telegram interface validated on WSL2 | Authorized-user Telegram → Hermes → Telegram round-trip passes |
 | 3 | MASTER, CODER, REVIEWER profiles | Role boundaries are exercised |
 | 4 | Skill architecture | Initial skills are documented and available |
 | 5 | Kanban and handoff | MASTER → CODER → REVIEWER → MASTER flow works |
@@ -17,6 +17,12 @@
 ## Phase 0 deliverables
 
 The documents in this repository, an initial decision log, a gitignore policy, and a safe-to-initialize repository structure. No implementation work is authorized by Phase 0.
+
+## Validated runtime baseline
+
+**Phase 1 — Complete:** Hermes is operational on WSL2 Ubuntu with systemd. `hermes doctor` and the `ORBIS-WSL-OK` basic chat test passed using the baseline model `stepfun/step-3.7-flash:free`. Windows Native Hermes is retained only as fallback.
+
+**Phase 2 — Complete:** A private, explicitly allowlisted Telegram bot completed validated Telegram → Hermes → Telegram round trips on the WSL2 systemd gateway. `ORBIS-WSL-TELEGRAM-OK`, `TEST-1`, model query, and `ORBIS-READY` passed. The Windows Native Telegram Gateway is not the primary runtime because it was unstable.
 
 ## Initial skills
 

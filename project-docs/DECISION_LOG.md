@@ -15,5 +15,35 @@
 | ADR-011 | `main` is the stable branch and `develop` is the integration branch. | Accepted |
 | ADR-012 | Secrets and runtime credentials must never be stored in GitHub. | Accepted |
 | ADR-013 | Important sensitive/runtime data uses secure local backup rather than public Git storage. | Accepted |
+| ADR-014 | Codex Economy Principle | Accepted |
+
+### ADR-014 — Codex Economy Principle
+
+**Decision:** Codex is an execution resource and must be used only when repository, terminal, implementation, testing, or Git operations are materially required.
+
+Planning, architecture, analysis, review, task decomposition, prompt preparation, governance, and decision-making should be performed by ChatGPT whenever possible.
+
+Every Codex work package should:
+
+- have a clearly defined objective;
+- specify exact scope;
+- specify affected files/components when known;
+- specify tests;
+- specify stop conditions;
+- avoid unnecessary repository exploration;
+- avoid unrelated refactoring; and
+- avoid duplicate analysis already completed by ChatGPT.
+
+**Default decision:** Do not invoke Codex unless execution is necessary.
+
+**Goal:** Minimize Codex credit consumption without reducing implementation quality or safety.
+
+| ADR-015 | Mandatory AI Control Plane | Accepted |
+
+### ADR-015 — Mandatory AI Control Plane
+
+**Decision:** All AI implementation work must follow the permanent governance in `AGENTS.md` and `project-docs/AI_CONTROL_PLANE.md`. Current implementation scope is defined by `project-docs/AI_ACTIVE_TASK.md`; completed implementation is handed to the independent reviewer through `ai-review/REVIEW_HANDOFF.md`.
+
+**Status:** Accepted
 
 Future decisions should include context, alternatives, consequences, owner, and date. No implementation decision changes an accepted ADR without owner review.

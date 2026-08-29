@@ -45,4 +45,10 @@ flowchart TD
 
 V1 does not include a custom dashboard, large agent fleet, complex model voting or routing, custom memory/Kanban systems, unnecessary custom MCP servers, or production integrations. See the roadmap for the staged scope.
 
-Do not commit or push this repository until its owner has reviewed the Phase 0 documentation.
+## Git governance
+
+- `main` is the stable, approved, and recoverable branch.
+- `develop` is the integration branch.
+- Implementation work uses `feature/*`, `ai/codex-*`, or `hotfix/*` branches; significant changes are not made directly on `main` or normally on `develop`.
+- Reviewable changes go through a Pull Request targeting `develop`; review approval and merge authorization are separate actions.
+- Production or destructive actions require explicit human approval.

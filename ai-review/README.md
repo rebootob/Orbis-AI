@@ -8,8 +8,8 @@ Before executing a Work Package, Codex must read `AGENTS.md` → `project-docs/A
 
 1. Codex implements and tests a work package on `ai/codex-<work-package>`.
 2. Codex inspects the diff, runs security/secret checks, commits, and pushes the branch.
-3. Codex opens or updates a pull request from that branch to `develop`.
-4. Codex updates [REVIEW_HANDOFF.md](REVIEW_HANDOFF.md) truthfully and sets `REVIEW STATUS` to `REVIEW_REQUESTED`.
+3. Codex pushes the branch; GitHub Actions creates or maintains its Pull Request to `develop`.
+4. Codex updates [REVIEW_HANDOFF.md](REVIEW_HANDOFF.md) truthfully and sets `REVIEW STATUS` to `REVIEW_REQUESTED`. If a PR number is not available locally, use `PULL REQUEST: AUTO_DISCOVER`; ChatGPT discovers it by source branch.
 5. The project owner says only `review`.
 6. ChatGPT inspects GitHub directly: this handoff, the active task, the referenced pull request and diff, relevant architecture/security policies, tests, and branch/commit state.
 7. ChatGPT returns `REVIEW PASS`, `REQUEST CHANGES`, or `BLOCKED`.
@@ -18,7 +18,7 @@ The project owner does not need to manually copy routine terminal output, screen
 
 ## Review contract
 
-Before requesting review, Codex must finish scope, run relevant tests, inspect the diff, run security checks, commit, push, create/update the pull request, and update the handoff. Codex may set only `NOT_READY`, `REVIEW_REQUESTED`, or `CHANGES_REQUESTED`; only the independent reviewer may set `REVIEW_PASS`.
+Before requesting review, Codex must finish scope, run relevant tests, inspect the diff, run security checks, commit, push, and update the handoff. GitHub Actions creates or maintains the Pull Request. Codex may set only `NOT_READY`, `REVIEW_REQUESTED`, or `CHANGES_REQUESTED`; only the independent reviewer may set `REVIEW_PASS`.
 
 The reviewer uses these severities: **BLOCKER** (must fix before merge), **MAJOR** (normally must fix), **MINOR**, and **NOTE**. A review can pass only with zero BLOCKER and zero MAJOR findings.
 

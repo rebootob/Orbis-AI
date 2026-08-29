@@ -4,13 +4,13 @@ PROJECT:
 Orbis AI
 
 REVIEW STATUS:
-NOT_READY
+REVIEW_REQUESTED
 
 WORK PACKAGE:
 WP-000-CONTROL-PLANE-BOOTSTRAP
 
 PULL REQUEST:
-PENDING — authenticated GitHub Pull Request permission is required
+AUTO_DISCOVER
 
 SOURCE BRANCH:
 ai/codex-review-gateway
@@ -19,7 +19,7 @@ TARGET BRANCH:
 develop
 
 HEAD COMMIT:
-e9bda04398216475051a58fe79de0f5c64d68324 (governance implementation commit)
+32d61180e0ec1c04efd8597a23412dbe109b6533
 
 BASE:
 develop
@@ -64,7 +64,7 @@ LOW — this work changes documentation and Pull Request metadata only; it does 
 
 ## Known Limitations
 
-Pull Request creation requires authenticated GitHub write access. No runtime configuration or application changes are included.
+GitHub Actions creates or maintains the Pull Request after branch push. Codex does not query the PR number. No runtime configuration or application changes are included.
 
 ## Rollback Plan
 
@@ -72,7 +72,7 @@ Revert the Review Gateway commits, or close the Pull Request without merging. No
 
 ## Open Issues
 
-GitHub Pull Request permission must be available before the review request can be completed.
+NONE
 
 ## Reviewer Attention
 

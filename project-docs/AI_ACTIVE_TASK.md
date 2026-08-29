@@ -7,7 +7,7 @@ WORK PACKAGE:
 WP-000-CONTROL-PLANE-BOOTSTRAP
 
 STATUS:
-BLOCKED
+REVIEW_REQUESTED
 
 CONTROL PLANE:
 ChatGPT
@@ -55,4 +55,4 @@ TARGET:
 develop
 
 NEXT GATE:
-GitHub authentication with Pull Request write permission, then ChatGPT Independent Review
+ChatGPT Independent Review

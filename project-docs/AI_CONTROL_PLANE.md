@@ -36,7 +36,9 @@ Perform only current Work Package work. Unless required, do not redesign archite
 
 ## 7. Git governance
 
-Official repository: `rebootob/Orbis-AI`. `main` is stable, `develop` is integration, and Codex implementation uses `ai/codex-*` branches. Normal flow: `develop` → `ai/codex-<work-package>` → targeted tests → commit → push → Pull Request → independent review → `develop`.
+Official repository: `rebootob/Orbis-AI`. `main` is stable, `develop` is integration, and Codex implementation uses `ai/codex-*` branches. Normal flow: ChatGPT prepares a Work Package → Codex implements/tests/commits/`git push`es → GitHub Actions creates or maintains the Pull Request → Codex sets `REVIEW_REQUESTED` → the Project Owner says `review` → ChatGPT discovers the PR by source branch and reviews independently.
+
+Codex must not depend on a local `gh` installation or a PR number to complete handoff. When the PR number cannot be queried, use `PULL REQUEST: AUTO_DISCOVER`; ChatGPT discovers the actual PR from GitHub using the source branch.
 
 No normal development on `main`, no force push/history rewrite/silent discard, inspect diff before commit, perform secret check before push, and keep review and merge as separate gates.
 

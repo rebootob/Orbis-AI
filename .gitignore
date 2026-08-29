@@ -1,0 +1,44 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+config/.env
+credentials/
+private/
+*.key
+*.pem
+*.p12
+*.pfx
+secrets/
+id_rsa
+id_ed25519
+credentials.json
+secrets.json
+
+# Local state and logs
+logs/
+tmp/
+temp/
+cache/
+*.log
+*.sqlite
+*.sqlite3
+*.db
+
+# Dependencies and generated output
+__pycache__/
+node_modules/
+dist/
+build/
+coverage/
+
+# Local backups
+Orbis-AI-Backups/
+backup/
+backups/
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

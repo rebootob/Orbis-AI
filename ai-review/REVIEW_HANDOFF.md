@@ -13,31 +13,28 @@ PULL REQUEST:
 AUTO_DISCOVER
 
 SOURCE BRANCH:
-ai/codex-wp-003-prep
+ai/codex-wp-003-execution-gate
 
 TARGET BRANCH:
 develop
 
 HEAD COMMIT:
-1d6e071e10aeea7fccf3f2741847bde353b5d931
+b64f141ea8350c367b8b916b0ee03874717e1304
 
 BASE:
 develop
 
 ## Objective
 
-Record the validated Phase 1 and Phase 2 runtime baseline and prepare WP-003 for Hermes role profiles.
+Authorize the WP-003 execution gate for isolated Hermes role validation after independent review and merge.
 
 ## Implementation Summary
 
-Records the validated Hermes and private allowlisted Telegram baseline, selects WSL2 Ubuntu as the primary Hermes runtime, defines the scoped WP-003 role-profile preparation task, and restores the complete Active Task contract. No Hermes profile or runtime is modified.
+Defines the approved Phase 3 execution boundaries for future interactive WSL2 validation: default MASTER, blank coder/reviewer profiles, MASTER-only Telegram, isolated state, and no credential cloning. No Hermes profile, WSL setting, or runtime is modified by this Pull Request.
 
 ## Files Changed
 
-- `project-docs/02_IMPLEMENTATION_ROADMAP.md`
-- `project-docs/09_TELEGRAM_DESIGN.md`
 - `project-docs/AI_ACTIVE_TASK.md`
-- `project-docs/DECISION_LOG.md`
 - `ai-review/REVIEW_HANDOFF.md`
 
 ## Tests Executed
@@ -47,23 +44,23 @@ Records the validated Hermes and private allowlisted Telegram baseline, selects 
 
 ## Test Results
 
-PASS — documentation validation completed.
+PASS — execution-gate documentation validation completed.
 
 ## Security Validation
 
-PASS — no credentials, tokens, private keys, `.env` values, numeric Telegram user IDs, or runtime secrets were introduced.
+PASS — no credentials, tokens, private keys, `.env` values, numeric Telegram user IDs, credential cloning, or runtime secrets were introduced.
 
 ## Regression Risk
 
-LOW — documentation and governance metadata only; it does not alter runtime behavior.
+LOW — execution-gate documentation only; it does not alter runtime behavior.
 
 ## Known Limitations
 
-GitHub Actions creates or maintains the Pull Request after branch push. Codex does not query the PR number. Hermes profiles and runtime configuration are intentionally not changed.
+GitHub Actions creates or maintains the Pull Request after branch push. Interactive runtime work remains outside Codex and occurs only after review and merge.
 
 ## Rollback Plan
 
-Close the Pull Request without merging, or revert this documentation commit. No runtime or production state is changed.
+Close the Pull Request without merging, or revert this documentation commit. If post-merge validation fails, delete only coder/reviewer profiles; do not touch default MASTER.
 
 ## Open Issues
 
@@ -71,4 +68,4 @@ NONE
 
 ## Reviewer Attention
 
-Phase 1–2 baseline record accuracy, WSL2 runtime decision, WP-003 role-boundary scope, and absence of credentials.
+Phase 3 execution boundaries, MASTER-only Telegram design, no-clone/no-credential safeguards, and separation of Codex from local runtime work.

@@ -17,6 +17,7 @@
 | ADR-013 | Important sensitive/runtime data uses secure local backup rather than public Git storage. | Accepted |
 | ADR-014 | Codex Economy Principle | Accepted |
 | ADR-015 | Mandatory AI Control Plane | Accepted |
+| ADR-016 | WSL2 Ubuntu is the primary Hermes runtime for Orbis AI. Windows Native Hermes is retained only as fallback because the Telegram gateway proved unstable on the current Windows-native runtime. | Accepted |
 
 ### ADR-014 — Codex Economy Principle
 
@@ -42,6 +43,12 @@ Every Codex work package should:
 ### ADR-015 — Mandatory AI Control Plane
 
 **Decision:** All AI implementation work must follow the permanent governance in `AGENTS.md` and `project-docs/AI_CONTROL_PLANE.md`. Current implementation scope is defined by `project-docs/AI_ACTIVE_TASK.md`; completed implementation is handed to the independent reviewer through `ai-review/REVIEW_HANDOFF.md`.
+
+**Status:** Accepted
+
+### ADR-016 — Primary Hermes Runtime
+
+**Decision:** WSL2 Ubuntu is the primary Hermes runtime for Orbis AI. Windows Native Hermes is retained only as fallback because the Telegram gateway proved unstable on the current Windows-native runtime.
 
 **Status:** Accepted
 

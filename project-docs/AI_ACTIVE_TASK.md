@@ -1,61 +1,34 @@
 # ORBIS AI — ACTIVE TASK
 
-PROJECT:
-Orbis AI
-
 WORK PACKAGE:
-WP-000-CONTROL-PLANE-BOOTSTRAP
-
-WORK PACKAGE STATUS:
-COMPLETE
+WP-003-HERMES-ROLE-PROFILES
 
 STATUS:
-COMPLETED
-
-CONTROL PLANE:
-ChatGPT
-
-EXECUTION PLANE:
-Codex
+READY_FOR_CODEX
 
 CURRENT PHASE:
-Phase 0 — Project Foundation
+Phase 3 — MASTER / CODER / REVIEWER Profiles
 
 OBJECTIVE:
 
-Establish the permanent ChatGPT → Codex → GitHub → ChatGPT governance and review workflow.
+Define and validate three isolated Hermes roles: MASTER, CODER, REVIEWER.
 
-WHY:
+ARCHITECTURE:
 
-Provide reliable project tracking, reduce Codex credit consumption, enforce security boundaries, and allow the Project Owner to request independent review using only `review`.
+- Default/main Hermes profile acts as MASTER.
+- Create separate `coder` and `reviewer` profiles.
+- Telegram Gateway remains MASTER-only.
+- CODER and REVIEWER must NOT have Telegram gateway credentials.
+- No agent-to-agent automation yet.
+- No Kanban orchestration yet.
+- No n8n / MCP / Kintone yet.
 
-SCOPE:
+ACCEPTANCE:
 
-- `AGENTS.md`
-- `AI_CONTROL_PLANE.md`
-- Active Task contract
-- ADR-014
-- ADR-015
-- Review Gateway integration
-- stale governance documentation correction
-
-OUT OF SCOPE:
-
-- Hermes installation
-- Telegram configuration
-- n8n
-- Kintone
-- application implementation
-- production changes
-
-BASE BRANCH:
-develop
-
-WORKING BRANCH:
-ai/codex-review-gateway
-
-TARGET:
-develop
-
-NEXT GATE:
-Phase 1 Work Package preparation
+- MASTER role boundary validated.
+- CODER role boundary validated.
+- REVIEWER role boundary validated.
+- CODER cannot self-approve.
+- REVIEWER reviews only and does not silently modify work.
+- Profile state is isolated.
+- No duplicate Telegram credentials in worker profiles.

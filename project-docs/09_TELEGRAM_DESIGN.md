@@ -1,6 +1,6 @@
 # Telegram Design
 
-Telegram is the planned primary remote command interface, introduced in Phase 2. It transports requests to MASTER Hermes and returns scoped task updates or results.
+Telegram is the primary remote command interface. It transports requests to MASTER Hermes and returns scoped task updates or results.
 
 ## Required controls
 
@@ -12,9 +12,11 @@ Telegram is the planned primary remote command interface, introduced in Phase 2.
 
 ## Validation path
 
-1. Configure authorized IDs as `<TO_BE_DEFINED>`.
+1. Configure authorized IDs without recording them in Git.
 2. Verify an authorized Telegram → Hermes → Telegram exchange.
 3. Verify unauthorized access is denied.
 4. Verify dangerous actions still require explicit human approval.
 
-No Telegram configuration is present in this Phase 0 repository.
+## Validated baseline
+
+Phase 2 validation passed using Hermes on WSL2 Ubuntu: the private allowlisted Telegram route completed successful round trips. The WSL2 systemd gateway is the preferred runtime. Telegram user IDs, bot tokens, and other credentials are intentionally not recorded here. The Windows Native Telegram Gateway is retained only as a non-primary fallback because it was unstable.

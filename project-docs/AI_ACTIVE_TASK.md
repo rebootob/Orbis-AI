@@ -7,7 +7,7 @@ WORK PACKAGE:
 WP-003-HERMES-ROLE-PROFILES
 
 STATUS:
-REVIEW_REQUESTED
+READY_FOR_CODEX
 
 CONTROL PLANE:
 ChatGPT
@@ -20,74 +20,78 @@ Phase 3 — MASTER / CODER / REVIEWER Profiles
 
 OBJECTIVE:
 
-Define and validate three isolated Hermes roles: MASTER, CODER, REVIEWER.
+Create and validate three isolated Hermes roles on the established WSL2 Ubuntu runtime.
 
 WHY:
 
-Establish role boundaries before any agent delegation or orchestration is introduced.
+Establish isolated role boundaries before agent-to-agent automation, Kanban, MCP, n8n, or project execution is introduced.
 
 SCOPE:
 
-- Prepare the WP-003 role-profile contract and review metadata only.
-- Preserve MASTER as the default/main Hermes profile and define separate `coder` and `reviewer` profiles for future execution after approval.
+- Default Hermes profile remains MASTER.
+- Create blank Hermes profile `coder`.
+- Create blank Hermes profile `reviewer`.
+- Define MASTER, CODER, REVIEWER role boundaries.
+- Validate profile isolation and role behavior.
+- Verify Telegram remains MASTER-only.
+- Record validation evidence.
+
+IMPORTANT EXECUTION DESIGN:
+
+- Never use `--clone` or `--clone-all`.
+- Do not copy MASTER `.env`, Telegram credentials, or other secrets.
+- Do not install coder/reviewer gateways or enable multiplex profile gateway.
+- Only MASTER/default gateway may remain active.
+- Runtime commands are performed interactively on the owner's WSL2 host under ChatGPT guidance; Codex repository work is limited to governance/evidence recording.
 
 OUT OF SCOPE:
 
-- Creating Hermes profiles or modifying runtime configuration.
-- Hermes, Telegram, WSL, model, credential, or secret changes.
-- Agent-to-agent automation, Kanban orchestration, n8n, MCP, Kintone, application implementation, and production changes.
+- Agent-to-agent automation, Kanban, n8n, MCP, Kintone, Project Registry, production automation, additional Telegram bots, additional gateways, changing the current MASTER model, and Hermes upgrade.
 
 EXPECTED COMPONENTS:
 
-- Default/main Hermes profile as future MASTER.
-- Future isolated `coder` and `reviewer` profiles.
-- MASTER-only Telegram Gateway.
+- `default` = MASTER
+- `coder` = CODER
+- `reviewer` = REVIEWER
 
 REQUIRED CONTEXT:
 
 - `AGENTS.md`
 - `project-docs/AI_CONTROL_PLANE.md`
 - `project-docs/03_AGENT_ROLES.md`
-- `project-docs/04_SECURITY_POLICY.md`
-- `project-docs/05_APPROVAL_POLICY.md`
 
 IMPLEMENTATION INSTRUCTIONS:
 
-- This Pull Request is preparation only.
-- Do not begin Phase 3 execution until independent review passes, the Pull Request is merged, and a subsequent Active Task authorizes execution.
-- CODER and REVIEWER must not receive Telegram gateway credentials.
-- No agent-to-agent automation, Kanban orchestration, n8n, MCP, or Kintone work is authorized.
+- After this gate is merged, execute the validation sequence on the owner's WSL2 host under ChatGPT guidance only.
+- Codex must not access or modify WSL, local Hermes, runtime configuration, or credentials.
 
 TEST REQUIREMENTS:
 
-- Validate this documentation contract and changed-file secret scan only.
-- Phase 3 role-boundary validation is deferred until explicit execution authorization.
+After this gate is merged, perform: `hermes profile list`; create blank `coder`; create blank `reviewer`; verify independent home/state; verify MASTER Telegram; verify coder/reviewer have no Telegram gateway credentials; test CODER and REVIEWER role boundaries; and verify `default` remains MASTER.
 
 SECURITY REQUIREMENTS:
 
-- Do not record or duplicate Telegram credentials, user IDs, tokens, OAuth data, `.env` values, or runtime secrets.
-- Worker profiles must remain isolated and must not receive Telegram gateway credentials when Phase 3 is authorized.
+- No Telegram token/user ID, `.env` value, credential cloning, worker messaging-gateway credential, or secret in Git/review handoff.
 
 BASE BRANCH:
 develop
 
 WORKING BRANCH:
-ai/codex-wp-003-prep
+ai/codex-wp-003-execution-gate
 
 TARGET:
 develop
 
 ROLLBACK:
 
-Close this Pull Request without merging, or revert its documentation commits. No runtime state is changed.
+If Phase 3 validation fails, delete only the newly created `coder` and `reviewer` profiles. Do not touch the default MASTER profile.
 
 DELIVERABLES:
 
-- Complete WP-003 preparation contract.
-- Updated review handoff for independent review.
-- Explicit Phase 1–2 runtime baseline documentation.
+- Approved WP-003 execution gate.
+- Validation evidence recorded after interactive runtime work.
 
 STOP CONDITIONS:
 
-- Stop after this Pull Request is prepared for independent review.
-- Do not create Hermes profiles, modify runtime, or begin Phase 3 execution.
+- Stop this Codex task after documentation is committed, pushed, and handed off for independent review.
+- Do not create Hermes profiles, modify WSL, or modify local Hermes in this task.

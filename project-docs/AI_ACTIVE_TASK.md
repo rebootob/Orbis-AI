@@ -7,7 +7,7 @@ WORK PACKAGE:
 WP-003-HERMES-ROLE-PROFILES
 
 STATUS:
-READY_FOR_CODEX
+REVIEW_REQUESTED
 
 CONTROL PLANE:
 ChatGPT
@@ -77,7 +77,7 @@ BASE BRANCH:
 develop
 
 WORKING BRANCH:
-ai/codex-wp-003-execution-gate
+ai/codex-wp-003-coder-evidence
 
 TARGET:
 develop
@@ -91,7 +91,22 @@ DELIVERABLES:
 - Approved WP-003 execution gate.
 - Validation evidence recorded after interactive runtime work.
 
+CODER VALIDATION EVIDENCE:
+
+- Profile path: `/home/allday/.hermes/profiles/coder`
+- Configured model: `stepfun/step-3.7-flash:free`
+- Coder setup: PASS
+- Profile isolation: PASS
+- Coder gateway: not running
+- Default MASTER gateway: running
+- `ORBIS-CODER-OK` test: PASS
+- Blocker: NONE
+
+REVIEWER STATUS:
+
+- NOT TESTED — reviewer profile has not been created.
+
 STOP CONDITIONS:
 
-- Stop this Codex task after documentation is committed, pushed, and handed off for independent review.
-- Do not create Hermes profiles, modify WSL, or modify local Hermes in this task.
+- Stop this Codex task after the CODER evidence is committed, pushed, and handed off for independent review.
+- Do not create reviewer or modify runtime in this task.

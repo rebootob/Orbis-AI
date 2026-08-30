@@ -6,37 +6,34 @@ STATUS: IMPLEMENTATION — BACKUP EXECUTION / MANIFEST VALIDATION
 
 ---
 
-## 1. Backup Summary
+## 1. Backup Attempts Summary
 
-| Field | Value |
-|---|---|
-| Backup ID | `20260830-224459` |
-| Created at | 2026-08-30T22:45:59 |
-| Source host | sleep-cat |
-| Source OS | Ubuntu 26.04.1 LTS (WSL2) |
-| Hermes version | v0.20.6 (2026.8.27) |
-| Hermes upstream commit | dce2ecb8 |
-| Hermes local patch | 1c5ee581 |
-| Repository | rebootob/Orbis-AI |
-| Develop commit | a7789317931894366dba8f8d3e4b04d659ee6d4f |
-| Backup design reference | develop@a778931 |
-| Recovery readiness | YES |
-| Backup status | COMPLETE |
-| Partial/failed items | 0 |
+| Attempt | Backup ID | Acceptance | Reason |
+|---|---|---|---|
+| 1 | `20260830-224459` | REJECTED | Canonical `*.lock` exclusion mismatch |
+| 2 | `20260830-231125` | PENDING_REVIEW | Corrected exclusion set |
+
+Attempt 1 backup was preserved without modification for audit evidence:
+- Path: `/home/allday/.hermes/backups/wp005c-runtime-backup/20260830-224459/`
+- Manifest: preserved
+- Checksums: preserved
+- No alteration to source backup files.
+
+Attempt 2 backup created with canonical exclusions enforced.
 
 ## 2. Backup Destination
 
 | Field | Value |
 |---|---|
-| Backup root | `/home/allday/.hermes/backups/wp005c-runtime-backup/20260830-224459/` |
-| Manifest | `/home/allday/.hermes/backups/wp005c-runtime-backup/20260830-224459/manifests/BACKUP_MANIFEST.txt` |
-| Checksums | `/home/allday/.hermes/backups/wp005c-runtime-backup/20260830-224459/checksums/SHA256SUMS.txt` |
+| Backup root | `/home/allday/.hermes/backups/wp005c-runtime-backup/20260830-231125/` |
+| Manifest | `/home/allday/.hermes/backups/wp005c-runtime-backup/20260830-231125/manifests/BACKUP_MANIFEST.txt` |
+| Checksums | `/home/allday/.hermes/backups/wp005c-runtime-backup/20260830-231125/checksums/SHA256SUMS.txt` |
 | Secondary copy | NOT_YET_CREATED — no approved external/offline destination was available |
 
 ## 3. Backup Structure
 
 ```
-20260830-224459/
+20260830-231125/
 ├── checksums/SHA256SUMS.txt
 ├── manifests/BACKUP_MANIFEST.txt
 ├── profiles/
@@ -45,16 +42,27 @@ STATUS: IMPLEMENTATION — BACKUP EXECUTION / MANIFEST VALIDATION
 │   └── REVIEWER/
 ├── repo/                        (empty; Git is source of truth)
 ├── runtime/
-│   └── .skills_prompt_snapshot.json
+│   ├── .skills_prompt_snapshot.json
+│   └── databases/
+│       ├── state.db
+│       ├── kanban.db
+│       ├── projects.db
+│       ├── verification_evidence.db
+│       ├── coder_state.db
+│       ├── reviewer_state.db
+│       ├── coder_projects.db
+│       └── reviewer_projects.db
 ├── services/
-│   ├── gateway.lock
-│   ├── gateway.log
-│   ├── gateway.pid
 │   ├── gateway_state.json
 │   └── hermes-gateway.service
 └── system/
     └── authorized_keys
 ```
+
+Excluded per canonical design:
+- `gateway.lock` (`*.lock`)
+- `gateway.log` (runtime log, NOT_REQUIRED_BY_DESIGN)
+- `.env`, `auth.json`, private keys, tokens, session secrets, production credentials
 
 ## 4. Backup Validation Matrix
 
@@ -69,6 +77,11 @@ STATUS: IMPLEMENTATION — BACKUP EXECUTION / MANIFEST VALIDATION
 | SECRET_EXCLUSION | PASS |
 | CHECKSUM_VERIFY | PASS |
 | INVENTORY_ITEMS_UNACCOUNTED_FOR | 0 |
+| LOCK_FILE_COUNT | 0 |
+| ENV_FILE_COUNT | 0 |
+| AUTH_JSON_COUNT | 0 |
+| PRIVATE_KEY_COUNT | 0 |
+| SECRET_FILE_POLICY | PASS |
 
 ## 5. Secret Exclusion
 
@@ -117,13 +130,29 @@ This does not invalidate the primary backup.
 
 ## 9. Evidence
 
-- Manifest path: `/home/allday/.hermes/backups/wp005c-runtime-backup/20260830-224459/manifests/BACKUP_MANIFEST.txt`
+### Attempt 1 (REJECTED)
+- Backup ID: `20260830-224459`
+- Path: `/home/allday/.hermes/backups/wp005c-runtime-backup/20260830-224459/`
+- Manifest: `/home/allday/.hermes/backups/wp005c-runtime-backup/20260830-224459/manifests/BACKUP_MANIFEST.txt`
 - Checksum file: `/home/allday/.hermes/backups/wp005c-runtime-backup/20260830-224459/checksums/SHA256SUMS.txt`
 - Checksum verification: PASS
 - Total manifest items: 36
 - Backed up items: 32
 - Secret recovery required items: 4
 - Inventory items unaccounted for: 0
+- BACKUP_ACCEPTANCE=REJECTED
+- REJECTION_REASON=CANONICAL_EXCLUSION_MISMATCH
+- SOURCE_BACKUP_PRESERVED=YES
+
+### Attempt 2 (Corrected)
+- Backup ID: `20260830-231125`
+- Path: `/home/allday/.hermes/backups/wp005c-runtime-backup/20260830-231125/`
+- Manifest: `/home/allday/.hermes/backups/wp005c-runtime-backup/20260830-231125/manifests/BACKUP_MANIFEST.txt`
+- Checksum file: `/home/allday/.hermes/backups/wp005c-runtime-backup/20260830-231125/checksums/SHA256SUMS.txt`
+- Checksum verification: PASS (recomputed after removing excluded files)
+- Lock files included: 0
+- Secret files included: 0
+- BACKUP_ACCEPTANCE=PENDING_REVIEW
 
 ## 10. Owner Actions Required
 

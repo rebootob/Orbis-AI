@@ -4,10 +4,10 @@ PROJECT:
 Orbis AI
 
 WORK PACKAGE:
-WP-005C — PLANNING / NOT STARTED
+WP-005C — IMPLEMENTATION — RUNTIME INVENTORY / BACKUP DESIGN
 
 STATUS:
-WP-005C PLANNING / NOT STARTED
+IMPLEMENTATION — RUNTIME INVENTORY / BACKUP DESIGN
 WP-005B = COMPLETE / MERGED (merge commit 5fe175efc4e4f9933299b14151919709c69769b3)
 
 CURRENT PHASE:
@@ -226,20 +226,28 @@ All blocks complete and merged into develop:
 
 Merge commit: 5fe175efc4e4f9933299b14151919709c69769b3
 
-WP-005C: NOT STARTED.
+WP-005C: IMPLEMENTATION — RUNTIME INVENTORY / BACKUP DESIGN.
+
+## Current WP-005C Objective
+
+Make the Orbis AI Hermes runtime recoverable, portable, and migration-ready without
+relying on chat history, while preserving all required integrations, profiles,
+Core Skills, and authentication state.
+
+## WP-005C Status
+
+- Runtime inventory complete: see `project-docs/WP-005C_RUNTIME_INVENTORY.md`
+- Backup design complete: see `project-docs/WP-005C_BACKUP_DESIGN.md`
+- Secure credential recovery inventory complete: documented in runtime inventory
+- Recovery readiness: FAIL until Project Owner confirms secure recovery sources exist and are accessible
 
 ## Next Step
 
-Define WP-005C scope and task contract before implementation.
+Complete Project Owner review of:
+- runtime inventory
+- backup design
+- credential recovery sources
 
-Required WP-005C task contract elements:
-- objective
-- scope
-- out-of-scope
-- acceptance criteria
-- permission level
-- tests
-- rollback
-- stop conditions
+Only after approval proceed to backup execution, migration validation, or cutover planning.
 
-Do not begin WP-005C implementation until its task contract is approved.
+Do not expand scope beyond Runtime Inventory / Backup Design without explicit approval.

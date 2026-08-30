@@ -153,18 +153,21 @@ Observation:
 | Field | Value |
 |---|---|
 | SSH daemon status | active |
-| Loopback binding | observed |
-| SSH port | `ss` output did not show `:22` or `:2222` listeners in the sampled discovery; `PermitRootLogin` / `PasswordAuthentication` directives were not found in `/etc/ssh/sshd_config` via this inspection. |
-| Authentication method | ED25519 key-only per project contract |
+| WSL-side listener observation | `ss` output captured during this inventory did not list `:22` or `:2222` listeners; this is a sampled observation, not proof that port 2222 is absent. |
+| Windows-side loopback/forwarding mechanism | UNKNOWN — not proven by safe read-only WSL-side discovery. |
+| Desktop target | `127.0.0.1:2222` per approved Phase 5 architecture and WP-005B evidence |
+| Authentication method | ED25519 key-only |
 | Authorized keys | `/home/allday/.ssh/authorized_keys` |
 | Desktop SSH sessions | `/home/allday/.hermes/desktop-ssh/` contains session dirs: `1c2c...`, `b5568...`, `f89bea...` |
 | Desktop session artifacts | Each session contains `backend.lock.json` + log file. Lock fields present: ownershipId, spawnNonce, pid, port, profile, hermesPath, hermesHome, logPath, tokenFingerprint, protocolVersion, startedAt, creationTime, schemaVersion. |
 | Windows local backend state | NO detected Windows-local Hermes backend in this inspection. Desktop sessions point to WSL2 Hermes home and executable path. |
 | Windows duplicate runtime | NO second Orbis runtime detected. |
+| Last validated Desktop-to-WSL connection | PASS — WP-005B B4 evidence |
 
 Required guard values:
 - `WINDOWS_LOCAL_HERMES_BACKEND_RUNNING=NO`
 - `DUPLICATE_ACTIVE_ORBIS_RUNTIME=NO`
+- `WINDOWS_LOOPBACK_FORWARDING_MECHANISM=UNKNOWN`
 
 If Windows-local bootstrap/install is detected in later phases:
 - STOP
@@ -196,7 +199,7 @@ Classification for runtime-critical items not recoverable from Git alone.
 
 | Item | Path/Reference | Classification |
 |---|---|---|
-| Hermes root SOUL | `/home/allday/.hermes/SOUL.md` | GIT_SOURCE — not currently in repo; requires explicit backup |
+| Hermes root SOUL | `/home/allday/.hermes/SOUL.md` | BACKUP_REQUIRED |
 | Hermes root config | `/home/allday/.hermes/config.yaml` | BACKUP_REQUIRED |
 | Root auth JSON | `/home/allday/.hermes/auth.json` | SECRET_RECOVERY_REQUIRED |
 | Root .env | `/home/allday/.hermes/.env` | SECRET_RECOVERY_REQUIRED |
@@ -210,7 +213,7 @@ Classification for runtime-critical items not recoverable from Git alone.
 | Gateway lock/pid/sock | `/home/allday/.hermes/gateway.{lock,pid,sock}` | BACKUP_REQUIRED |
 | Gateway state | `/home/allday/.hermes/gateway_state.json` | BACKUP_REQUIRED |
 | Gateway logs | `/home/allday/.hermes/logs/gateway.log` | BACKUP_REQUIRED |
-| CODER SOUL | `/home/allday/.hermes/profiles/coder/SOUL.md` | GIT_SOURCE — not currently in repo; requires explicit backup |
+| CODER SOUL | `/home/allday/.hermes/profiles/coder/SOUL.md` | BACKUP_REQUIRED |
 | CODER config | `/home/allday/.hermes/profiles/coder/config.yaml` | BACKUP_REQUIRED |
 | CODER .env | `/home/allday/.hermes/profiles/coder/.env` | SECRET_RECOVERY_REQUIRED |
 | CODER auth | `/home/allday/.hermes/profiles/coder/auth.json` | SECRET_RECOVERY_REQUIRED |
@@ -221,7 +224,7 @@ Classification for runtime-critical items not recoverable from Git alone.
 | CODER cron | `/home/allday/.hermes/profiles/coder/cron/` | BACKUP_REQUIRED |
 | CODER skills runtime | `/home/allday/.hermes/profiles/coder/skills/` | BACKUP_REQUIRED |
 | CODER processes | `/home/allday/.hermes/profiles/coder/processes.json` | BACKUP_REQUIRED |
-| REVIEWER SOUL | `/home/allday/.hermes/profiles/reviewer/SOUL.md` | GIT_SOURCE — not currently in repo; requires explicit backup |
+| REVIEWER SOUL | `/home/allday/.hermes/profiles/reviewer/SOUL.md` | BACKUP_REQUIRED |
 | REVIEWER config | `/home/allday/.hermes/profiles/reviewer/config.yaml` | BACKUP_REQUIRED |
 | REVIEWER .env | `/home/allday/.hermes/profiles/reviewer/.env` | SECRET_RECOVERY_REQUIRED |
 | REVIEWER auth | `/home/allday/.hermes/profiles/reviewer/auth.json` | SECRET_RECOVERY_REQUIRED |
@@ -233,7 +236,7 @@ Classification for runtime-critical items not recoverable from Git alone.
 | SSH authorized keys | `/home/allday/.ssh/authorized_keys` | BACKUP_REQUIRED |
 | SSH host keys | `/etc/ssh/ssh_host_*_key` | REGENERATABLE |
 | Desktop SSH trust state | `/home/allday/.hermes/desktop-ssh/` | BACKUP_REQUIRED |
-| Hermes install dir | `/home/allday/.hermes/hermes-agent/` | BACKUP_REQUIRED or REGENERATABLE via install/reinstall |
+| Hermes install dir | `/home/allday/.hermes/hermes-agent/` | REGENERATABLE |
 | Venv | `/home/allday/.hermes/hermes-agent/venv/` | REGENERATABLE |
 | Channel directory | `/home/allday/.hermes/channel_directory.json` | BACKUP_REQUIRED |
 | Install ID | `/home/allday/.hermes/install_id` | BACKUP_REQUIRED |
@@ -241,8 +244,9 @@ Classification for runtime-critical items not recoverable from Git alone.
 | Models cache files | `models_dev_cache.json`, `provider_models_cache.json`, etc. | REGENERATABLE |
 
 Notes:
-- `GIT_SOURCE` here means “not currently tracked in Git”; it does not imply these files are safely recoverable without backup. They still require explicit backup or documented recovery.
-- Any classification may change after the Secure Credential Recovery inventory is completed.
+- Classification is based on current repository/architecture facts, not on whether a file is recoverable by chance.
+- If a new canonical repository source is later approved for any item here, its classification may change.
+- Secure-recovery items are tracked separately in Section 10.
 
 ---
 

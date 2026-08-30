@@ -23,20 +23,21 @@ Codex is not used.
 BASE BRANCH:
 develop
 
-BASE COMMIT:
-9f8aedd938191079cc67070ad7941bcdc9f12080
-
 WORKING BRANCH:
-develop
+ai/wp-005c-runtime-inventory-backup-design
 
 TARGET:
 develop
 
 ## Objective
 
-Activate the approved Phase 5 Kanban/Handoff behavior in the existing WSL2
-Hermes runtime and connect Hermes Desktop as an optional operator console
-without creating a second Orbis runtime.
+Document the current Hermes/Orbis runtime state and design the backup/restore
+architecture for WP-005C without modifying runtime behavior, creating backups,
+or starting migration.
+
+Current approved implementation scope is limited to:
+- Runtime Inventory
+- Backup Design
 
 ## Runtime Architecture
 
@@ -45,13 +46,11 @@ without creating a second Orbis runtime.
 - CODER = `coder` Hermes profile.
 - REVIEWER = `reviewer` Hermes profile.
 - Telegram = remote command interface.
-- Hermes Desktop = optional operator console.
+- Hermes Desktop = optional operator console connected via SSH.
 - GitHub Issues = canonical task/Kanban source of truth.
 - GitHub/Git = implementation and audit evidence.
 
-Hermes Desktop connects to the approved WSL2 Hermes backend via SSH.
-
-Architecture:
+Hermes Desktop connects to the approved WSL2 Hermes backend via SSH:
 
 Windows Hermes Desktop UI
 -> Connect via SSH
@@ -65,82 +64,28 @@ No second Orbis runtime exists or is created on Windows.
 Windows local Hermes backend = NO.
 Telegram remains independently operational.
 
-Note: Remote Gateway / `hermes serve` :9119 was an earlier attempted
-architecture and is NOT the final B4 connection method.
-
 ## Scope
 
-### B1 — Core Skill Runtime Upgrade
+### Current WP-005C Scope
 
-Deploy repository Core Skills v0.2.0 to their intended existing profiles:
+- Runtime Inventory: non-destructive discovery of host, installation, profiles,
+  Core Skills, Git/GitHub, Telegram, Desktop/SSH, services, and non-Git state.
+- Backup Design: architecture, manifest, integrity, restore order, retention,
+  secret recovery separation, validation procedure, and completeness proof.
 
-MASTER:
-- `project-manager`
-- `git-governance`
-- `security`
+### WP-005C Scope Guard
 
-CODER:
-- `code-development`
-- `git-governance`
-- `security`
-
-REVIEWER:
-- `code-review`
-- `git-governance`
-- `security`
-
-Requirements:
-- backup existing runtime Skills before replacement;
-- verify repository/runtime SHA256 equality;
-- verify all deployed Core Skills report version 0.2.0.
-
-STATUS: COMPLETE / PASS
-
-### B2 — Runtime Behavioral Validation
-
-Validate fresh-session behavior for:
-- MASTER task coordination and authority boundaries;
-- CODER implementation/handoff boundaries;
-- REVIEWER PASS/FAIL and Control Plane routing;
-- blocked-state recovery rules;
-- no runtime role identity crossover;
-- no REVIEWER-generated repository REVIEW_PASS;
-- no unauthorized merge/deploy/Level 3 action.
-
-STATUS: COMPLETE / PASS
-
-### B3 — GitHub Task Runtime Integration
-
-Validate that Hermes can operate from the approved GitHub Issue model.
-Findings resolved with patch versions:
-- project-manager v0.2.1, git-governance v0.2.1 (GitHub native state vs Orbis state)
-- project-manager v0.2.2, git-governance v0.2.2 (label scope canonical-Issue-only)
-
-Validate:
-- read canonical task contract;
-- recognize `state:*` and `role:*`;
-- produce required handoff records;
-- follow FAIL return loop;
-- recover task context after fresh session/restart;
-- stop on inconsistent state/evidence.
-
-Live task/label creation limited to controlled validation required by this Work Package.
-
-STATUS: COMPLETE / PASS
-
-### B4 — Hermes Desktop Integration
-
-Connect Hermes Desktop to the existing WSL2 Hermes backend.
-Architecture validated:
-- Windows Hermes Desktop UI -> SSH 127.0.0.1:2222 -> existing WSL2 Hermes / Orbis runtime
-- ED25519 key-only authentication
-- Windows local Hermes backend = NO
-- Telegram remains independently operational
-- Desktop shutdown does not stop Orbis runtime = PASS
-- Desktop relaunch/reconnect = PASS
-- Desktop cannot bypass review, merge, Level 3, role, or security rules
-
-STATUS: COMPLETE / PASS
+The current approved implementation boundary ends at documentation.
+Do not start:
+- backup execution
+- restore execution
+- server migration
+- cutover
+- runtime modification
+- secret rotation
+- Windows Hermes backend installation
+- PowerShell policy changes
+- deployment
 
 ## Authority Model
 
@@ -164,7 +109,7 @@ STATUS: COMPLETE / PASS
 
 ## Required Validation
 
-- runtime backup completeness
+- runtime inventory completeness
 - repository/runtime Skill SHA256 equality
 - Core Skill version matrix
 - fresh-session role identity
@@ -176,44 +121,13 @@ STATUS: COMPLETE / PASS
 - Desktop shutdown does not stop Orbis runtime
 - secret-safe inspection
 - repository diff check
+- Windows duplicate runtime guard:
+  - `WINDOWS_LOCAL_HERMES_BACKEND_RUNNING=NO`
+  - `DUPLICATE_ACTIVE_ORBIS_RUNTIME=NO`
+  - `WINDOWS_LOOPBACK_FORWARDING_MECHANISM=UNKNOWN`
 
-STATUS: ALL COMPLETE / PASS
-
-## Rollback
-
-- Restore Core Skills from the WP-005B local backup.
-- Preserve existing SOUL/profile/config files unless a separately identified
-  change is required.
-- Stop Desktop/backend integration and return to the existing Telegram/CLI
-  runtime if Desktop validation fails.
-- Repository changes can be reverted through Git.
-
-## Out of Scope
-
-- n8n/MCP
-- Kintone
-- Project Registry
-- Cron/background automation
-- additional agents
-- additional Telegram gateways
-- model changes
-- custom Kanban UI/database
-- production deployment automation
-- broad LAN/Internet exposure of Hermes backend
-- WP-005C
-
-## Stop Conditions
-
-Stop if:
-- runtime backup is incomplete;
-- source/runtime Skill verification fails;
-- role identity becomes ambiguous;
-- Desktop requires a separate Orbis runtime;
-- GitHub task state/evidence is inconsistent;
-- secrets may be exposed;
-- public backend exposure becomes necessary;
-- a Level 3 action is reached without explicit Project Owner approval;
-- scope expands beyond WP-005B.
+STATUS: ALL COMPLETE / PASS for WP-005B.
+WP-005C validation continues under current limited scope.
 
 ## WP-005B Summary
 
@@ -226,20 +140,56 @@ All blocks complete and merged into develop:
 
 Merge commit: 5fe175efc4e4f9933299b14151919709c69769b3
 
-WP-005C: IMPLEMENTATION — RUNTIME INVENTORY / BACKUP DESIGN.
+## Rollback
 
-## Current WP-005C Objective
+- Preserve existing SOUL/profile/config files unless a separately identified
+  change is required.
+- Stop any expansion beyond Runtime Inventory / Backup Design and return to
+  approved Phase 5 architecture if scope drifts.
+- Repository changes can be reverted through Git.
 
-Make the Orbis AI Hermes runtime recoverable, portable, and migration-ready without
-relying on chat history, while preserving all required integrations, profiles,
-Core Skills, and authentication state.
+## Out of Scope
 
-## WP-005C Status
+- n8n/MCP
+- Kintone
+- Project Registry
+- Cron/background automation additions
+- additional agents
+- additional Telegram gateways
+- model changes
+- custom Kanban UI/database
+- production deployment automation
+- broad LAN/Internet exposure of Hermes backend
+- WP-005D or later work packages
+- backup execution
+- restore execution
+- server migration
+- cutover
+- changing approved Phase 5 architecture unless required by migration
 
-- Runtime inventory complete: see `project-docs/WP-005C_RUNTIME_INVENTORY.md`
-- Backup design complete: see `project-docs/WP-005C_BACKUP_DESIGN.md`
-- Secure credential recovery inventory complete: documented in runtime inventory
-- Recovery readiness: FAIL until Project Owner confirms secure recovery sources exist and are accessible
+## Stop Conditions
+
+Stop if:
+- runtime inventory is incomplete;
+- backup design is incomplete;
+- restore procedure requires chat history;
+- secrets may be exposed;
+- new server validation is reached;
+- old server must be deleted before acceptance;
+- rollback path is unavailable or untested;
+- GitHub task state/evidence becomes inconsistent;
+- a Level 3 action is reached without explicit Project Owner approval;
+- scope expands beyond WP-005C Runtime Inventory / Backup Design;
+- Hermes Desktop attempts Windows-local backend bootstrap/installation.
+- A second Hermes/Orbis runtime becomes active on Windows.
+- `WINDOWS_LOCAL_HERMES_BACKEND_RUNNING=YES` or `DUPLICATE_ACTIVE_ORBIS_RUNTIME=YES`.
+
+## Recovery Readiness
+
+- Secure credential recovery inventory is documented.
+- Recovery readiness remains FAIL until Project Owner confirms the documented
+  secure recovery sources exist and are accessible.
+- Do not treat documentation alone as proof of recoverability.
 
 ## Next Step
 

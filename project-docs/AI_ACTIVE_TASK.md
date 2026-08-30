@@ -73,6 +73,8 @@ Telegram remains independently operational.
 - Backup Execution: create a non-destructive local backup of approved Hermes
   runtime state, manifest, and checksums.
 - Manifest Validation: validate backup completeness and record results.
+- Secondary Copy: create a verified Windows-drive secondary copy of the accepted
+  backup for offline protection.
 
 ### WP-005C Scope Guard
 
@@ -114,12 +116,13 @@ Do not start:
 - manifest creation and validation
 - checksum verification
 - secret exclusion verification
+- secondary copy file count/size/checksum verification
 - Windows duplicate runtime guard:
   - `WINDOWS_LOCAL_HERMES_BACKEND_RUNNING=NO`
   - `DUPLICATE_ACTIVE_ORBIS_RUNTIME=NO`
   - `WINDOWS_LOOPBACK_FORWARDING_MECHANISM=UNKNOWN`
 
-STATUS: WP-005C backup execution in progress.
+STATUS: WP-005C secondary copy in progress.
 
 ## WP-005B Summary
 
@@ -194,7 +197,8 @@ Stop if:
 Complete Project Owner review of:
 - backup execution record
 - manifest validation
-- secondary copy provision
+- secondary copy checksum verification
+- file count/size reconciliation
 
 Only after approval proceed to restore execution, migration validation,
 or cutover planning.

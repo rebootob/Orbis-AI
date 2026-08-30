@@ -28,9 +28,56 @@ Attempt 2 backup created with canonical exclusions enforced.
 | Backup root | `/home/allday/.hermes/backups/wp005c-runtime-backup/20260830-231125/` |
 | Manifest | `/home/allday/.hermes/backups/wp005c-runtime-backup/20260830-231125/manifests/BACKUP_MANIFEST.txt` |
 | Checksums | `/home/allday/.hermes/backups/wp005c-runtime-backup/20260830-231125/checksums/SHA256SUMS.txt` |
-| Secondary copy | NOT_YET_CREATED — no approved external/offline destination was available |
+| Secondary copy | `/mnt/d/Orbis-AI-Backup/WP-005C/20260830-231125/` |
 
-## 3. Backup Structure
+## 4. Backup Validation Matrix
+
+| Check | Result |
+|---|---|
+| MASTER_BACKUP | PASS |
+| CODER_BACKUP | PASS |
+| REVIEWER_BACKUP | PASS |
+| SKILLS_BACKUP | PASS |
+| DATABASE_BACKUP | PASS |
+| SERVICE_CONFIG_BACKUP | PASS |
+| SECRET_EXCLUSION | PASS |
+| CHECKSUM_VERIFY | PASS |
+| INVENTORY_ITEMS_UNACCOUNTED_FOR | 0 |
+| LOCK_FILE_COUNT | 0 |
+| ENV_FILE_COUNT | 0 |
+| AUTH_JSON_COUNT | 0 |
+| PRIVATE_KEY_COUNT | 0 |
+| SECRET_FILE_POLICY | PASS |
+
+## 5. Secondary Copy
+
+| Field | Value |
+|---|---|
+| SECONDARY_COPY_STATUS | COMPLETE |
+| SECONDARY_BACKUP_ID | `20260830-231125` |
+| WINDOWS_DRIVE_SELECTED | `D:` |
+| WINDOWS_DESTINATION | `D:\Orbis-AI-Backup\WP-005C\20260830-231125\` |
+| WSL_DESTINATION | `/mnt/d/Orbis-AI-Backup/WP-005C/20260830-231125/` |
+| SOURCE_FILE_COUNT | 248542 |
+| SECONDARY_FILE_COUNT | 248542 |
+| FILE_COUNT_MATCH | YES |
+| SOURCE_TOTAL_BYTES | 5582547268 |
+| SECONDARY_TOTAL_BYTES | pending final `du`/checksum confirmation |
+| SIZE_MATCH | pending final confirmation |
+| SECONDARY_CHECKSUM_VERIFY | IN_PROGRESS |
+| LOCK_FILE_COUNT | 0 |
+| ENV_FILE_COUNT | 0 |
+| AUTH_JSON_COUNT | 0 |
+| PRIVATE_KEY_COUNT | 0 |
+| SECRET_FILE_POLICY | PASS |
+| SOURCE_BACKUP_MODIFIED | NO |
+| ATTEMPT1_MODIFIED | NO |
+| SERVICE_STOPPED | NO |
+| SERVICE_RESTARTED | NO |
+| RUNTIME_MODIFIED | NO |
+| SECRET_VALUE_EXPOSED | NO |
+| RESTORE_STARTED | NO |
+| MIGRATION_STARTED | NO |
 
 ```
 20260830-231125/

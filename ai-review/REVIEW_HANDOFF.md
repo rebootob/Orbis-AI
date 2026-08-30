@@ -7,61 +7,64 @@ REVIEW STATUS:
 REVIEW_REQUESTED
 
 WORK PACKAGE:
-WP-003-HERMES-ROLE-PROFILES
+WP-004A-HERMES-SKILL-DISCOVERY-AND-DESIGN-GATE
 
 PULL REQUEST:
 AUTO_DISCOVER
 
 SOURCE BRANCH:
-ai/codex-wp-003-closeout
+ai/codex-wp-004a-skill-discovery
 
 TARGET BRANCH:
 develop
 
 HEAD COMMIT:
-46dc4cb69949de5db2335b6f44b392dbca40e7e8
+085912c96d66488cb6f61e3869e3509d685e4ac1
 
 BASE:
 develop
 
 ## Objective
 
-WP-003 closeout review after approved and merged Phase 3 runtime validation.
+Phase 4 skill discovery/design review before any custom Orbis skill is created or installed.
 
 ## Implementation Summary
 
-Documentation-only closeout of final Phase 3 evidence: `default` = MASTER with its gateway running; `coder` = CODER and `reviewer` = REVIEWER with gateways stopped; Telegram remains MASTER-only; both worker profiles have no Telegram configuration; CODER self-approval and REVIEWER no-silent-repair boundaries passed. No runtime change is made.
+Read-only inspection verified Hermes Agent `v0.20.6`, source checkout `1c5ee5815fe5a3913530ba9d803b5b60bc633766`, `SKILL.md` structure, project/profile/external loading precedence, project trust behavior, and Core 5 naming evidence. The documentation corrects `inspect`/`check`/`audit` semantics, defines future local-skill verification, and separates repository source from future profile deployment. No runtime or skill modification was made.
 
 ## Files Changed
 
 - `project-docs/AI_ACTIVE_TASK.md`
+- `project-docs/07_SKILL_ARCHITECTURE.md`
 - `ai-review/REVIEW_HANDOFF.md`
 
 ## Tests Executed
 
-- Verified the approved-and-merged Phase 3 validation record supplied for closeout.
-- Ran `git diff --check`.
-- Ran changed-file secret-safety scan.
+- Read-only `hermes --help`, `hermes skills --help`, `hermes skills list`, and command-help inspection.
+- Read-only `hermes --version` and source checkout SHA inspection.
+- Read-only inspection of skill directories, one bundled `SKILL.md` sample, and resolver source/test evidence.
+- Read-only collision check for the Core 5 across default, coder, and reviewer profiles.
+- Ran `git diff --check` and changed-file secret-safety scan.
 
 ## Test Results
 
-PASS — Phase 3 closeout documentation accurately records the approved and merged validation baseline.
+PASS — discovery evidence and the corrected architecture/design record are sufficient for this documentation-only gate; Core skill implementation is NOT STARTED and no custom skill was created or installed.
 
 ## Security Validation
 
-PASS — no credentials, tokens, private keys, `.env` values, numeric Telegram user IDs, cookies, session secrets, or runtime secrets were introduced.
+PASS — runtime inspection was read-only and no credentials, tokens, Telegram IDs, `.env` values, OAuth data, or other secrets are recorded.
 
 ## Regression Risk
 
-LOW — documentation-only closeout; no runtime, profile, gateway, Telegram, model, or credential change.
+LOW — documentation-only change; no Hermes runtime, profile, gateway, model, credential, or skill was modified.
 
 ## Known Limitations
 
-Phase 4 — Skills is NEXT / NOT STARTED and is not authorized by this closeout. GitHub Actions creates or maintains the Pull Request after branch push.
+This work package does not create, install, validate, enable, or deploy any custom Orbis skill. The future local-skill verification sequence is documented but not executed. Related built-ins `github-code-review` and `requesting-code-review` require scope discipline but are not exact-name collisions.
 
 ## Rollback Plan
 
-Close the Pull Request without merging, or revert the closeout documentation commit only. Do not modify validated runtime profiles or gateways.
+Revert the documentation changes only. No runtime rollback is necessary because runtime inspection was read-only.
 
 ## Open Issues
 
@@ -69,4 +72,4 @@ NONE
 
 ## Reviewer Attention
 
-Accuracy of Phase 3 final state, documentation-only scope, rollback limited to closeout documentation, and explicit Phase 4 NEXT / NOT STARTED boundary.
+Verify corrected native command semantics, project-trust/precedence record, repository-versus-runtime mapping, Core 5 profile mapping, future verification strategy, and explicit non-authorization of skill implementation.

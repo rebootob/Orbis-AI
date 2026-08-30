@@ -14,9 +14,9 @@ Native project-local locations are `<project-root>/.hermes/skills/` and `<projec
 
 `hermes skills inspect <identifier>` previews a candidate before installation. `hermes skills check [name]` checks installed hub skills for upstream updates, and `hermes skills audit [name]` re-scans installed hub skills. They are not generic local custom-skill validators. `hermes skills list` reports installed/enabled skills; a session can explicitly preload skills with `--skills`.
 
-## Source of truth and future runtime deployment
+## Source of truth and validated runtime deployment
 
-Repository `skills/` is the Git/version-controlled source of truth for Orbis skill definitions. It is not assumed to be automatically discovered by Hermes. In a separately authorized deployment work package, approved skills will be placed or synchronized into the appropriate profile's `HERMES_HOME/skills` directory.
+Repository `skills/` is the Git/version-controlled source of truth for Orbis skill definitions. It is not assumed to be automatically discovered by Hermes. WP-004C deployed the reviewed Core Skills into the appropriate profile-local `HERMES_HOME/skills` directories and verified source/runtime equality.
 
 | Profile | Intended Core skills |
 |---|---|
@@ -24,11 +24,11 @@ Repository `skills/` is the Git/version-controlled source of truth for Orbis ski
 | CODER | `code-development`, `git-governance`, `security` |
 | REVIEWER | `code-review`, `git-governance`, `security` |
 
-This mapping keeps Core governance skills available across registered projects, not only when Hermes runs inside the Orbis repository. WP-004A does not deploy these skills.
+This mapping keeps Core governance skills available across registered projects, not only when Hermes runs inside the Orbis repository. WP-004C validated the mapping in the live WSL2 Hermes runtime.
 
-## CORE NOW — design only
+## CORE — implemented and runtime validated
 
-Core skill implementation: REPOSITORY DEFINITIONS CREATED — PENDING INDEPENDENT REVIEW. These definitions are not deployed or runtime validated.
+Core skill implementation: COMPLETE FOR PHASE 4 — repository definitions exist, intended profile deployment is complete, and role/authority behavior has been validated.
 
 | Skill | Applicable role | Purpose |
 |---|---|---|
@@ -46,17 +46,30 @@ There is no exact installed-name collision with the Core 5. The built-ins `githu
 - `kintone` — future approved integration work.
 - Project-specific skills — later approved projects only.
 
-No deferred skill is created or installed by WP-004A.
+No deferred Skill is implemented by Phase 4.
 
-## Future local-skill verification — not executed in WP-004A
+## Runtime verification executed in WP-004C
 
-After a custom skill is created in a separately authorized work package:
+The Core Skills were validated using:
 
-1. Validate required `SKILL.md` and front matter.
-2. Verify with `hermes -p <profile> skills list --enabled-only` and confirm expected profile visibility.
-3. Start a fresh session with explicit `--skills <skill-name>`.
-4. Run a behavioral test.
-5. Run a role-boundary negative test where applicable.
+1. `SKILL.md` structure/front-matter verification.
+2. Profile-local visibility checks.
+3. Source/runtime SHA256 comparison.
+4. Fresh-session behavioral tests for CODER, REVIEWER, and MASTER.
+5. Negative authority-boundary tests.
+6. Telegram fresh-session MASTER identity and governance tests.
+7. Final Skill-matrix consistency verification across all three profiles.
+
+## Role identity versus Skills
+
+Role identity and reusable Skill guidance are separate concerns.
+
+- Persistent MASTER/CODER/REVIEWER identity belongs to the active Hermes profile, with role boundary guidance in its profile `SOUL.md`.
+- Skills describe how the active role performs applicable work.
+- Loading a shared Skill does not assign, combine, or change roles.
+- MASTER identifies only as MASTER, CODER only as CODER, and REVIEWER only as REVIEWER.
+- Runtime REVIEWER PASS/FAIL is review evidence only; final repository `REVIEW_PASS` remains with the ChatGPT Control Plane.
+- Merge and all Level 3 authorization remain with the Project Owner.
 
 ## Required Orbis skill contract
 

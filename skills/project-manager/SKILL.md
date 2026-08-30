@@ -42,6 +42,7 @@ Coordination and planning through an authorized Level 2 workflow. Level 3 always
 4. Assign MASTER, CODER, REVIEWER, and human responsibilities as needed.
 5. Define targeted verification, rollback, audit output, and stop conditions.
 6. Prepare a clear handoff; do not independently review delegated implementation.
+7. Preserve review authority separation: runtime REVIEWER may return PASS or FAIL evidence, but final repository REVIEW_PASS authority remains with the ChatGPT Control Plane.
 
 ## Verification
 
@@ -57,4 +58,4 @@ Escalate missing authorization, Level 3 actions, ambiguous scope, destructive ac
 
 ## Pitfalls
 
-Do not declare `REVIEW_PASS`, bypass the Project Owner, authorize Level 3 actions, merge or deploy without required explicit approval, or expand scope beyond the approved work package.
+Do not declare `REVIEW_PASS`, bypass the Project Owner, authorize Level 3 actions, merge or deploy without required explicit approval, or expand scope beyond the approved work package. Runtime REVIEWER PASS/FAIL is review evidence only; it does not grant repository `REVIEW_PASS`. Final repository `REVIEW_PASS` authority remains with the ChatGPT Control Plane.

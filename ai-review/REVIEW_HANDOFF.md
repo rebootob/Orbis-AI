@@ -7,74 +7,95 @@ REVIEW STATUS:
 REVIEW_REQUESTED
 
 WORK PACKAGE:
-WP-004B-CORE-SKILLS-REPOSITORY-IMPLEMENTATION
+WP-004C-CORE-SKILLS-RUNTIME-DEPLOYMENT-AND-VALIDATION
 
 PULL REQUEST:
 AUTO_DISCOVER
 
 SOURCE BRANCH:
-ai/codex-wp-004b-core-skills
+ai/manual-wp-004c-reviewpass-fix
 
 TARGET BRANCH:
 develop
 
 HEAD COMMIT:
-286d5e64775885a821563509582ab32c1190f33c
+AUTO_DISCOVER_FROM_PR
 
 BASE:
 develop
 
 ## Objective
 
-Create the five approved Core Skill repository definitions without Hermes runtime deployment.
+Close Phase 4 by recording validated Core Skill runtime deployment, authority-boundary corrections, MASTER persistent identity, and final runtime consistency.
 
-## Implementation Summary
-
-Added `project-manager`, `code-development`, `code-review`, `git-governance`, and `security` repository `SKILL.md` definitions in native Hermes format. Updated source-of-truth documentation and architecture status. No skill was installed, deployed, synchronized, or enabled in Hermes runtime.
-
-## Files Changed
+## Repository Changes
 
 - `skills/project-manager/SKILL.md`
-- `skills/code-development/SKILL.md`
-- `skills/code-review/SKILL.md`
 - `skills/git-governance/SKILL.md`
 - `skills/security/SKILL.md`
 - `skills/README.md`
+- `project-docs/02_IMPLEMENTATION_ROADMAP.md`
 - `project-docs/07_SKILL_ARCHITECTURE.md`
 - `project-docs/AI_ACTIVE_TASK.md`
 - `ai-review/REVIEW_HANDOFF.md`
 
-## Tests Executed
+## Runtime Changes
 
-- Inline repository validation of required files, YAML front matter, exact/unique names, version, and required headings.
-- Role-boundary text validation.
-- `git diff --check`.
-- Changed-file secret-safety scan.
+- MASTER: `project-manager`, `git-governance`, `security`.
+- CODER: `code-development`, `git-governance`, `security`.
+- REVIEWER: `code-review`, `git-governance`, `security`.
+- MASTER default-profile `SOUL.md` gained a persistent MASTER role boundary after backup and preservation verification.
 
-## Test Results
+No runtime secret or credential file is included in this repository change.
 
-PASS — all five repository definitions satisfy the WP-004B structural and role-boundary checks.
+## Tests / Evidence
+
+- Pre-deployment collision check: PASS.
+- Skill source/runtime hash verification: PASS.
+- CODER visibility: PASS.
+- CODER negative authority behavior: PASS.
+- REVIEWER visibility: PASS.
+- REVIEWER negative authority behavior: PASS.
+- MASTER visibility: PASS.
+- MASTER CLI role/authority behavior: PASS.
+- MASTER Telegram fresh-session role identity: PASS.
+- MASTER Telegram final governance validation: PASS.
+- Final runtime consistency matrix across all three profiles: PASS.
+- `git diff --check`: PASS.
+
+## Authority Validation
+
+- Runtime REVIEWER PASS/FAIL is evidence only.
+- Final repository `REVIEW_PASS` authority is ChatGPT Control Plane.
+- Merge authorization is explicit Project Owner approval.
+- Level 3 authorization is explicit Project Owner approval.
+- Shared Skills do not change or combine active role identity.
 
 ## Security Validation
 
-PASS — no credentials, tokens, `.env` values, Telegram IDs, OAuth values, private keys, or runtime secrets were introduced. No Hermes runtime change was made.
+PASS — no credentials, tokens, `.env` values, Telegram IDs, OAuth values, private keys, or production secrets are included. No model or Telegram configuration change was made.
 
 ## Regression Risk
 
-LOW — repository definitions and documentation only; runtime deployment is NOT STARTED.
+LOW-MEDIUM — governance text and runtime Skill deployment changed, plus MASTER persistent role identity was corrected. All affected role boundaries were behaviorally validated.
+
+## Rollback
+
+- Revert the repository correction commit if required.
+- Restore runtime Skills from the WP-004C backups if required.
+- Restore MASTER `SOUL.md` from its pre-change backup if required.
 
 ## Known Limitations
 
-The Core 5 definitions are pending independent review and are not deployed or runtime validated.
-
-## Rollback Plan
-
-Revert this repository-definition commit only. No runtime rollback is needed.
-
-## Open Issues
-
-NONE
+- This Work Package does not implement Phase 5 Kanban/handoff.
+- n8n, Kintone, Project Registry, automation, and project-specific Skills remain deferred.
 
 ## Reviewer Attention
 
-Verify native front matter, role applicability and boundaries, permission ceilings, no implied tool/permission grants, no runtime deployment claims, and the required source-of-truth distinction.
+Verify that:
+1. authority separation is consistent across the three corrected Skills;
+2. shared Skills preserve active-role identity;
+3. Phase 4 is closed without introducing Phase 5 implementation;
+4. runtime claims match the recorded validation evidence.
+
+Actual GitHub PR head SHA is authoritative.

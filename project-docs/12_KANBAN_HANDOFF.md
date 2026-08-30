@@ -19,6 +19,31 @@ GitHub Issues are used instead of creating a custom Kanban system.
 
 Hermes memory and Telegram chat are not the canonical task state.
 
+## Canonical State Interpretation
+
+GitHub native Issue state and Orbis Kanban state are separate concepts.
+
+- GitHub native Issue state is `open` or `closed`.
+- Orbis task state is the exact single `state:*` label.
+- Orbis responsibility is the exact single `role:*` label.
+- In Orbis workflow context, `state`, `current state`, or `CURRENT_STATE`
+  means the exact `state:*` label unless the field explicitly asks for
+  `GITHUB_NATIVE_STATE`.
+- In Orbis workflow context, `role`, `current role`, or `CURRENT_ROLE`
+  means the exact `role:*` label.
+- Never substitute GitHub `open` / `closed` for an Orbis `state:*` value.
+- If more than one `state:*` label exists, stop with a state conflict.
+- If more than one `role:*` label exists, stop with a role conflict.
+- After any label write, re-read the Issue and report the canonical labels,
+  not the GitHub native Issue state.
+- State/role uniqueness and label counts must be calculated only from labels
+  attached to the current canonical Issue.
+- Never use the repository-wide label catalog (`gh label list`) to determine
+  `STATE_LABEL_COUNT`, `ROLE_LABEL_COUNT`, current task state, or current task
+  responsibility.
+- Repository label definitions describe labels that exist; they do not
+  represent labels attached to the current task.
+
 ## Task Identity
 
 Canonical task ID:
@@ -180,6 +205,17 @@ Recovery procedure:
 7. Continue only the next authorized action.
 
 If task state and evidence disagree, stop and report the inconsistency.
+
+## Phase 5 Validation Summary
+
+Phase 5 workflow was validated through WP-005B B3 and B4:
+
+- GitHub native `open`/`closed` and Orbis `state:*` are treated as separate
+  concepts in all runtime contexts.
+- State/role counts are calculated from labels attached to the canonical Issue
+  only.
+- Restart/resume recovers task context from GitHub Issue state, labels,
+  contract, and comments without depending on chat history.
 
 ## Phase 5 Scope Boundary
 

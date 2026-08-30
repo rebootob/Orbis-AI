@@ -1,7 +1,7 @@
 ---
 name: git-governance
 description: Enforce Orbis branch safety, review separation, rollback, and auditability.
-version: 0.2.0
+version: 0.2.2
 ---
 
 # Git Governance
@@ -68,6 +68,21 @@ This shared Skill provides governance guidance only; it does not assign or combi
 ## Kanban Task Linkage
 
 For Phase 5, Git evidence must remain traceable to the canonical GitHub task Issue defined in `project-docs/12_KANBAN_HANDOFF.md`.
+
+Canonical task interpretation:
+
+- GitHub `open` / `closed` is native Issue lifecycle state only.
+- The Orbis Kanban state is the exact single `state:*` label.
+- The Orbis responsibility is the exact single `role:*` label.
+- In Orbis workflow output, `CURRENT_STATE` must contain the `state:*` label,
+  never native GitHub `open` / `closed`.
+- After label mutation, re-read the Issue and verify exactly one state label
+  and at most one responsibility label before continuing.
+- Perform that verification against the labels attached to the current Issue
+  only. Repository-wide label definitions are not task-state evidence.
+- Never use `gh label list` to calculate task `STATE_LABEL_COUNT` or
+  `ROLE_LABEL_COUNT`; use the current Issue's attached labels.
+- Conflicting canonical labels require STOP and escalation, not guessing.
 
 Git governance requirements:
 

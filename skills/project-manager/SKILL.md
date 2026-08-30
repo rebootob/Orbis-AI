@@ -1,7 +1,7 @@
 ---
 name: project-manager
 description: Plan controlled Orbis work packages, approvals, and handoffs.
-version: 0.2.0
+version: 0.2.2
 ---
 
 # Project Manager
@@ -53,6 +53,19 @@ MASTER responsibilities:
 1. Create or identify the canonical GitHub task Issue.
 2. Confirm the task contract includes objective, scope, out-of-scope boundaries, acceptance criteria, permission level, tests/evidence, rollback, and stop conditions.
 3. Keep exactly one canonical `state:*` label and at most one current `role:*` responsibility label.
+
+Canonical interpretation rule: in Orbis task context, `state`, `current state`,
+and `CURRENT_STATE` always mean the exact `state:*` label. GitHub native
+`open` / `closed` is separate lifecycle metadata and must be reported only when
+explicitly requested as `GITHUB_NATIVE_STATE`. Likewise, Orbis current
+responsibility must use the exact `role:*` label. Never substitute native
+GitHub state for Orbis Kanban state.
+
+When checking state/role uniqueness or counts, inspect only labels attached to
+the canonical Issue. Never use the repository-wide label catalog
+(`gh label list`) as task-state evidence. `STATE_LABEL_COUNT` and
+`ROLE_LABEL_COUNT` are counts of matching labels on that Issue only.
+
 4. Delegate authorized implementation with a `MASTER -> CODER` handoff comment when CODER work is required.
 5. Do not rely on Telegram or Hermes session memory as the canonical task state.
 6. After restart or a fresh session, recover work from the GitHub Issue state, responsibility, task contract, and latest relevant handoff evidence.

@@ -4,110 +4,130 @@ PROJECT:
 Orbis AI
 
 WORK PACKAGE:
-WP-004C-CORE-SKILLS-RUNTIME-DEPLOYMENT-AND-VALIDATION
+WP-005A-KANBAN-HANDOFF-FOUNDATION
 
 STATUS:
 REVIEW_REQUESTED
 
 CURRENT PHASE:
-Phase 4 — Skills
+Phase 5 — Kanban & Handoff
 
 CONTROL PLANE:
 ChatGPT
 
 EXECUTION MODE:
-Project Owner + ChatGPT-guided manual execution. Codex was not used for WP-004C.
-
-CORE SKILL IMPLEMENTATION:
-REPOSITORY DEFINITIONS CREATED
-
-RUNTIME DEPLOYMENT:
-VALIDATED
-
-MASTER ROLE IDENTITY:
-VALIDATED
-
-OBJECTIVE:
-
-Deploy the approved Core 5 Skills to their intended Hermes profiles, validate role and authority boundaries, and preserve MASTER identity across CLI and Telegram runtime.
-
-SCOPE:
-
-- Deploy approved repository Skills to the intended Hermes profiles.
-- Validate skill visibility and source/runtime hashes.
-- Exercise CODER, REVIEWER, and MASTER behavior.
-- Validate MASTER through Telegram.
-- Correct authority ambiguity discovered during runtime validation.
-- Persist MASTER role identity through the default profile `SOUL.md`.
-- Perform final runtime consistency verification.
-
-VALIDATED ROLE / SKILL MAPPING:
-
-- MASTER: `project-manager`, `git-governance`, `security`.
-- CODER: `code-development`, `git-governance`, `security`.
-- REVIEWER: `code-review`, `git-governance`, `security`.
-
-VALIDATED AUTHORITY MODEL:
-
-- MASTER plans, coordinates, delegates, and manages approval gates.
-- CODER performs authorized implementation and cannot self-approve.
-- REVIEWER performs independent runtime review and returns PASS/FAIL evidence only.
-- Final repository `REVIEW_PASS` authority remains with the ChatGPT Control Plane.
-- Merge authorization requires explicit Project Owner approval.
-- All Level 3 actions require explicit Project Owner approval.
-- Skills provide operating guidance and do not change the active runtime role.
-
-RUNTIME EVIDENCE:
-
-- Core Skill collision preflight passed before deployment.
-- Source/runtime SHA256 verification passed.
-- CODER visibility and behavioral validation passed.
-- REVIEWER visibility and behavioral validation passed.
-- MASTER visibility and CLI behavioral validation passed.
-- MASTER Telegram fresh-session identity validation passed after persistent role correction.
-- MASTER Telegram final governance validation passed.
-- Final expected Skill matrix/hash consistency passed across MASTER, CODER, and REVIEWER.
-- Default MASTER `SOUL.md` was backed up before modification and original content preservation was hash-verified.
-
-SECURITY:
-
-- No credentials, tokens, `.env` values, Telegram IDs, OAuth values, or private keys were added to Git.
-- Telegram configuration was not changed.
-- Model configuration was not changed.
-- Worker gateways were not enabled.
-- No production integration was introduced.
-
-OUT OF SCOPE:
-
-- Phase 5 Kanban/handoff implementation.
-- n8n/MCP implementation.
-- Kintone integration.
-- Project Registry.
-- Automation/Cron.
-- Project-specific Skills.
-- Additional agents or gateways.
+Project Owner + ChatGPT-guided manual execution. Codex is not used.
 
 BASE BRANCH:
 develop
 
+BASE COMMIT:
+53fd0c7089ca5c4e35966d436f6315217fa883c2
+
 WORKING BRANCH:
-ai/manual-wp-004c-reviewpass-fix
+ai/manual-wp-005a-kanban-handoff
 
 TARGET:
 develop
 
-ROLLBACK:
+## Objective
 
-- Repository corrections can be reverted through Git.
-- Runtime Skill files were backed up before synchronization.
-- MASTER `SOUL.md` was backed up before role-boundary insertion.
-- No credentials or external integration state requires rollback.
+Define the minimum complete task-state and handoff foundation so MASTER,
+CODER, REVIEWER, ChatGPT Control Plane, and the Project Owner can coordinate
+durable work without relying on chat-session memory.
 
-NEXT STEP:
+## Foundation Decision
 
-Independent ChatGPT review of the WP-004C closeout PR. Do not start Phase 5 until Phase 4 closeout is reviewed, merged, and explicitly advanced.
+- GitHub Issue = canonical task record.
+- Issue body = task contract.
+- `state:*` label = canonical task state.
+- `role:*` label = current responsibility.
+- Issue comments = chronological handoff and audit evidence.
+- Branch / commit / Pull Request = implementation evidence when applicable.
+- No custom Kanban database or application.
 
-STOP CONDITIONS:
+## Scope
 
-- Stop after commit, push, and review handoff.
-- Do not begin Phase 5 implementation in this Work Package.
+- Define task identity and task contract.
+- Define Kanban states and transition rules.
+- Define responsibility labels.
+- Define handoff format between roles.
+- Define REVIEWER FAIL return loop.
+- Define REVIEWER PASS → Control Plane review flow.
+- Define restart/resume procedure.
+- Resolve Kanban and handoff `<TO_BE_DEFINED>` documentation.
+- Align approval rules with Phase 4 authority model.
+- Prepare Issue template.
+- Update Core Skills for Phase 5 behavior.
+- Prepare independent review handoff.
+- Define the Phase 5 Hermes Desktop integration requirement for WP-005B:
+  Desktop must operate as an optional operator console connected to the existing
+  WSL2 Hermes runtime, not as a separate Orbis runtime.
+
+## Authority Model
+
+- MASTER plans, creates, coordinates, and delegates tasks.
+- CODER implements authorized scope and cannot self-approve.
+- Runtime REVIEWER returns PASS or FAIL evidence only.
+- Runtime REVIEWER PASS moves work to Control Plane review.
+- Final repository `REVIEW_PASS` belongs to ChatGPT Control Plane.
+- Merge requires explicit Project Owner approval.
+- Level 3 actions require explicit Project Owner approval.
+
+## Expected States
+
+- `state:ready`
+- `state:in-progress`
+- `state:runtime-review`
+- `state:changes-requested`
+- `state:control-review`
+- `state:review-pass`
+- `state:waiting-approval`
+- `state:blocked`
+- `state:completed`
+
+## Out of Scope
+
+- Live Hermes runtime Skill deployment in WP-005A.
+- Hermes Desktop installation or runtime connection in WP-005A.
+- End-to-end Hermes execution test.
+- Custom Kanban UI or database.
+- GitHub Projects requirement.
+- n8n or MCP.
+- Kintone.
+- Project Registry.
+- Cron / background automation.
+- Additional agents or gateways.
+- Production deployment.
+
+## Tests Required
+
+- `git diff --check`
+- changed-file scope verification
+- state-label uniqueness check
+- required handoff-path verification
+- REVIEWER PASS cannot directly create repository REVIEW_PASS
+- merge / Level 3 authority verification
+- secret-safety inspection before push
+
+## Rollback
+
+Revert the WP-005A repository commit.
+
+WP-005A performs no Hermes runtime deployment and no production change.
+
+## Next Step
+
+Independent ChatGPT review of the WP-005A Pull Request.
+
+Do not begin WP-005B runtime integration until WP-005A is reviewed and merged.
+
+## Stop Conditions
+
+Stop if:
+
+- custom database or custom Kanban application becomes necessary;
+- authority boundaries become ambiguous;
+- runtime deployment is required before WP-005A review;
+- secret exposure is detected;
+- scope expands into Phase 6 or later work.

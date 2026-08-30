@@ -14,4 +14,4 @@ Inspects the diff, logic, regression risk, security posture, and tests. REVIEWER
 
 ## Required handoff record
 
-Each task should retain: task ID, registered project, scope, acting role, changed artifacts, tests/evidence, reviewer verdict, approvals, timestamps, and final outcome. The storage mechanism is `<TO_BE_DEFINED>`.
+Each task must retain: task ID, scope, acting/current responsibility, changed artifacts, tests/evidence, reviewer verdict, approvals where applicable, timestamps, and final outcome. For Phase 5 the canonical task store is a GitHub Issue: the Issue body holds the task contract, labels hold current state/responsibility, and comments retain chronological handoff and audit evidence. Project Registry linkage remains deferred to its approved phase.

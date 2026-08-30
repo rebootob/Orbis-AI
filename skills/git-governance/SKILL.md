@@ -1,7 +1,7 @@
 ---
 name: git-governance
 description: Enforce Orbis branch safety, review separation, rollback, and auditability.
-version: 0.1.0
+version: 0.2.0
 ---
 
 # Git Governance
@@ -24,7 +24,7 @@ Repository, source branch, target branch, current head SHA, Work Package, review
 
 ## Scope
 
-Use `rebootob/Orbis-AI`; treat `main` as stable/approved, `develop` as integration, `ai/codex-*` as Codex execution work, `feature/*` as human feature work, and `hotfix/*` as emergency only. Significant changes use Pull Requests targeting `develop`; inspect diff before commit and perform a secret check before push.
+Use `rebootob/Orbis-AI`; treat `main` as stable/approved, `develop` as integration, `ai/codex-*` as explicitly authorized Codex execution work, `ai/manual-*` as ChatGPT-guided manual execution work, `feature/*` as human feature work, and `hotfix/*` as emergency only. Significant changes use Pull Requests targeting `develop`; inspect diff before commit and perform a secret check before push.
 
 ## Allowed Tools
 
@@ -64,6 +64,25 @@ This shared Skill provides governance guidance only; it does not assign or combi
 - Merge authorization belongs to the Project Owner and requires explicit approval.
 - Level 3 authorization belongs to the Project Owner and requires explicit approval.
 - Review PASS, including runtime REVIEWER PASS, never authorizes merge or deployment by itself.
+
+## Kanban Task Linkage
+
+For Phase 5, Git evidence must remain traceable to the canonical GitHub task Issue defined in `project-docs/12_KANBAN_HANDOFF.md`.
+
+Git governance requirements:
+
+1. Every implementation branch used for an Orbis task must be traceable to its canonical `ORBIS-TASK-#<issue-number>`.
+2. Handoff evidence must record the exact branch and relevant commit SHA.
+3. When a Pull Request exists, record its number or URL in the task handoff evidence.
+4. REVIEWER must review the actual PR/head SHA or exact commit identified in the handoff.
+5. A later commit invalidates an earlier review verdict for changed content and requires review of the new head.
+6. Runtime REVIEWER PASS must record the reviewed SHA before routing to `state:control-review`.
+7. ChatGPT Control Plane repository review must use the actual current PR head as authoritative.
+8. Merge authorization is separate from review and requires explicit Project Owner approval.
+9. Do not force-push or rewrite reviewed history to make evidence appear consistent.
+10. If Task ID, branch, commit, PR head, or handoff evidence disagree, stop and report the mismatch instead of guessing.
+11. After merge, record the resulting merge commit or final integrated SHA in the task outcome when applicable.
+12. Git history and task comments are audit evidence; do not silently delete or rewrite them.
 
 ## Verification
 

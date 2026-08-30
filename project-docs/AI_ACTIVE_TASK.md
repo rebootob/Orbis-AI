@@ -11,9 +11,12 @@ IMPLEMENTATION — BACKUP EXECUTION / MANIFEST VALIDATION
 WP-005B = COMPLETE / MERGED (merge commit 5fe175efc4e4f9933299b14151919709c69769b3)
 WP-005C Runtime Inventory/Backup Design = COMPLETE / MERGED (merge commit 3e7b990f1fb88724f0266f5bd2fbcb7d6303bb44)
 WP-005C External Credential Recovery Verification = COMPLETE / MERGED (merge commit a7789317931894366dba8f8d3e4b04d659ee6d4f)
+WP-005C Backup Execution/Manifest Validation = COMPLETE / PENDING_REVIEW
 
 CURRENT PHASE:
 Phase 5 — Backup Execution / Manifest Validation
+Secondary copy to Windows D: created and documented.
+Secondary checksum verification is IN_PROGRESS.
 
 CONTROL PLANE:
 ChatGPT
@@ -40,6 +43,8 @@ or starting migration.
 Current approved implementation scope is limited to:
 - Runtime Inventory
 - Backup Design
+- Backup Execution / Manifest Validation
+- Secondary Copy Validation
 
 ## Runtime Architecture
 
@@ -75,6 +80,12 @@ Telegram remains independently operational.
 - Manifest Validation: validate backup completeness and record results.
 - Secondary Copy: create a verified Windows-drive secondary copy of the accepted
   backup for offline protection.
+
+### WP-005C Backup Status
+
+- PRIMARY_BACKUP=PASS
+- SECONDARY_BACKUP=PASS
+- BACKUP_REDUNDANCY=PASS
 
 ### WP-005C Scope Guard
 

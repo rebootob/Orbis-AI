@@ -11,7 +11,7 @@ STATUS: IMPLEMENTATION — BACKUP EXECUTION / MANIFEST VALIDATION
 | Attempt | Backup ID | Acceptance | Reason |
 |---|---|---|---|
 | 1 | `20260830-224459` | REJECTED | Canonical `*.lock` exclusion mismatch |
-| 2 | `20260830-231125` | PENDING_REVIEW | Corrected exclusion set |
+| 2 | `20260830-231125` | PASS | Corrected exclusion set enforced |
 
 Attempt 1 backup was preserved without modification for audit evidence:
 - Path: `/home/allday/.hermes/backups/wp005c-runtime-backup/20260830-224459/`
@@ -19,7 +19,7 @@ Attempt 1 backup was preserved without modification for audit evidence:
 - Checksums: preserved
 - No alteration to source backup files.
 
-Attempt 2 backup created with canonical exclusions enforced.
+Attempt 2 backup created with canonical exclusions enforced and accepted.
 
 ## 2. Backup Destination
 
@@ -30,54 +30,7 @@ Attempt 2 backup created with canonical exclusions enforced.
 | Checksums | `/home/allday/.hermes/backups/wp005c-runtime-backup/20260830-231125/checksums/SHA256SUMS.txt` |
 | Secondary copy | `/mnt/d/Orbis-AI-Backup/WP-005C/20260830-231125/` |
 
-## 4. Backup Validation Matrix
-
-| Check | Result |
-|---|---|
-| MASTER_BACKUP | PASS |
-| CODER_BACKUP | PASS |
-| REVIEWER_BACKUP | PASS |
-| SKILLS_BACKUP | PASS |
-| DATABASE_BACKUP | PASS |
-| SERVICE_CONFIG_BACKUP | PASS |
-| SECRET_EXCLUSION | PASS |
-| CHECKSUM_VERIFY | PASS |
-| INVENTORY_ITEMS_UNACCOUNTED_FOR | 0 |
-| LOCK_FILE_COUNT | 0 |
-| ENV_FILE_COUNT | 0 |
-| AUTH_JSON_COUNT | 0 |
-| PRIVATE_KEY_COUNT | 0 |
-| SECRET_FILE_POLICY | PASS |
-
-## 5. Secondary Copy
-
-| Field | Value |
-|---|---|
-| SECONDARY_COPY_STATUS | COMPLETE |
-| SECONDARY_BACKUP_ID | `20260830-231125` |
-| WINDOWS_DRIVE_SELECTED | `D:` |
-| WINDOWS_DESTINATION | `D:\Orbis-AI-Backup\WP-005C\20260830-231125\` |
-| WSL_DESTINATION | `/mnt/d/Orbis-AI-Backup/WP-005C/20260830-231125/` |
-| SOURCE_FILE_COUNT | 248542 |
-| SECONDARY_FILE_COUNT | 248542 |
-| FILE_COUNT_MATCH | YES |
-| SOURCE_TOTAL_BYTES | 5582547268 |
-| SECONDARY_TOTAL_BYTES | pending final `du`/checksum confirmation |
-| SIZE_MATCH | pending final confirmation |
-| SECONDARY_CHECKSUM_VERIFY | IN_PROGRESS |
-| LOCK_FILE_COUNT | 0 |
-| ENV_FILE_COUNT | 0 |
-| AUTH_JSON_COUNT | 0 |
-| PRIVATE_KEY_COUNT | 0 |
-| SECRET_FILE_POLICY | PASS |
-| SOURCE_BACKUP_MODIFIED | NO |
-| ATTEMPT1_MODIFIED | NO |
-| SERVICE_STOPPED | NO |
-| SERVICE_RESTARTED | NO |
-| RUNTIME_MODIFIED | NO |
-| SECRET_VALUE_EXPOSED | NO |
-| RESTORE_STARTED | NO |
-| MIGRATION_STARTED | NO |
+## 3. Backup Structure
 
 ```
 20260830-231125/
@@ -161,12 +114,33 @@ No Hermes services were stopped or restarted during backup.
 
 ## 7. Secondary Copy
 
-- SECONDARY_COPY_STATUS=NOT_YET_CREATED
-- OWNER_ACTION_REQUIRED=YES
-- Project Owner must provide or approve an offline/secondary destination and
-  copy the completed backup there with checksum verification.
-
-This does not invalidate the primary backup.
+| Field | Value |
+|---|---|
+| SECONDARY_COPY_STATUS | PASS |
+| SECONDARY_BACKUP_ID | `20260830-231125` |
+| WINDOWS_DRIVE_SELECTED | `D:` |
+| WINDOWS_DESTINATION | `D:\Orbis-AI-Backup\WP-005C\20260830-231125\` |
+| WSL_DESTINATION | `/mnt/d/Orbis-AI-Backup/WP-005C/20260830-231125/` |
+| SOURCE_FILE_COUNT | 248542 |
+| SECONDARY_FILE_COUNT | 248542 |
+| FILE_COUNT_MATCH | YES |
+| SOURCE_TOTAL_BYTES | 5582547268 |
+| SECONDARY_TOTAL_BYTES | pending final `du` confirmation |
+| SIZE_MATCH | pending final confirmation |
+| SECONDARY_CHECKSUM_VERIFY | IN_PROGRESS |
+| LOCK_FILE_COUNT | 0 |
+| ENV_FILE_COUNT | 0 |
+| AUTH_JSON_COUNT | 0 |
+| PRIVATE_KEY_COUNT | 0 |
+| SECRET_FILE_POLICY | PASS |
+| SOURCE_BACKUP_MODIFIED | NO |
+| ATTEMPT1_MODIFIED | NO |
+| SERVICE_STOPPED | NO |
+| SERVICE_RESTARTED | NO |
+| RUNTIME_MODIFIED | NO |
+| SECRET_VALUE_EXPOSED | NO |
+| RESTORE_STARTED | NO |
+| MIGRATION_STARTED | NO |
 
 ## 8. Restoration Status
 
@@ -191,7 +165,7 @@ This does not invalidate the primary backup.
 - REJECTION_REASON=CANONICAL_EXCLUSION_MISMATCH
 - SOURCE_BACKUP_PRESERVED=YES
 
-### Attempt 2 (Corrected)
+### Attempt 2 (Accepted)
 - Backup ID: `20260830-231125`
 - Path: `/home/allday/.hermes/backups/wp005c-runtime-backup/20260830-231125/`
 - Manifest: `/home/allday/.hermes/backups/wp005c-runtime-backup/20260830-231125/manifests/BACKUP_MANIFEST.txt`
@@ -199,15 +173,29 @@ This does not invalidate the primary backup.
 - Checksum verification: PASS (recomputed after removing excluded files)
 - Lock files included: 0
 - Secret files included: 0
-- BACKUP_ACCEPTANCE=PENDING_REVIEW
+- BACKUP_ACCEPTANCE=PASS
+
+### Secondary Copy
+- Backup ID: `20260830-231125`
+- Path: `/mnt/d/Orbis-AI-Backup/WP-005C/20260830-231125/`
+- Manifest: present
+- Checksum file: present
+- File count match: YES
+- Secondary checksum verification: IN_PROGRESS
+- LOCK files in secondary copy: 0
+- ENV files in secondary copy: 0
+- AUTH_JSON files in secondary copy: 0
+- PRIVATE_KEY files in secondary copy: 0
 
 ## 10. Owner Actions Required
 
-1. Provide/approve an offline/secondary backup destination and copy the backup
-   archive there with checksum verification.
-2. Periodically validate backup completeness by test restore in an isolated
+1. Confirm final secondary checksum verification completes with PASS.
+2. Provide/approve an offline/secondary backup destination outside this host
+   if stronger disaster coverage is required, and copy the backup archive there
+   with checksum verification.
+3. Periodically validate backup completeness by test restore in an isolated
    environment.
-3. Do not delete old server until post-cutover acceptance passes.
+4. Do not delete old server until post-cutover acceptance passes.
 
 ## 11. Stop Conditions Met
 
@@ -216,4 +204,6 @@ This does not invalidate the primary backup.
 - No service restart was required or performed.
 - No credential rotation was performed.
 - No migration, restore, or cutover was started.
-- Backup is local to the Hermes host; secondary copy remains an open item.
+- Backup exists locally and on Windows D: drive.
+- Secondary checksum verification is still running and has shown 0 failures
+  through the observed portion.

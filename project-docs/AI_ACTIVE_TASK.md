@@ -84,7 +84,7 @@ develop
 
 ROLLBACK:
 
-If Phase 3 validation fails, delete only the newly created `coder` and `reviewer` profiles. Do not touch the default MASTER profile.
+If REVIEWER validation fails, remove or revert only the reviewer profile/config created for WP-003. Do not touch MASTER/default or validated coder unless a coder-specific rollback is explicitly required.
 
 DELIVERABLES:
 
@@ -100,6 +100,9 @@ CODER VALIDATION EVIDENCE:
 - Coder gateway: not running
 - Default MASTER gateway: running
 - `ORBIS-CODER-OK` test: PASS
+- Persistent CODER role configuration: PASS — implements approved work, runs tests, prepares handoff, and must not approve its own work.
+- CODER self-approval boundary: PASS — identifies itself as CODER and refuses to mark its own implementation `REVIEW_PASS`.
+- Telegram/gateway configuration in coder: not found
 - Blocker: NONE
 
 REVIEWER STATUS:
@@ -114,7 +117,8 @@ REVIEWER VALIDATION EVIDENCE:
 - Coder gateway: not running
 - Default MASTER gateway: running
 - Telegram/gateway configuration in reviewer: not found
-- REVIEWER role-boundary test: PASS — reviewer refused to directly repair code and stated that it reviews and reports findings only.
+- Persistent REVIEWER role configuration: PASS — reviews diff, regression risk, security, and tests; returns PASS or FAIL; and must not silently repair work under review.
+- REVIEWER no-silent-repair boundary: PASS — identifies itself as REVIEWER and refuses direct modification, reporting findings instead.
 - `ORBIS-REVIEWER-OK` test: PASS
 - Blocker: NONE
 

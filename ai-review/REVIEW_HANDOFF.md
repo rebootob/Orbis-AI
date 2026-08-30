@@ -13,24 +13,24 @@ PULL REQUEST:
 AUTO_DISCOVER
 
 SOURCE BRANCH:
-ai/codex-wp-003-coder-evidence
+ai/codex-wp-003-reviewer-evidence
 
 TARGET BRANCH:
 develop
 
 HEAD COMMIT:
-034e20105b7953f1c6c5bd3c65ac511439c3980a
+ac2d93ac985c25c23c990ff1e3fee558afe25e46
 
 BASE:
 develop
 
 ## Objective
 
-Record verified non-secret evidence from the completed CODER runtime setup for independent Phase 3 review.
+Record verified non-secret evidence from the completed CODER and REVIEWER runtime setup for independent Phase 3 review.
 
 ## Implementation Summary
 
-Records verified CODER evidence only: isolated profile directory, configured model, stopped coder gateway, running MASTER gateway, no Telegram configuration, and passing `ORBIS-CODER-OK` response. Reviewer is not created or tested.
+Records verified REVIEWER evidence: isolated profile directory, model `stepfun/step-3.7-flash:free`, stopped reviewer and coder gateways, running MASTER gateway, no reviewer Telegram/gateway configuration, a passing review-only role-boundary response, and a passing `ORBIS-REVIEWER-OK` response. Existing CODER evidence is retained.
 
 ## Files Changed
 
@@ -39,15 +39,16 @@ Records verified CODER evidence only: isolated profile directory, configured mod
 
 ## Tests Executed
 
-- Verified CODER setup output without exposing secrets.
-- Verified coder profile directory, model, gateway states, and absence of Telegram configuration.
-- Ran `ORBIS-CODER-OK` one-shot test.
+- Verified REVIEWER setup output without exposing secrets.
+- Verified reviewer profile directory, model, profile isolation, all profile gateway states, and absence of reviewer Telegram/gateway configuration.
+- Ran the REVIEWER review-only role-boundary test.
+- Ran the `ORBIS-REVIEWER-OK` one-shot test.
 - Ran `git diff --check`.
 - Ran changed-file secret-safety scan.
 
 ## Test Results
 
-PASS — CODER setup and evidence documentation validation completed.
+PASS — REVIEWER setup, review-only role boundary, and evidence documentation validation completed.
 
 ## Security Validation
 
@@ -55,11 +56,11 @@ PASS — no credentials, tokens, private keys, `.env` values, numeric Telegram u
 
 ## Regression Risk
 
-LOW — evidence recording only; no additional runtime behavior is changed.
+LOW — reviewer profile configuration and evidence recording only; MASTER/default and coder were not changed, and no gateway was installed or started.
 
 ## Known Limitations
 
-Reviewer profile is NOT TESTED because it has not been created. GitHub Actions creates or maintains the Pull Request after branch push.
+The review handoff records non-secret evidence only. GitHub Actions creates or maintains the Pull Request after branch push.
 
 ## Rollback Plan
 
@@ -71,4 +72,4 @@ NONE
 
 ## Reviewer Attention
 
-Coder model/isolation/gateway evidence, `ORBIS-CODER-OK` result, absence of Telegram configuration, and reviewer deferred status.
+Reviewer model/isolation/gateway evidence, absence of reviewer Telegram/gateway configuration, review-only role boundary, `ORBIS-REVIEWER-OK` result, and confirmation that MASTER/default and coder were not modified.

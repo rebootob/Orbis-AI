@@ -62,12 +62,12 @@ REQUIRED CONTEXT:
 
 IMPLEMENTATION INSTRUCTIONS:
 
-- After this gate is merged, execute the validation sequence on the owner's WSL2 host under ChatGPT guidance only.
-- Codex must not access or modify WSL, local Hermes, runtime configuration, or credentials.
+- Record only verified, non-secret runtime evidence from the owner-authorized Phase 3 profile work.
+- Do not create additional profiles or modify MASTER/default, coder, gateways, credentials, or runtime configuration.
 
 TEST REQUIREMENTS:
 
-After this gate is merged, perform: `hermes profile list`; create blank `coder`; create blank `reviewer`; verify independent home/state; verify MASTER Telegram; verify coder/reviewer have no Telegram gateway credentials; test CODER and REVIEWER role boundaries; and verify `default` remains MASTER.
+Record only tests actually performed: `hermes profile list`; independent profile-state checks; worker gateway-state checks; absence of reviewer Telegram/gateway configuration; CODER and REVIEWER role-boundary tests; and verification that `default` remains MASTER.
 
 SECURITY REQUIREMENTS:
 
@@ -77,7 +77,7 @@ BASE BRANCH:
 develop
 
 WORKING BRANCH:
-ai/codex-wp-003-coder-evidence
+ai/codex-wp-003-reviewer-evidence
 
 TARGET:
 develop
@@ -104,9 +104,21 @@ CODER VALIDATION EVIDENCE:
 
 REVIEWER STATUS:
 
-- NOT TESTED — reviewer profile has not been created.
+REVIEWER VALIDATION EVIDENCE:
+
+- Reviewer setup: PASS
+- Profile path: `/home/allday/.hermes/profiles/reviewer`
+- Configured model: `stepfun/step-3.7-flash:free`
+- Profile isolation: PASS
+- Reviewer gateway: not running
+- Coder gateway: not running
+- Default MASTER gateway: running
+- Telegram/gateway configuration in reviewer: not found
+- REVIEWER role-boundary test: PASS — reviewer refused to directly repair code and stated that it reviews and reports findings only.
+- `ORBIS-REVIEWER-OK` test: PASS
+- Blocker: NONE
 
 STOP CONDITIONS:
 
-- Stop this Codex task after the CODER evidence is committed, pushed, and handed off for independent review.
-- Do not create reviewer or modify runtime in this task.
+- Stop this Codex task after the reviewer evidence is committed, pushed, and handed off for independent review.
+- Do not create additional profiles or modify runtime further in this task.

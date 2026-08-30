@@ -164,3 +164,35 @@ Verify:
 7. Hermes Desktop remains WP-005B runtime work only.
 
 Actual GitHub PR head SHA is authoritative.
+
+## Review Corrections
+
+The first independent review returned `CHANGES_REQUESTED`.
+
+Corrections applied:
+
+1. Permanent governance now identifies Hermes Agent as the primary Orbis
+   runtime/orchestrator.
+
+2. Codex is now an optional execution worker used only when a Work Package
+   explicitly authorizes it.
+
+3. `READY_FOR_EXECUTION` is the normal ready state for Hermes or
+   ChatGPT-guided manual execution. `READY_FOR_CODEX` remains available only
+   for Work Packages explicitly assigned to Codex.
+
+4. `ai/manual-*` is now recognized as the branch pattern for ChatGPT-guided
+   manual execution.
+
+5. `AGENTS.md` now states that it is the Codex entry point only when Codex is
+   explicitly assigned repository work.
+
+6. `state:blocked` now requires durable recovery metadata:
+   `BLOCKED_FROM_STATE`, `BLOCKED_FROM_ROLE`, `REASON`,
+   `RESOLUTION_REQUIRED`, and `NEXT_STATE_AFTER_RESOLUTION`.
+
+7. Missing or inconsistent blocked-state recovery metadata keeps the task
+   blocked and requires escalation instead of guessing.
+
+These corrections do not deploy Hermes runtime changes and do not add
+Phase 6+ functionality.

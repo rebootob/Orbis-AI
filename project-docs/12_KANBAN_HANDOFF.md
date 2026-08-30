@@ -96,6 +96,31 @@ REVIEW_PASS
 
 `state:blocked` may interrupt any non-terminal state when work cannot safely continue.
 
+## Blocked State Recovery
+
+Before changing a task to `state:blocked`, the transition comment must record:
+
+- `BLOCKED_FROM_STATE`
+- `BLOCKED_FROM_ROLE`
+- `REASON`
+- `RESOLUTION_REQUIRED`
+- `NEXT_STATE_AFTER_RESOLUTION`
+
+The recorded `NEXT_STATE_AFTER_RESOLUTION` must be a valid state that the task
+was authorized to enter from the blocked context.
+
+When the blocker is resolved:
+
+1. Record a resolution comment.
+2. Verify the original blocked-state evidence.
+3. Restore the recorded next state and responsibility.
+4. Continue only the next authorized action.
+
+Do not infer or guess the pre-blocked state after restart.
+
+If blocked-state metadata is missing or inconsistent, keep the task blocked and
+escalate instead of continuing.
+
 ## Review Authority
 
 Runtime REVIEWER:

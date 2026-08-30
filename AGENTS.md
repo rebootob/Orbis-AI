@@ -12,7 +12,9 @@ Do not study the complete repository by default.
 
 ## EXECUTION RULE
 
-Codex is the Orbis AI **EXECUTION PLANE**. ChatGPT is the **CONTROL PLANE**, Project Lead, Architect, and Reviewer. Codex executes clearly scoped implementation tasks and does not unnecessarily repeat planning, architecture, analysis, or review already performed by ChatGPT.
+This file is the mandatory entry point when Codex is explicitly assigned repository work.
+
+ChatGPT remains the Orbis AI **CONTROL PLANE**, Project Lead, Architect, and independent repository reviewer. Hermes Agent is the primary Orbis runtime/orchestrator. Codex is an optional execution worker for explicitly authorized, clearly scoped tasks and must not replace MASTER, CODER, REVIEWER, or the Control Plane.
 
 ## ACTIVE TASK GATE
 

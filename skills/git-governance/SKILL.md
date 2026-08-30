@@ -24,7 +24,7 @@ Repository, source branch, target branch, current head SHA, Work Package, review
 
 ## Scope
 
-Use `rebootob/Orbis-AI`; treat `main` as stable/approved, `develop` as integration, `ai/codex-*` as Codex execution work, `feature/*` as human feature work, and `hotfix/*` as emergency only. Significant changes use Pull Requests targeting `develop`; inspect diff before commit and perform a secret check before push.
+Use `rebootob/Orbis-AI`; treat `main` as stable/approved, `develop` as integration, `ai/codex-*` as explicitly authorized Codex execution work, `ai/manual-*` as ChatGPT-guided manual execution work, `feature/*` as human feature work, and `hotfix/*` as emergency only. Significant changes use Pull Requests targeting `develop`; inspect diff before commit and perform a secret check before push.
 
 ## Allowed Tools
 

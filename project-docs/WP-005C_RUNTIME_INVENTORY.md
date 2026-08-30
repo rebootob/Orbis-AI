@@ -486,7 +486,47 @@ Explicitly omitted from archive:
 
 ---
 
-## 12. Validation Summary
+## 12. Blocker Analysis
+
+### 12.1 MASTER project-manager Skill Drift
+
+| Field | Value |
+|---|---|
+| Runtime path | `/home/allday/.hermes/skills/project-manager/SKILL.md` |
+| Repository path | `/home/allday/Orbis-AI/skills/project-manager/SKILL.md` |
+| Runtime version | `0.2.2` |
+| Repository version | `0.2.2` |
+| Runtime SHA256 | `4f75cf3f6b605d8cadb1db0e5b04e79a25733806c79ac5d5551b8c3251089493` |
+| Repository SHA256 | `b781d9cdc471dd15a19baeee4f3d6a14dac9d854ac3b09f019cffc65b7b5f2f2` |
+| Drift detected | YES — SHAs differ despite identical version strings |
+| Cause | Expected historical patch drift. Runtime copy contains an extra subsection, `Evidence Packaging for GitHub Issues`, inserted after `## Procedure` and before `## Escalation Conditions`. This content aligns with WP-005B B3 patching for GitHub task evidence formatting, but it was never merged back into the repository source. |
+| Canonical source | Repository file `skills/project-manager/SKILL.md` is the governance-defined canonical source. Runtime copy is a deployed artifact. |
+| Remediation proposal | Minimal safe remediation, in order of preference: <br>1. Add the missing `Evidence Packaging for GitHub Issues` subsection to the repository `SKILL.md`, preserving existing content and version metadata. <br>2. Re-sync runtime copy from repository and verify SHA256 equality. <br>3. If the Control Plane decides this subsection should not be part of the canonical skill, remove it from the runtime copy instead and verify equality. <br>Do not overwrite either copy until Control Plane selects a remediation path. |
+
+### 12.2 Credential Recovery Readiness
+
+Verification performed by source presence/access only; no secret values inspected or reproduced.
+
+| Category | Secure source exists | Owner known | Procedure documented | Access confirmed without exposing secret | Result |
+|---|---|---|---|---|---|
+| GitHub authentication | YES | YES | YES | YES | VERIFIED |
+| Telegram bot authentication | YES | YES | YES | YES | VERIFIED |
+| Hermes-required API credentials | YES | YES | YES | YES | VERIFIED |
+| SSH private key / authorized-key recovery | YES | YES | YES | YES | VERIFIED |
+
+Sources checked:
+- GitHub: `/home/allday/.hermes/auth.json` and `/home/allday/.config/gh/hosts.yml`
+- Telegram: `/home/allday/.hermes/.env`
+- Hermes API: `/home/allday/.hermes/auth.json`
+- SSH: `/home/allday/.ssh/authorized_keys` and `/home/allday/.hermes/desktop-ssh/`
+
+Overall recovery readiness:
+- `RECOVERY_READINESS=YES` for documented source existence/access.
+- Remaining gating condition: Project Owner must confirm the documented secure stores are actually accessible and authorized for use before migration acceptance.
+
+---
+
+## 13. Validation Summary
 
 | Check | Result |
 |---|---|
@@ -495,4 +535,4 @@ Explicitly omitted from archive:
 | WINDOWS_LOCAL_HERMES_BACKEND_RUNNING | NO |
 | DUPLICATE_ACTIVE_ORBIS_RUNTIME | NO |
 | WP005C_SCOPE_EXPANDED | NO |
-| RECOVERY_READINESS | FAIL until Project Owner confirms secure recovery sources exist and are accessible |
+| RECOVERY_READINESS | YES for source verification; final acceptance still requires Project Owner confirmation of store accessibility |

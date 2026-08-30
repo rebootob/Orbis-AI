@@ -19,6 +19,31 @@ GitHub Issues are used instead of creating a custom Kanban system.
 
 Hermes memory and Telegram chat are not the canonical task state.
 
+## Canonical State Interpretation
+
+GitHub native Issue state and Orbis Kanban state are separate concepts.
+
+- GitHub native Issue state is `open` or `closed`.
+- Orbis task state is the exact single `state:*` label.
+- Orbis responsibility is the exact single `role:*` label.
+- In Orbis workflow context, `state`, `current state`, or `CURRENT_STATE`
+  means the exact `state:*` label unless the field explicitly asks for
+  `GITHUB_NATIVE_STATE`.
+- In Orbis workflow context, `role`, `current role`, or `CURRENT_ROLE`
+  means the exact `role:*` label.
+- Never substitute GitHub `open` / `closed` for an Orbis `state:*` value.
+- If more than one `state:*` label exists, stop with a state conflict.
+- If more than one `role:*` label exists, stop with a role conflict.
+- After any label write, re-read the Issue and report the canonical labels,
+  not the GitHub native Issue state.
+- State/role uniqueness and label counts must be calculated only from labels
+  attached to the current canonical Issue.
+- Never use the repository-wide label catalog (`gh label list`) to determine
+  `STATE_LABEL_COUNT`, `ROLE_LABEL_COUNT`, current task state, or current task
+  responsibility.
+- Repository label definitions describe labels that exist; they do not
+  represent labels attached to the current task.
+
 ## Task Identity
 
 Canonical task ID:

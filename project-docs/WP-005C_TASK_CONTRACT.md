@@ -104,6 +104,32 @@ Explicitly exclude from backups and Git:
 - If secrets are required for restore, restore procedure must rely on
   secure existing stores/vaults, not chat history.
 
+### 5.1 Secure Credential Recovery
+
+Secrets MUST NOT be stored in Git, chat, logs, ordinary plaintext backup archives,
+or backup manifests.
+
+However, every credential required to restore Orbis AI MUST have a documented
+secure recovery source.
+
+For each required credential, document ONLY:
+- credential purpose/name
+- authoritative secure storage location/reference
+- recovery owner
+- recovery procedure
+- verification method
+
+Never document the secret value.
+
+Required categories:
+- GitHub authentication
+- Telegram bot authentication
+- Hermes-required API credentials
+- SSH private key / authorized-key recovery
+- any other runtime credential discovered during inventory
+
+Migration acceptance MUST FAIL if any required credential has no recoverable secure source.
+
 ## 6. Restore Requirements
 
 Restore must be possible without:
@@ -193,6 +219,12 @@ Restore verification must include:
 - Disaster recovery rehearsal recorded and successful.
 - No secrets committed to Git.
 - WP-005C task contract approved by Project Owner before implementation.
+- Windows Hermes Desktop remains UI-only.
+- Migration, restore, reconnect, or Desktop installer behavior MUST NOT create or activate a second Hermes / Orbis runtime on Windows.
+- Required validation:
+  - WINDOWS_LOCAL_HERMES_BACKEND_RUNNING=NO
+  - DUPLICATE_ACTIVE_ORBIS_RUNTIME=NO
+- If Hermes Desktop attempts Windows-local bootstrap/backend installation, STOP and investigate. Do NOT complete the local backend installation.
 
 ## 13. Permission Level
 
@@ -213,6 +245,8 @@ Restore verification must include:
 - Parallel new-server validation test
 - Cutover dry-run or rehearsal
 - Disaster recovery rehearsal
+- Windows duplicate runtime guard: `WINDOWS_LOCAL_HERMES_BACKEND_RUNNING=NO`
+- Windows duplicate runtime guard: `DUPLICATE_ACTIVE_ORBIS_RUNTIME=NO`
 
 ## 15. Out of Scope
 
@@ -242,6 +276,9 @@ Stop if:
 - GitHub task state/evidence becomes inconsistent;
 - a Level 3 action is reached without explicit Project Owner approval;
 - scope expands beyond WP-005C.
+- Hermes Desktop attempts Windows-local backend bootstrap/installation.
+- A second Hermes/Orbis runtime becomes active on Windows.
+- `WINDOWS_LOCAL_HERMES_BACKEND_RUNNING=YES` or `DUPLICATE_ACTIVE_ORBIS_RUNTIME=YES`.
 
 ---
 

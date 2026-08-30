@@ -7,64 +7,69 @@ REVIEW STATUS:
 REVIEW_REQUESTED
 
 WORK PACKAGE:
-WP-004A-HERMES-SKILL-DISCOVERY-AND-DESIGN-GATE
+WP-004B-CORE-SKILLS-REPOSITORY-IMPLEMENTATION
 
 PULL REQUEST:
 AUTO_DISCOVER
 
 SOURCE BRANCH:
-ai/codex-wp-004a-skill-discovery
+ai/codex-wp-004b-core-skills
 
 TARGET BRANCH:
 develop
 
 HEAD COMMIT:
-085912c96d66488cb6f61e3869e3509d685e4ac1
+286d5e64775885a821563509582ab32c1190f33c
 
 BASE:
 develop
 
 ## Objective
 
-Phase 4 skill discovery/design review before any custom Orbis skill is created or installed.
+Create the five approved Core Skill repository definitions without Hermes runtime deployment.
 
 ## Implementation Summary
 
-Read-only inspection verified Hermes Agent `v0.20.6`, source checkout `1c5ee5815fe5a3913530ba9d803b5b60bc633766`, `SKILL.md` structure, project/profile/external loading precedence, project trust behavior, and Core 5 naming evidence. The documentation corrects `inspect`/`check`/`audit` semantics, defines future local-skill verification, and separates repository source from future profile deployment. No runtime or skill modification was made.
+Added `project-manager`, `code-development`, `code-review`, `git-governance`, and `security` repository `SKILL.md` definitions in native Hermes format. Updated source-of-truth documentation and architecture status. No skill was installed, deployed, synchronized, or enabled in Hermes runtime.
 
 ## Files Changed
 
-- `project-docs/AI_ACTIVE_TASK.md`
+- `skills/project-manager/SKILL.md`
+- `skills/code-development/SKILL.md`
+- `skills/code-review/SKILL.md`
+- `skills/git-governance/SKILL.md`
+- `skills/security/SKILL.md`
+- `skills/README.md`
 - `project-docs/07_SKILL_ARCHITECTURE.md`
+- `project-docs/AI_ACTIVE_TASK.md`
 - `ai-review/REVIEW_HANDOFF.md`
 
 ## Tests Executed
 
-- Read-only `hermes --help`, `hermes skills --help`, `hermes skills list`, and command-help inspection.
-- Read-only `hermes --version` and source checkout SHA inspection.
-- Read-only inspection of skill directories, one bundled `SKILL.md` sample, and resolver source/test evidence.
-- Read-only collision check for the Core 5 across default, coder, and reviewer profiles.
-- Ran `git diff --check` and changed-file secret-safety scan.
+- Inline repository validation of required files, YAML front matter, exact/unique names, version, and required headings.
+- Role-boundary text validation.
+- `git diff --check`.
+- Changed-file secret-safety scan.
 
 ## Test Results
 
-PASS — discovery evidence and the corrected architecture/design record are sufficient for this documentation-only gate; Core skill implementation is NOT STARTED and no custom skill was created or installed.
+PASS — all five repository definitions satisfy the WP-004B structural and role-boundary checks.
 
 ## Security Validation
 
-PASS — runtime inspection was read-only and no credentials, tokens, Telegram IDs, `.env` values, OAuth data, or other secrets are recorded.
+PASS — no credentials, tokens, `.env` values, Telegram IDs, OAuth values, private keys, or runtime secrets were introduced. No Hermes runtime change was made.
 
 ## Regression Risk
 
-LOW — documentation-only change; no Hermes runtime, profile, gateway, model, credential, or skill was modified.
+LOW — repository definitions and documentation only; runtime deployment is NOT STARTED.
 
 ## Known Limitations
 
-This work package does not create, install, validate, enable, or deploy any custom Orbis skill. The future local-skill verification sequence is documented but not executed. Related built-ins `github-code-review` and `requesting-code-review` require scope discipline but are not exact-name collisions.
+The Core 5 definitions are pending independent review and are not deployed or runtime validated.
 
 ## Rollback Plan
 
-Revert the documentation changes only. No runtime rollback is necessary because runtime inspection was read-only.
+Revert this repository-definition commit only. No runtime rollback is needed.
 
 ## Open Issues
 
@@ -72,4 +77,4 @@ NONE
 
 ## Reviewer Attention
 
-Verify corrected native command semantics, project-trust/precedence record, repository-versus-runtime mapping, Core 5 profile mapping, future verification strategy, and explicit non-authorization of skill implementation.
+Verify native front matter, role applicability and boundaries, permission ceilings, no implied tool/permission grants, no runtime deployment claims, and the required source-of-truth distinction.

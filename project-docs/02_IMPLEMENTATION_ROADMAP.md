@@ -24,6 +24,10 @@ The documents in this repository, an initial decision log, a gitignore policy, a
 
 **Phase 2 — Complete:** A private, explicitly allowlisted Telegram bot completed validated Telegram → Hermes → Telegram round trips on the WSL2 systemd gateway. `ORBIS-WSL-TELEGRAM-OK`, `TEST-1`, model query, and `ORBIS-READY` passed. The Windows Native Telegram Gateway is not the primary runtime because it was unstable.
 
+**Phase 3 — Complete:** `default` = MASTER, `coder` = CODER, and `reviewer` = REVIEWER. Role boundaries are validated; the MASTER gateway is running, worker gateways are stopped, and Telegram remains MASTER-only.
+
+**Phase 4 — Next / Not Started:** Skills is the next planned phase. This closeout does not authorize Phase 4 execution.
+
 ## Initial skills
 
 `project-manager`, `code-development`, `code-review`, `git-governance`, `security`, `n8n`, and `kintone`. Future project skills may include `MBO2026`, `OrgFlow`, and `COCE`.

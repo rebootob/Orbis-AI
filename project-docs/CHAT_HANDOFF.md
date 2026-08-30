@@ -21,13 +21,17 @@ Integration branch:
 `develop`
 
 Current working branch:
-`ai/manual-wp-005b-hermes-runtime-desktop`
+`develop`
 
 Current Phase:
 Phase 5 — Kanban & Handoff
 
 Current Work Package:
 `WP-005B-HERMES-RUNTIME-AND-DESKTOP-INTEGRATION`
+
+Post-merge state:
+WP-005B = COMPLETE / MERGED
+Merge commit: `5fe175efc4e4f9933299b14151919709c69769b3`
 
 ---
 
@@ -196,9 +200,9 @@ ChatGPT independently verified the labels and Issue comment from GitHub.
 
 ## EXACT NEXT STEP
 
-WP-005B final repository diff/review and merge approval preparation.
+Define WP-005C scope and task contract before implementation.
 
-WP-005C remains NOT STARTED.
+WP-005C remains NOT STARTED until its task contract is approved.
 
 ---
 
@@ -283,9 +287,9 @@ Do not begin WP-005C before WP-005B review and merge.
 
 The new ChatGPT conversation must:
 
-1. Read `project-docs/CHAT_HANDOFF.md`.
-2. Read `project-docs/AI_ACTIVE_TASK.md`.
-3. Read `project-docs/12_KANBAN_HANDOFF.md`.
+1. Read `project-docs/CHAT_HANDOFF.md` from the current branch.
+2. Read `project-docs/AI_ACTIVE_TASK.md` from the current branch.
+3. Read `project-docs/12_KANBAN_HANDOFF.md` from the current branch.
 4. Inspect current branch and working tree.
 5. Inspect GitHub Issue #12 and latest comments.
 6. Treat attached `state:*` / `role:*` labels as canonical.
@@ -293,6 +297,9 @@ The new ChatGPT conversation must:
 8. Continue from `EXACT NEXT STEP`.
 9. Do not repeat completed validation.
 10. Do not expand scope.
+
+Default branch for new chats is `develop` unless a newer approved working
+branch exists.
 
 ---
 
@@ -302,10 +309,10 @@ Use this message in a new ChatGPT conversation:
 
 Continue Orbis AI.
 Repository: rebootob/Orbis-AI
-Working branch: ai/manual-wp-005b-hermes-runtime-desktop
+Working branch: develop
 
-Read these files from branch ai/manual-wp-005b-hermes-runtime-desktop,
-NOT from develop:
+Read these files from the current branch unless a newer approved working
+branch is specified:
 
 1. project-docs/CHAT_HANDOFF.md
 2. project-docs/AI_ACTIVE_TASK.md
@@ -326,12 +333,8 @@ Phase 4: COMPLETE
 
 Phase 5:
 - WP-005A: COMPLETE / MERGED
-- WP-005B B1: COMPLETE / PASS
-- WP-005B B2: COMPLETE / PASS
-- WP-005B B3: COMPLETE / PASS
-- WP-005B B4: COMPLETE / PASS
-- WP-005B: COMPLETE pending repository closeout / merge
+- WP-005B: COMPLETE / MERGED (merge commit 5fe175efc4e4f9933299b14151919709c69769b3)
 - WP-005C: NOT STARTED
 
 Resume point:
-WP-005B final repository diff/review and merge approval preparation.
+Define WP-005C scope and task contract before implementation.

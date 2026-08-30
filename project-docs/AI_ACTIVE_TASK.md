@@ -7,7 +7,8 @@ WORK PACKAGE:
 WP-005B-HERMES-RUNTIME-AND-DESKTOP-INTEGRATION
 
 STATUS:
-COMPLETE pending repository closeout / merge
+WP-005C PLANNING / NOT STARTED
+WP-005B = COMPLETE / MERGED (merge commit 5fe175efc4e4f9933299b14151919709c69769b3)
 
 CURRENT PHASE:
 Phase 5 — Kanban & Handoff
@@ -26,7 +27,7 @@ BASE COMMIT:
 9f8aedd938191079cc67070ad7941bcdc9f12080
 
 WORKING BRANCH:
-ai/manual-wp-005b-hermes-runtime-desktop
+develop
 
 TARGET:
 develop
@@ -216,20 +217,29 @@ Stop if:
 
 ## WP-005B Summary
 
-All blocks complete:
+All blocks complete and merged into develop:
 
 - B1: COMPLETE / PASS
 - B2: COMPLETE / PASS
 - B3: COMPLETE / PASS (Issues #12 closed)
 - B4: COMPLETE / PASS (Issue #13 closed)
 
-WP-005B implementation and validation are COMPLETE pending repository
-closeout and merge approval.
+Merge commit: 5fe175efc4e4f9933299b14151919709c69769b3
 
 WP-005C: NOT STARTED.
 
 ## Next Step
 
-WP-005B final repository diff/review and merge approval preparation.
+Define WP-005C scope and task contract before implementation.
 
-Do not begin WP-005C until WP-005B is reviewed and merged.
+Required WP-005C task contract elements:
+- objective
+- scope
+- out-of-scope
+- acceptance criteria
+- permission level
+- tests
+- rollback
+- stop conditions
+
+Do not begin WP-005C implementation until its task contract is approved.

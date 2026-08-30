@@ -28,7 +28,13 @@ The documents in this repository, an initial decision log, a gitignore policy, a
 
 **Phase 4 — Complete:** The Core Skills `project-manager`, `code-development`, `code-review`, `git-governance`, and `security` are version-controlled, deployed to their intended Hermes profiles, and behaviorally validated. MASTER persistent identity is provided by the default profile `SOUL.md`; Skills provide operating guidance and do not change the active role.
 
-**Phase 5 — Next / Not Started:** Kanban and handoff is the next planned phase. This Phase 4 closeout does not authorize Phase 5 implementation.
+**Phase 5 — In Progress:** Kanban and Handoff is being implemented through WP-005A/WP-005B/WP-005C.
+
+- WP-005A: GitHub-Issue-based task state, handoff protocol, Issue template, governance, and Core Skill guidance.
+- WP-005B: Hermes runtime integration plus optional Hermes Desktop operator console connected to the existing WSL2 Hermes runtime.
+- WP-005C: end-to-end MASTER → CODER → REVIEWER → Control Plane workflow, FAIL return loop, Telegram/Desktop access, and restart/resume validation.
+
+Hermes Desktop must not create a separate Orbis runtime. GitHub Issues remain the canonical task/Kanban source of truth.
 
 ## Skills
 

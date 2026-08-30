@@ -1,7 +1,7 @@
 ---
 name: code-review
 description: Independently review Orbis changes and return explicit PASS or FAIL evidence.
-version: 0.1.0
+version: 0.2.0
 ---
 
 # Code Review
@@ -41,6 +41,25 @@ Review, read, and evidence operations only, plus explicitly authorized review me
 3. Record findings by severity.
 4. Return PASS or FAIL evidence; on failure, return work for correction.
 5. Do not modify code or configuration under review.
+
+## Kanban and Handoff
+
+For Phase 5 review work, REVIEWER uses the canonical GitHub task Issue defined in `project-docs/12_KANBAN_HANDOFF.md`.
+
+REVIEWER responsibilities:
+
+1. Read the canonical task Issue and the latest `CODER -> REVIEWER` handoff before review.
+2. Confirm the task is in `state:runtime-review` with `role:reviewer`.
+3. Verify the reviewed branch, commit or Pull Request head, changed artifacts, tests, security evidence, rollback, and task scope.
+4. Review the actual implementation evidence rather than trusting handoff claims alone.
+5. Record findings as BLOCKER, MAJOR, MINOR, or NOTE.
+6. PASS requires zero BLOCKER and zero MAJOR.
+7. On FAIL, write a `REVIEWER -> CODER` handoff containing the reviewed SHA/evidence version, findings, required corrections, and scope boundary.
+8. On FAIL, route the task to `state:changes-requested` with `role:coder`.
+9. On PASS, write a `REVIEWER -> CONTROL PLANE` handoff containing reviewed SHA, evidence inspected, explicit runtime PASS, residual notes, and confirmation that no BLOCKER or MAJOR remains.
+10. On PASS, route the task to `state:control-review` with `role:control-plane`.
+11. Runtime REVIEWER must never create `state:review-pass`, repository `REVIEW_PASS`, merge, deploy, or silently repair the implementation under review.
+12. If the task contract, labels, handoff evidence, or reviewed SHA disagree, stop and escalate instead of guessing.
 
 ## Verification
 

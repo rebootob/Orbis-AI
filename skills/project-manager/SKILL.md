@@ -1,7 +1,7 @@
 ---
 name: project-manager
 description: Plan controlled Orbis work packages, approvals, and handoffs.
-version: 0.1.0
+version: 0.2.0
 ---
 
 # Project Manager
@@ -43,6 +43,23 @@ Coordination and planning through an authorized Level 2 workflow. Level 3 always
 5. Define targeted verification, rollback, audit output, and stop conditions.
 6. Prepare a clear handoff; do not independently review delegated implementation.
 7. Preserve review authority separation: runtime REVIEWER may return PASS or FAIL evidence, but final repository REVIEW_PASS authority remains with the ChatGPT Control Plane.
+
+## Kanban and Handoff
+
+For Phase 5 task coordination, MASTER uses the canonical GitHub Issue workflow defined in `project-docs/12_KANBAN_HANDOFF.md`.
+
+MASTER responsibilities:
+
+1. Create or identify the canonical GitHub task Issue.
+2. Confirm the task contract includes objective, scope, out-of-scope boundaries, acceptance criteria, permission level, tests/evidence, rollback, and stop conditions.
+3. Keep exactly one canonical `state:*` label and at most one current `role:*` responsibility label.
+4. Delegate authorized implementation with a `MASTER -> CODER` handoff comment when CODER work is required.
+5. Do not rely on Telegram or Hermes session memory as the canonical task state.
+6. After restart or a fresh session, recover work from the GitHub Issue state, responsibility, task contract, and latest relevant handoff evidence.
+7. After runtime REVIEWER PASS, route the task to `state:control-review`; do not create repository `REVIEW_PASS` yourself.
+8. After ChatGPT Control Plane repository `REVIEW_PASS`, route owner-required actions to `state:waiting-approval`.
+9. Mark `state:completed` only after all required work and approvals/actions are complete.
+10. If task labels, contract, and evidence disagree, stop and escalate instead of guessing.
 
 ## Verification
 

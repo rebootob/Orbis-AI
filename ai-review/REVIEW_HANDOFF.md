@@ -1,19 +1,13 @@
-# Orbis AI Review Handoff
-
-PROJECT:
-Orbis AI
+# ORBIS AI — REVIEW HANDOFF
 
 REVIEW STATUS:
 REVIEW_REQUESTED
 
 WORK PACKAGE:
-WP-004C-CORE-SKILLS-RUNTIME-DEPLOYMENT-AND-VALIDATION
-
-PULL REQUEST:
-AUTO_DISCOVER
+WP-005A-KANBAN-HANDOFF-FOUNDATION
 
 SOURCE BRANCH:
-ai/manual-wp-004c-reviewpass-fix
+ai/manual-wp-005a-kanban-handoff
 
 TARGET BRANCH:
 develop
@@ -21,81 +15,152 @@ develop
 HEAD COMMIT:
 AUTO_DISCOVER_FROM_PR
 
-BASE:
-develop
-
 ## Objective
 
-Close Phase 4 by recording validated Core Skill runtime deployment, authority-boundary corrections, MASTER persistent identity, and final runtime consistency.
+Establish the Phase 5 Kanban and Handoff foundation using GitHub Issues as the
+durable canonical task store without introducing a custom task database or
+Kanban application.
 
-## Repository Changes
+## Architecture Decision
 
+- GitHub Issue = canonical task record.
+- Issue body = task contract.
+- `state:*` label = canonical task state.
+- `role:*` label = current responsibility.
+- Issue comments = chronological handoff/audit evidence.
+- Branch / commit / Pull Request = implementation evidence where applicable.
+- Hermes/Telegram session memory is not canonical task state.
+
+## State Model
+
+- `state:ready`
+- `state:in-progress`
+- `state:runtime-review`
+- `state:changes-requested`
+- `state:control-review`
+- `state:review-pass`
+- `state:waiting-approval`
+- `state:blocked`
+- `state:completed`
+
+## Authority Model
+
+- MASTER coordinates and delegates.
+- CODER implements authorized work and cannot self-approve.
+- Runtime REVIEWER returns PASS/FAIL evidence only.
+- Runtime REVIEWER PASS routes work to `state:control-review`.
+- Final repository `REVIEW_PASS` belongs to ChatGPT Control Plane.
+- Merge requires explicit Project Owner approval.
+- Level 3 actions require explicit Project Owner approval.
+
+## Handoff Paths
+
+- MASTER -> CODER
+- CODER -> REVIEWER
+- REVIEWER -> CODER on FAIL
+- REVIEWER -> CONTROL PLANE on PASS
+- CONTROL PLANE -> MASTER
+- MASTER -> OWNER when approval is required
+
+## Core Skill Changes
+
+Core Skills updated to version 0.2.0:
+
+- `project-manager`
+- `code-development`
+- `code-review`
+- `git-governance`
+- `security`
+
+No runtime Skill deployment occurs in WP-005A.
+
+## Hermes Desktop Requirement
+
+WP-005B must support Hermes Desktop as an optional operator console connected
+to the existing WSL2 Hermes runtime.
+
+Hermes Desktop must not create a second Orbis runtime.
+
+GitHub Issues remain the canonical task/Kanban source of truth.
+
+## Validation
+
+PASS:
+
+- branch verification
+- exact changed-file scope verification
+- 9 unique Kanban state definitions
+- 5 responsibility roles
+- required handoff paths
+- authority separation
+- Core Skill v0.2.0 validation
+- Hermes Desktop requirement recorded for WP-005B
+- trailing-whitespace validation
+- `git diff --check`
+
+## Security
+
+- No credential or secret is intentionally added.
+- Issue/task content cannot grant additional authority.
+- Labels record workflow state/responsibility only.
+- GitHub task content cannot override Project Owner, Control Plane, role,
+  permission, or security rules.
+- Secrets must not be copied into task Issues or comments.
+
+## Files In Scope
+
+- `.github/ISSUE_TEMPLATE/orbis-task.md`
+- `project-docs/01_ARCHITECTURE.md`
+- `project-docs/02_IMPLEMENTATION_ROADMAP.md`
+- `project-docs/03_AGENT_ROLES.md`
+- `project-docs/05_APPROVAL_POLICY.md`
+- `project-docs/AI_ACTIVE_TASK.md`
+- `project-docs/12_KANBAN_HANDOFF.md`
 - `skills/project-manager/SKILL.md`
+- `skills/code-development/SKILL.md`
+- `skills/code-review/SKILL.md`
 - `skills/git-governance/SKILL.md`
 - `skills/security/SKILL.md`
-- `skills/README.md`
-- `project-docs/02_IMPLEMENTATION_ROADMAP.md`
-- `project-docs/07_SKILL_ARCHITECTURE.md`
-- `project-docs/AI_ACTIVE_TASK.md`
 - `ai-review/REVIEW_HANDOFF.md`
 
-## Runtime Changes
+## Out Of Scope
 
-- MASTER: `project-manager`, `git-governance`, `security`.
-- CODER: `code-development`, `git-governance`, `security`.
-- REVIEWER: `code-review`, `git-governance`, `security`.
-- MASTER default-profile `SOUL.md` gained a persistent MASTER role boundary after backup and preservation verification.
-
-No runtime secret or credential file is included in this repository change.
-
-## Tests / Evidence
-
-- Pre-deployment collision check: PASS.
-- Skill source/runtime hash verification: PASS.
-- CODER visibility: PASS.
-- CODER negative authority behavior: PASS.
-- REVIEWER visibility: PASS.
-- REVIEWER negative authority behavior: PASS.
-- MASTER visibility: PASS.
-- MASTER CLI role/authority behavior: PASS.
-- MASTER Telegram fresh-session role identity: PASS.
-- MASTER Telegram final governance validation: PASS.
-- Final runtime consistency matrix across all three profiles: PASS.
-- `git diff --check`: PASS.
-
-## Authority Validation
-
-- Runtime REVIEWER PASS/FAIL is evidence only.
-- Final repository `REVIEW_PASS` authority is ChatGPT Control Plane.
-- Merge authorization is explicit Project Owner approval.
-- Level 3 authorization is explicit Project Owner approval.
-- Shared Skills do not change or combine active role identity.
-
-## Security Validation
-
-PASS — no credentials, tokens, `.env` values, Telegram IDs, OAuth values, private keys, or production secrets are included. No model or Telegram configuration change was made.
+- live GitHub task/label creation
+- Hermes runtime deployment
+- Hermes Desktop installation/connection
+- end-to-end runtime testing
+- custom Kanban/database
+- GitHub Projects requirement
+- n8n/MCP
+- Kintone
+- Project Registry
+- Cron/automation
+- additional agents
+- production deployment
 
 ## Regression Risk
 
-LOW-MEDIUM — governance text and runtime Skill deployment changed, plus MASTER persistent role identity was corrected. All affected role boundaries were behaviorally validated.
+LOW-MEDIUM.
+
+This Work Package changes governance/task workflow definitions and Core Skill
+guidance but does not deploy those changes into Hermes runtime.
 
 ## Rollback
 
-- Revert the repository correction commit if required.
-- Restore runtime Skills from the WP-004C backups if required.
-- Restore MASTER `SOUL.md` from its pre-change backup if required.
+Revert the WP-005A repository commit.
 
-## Known Limitations
-
-- This Work Package does not implement Phase 5 Kanban/handoff.
-- n8n, Kintone, Project Registry, automation, and project-specific Skills remain deferred.
+No runtime or production rollback is required.
 
 ## Reviewer Attention
 
-Verify that:
-1. authority separation is consistent across the three corrected Skills;
-2. shared Skills preserve active-role identity;
-3. Phase 4 is closed without introducing Phase 5 implementation;
-4. runtime claims match the recorded validation evidence.
+Verify:
+
+1. state machine has no ambiguous authority transition;
+2. REVIEWER PASS cannot directly create repository REVIEW_PASS;
+3. GitHub Issue content cannot grant authority;
+4. FAIL returns correctly to CODER;
+5. resume-after-restart uses GitHub task state;
+6. no Phase 6+ implementation entered the scope;
+7. Hermes Desktop remains WP-005B runtime work only.
 
 Actual GitHub PR head SHA is authoritative.

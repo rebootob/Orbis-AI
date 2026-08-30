@@ -1,22 +1,68 @@
 # Approval Policy
 
-## Decision rules
+## Decision Rules
 
-Level 0 actions may proceed automatically. Level 1 actions may proceed only in an approved development workspace. Level 2 actions require a recorded REVIEWER PASS before execution. Level 3 actions require explicit user approval for the exact action and target before execution.
+Level 0 read actions may normally proceed automatically.
 
-## Approval record
+Level 1 development writes may proceed only inside the explicitly approved
+development scope or workspace.
 
-For every Level 2 or 3 action, record the task ID, target project/environment, requested action, risk, reviewer result, user approval where required, actor, timestamp, and outcome. The authoritative log location is `<TO_BE_DEFINED>`.
+A normal non-protected development-branch push may occur when the current Work
+Package authorizes it and the push is required to create reviewable evidence.
+
+That push does not authorize merge, deployment, production change, or
+repository `REVIEW_PASS`.
+
+For repository integration such as merge:
+
+1. Runtime REVIEWER independently reviews the implementation.
+2. Runtime REVIEWER returns PASS or FAIL evidence.
+3. After runtime PASS, ChatGPT Control Plane independently determines repository `REVIEW_PASS`.
+4. Explicit Project Owner approval is required before merge.
+
+Level 3 production, destructive, credential, permission, migration, or
+force-push actions always require explicit Project Owner approval for the exact
+action and target.
+
+Runtime REVIEWER PASS and repository `REVIEW_PASS` are separate decisions.
+
+## Approval Record
+
+For actions requiring review or explicit owner approval, retain sufficient
+evidence to identify:
+
+- Task ID
+- Target project or environment
+- Requested action
+- Permission or risk level
+- Runtime REVIEWER result where applicable
+- ChatGPT Control Plane repository review decision where applicable
+- Project Owner approval where required
+- Actor
+- Timestamp
+- Outcome
+
+During Phase 5 the GitHub task Issue and linked Git / Pull Request evidence
+provide the canonical workflow and audit record.
+
+Future Project Registry work may add cross-project indexing but does not replace
+the Phase 5 task record.
 
 ## Examples
 
-| Action | Level | Gate |
+| Action | Level / Type | Gate |
 |---|---|---|
-| Inspect a repository status | 0 | None |
-| Edit code in a development workspace | 1 | Workspace scope |
-| Merge a reviewed branch | 2 | REVIEWER PASS |
-| Push to a remote | 2 | REVIEWER PASS |
-| Change a production credential | 3 | Explicit user approval |
-| Delete production data or force-push | 3 | Explicit user approval |
+| Inspect repository or task status | Level 0 | None |
+| Edit files in approved development scope | Level 1 | Approved Work Package |
+| Push authorized development branch for review | Level 2 workflow | Work Package + diff/secret checks |
+| Runtime implementation review | Review | REVIEWER PASS/FAIL |
+| Repository `REVIEW_PASS` | Review | ChatGPT Control Plane |
+| Merge reviewed work | Level 2 integration | Control Plane `REVIEW_PASS` + explicit Project Owner approval |
+| Production deployment or production change | Level 3 | Explicit Project Owner approval |
+| Production credential or permission change | Level 3 | Explicit Project Owner approval |
+| Production data deletion or force-push protected history | Level 3 | Explicit Project Owner approval |
 
-If scope, environment, or impact is unclear, stop and request clarification; do not infer approval.
+Review PASS never authorizes deployment automatically.
+
+If scope, environment, authority, or impact is unclear, stop and request
+clarification. Do not infer approval.

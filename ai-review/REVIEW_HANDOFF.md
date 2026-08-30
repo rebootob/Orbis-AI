@@ -19,7 +19,7 @@ TARGET BRANCH:
 develop
 
 HEAD COMMIT:
-e089743e207c1b90a5e2006cecfcc0103418ccd6
+085912c96d66488cb6f61e3869e3509d685e4ac1
 
 BASE:
 develop
@@ -30,7 +30,7 @@ Phase 4 skill discovery/design review before any custom Orbis skill is created o
 
 ## Implementation Summary
 
-Read-only inspection verified Hermes `SKILL.md` structure, active-profile skill locations, profile-scoped loading, native list/inspect/audit/check commands, and collision behavior. The documentation defines a Core 5 design and a required skill contract only; no runtime or skill modification was made.
+Read-only inspection verified Hermes Agent `v0.20.6`, source checkout `1c5ee5815fe5a3913530ba9d803b5b60bc633766`, `SKILL.md` structure, project/profile/external loading precedence, project trust behavior, and Core 5 naming evidence. The documentation corrects `inspect`/`check`/`audit` semantics, defines future local-skill verification, and separates repository source from future profile deployment. No runtime or skill modification was made.
 
 ## Files Changed
 
@@ -41,13 +41,14 @@ Read-only inspection verified Hermes `SKILL.md` structure, active-profile skill 
 ## Tests Executed
 
 - Read-only `hermes --help`, `hermes skills --help`, `hermes skills list`, and command-help inspection.
+- Read-only `hermes --version` and source checkout SHA inspection.
 - Read-only inspection of skill directories, one bundled `SKILL.md` sample, and resolver source/test evidence.
 - Read-only collision check for the Core 5 across default, coder, and reviewer profiles.
 - Ran `git diff --check` and changed-file secret-safety scan.
 
 ## Test Results
 
-PASS — discovery evidence is sufficient for the documentation-only design gate; no custom skill was created or installed.
+PASS — discovery evidence and the corrected architecture/design record are sufficient for this documentation-only gate; Core skill implementation is NOT STARTED and no custom skill was created or installed.
 
 ## Security Validation
 
@@ -59,7 +60,7 @@ LOW — documentation-only change; no Hermes runtime, profile, gateway, model, c
 
 ## Known Limitations
 
-This work package does not create, install, validate, or enable any custom Orbis skill. Related built-ins `github-code-review` and `requesting-code-review` require scope discipline but are not exact-name collisions.
+This work package does not create, install, validate, enable, or deploy any custom Orbis skill. The future local-skill verification sequence is documented but not executed. Related built-ins `github-code-review` and `requesting-code-review` require scope discipline but are not exact-name collisions.
 
 ## Rollback Plan
 
@@ -71,4 +72,4 @@ NONE
 
 ## Reviewer Attention
 
-Verify the native loading/preference record, Core 5 role design, required skill contract, related built-in scope overlap, and explicit non-authorization of skill implementation.
+Verify corrected native command semantics, project-trust/precedence record, repository-versus-runtime mapping, Core 5 profile mapping, future verification strategy, and explicit non-authorization of skill implementation.

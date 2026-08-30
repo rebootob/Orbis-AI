@@ -9,6 +9,9 @@ WP-004A-HERMES-SKILL-DISCOVERY-AND-DESIGN-GATE
 STATUS:
 IN_PROGRESS — DISCOVERY
 
+CORE SKILL IMPLEMENTATION:
+NOT STARTED
+
 CONTROL PLANE:
 ChatGPT
 
@@ -53,12 +56,15 @@ REQUIRED CONTEXT:
 
 VERIFIED NATIVE HERMES SKILL ARCHITECTURE:
 
+- Runtime identity (read-only): Hermes Agent `v0.20.6` (2026.8.27); source checkout `1c5ee5815fe5a3913530ba9d803b5b60bc633766`.
 - Required entry file: `SKILL.md` in a skill directory; optional `references/`, `templates/`, `assets/`, and supporting files may accompany it.
 - `SKILL.md` uses YAML front matter. `name` is required (maximum 64 characters); `description` is required (maximum 1024 characters). Optional native fields include `version`, `license`, `platforms`, `prerequisites`, `compatibility`, and `metadata`.
 - Active skills resolve from the active profile's `HERMES_HOME/skills`. Observed locations are `/home/allday/.hermes/skills` for default/MASTER and `/home/allday/.hermes/profiles/{coder,reviewer}/skills` for worker profiles.
 - Bundled skills are seeded into the active profile skill directory. The current default, coder, and reviewer profiles each expose the same 77 enabled built-in skills; no hub or local skills are installed.
-- Trusted project-local skill directories are discovered first, then active-profile skills, then configured external skill directories. Project-local skills take precedence over same-named lower-tier skills; non-project duplicate candidates are reported as an ambiguity rather than silently selected.
-- Native discovery/loading tools: `hermes skills list`, `hermes skills inspect`, `hermes skills audit`, `hermes skills check`, and explicit session preload via `--skills`.
+- Project-local locations are `<project-root>/.hermes/skills/` and `<project-root>/.agents/skills/`; discovery requires `hermes skills trust` and uses `skills.trusted_project_dirs`.
+- Precedence is project-local → profile-local → external. Project-local skills take precedence over same-named lower-tier skills; non-project duplicate candidates are reported as an ambiguity rather than silently selected.
+- Native command semantics: `hermes skills inspect` previews a candidate before installation; `hermes skills check` checks installed hub skills for upstream updates; `hermes skills audit` re-scans installed hub skills. These are not generic local custom-skill validators.
+- Native discovery/loading tools include `hermes skills list` and explicit session preload via `--skills`.
 
 NAMING COLLISIONS:
 
@@ -72,6 +78,21 @@ RECOMMENDED CORE 5 DESIGN:
 - `code-review` — REVIEWER diff, regression, security, and test review with explicit PASS or FAIL.
 - `git-governance` — branch, commit, Pull Request, rollback, and audit constraints for all roles.
 - `security` — secret handling, permission ceilings, approval gates, and escalation rules for all roles.
+
+SOURCE OF TRUTH AND FUTURE RUNTIME MAPPING:
+
+- Repository `skills/` is the Git/version-controlled source of truth. It is not assumed to be automatically discovered by Hermes.
+- A separately authorized future deployment will place or synchronize approved skills into the applicable profile's `HERMES_HOME/skills` directory.
+- MASTER: `project-manager`, `git-governance`, `security`.
+- CODER: `code-development`, `git-governance`, `security`.
+- REVIEWER: `code-review`, `git-governance`, `security`.
+- This profile mapping keeps Core governance skills available across registered projects, rather than only when Hermes runs inside the Orbis repository.
+
+FUTURE LOCAL-SKILL VERIFICATION (NOT EXECUTED IN WP-004A):
+
+- Validate the required `SKILL.md` and front matter after a custom skill is created in a separately authorized work package.
+- Verify with `hermes -p <profile> skills list --enabled-only` and confirm expected profile visibility.
+- Start a fresh session with explicit `--skills <skill-name>`, run a behavioral test, and run a role-boundary negative test where applicable.
 
 IMPLEMENTATION INSTRUCTIONS:
 

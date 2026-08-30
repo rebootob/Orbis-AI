@@ -527,7 +527,65 @@ Overall recovery readiness:
 
 ---
 
-## 13. Validation Summary
+## 13. Remaining Blocker Remediation Proposal
+
+### 13.1 MASTER project-manager Skill Drift
+
+Recommendation: **OPTION_A**
+
+Preserve the runtime-only `Evidence Packaging for GitHub Issues` subsection by adding it to the repository canonical `skills/project-manager/SKILL.md`, then later re-sync the runtime copy from the repository and verify SHA256 equality.
+
+Rationale:
+- The subsection was introduced during WP-005B B3 patching to satisfy evidence-packaging behavior for GitHub Issues.
+- It is a validated runtime behavior requirement, not accidental drift.
+- Keeping it in the canonical repository source prevents recurrence on future deployments and preserves the WP-005B B3 validation outcome.
+- Version metadata can remain `0.2.2`; this is a content correction, not a feature bump.
+
+Next step after Control Plane approval:
+1. Add the subsection to the repository `SKILL.md`.
+2. Re-sync runtime copy.
+3. Verify runtime/repo SHA256 equality.
+4. Do not modify either file until this proposal is approved.
+
+### 13.2 External Credential Recovery Recommendations
+
+For each category, the recommended external recovery method, storage location, verification requirement, and reissue acceptability are documented below. No secret values are reproduced.
+
+#### 13.2.1 GitHub Authentication
+
+- Recommended external recovery method: Store GitHub token reference/recovery procedure in an external secure vault or password manager that survives total server loss; alternatively, rely on GitHub-supported token reissue from an approved operator account.
+- Where it should live: External vault/password manager on a separate protected device, or GitHub account recovery path.
+- What Project Owner must verify: Vault entry exists and is accessible; or operator account can reissue token.
+- Provider re-authentication/reissue acceptable: YES — GitHub tokens can be reissued via approved account/device flow.
+- Secret export required: NO — store reference/recovery procedure, not plaintext token.
+
+#### 13.2.2 Telegram Bot Authentication
+
+- Recommended external recovery method: Store bot token in an external secure vault or password manager; alternatively, use Telegram @BotFather to reissue/reset the token.
+- Where it should live: External vault/password manager on a separate protected device; or Telegram @BotFather recovery path.
+- What Project Owner must verify: Vault entry exists and is accessible; or @BotFather can reset token to a new value.
+- Provider re-authentication/reissue acceptable: YES — Telegram bot token can be reset via @BotFather.
+- Secret export required: NO — store reference/recovery procedure, not plaintext token.
+
+#### 13.2.3 Hermes-Required API Credentials
+
+- Recommended external recovery method: Store Nous provider OAuth/token recovery procedure in an external secure vault or password manager; alternatively, rely on Nous Portal provider-supported re-authentication/token reissue.
+- Where it should live: External vault/password manager on a separate protected device; or Nous Portal account recovery path.
+- What Project Owner must verify: Vault entry exists and is accessible; or Nous Portal account login and token refresh flow are functional.
+- Provider re-authentication/reissue acceptable: YES — provider-supported re-authentication or token reissue is acceptable.
+- Secret export required: NO — store reference/recovery procedure, not plaintext tokens.
+
+#### 13.2.4 SSH Private Key Recovery
+
+- Recommended external recovery method: Store ED25519 private key in an external secure vault or password manager on a separate protected device; alternatively, regenerate a new key pair and replace authorized_keys on the server.
+- Where it should live: External vault/password manager on a separate protected device; or verified Windows-side Hermes Desktop SSH trust store.
+- What Project Owner must verify: External key store exists and is accessible; or new key pair can be generated and authorized without exposing the private key.
+- Provider re-authentication/reissue acceptable: YES — SSH key pair can be regenerated; authorized_keys can be replaced.
+- Secret export required: NO — store private key in secure vault, or regenerate; do not export through chat/logs/backup archives.
+
+---
+
+## 14. Validation Summary
 
 | Check | Result |
 |---|---|
@@ -536,4 +594,4 @@ Overall recovery readiness:
 | WINDOWS_LOCAL_HERMES_BACKEND_RUNNING | NO |
 | DUPLICATE_ACTIVE_ORBIS_RUNTIME | NO |
 | WP005C_SCOPE_EXPANDED | NO |
-| RECOVERY_READINESS | FAIL — external recovery sources not verified |
+| RECOVERY_READINESS | FAIL — external recovery sources not yet verified |

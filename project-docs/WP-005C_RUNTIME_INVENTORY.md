@@ -497,11 +497,23 @@ Explicitly omitted from archive:
 | Runtime version | `0.2.2` |
 | Repository version | `0.2.2` |
 | Runtime SHA256 | `4f75cf3f6b605d8cadb1db0e5b04e79a25733806c79ac5d5551b8c3251089493` |
-| Repository SHA256 | `b781d9cdc471dd15a19baeee4f3d6a14dac9d854ac3b09f019cffc65b7b5f2f2` |
-| Drift detected | NO — SHAs now match after canonical repository remediation |
-| Cause | Resolved. Runtime-only `Evidence Packaging for GitHub Issues` subsection was added to the repository canonical `skills/project-manager/SKILL.md`. Repository and runtime copies now match. |
+| Repository SHA256 | `4f75cf3f6b605d8cadb1db0e5b04e79a25733806c79ac5d5551b8c3251089493` |
+| Drift detected | NO — SHAs match after canonical repository remediation and runtime re-sync |
+| Cause | Resolved. Runtime-only `Evidence Packaging for GitHub Issues` subsection was added to the repository canonical `skills/project-manager/SKILL.md`, then the runtime copy was re-synced from the canonical source. |
 | Canonical source | Repository file `skills/project-manager/SKILL.md` |
-| Remediation status | APPLIED — repository canonical updated; runtime copy untouched |
+| Remediation status | APPLIED — repository canonical updated; runtime re-synced; hashes verified |
+
+### 12.1.1 Runtime Re-sync Record
+
+- Resync date/time: 2026-08-30
+- Pre-sync runtime SHA256: `4f75cf3f6b605d8cadb1db0e5b04e79a25733806c79ac5d5551b8c3251089493`
+- Repository SHA256: `4f75cf3f6b605d8cadb1db0e5b04e79a25733806c79ac5d5551b8c3251089493`
+- Post-sync runtime SHA256: `4f75cf3f6b605d8cadb1db0e5b04e79a25733806c79ac5d5551b8c3251089493`
+- REPO_RUNTIME_MATCH=YES
+- Backup location: `/home/allday/.hermes/backups/wp005c-project-manager-resync/project-manager-SKILL.pre-resync.md`
+- Runtime behavior validation: skill loads, version 0.2.2, evidence packaging subsection present, authority boundary intact, no secret exposure
+- Service restart: NO
+- Other runtime changes: NONE
 
 ### 12.2 Credential Recovery Readiness
 

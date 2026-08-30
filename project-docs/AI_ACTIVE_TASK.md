@@ -7,7 +7,7 @@ WORK PACKAGE:
 WP-003-HERMES-ROLE-PROFILES
 
 STATUS:
-REVIEW_REQUESTED
+COMPLETED
 
 CONTROL PLANE:
 ChatGPT
@@ -16,25 +16,20 @@ EXECUTION PLANE:
 Codex
 
 CURRENT PHASE:
-Phase 3 — MASTER / CODER / REVIEWER Profiles
+Phase 3 — MASTER / CODER / REVIEWER Profiles — COMPLETE
 
 OBJECTIVE:
 
-Create and validate three isolated Hermes roles on the established WSL2 Ubuntu runtime.
+Formally close Phase 3 after approved and merged runtime validation.
 
 WHY:
 
-Establish isolated role boundaries before agent-to-agent automation, Kanban, MCP, n8n, or project execution is introduced.
+Phase 3 established and validated isolated role boundaries before any future skills or orchestration work.
 
 SCOPE:
 
-- Default Hermes profile remains MASTER.
-- Create blank Hermes profile `coder`.
-- Create blank Hermes profile `reviewer`.
-- Define MASTER, CODER, REVIEWER role boundaries.
-- Validate profile isolation and role behavior.
-- Verify Telegram remains MASTER-only.
-- Record validation evidence.
+- Record Phase 3 completion and its final, approved validation state.
+- Identify Phase 4 — Skills as the next planned phase without authorizing its execution.
 
 IMPORTANT EXECUTION DESIGN:
 
@@ -62,12 +57,12 @@ REQUIRED CONTEXT:
 
 IMPLEMENTATION INSTRUCTIONS:
 
-- Record only verified, non-secret runtime evidence from the owner-authorized Phase 3 profile work.
-- Do not create additional profiles or modify MASTER/default, coder, gateways, credentials, or runtime configuration.
+- Documentation-only closeout. No further Phase 3 runtime work is required.
+- Do not modify profiles, gateways, Telegram, credentials, or runtime configuration.
 
 TEST REQUIREMENTS:
 
-Record only tests actually performed: `hermes profile list`; independent profile-state checks; worker gateway-state checks; absence of reviewer Telegram/gateway configuration; CODER and REVIEWER role-boundary tests; and verification that `default` remains MASTER.
+Run documentation validation and a changed-file secret-safety scan only.
 
 SECURITY REQUIREMENTS:
 
@@ -77,19 +72,19 @@ BASE BRANCH:
 develop
 
 WORKING BRANCH:
-ai/codex-wp-003-reviewer-evidence
+ai/codex-wp-003-closeout
 
 TARGET:
 develop
 
 ROLLBACK:
 
-If REVIEWER validation fails, remove or revert only the reviewer profile/config created for WP-003. Do not touch MASTER/default or validated coder unless a coder-specific rollback is explicitly required.
+Revert the WP-003 closeout documentation only. Do not modify validated runtime profiles or gateways.
 
 DELIVERABLES:
 
-- Approved WP-003 execution gate.
-- Validation evidence recorded after interactive runtime work.
+- Phase 3 closeout documentation and independent-review handoff.
+- Phase 4 — Skills recorded as NEXT / NOT STARTED; no Phase 4 execution scope is opened.
 
 CODER VALIDATION EVIDENCE:
 
@@ -122,7 +117,22 @@ REVIEWER VALIDATION EVIDENCE:
 - `ORBIS-REVIEWER-OK` test: PASS
 - Blocker: NONE
 
+FINAL VALIDATED STATE:
+
+- `default` = MASTER; default gateway: running
+- `coder` = CODER; coder gateway: not running; no Telegram configuration
+- `reviewer` = REVIEWER; reviewer gateway: not running; no Telegram configuration
+- Telegram remains MASTER-only
+- CODER persistent role and self-approval boundary: PASS
+- REVIEWER persistent role and no-silent-repair boundary: PASS
+- Blockers: NONE
+- No further Phase 3 runtime work is required.
+
+NEXT PLANNED PHASE:
+
+Phase 4 — Skills — NEXT / NOT STARTED. This closeout does not authorize Phase 4 execution.
+
 STOP CONDITIONS:
 
-- Stop this Codex task after the reviewer evidence is committed, pushed, and handed off for independent review.
-- Do not create additional profiles or modify runtime further in this task.
+- Stop after closeout documentation is committed, pushed, and handed off for independent review.
+- Do not begin Phase 4 execution.

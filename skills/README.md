@@ -1,5 +1,7 @@
 # Skills
 
-This directory is reserved for reusable, reviewed skill definitions. Phase 0 defines the skill architecture only; it does not install or configure skills.
+Repository `skills/` is the Git/version-controlled source of truth for reviewed Orbis skill definitions. It is not automatically deployed to Hermes runtime.
 
-Every skill added here should link to the relevant policy documents and declare scope, permissions, verification, and escalation conditions.
+Each Core skill is one directory containing `SKILL.md`. The Core 5 are `project-manager`, `code-development`, `code-review`, `git-governance`, and `security`.
+
+Runtime deployment requires a separately authorized Work Package. No deferred skill is implemented yet.

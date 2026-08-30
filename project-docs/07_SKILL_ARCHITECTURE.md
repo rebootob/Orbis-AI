@@ -28,7 +28,7 @@ This mapping keeps Core governance skills available across registered projects, 
 
 ## CORE NOW — design only
 
-Core skill implementation: NOT STARTED. No custom skill is created by this architecture gate.
+Core skill implementation: REPOSITORY DEFINITIONS CREATED — PENDING INDEPENDENT REVIEW. These definitions are not deployed or runtime validated.
 
 | Skill | Applicable role | Purpose |
 |---|---|---|

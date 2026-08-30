@@ -498,10 +498,10 @@ Explicitly omitted from archive:
 | Repository version | `0.2.2` |
 | Runtime SHA256 | `4f75cf3f6b605d8cadb1db0e5b04e79a25733806c79ac5d5551b8c3251089493` |
 | Repository SHA256 | `b781d9cdc471dd15a19baeee4f3d6a14dac9d854ac3b09f019cffc65b7b5f2f2` |
-| Drift detected | YES — SHAs differ despite identical version strings |
-| Cause | Expected historical patch drift. Runtime copy contains an extra subsection, `Evidence Packaging for GitHub Issues`, inserted after `## Procedure` and before `## Escalation Conditions`. This content aligns with WP-005B B3 patching for GitHub task evidence formatting, but it was never merged back into the repository source. |
-| Canonical source | Repository file `skills/project-manager/SKILL.md` is the governance-defined canonical source. Runtime copy is a deployed artifact. |
-| Remediation proposal | Minimal safe remediation, in order of preference: <br>1. Add the missing `Evidence Packaging for GitHub Issues` subsection to the repository `SKILL.md`, preserving existing content and version metadata. <br>2. Re-sync runtime copy from repository and verify SHA256 equality. <br>3. If the Control Plane decides this subsection should not be part of the canonical skill, remove it from the runtime copy instead and verify equality. <br>Do not overwrite either copy until Control Plane selects a remediation path. |
+| Drift detected | NO — SHAs now match after canonical repository remediation |
+| Cause | Resolved. Runtime-only `Evidence Packaging for GitHub Issues` subsection was added to the repository canonical `skills/project-manager/SKILL.md`. Repository and runtime copies now match. |
+| Canonical source | Repository file `skills/project-manager/SKILL.md` |
+| Remediation status | APPLIED — repository canonical updated; runtime copy untouched |
 
 ### 12.2 Credential Recovery Readiness
 

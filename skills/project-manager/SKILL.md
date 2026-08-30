@@ -82,6 +82,31 @@ Before execution, confirm that scope, owner-approval requirements, test plan, ro
 
 Record task/work-package ID, project, objective, scope, acting role, approval requirement, evidence expectation, and final status.
 
+## Evidence Packaging for GitHub Issues
+
+When recovery/integration work produces validation evidence, record a compact PASS/FAIL evidence block as a GitHub issue comment before changing state or role. Include only validated facts as key=value lines; keep it to a single comment when possible.
+
+Use this shape:
+
+```
+TASK_ID: <id>
+ACTION: <short action name>
+REMOTE_URL: <url or N/A>
+
+<KEY1>=<VALUE1>
+<KEY2>=<VALUE2>
+...
+
+EVIDENCE:
+- <fact>
+- <fact>
+
+AUTHORITY: <work package/level>
+NEXT_ACTION: <next step or state change>
+```
+
+Do not duplicate evidence across multiple comments unless new findings invalidate prior evidence.
+
 ## Escalation Conditions
 
 Escalate missing authorization, Level 3 actions, ambiguous scope, destructive actions, security risk, failed verification, or any request to bypass the Project Owner.

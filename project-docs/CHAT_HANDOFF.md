@@ -69,14 +69,23 @@ Telegram
 Optional operator interface:
 Hermes Desktop
 
-Hermes Desktop connects to the existing WSL2 Hermes runtime via
-SSH 127.0.0.1:2222 through `hermes serve`.
+Hermes Desktop connects to the existing WSL2 Hermes runtime via SSH.
+
+Architecture:
+
+Windows Hermes Desktop UI
+-> Connect via SSH
+-> allday@127.0.0.1:2222
+-> existing WSL2 Hermes / Orbis runtime
+
+Authentication:
+ED25519 key-only.
 
 No second Orbis runtime exists or is created on Windows.
 Windows local Hermes backend = NO.
 
-Authentication:
-ED25519 key-only.
+Note: Remote Gateway / `hermes serve` :9119 was an earlier attempted
+architecture and is NOT the final B4 connection method.
 
 ---
 
@@ -210,9 +219,11 @@ comments without depending on chat history.
 
 Working-tree changes include:
 
-`project-docs/AI_ACTIVE_TASK.md`
 `project-docs/12_KANBAN_HANDOFF.md`
+`project-docs/AI_ACTIVE_TASK.md`
 `project-docs/CHAT_HANDOFF.md`
+`skills/git-governance/SKILL.md`
+`skills/project-manager/SKILL.md`
 
 ---
 

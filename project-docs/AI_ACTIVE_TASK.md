@@ -48,15 +48,24 @@ without creating a second Orbis runtime.
 - GitHub Issues = canonical task/Kanban source of truth.
 - GitHub/Git = implementation and audit evidence.
 
-Hermes Desktop connects to the approved WSL2 Hermes backend via SSH
-127.0.0.1:2222 through `hermes serve`. No second Orbis runtime exists or
-is created on Windows.
+Hermes Desktop connects to the approved WSL2 Hermes backend via SSH.
+
+Architecture:
+
+Windows Hermes Desktop UI
+-> Connect via SSH
+-> allday@127.0.0.1:2222
+-> existing WSL2 Hermes / Orbis runtime
 
 Authentication:
 ED25519 key-only.
 
+No second Orbis runtime exists or is created on Windows.
 Windows local Hermes backend = NO.
 Telegram remains independently operational.
+
+Note: Remote Gateway / `hermes serve` :9119 was an earlier attempted
+architecture and is NOT the final B4 connection method.
 
 ## Scope
 

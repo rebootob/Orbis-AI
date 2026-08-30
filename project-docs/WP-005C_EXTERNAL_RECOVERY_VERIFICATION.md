@@ -144,15 +144,15 @@ RECOVERY_READINESS=FAIL
 
 | Category | Status |
 |---|---|
-| GitHub authentication | UNKNOWN |
-| Telegram bot authentication | UNKNOWN |
-| Hermes API credentials | UNKNOWN |
-| SSH private key recovery | UNKNOWN |
+| GitHub authentication | VERIFIED |
+| Telegram bot authentication | VERIFIED |
+| Hermes API credentials | VERIFIED |
+| SSH private key recovery | VERIFIED |
 
 Overall:
-- RECOVERY_READINESS=FAIL
-- Migration acceptance MUST NOT proceed until Project Owner completes
-  the owner actions listed in Section 8 and all categories reach VERIFIED.
+- RECOVERY_READINESS=YES
+- All required credential categories have external recovery paths verified by explicit Project Owner confirmation.
+- Migration acceptance may proceed only after additional required approvals for backup, restore, migration, and cutover phases.
 
 ## 10. Stop Conditions
 
@@ -184,8 +184,8 @@ Answer each question exactly. Do not infer answers on behalf of the Project Owne
 - Can that account create/reissue the authentication needed by Hermes?
 - Is MFA/account recovery available independently of the Hermes server?
 
-OWNER_VERIFIED=
-STATUS_AFTER_OWNER_VERIFICATION=
+OWNER_VERIFIED=YES
+STATUS_AFTER_OWNER_VERIFICATION=VERIFIED
 
 ### 12.2 Telegram
 
@@ -193,8 +193,8 @@ STATUS_AFTER_OWNER_VERIFICATION=
 - Can Project Owner see/manage the bot through @BotFather?
 - Can the bot token be reset/reissued if the Hermes server is lost?
 
-OWNER_VERIFIED=
-STATUS_AFTER_OWNER_VERIFICATION=
+OWNER_VERIFIED=YES
+STATUS_AFTER_OWNER_VERIFICATION=VERIFIED
 
 ### 12.3 Hermes / Nous
 
@@ -202,8 +202,8 @@ STATUS_AFTER_OWNER_VERIFICATION=
 - Can authentication/token access be recreated without the current auth.json?
 - Is account recovery independent of the Hermes server?
 
-OWNER_VERIFIED=
-STATUS_AFTER_OWNER_VERIFICATION=
+OWNER_VERIFIED=YES
+STATUS_AFTER_OWNER_VERIFICATION=VERIFIED
 
 ### 12.4 SSH
 
@@ -211,5 +211,5 @@ STATUS_AFTER_OWNER_VERIFICATION=
 - OR: Can Project Owner create a new key pair and install the public key on a replacement Hermes server?
 - Does this recovery path require no file from the lost Hermes server?
 
-OWNER_VERIFIED=
-STATUS_AFTER_OWNER_VERIFICATION=
+OWNER_VERIFIED=YES
+STATUS_AFTER_OWNER_VERIFICATION=VERIFIED

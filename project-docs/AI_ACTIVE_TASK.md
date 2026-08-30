@@ -182,20 +182,20 @@ Stop if:
 
 ## Recovery Readiness
 
-- External credential recovery verification is in progress.
-- Recovery readiness remains FAIL until all four required credential categories
-  are independently verified with external sources that survive total server loss.
-- Documentation alone does not prove recoverability.
+- External credential recovery verification is COMPLETE / PASS.
+- RECOVERY_READINESS=YES
+- All four required credential categories have external recovery paths verified
+  by explicit Project Owner confirmation:
+  - GitHub authentication = VERIFIED
+  - Telegram bot authentication = VERIFIED
+  - Hermes API credentials = VERIFIED
+  - SSH private key recovery = VERIFIED
+- Documentation alone is no longer the limiting factor; subsequent WP-005C phases
+  still require separate approval before execution.
 
 ## Next Step
 
-Complete Project Owner verification of external recovery sources for:
-- GitHub authentication
-- Telegram bot authentication
-- Hermes API credentials
-- SSH private key / Desktop SSH access
+Proceed to the next approved WP-005C phase only after explicit Project Owner
+approval for backup execution, migration validation, or cutover planning.
 
-Only after all categories reach VERIFIED may WP-005C proceed to backup
-execution, migration validation, or cutover planning.
-
-Do not expand scope beyond External Credential Recovery Verification without explicit approval.
+Do not expand scope beyond approved WP-005C phases without explicit approval.

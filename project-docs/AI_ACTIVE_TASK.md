@@ -4,14 +4,15 @@ PROJECT:
 Orbis AI
 
 WORK PACKAGE:
-WP-005C — IMPLEMENTATION — RUNTIME INVENTORY / BACKUP DESIGN
+WP-005C — IMPLEMENTATION — EXTERNAL CREDENTIAL RECOVERY VERIFICATION
 
 STATUS:
-IMPLEMENTATION — RUNTIME INVENTORY / BACKUP DESIGN
+IMPLEMENTATION — EXTERNAL CREDENTIAL RECOVERY VERIFICATION
 WP-005B = COMPLETE / MERGED (merge commit 5fe175efc4e4f9933299b14151919709c69769b3)
+WP-005C Runtime Inventory/Backup Design = COMPLETE / MERGED (merge commit 3e7b990f1fb88724f0266f5bd2fbcb7d6303bb44)
 
 CURRENT PHASE:
-Phase 5 — Kanban & Handoff
+Phase 5 — External Credential Recovery Verification
 
 CONTROL PLANE:
 ChatGPT
@@ -68,14 +69,15 @@ Telegram remains independently operational.
 
 ### Current WP-005C Scope
 
-- Runtime Inventory: non-destructive discovery of host, installation, profiles,
-  Core Skills, Git/GitHub, Telegram, Desktop/SSH, services, and non-Git state.
-- Backup Design: architecture, manifest, integrity, restore order, retention,
-  secret recovery separation, validation procedure, and completeness proof.
+- External Credential Recovery Verification: safely verify external disaster-recovery paths for:
+  - GitHub authentication
+  - Telegram bot authentication
+  - Hermes-required API credentials
+  - SSH private key / Desktop SSH access
 
 ### WP-005C Scope Guard
 
-The current approved implementation boundary ends at documentation.
+This phase is verification and documentation only.
 Do not start:
 - backup execution
 - restore execution
@@ -86,6 +88,7 @@ Do not start:
 - Windows Hermes backend installation
 - PowerShell policy changes
 - deployment
+- credential reissue/rotation
 
 ## Authority Model
 
@@ -109,16 +112,11 @@ Do not start:
 
 ## Required Validation
 
-- runtime inventory completeness
-- repository/runtime Skill SHA256 equality
-- Core Skill version matrix
-- fresh-session role identity
-- authority-negative tests
-- Kanban/handoff behavior
-- restart/resume behavior
-- Desktop-to-WSL-runtime connection via SSH
-- Telegram remains functional
-- Desktop shutdown does not stop Orbis runtime
+- external credential recovery verification completeness
+- GitHub authentication recovery path verified or documented owner action
+- Telegram bot authentication recovery path verified or documented owner action
+- Hermes API credential recovery path verified or documented owner action
+- SSH private key recovery path verified or documented owner action
 - secret-safe inspection
 - repository diff check
 - Windows duplicate runtime guard:
@@ -126,8 +124,7 @@ Do not start:
   - `DUPLICATE_ACTIVE_ORBIS_RUNTIME=NO`
   - `WINDOWS_LOOPBACK_FORWARDING_MECHANISM=UNKNOWN`
 
-STATUS: ALL COMPLETE / PASS for WP-005B.
-WP-005C validation continues under current limited scope.
+STATUS: WP-005C external recovery verification in progress.
 
 ## WP-005B Summary
 
@@ -144,8 +141,8 @@ Merge commit: 5fe175efc4e4f9933299b14151919709c69769b3
 
 - Preserve existing SOUL/profile/config files unless a separately identified
   change is required.
-- Stop any expansion beyond Runtime Inventory / Backup Design and return to
-  approved Phase 5 architecture if scope drifts.
+- Stop any expansion beyond External Credential Recovery Verification and
+  return to approved Phase 5 architecture if scope drifts.
 - Repository changes can be reverted through Git.
 
 ## Out of Scope
@@ -165,39 +162,40 @@ Merge commit: 5fe175efc4e4f9933299b14151919709c69769b3
 - restore execution
 - server migration
 - cutover
+- credential reissue/rotation
 - changing approved Phase 5 architecture unless required by migration
 
 ## Stop Conditions
 
 Stop if:
-- runtime inventory is incomplete;
-- backup design is incomplete;
-- restore procedure requires chat history;
+- external recovery verification is incomplete;
+- verification requires secret exposure;
+- verification requires credential rotation/reissue;
 - secrets may be exposed;
-- new server validation is reached;
-- old server must be deleted before acceptance;
 - rollback path is unavailable or untested;
 - GitHub task state/evidence becomes inconsistent;
 - a Level 3 action is reached without explicit Project Owner approval;
-- scope expands beyond WP-005C Runtime Inventory / Backup Design;
+- scope expands beyond WP-005C External Credential Recovery Verification;
 - Hermes Desktop attempts Windows-local backend bootstrap/installation.
 - A second Hermes/Orbis runtime becomes active on Windows.
 - `WINDOWS_LOCAL_HERMES_BACKEND_RUNNING=YES` or `DUPLICATE_ACTIVE_ORBIS_RUNTIME=YES`.
 
 ## Recovery Readiness
 
-- Secure credential recovery inventory is documented.
-- Recovery readiness remains FAIL until Project Owner confirms the documented
-  secure recovery sources exist and are accessible.
-- Do not treat documentation alone as proof of recoverability.
+- External credential recovery verification is COMPLETE / PASS.
+- RECOVERY_READINESS=YES
+- All four required credential categories have external recovery paths verified
+  by explicit Project Owner confirmation:
+  - GitHub authentication = VERIFIED
+  - Telegram bot authentication = VERIFIED
+  - Hermes API credentials = VERIFIED
+  - SSH private key recovery = VERIFIED
+- Documentation alone is no longer the limiting factor; subsequent WP-005C phases
+  still require separate approval before execution.
 
 ## Next Step
 
-Complete Project Owner review of:
-- runtime inventory
-- backup design
-- credential recovery sources
+Proceed to the next approved WP-005C phase only after explicit Project Owner
+approval for backup execution, migration validation, or cutover planning.
 
-Only after approval proceed to backup execution, migration validation, or cutover planning.
-
-Do not expand scope beyond Runtime Inventory / Backup Design without explicit approval.
+Do not expand scope beyond approved WP-005C phases without explicit approval.

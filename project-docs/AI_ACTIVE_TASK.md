@@ -7,7 +7,7 @@ WORK PACKAGE:
 WP-005B-HERMES-RUNTIME-AND-DESKTOP-INTEGRATION
 
 STATUS:
-IN_PROGRESS
+COMPLETE pending repository closeout / merge
 
 CURRENT PHASE:
 Phase 5 — Kanban & Handoff
@@ -48,8 +48,15 @@ without creating a second Orbis runtime.
 - GitHub Issues = canonical task/Kanban source of truth.
 - GitHub/Git = implementation and audit evidence.
 
-Hermes Desktop must connect to the approved WSL2 Hermes backend and must not
-create or become a separate Orbis runtime.
+Hermes Desktop connects to the approved WSL2 Hermes backend via SSH
+127.0.0.1:2222 through `hermes serve`. No second Orbis runtime exists or
+is created on Windows.
+
+Authentication:
+ED25519 key-only.
+
+Windows local Hermes backend = NO.
+Telegram remains independently operational.
 
 ## Scope
 
@@ -77,10 +84,11 @@ Requirements:
 - verify repository/runtime SHA256 equality;
 - verify all deployed Core Skills report version 0.2.0.
 
+STATUS: COMPLETE / PASS
+
 ### B2 — Runtime Behavioral Validation
 
 Validate fresh-session behavior for:
-
 - MASTER task coordination and authority boundaries;
 - CODER implementation/handoff boundaries;
 - REVIEWER PASS/FAIL and Control Plane routing;
@@ -89,21 +97,16 @@ Validate fresh-session behavior for:
 - no REVIEWER-generated repository REVIEW_PASS;
 - no unauthorized merge/deploy/Level 3 action.
 
+STATUS: COMPLETE / PASS
+
 ### B3 — GitHub Task Runtime Integration
 
 Validate that Hermes can operate from the approved GitHub Issue model.
-
-A runtime validation finding established that GitHub native `open` / `closed`
-must never be substituted for Orbis `state:*`. Corrective Skill patch versions
-may be deployed during B3 only when they directly resolve a validation finding
-and source/runtime equality is reverified.
-
-A second B3 validation finding established that state/role uniqueness counts
-must be calculated from labels attached to the canonical Issue only, never from
-the repository-wide label catalog.
+Findings resolved with patch versions:
+- project-manager v0.2.1, git-governance v0.2.1 (GitHub native state vs Orbis state)
+- project-manager v0.2.2, git-governance v0.2.2 (label scope canonical-Issue-only)
 
 Validate:
-
 - read canonical task contract;
 - recognize `state:*` and `role:*`;
 - produce required handoff records;
@@ -111,22 +114,23 @@ Validate:
 - recover task context after fresh session/restart;
 - stop on inconsistent state/evidence.
 
-Live task/label creation must be limited to controlled validation required by
-this Work Package.
+Live task/label creation limited to controlled validation required by this Work Package.
+
+STATUS: COMPLETE / PASS
 
 ### B4 — Hermes Desktop Integration
 
 Connect Hermes Desktop to the existing WSL2 Hermes backend.
+Architecture validated:
+- Windows Hermes Desktop UI -> SSH 127.0.0.1:2222 -> existing WSL2 Hermes / Orbis runtime
+- ED25519 key-only authentication
+- Windows local Hermes backend = NO
+- Telegram remains independently operational
+- Desktop shutdown does not stop Orbis runtime = PASS
+- Desktop relaunch/reconnect = PASS
+- Desktop cannot bypass review, merge, Level 3, role, or security rules
 
-Requirements:
-
-- use the existing WSL2 Hermes runtime;
-- do not duplicate MASTER/CODER/REVIEWER state;
-- do not create a second production Orbis runtime;
-- preserve Telegram operation independently of Desktop;
-- keep backend exposure local/private unless a broader bind is explicitly
-  authorized;
-- Desktop must not bypass review, merge, Level 3, role, or security rules.
+STATUS: COMPLETE / PASS
 
 ## Authority Model
 
@@ -146,6 +150,7 @@ Requirements:
 - Use local backups for runtime files.
 - Do not enable additional worker gateways unless explicitly required and
   approved.
+- ED25519 key-only authentication is enforced for SSH connections.
 
 ## Required Validation
 
@@ -156,11 +161,13 @@ Requirements:
 - authority-negative tests
 - Kanban/handoff behavior
 - restart/resume behavior
-- Desktop-to-WSL-runtime connection
+- Desktop-to-WSL-runtime connection via SSH
 - Telegram remains functional
 - Desktop shutdown does not stop Orbis runtime
 - secret-safe inspection
 - repository diff check
+
+STATUS: ALL COMPLETE / PASS
 
 ## Rollback
 
@@ -183,11 +190,11 @@ Requirements:
 - custom Kanban UI/database
 - production deployment automation
 - broad LAN/Internet exposure of Hermes backend
+- WP-005C
 
 ## Stop Conditions
 
 Stop if:
-
 - runtime backup is incomplete;
 - source/runtime Skill verification fails;
 - role identity becomes ambiguous;
@@ -198,9 +205,22 @@ Stop if:
 - a Level 3 action is reached without explicit Project Owner approval;
 - scope expands beyond WP-005B.
 
+## WP-005B Summary
+
+All blocks complete:
+
+- B1: COMPLETE / PASS
+- B2: COMPLETE / PASS
+- B3: COMPLETE / PASS (Issues #12 closed)
+- B4: COMPLETE / PASS (Issue #13 closed)
+
+WP-005B implementation and validation are COMPLETE pending repository
+closeout and merge approval.
+
+WP-005C: NOT STARTED.
+
 ## Next Step
 
-Upgrade the approved Core Skills from v0.1.0 to v0.2.0 with backup and
-source/runtime hash verification.
+WP-005B final repository diff/review and merge approval preparation.
 
 Do not begin WP-005C until WP-005B is reviewed and merged.

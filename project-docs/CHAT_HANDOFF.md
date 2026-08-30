@@ -69,10 +69,14 @@ Telegram
 Optional operator interface:
 Hermes Desktop
 
-Hermes Desktop must connect to the existing WSL2 Hermes runtime through
-`hermes serve`.
+Hermes Desktop connects to the existing WSL2 Hermes runtime via
+SSH 127.0.0.1:2222 through `hermes serve`.
 
-Do not create a second Orbis runtime on Windows.
+No second Orbis runtime exists or is created on Windows.
+Windows local Hermes backend = NO.
+
+Authentication:
+ED25519 key-only.
 
 ---
 
@@ -83,7 +87,6 @@ Do not create a second Orbis runtime on Windows.
 STATUS: COMPLETE / PASS
 
 Initial Core Skills were upgraded from v0.1.0 to v0.2.0.
-
 9 runtime Skill copies were verified by SHA256 against repository source.
 
 ### B2 — Runtime Behavioral Validation
@@ -103,107 +106,24 @@ Validated:
 
 ### B3 — GitHub Task Runtime Integration
 
-STATUS: IN PROGRESS
+STATUS: COMPLETE / PASS
 
 Canonical test task:
 
 GitHub Issue #12
+Title: `[WP-005B TEST] Hermes GitHub Task Runtime Validation`
 
-Title:
+GitHub native Issue state: `closed`
+Final Orbis state label: `state:completed`
 
-`[WP-005B TEST] Hermes GitHub Task Runtime Validation`
+Findings resolved:
 
-Current canonical Issue labels:
-
-`state:in-progress`
-
-`role:coder`
-
-GitHub native Issue lifecycle remains:
-
-`open`
-
-These are different concepts.
-
----
-
-## Completed Runtime Handoff
-
-MASTER successfully performed:
-
-`MASTER -> CODER`
-
-The durable Issue #12 handoff comment records:
-
-- FROM_STATE: `state:ready`
-- TO_STATE: `state:in-progress`
-- FROM_ROLE: `role:master`
-- TO_ROLE: `role:coder`
-
-ChatGPT independently verified the labels and Issue comment from GitHub.
-
----
-
-## B3 Finding 1 — Fixed
-
-Problem:
-
-Hermes incorrectly used GitHub native Issue state:
-
-`open`
-
-as Orbis current task state.
-
-Correct rule:
-
-- GitHub native state = `open` / `closed`
-- Orbis state = exact attached `state:*` label
-- Orbis responsibility = exact attached `role:*` label
-
-Patch produced:
-
-- project-manager v0.2.1
-- git-governance v0.2.1
-
-Regression confirmed:
-
-`CURRENT_STATE=state:in-progress`
-
-Finding fixed.
-
----
-
-## B3 Finding 2 — Patch Deployed
-
-Problem:
-
-Hermes correctly read the task state/role but incorrectly counted:
-
-`STATE_LABEL_COUNT=9`
-
-`ROLE_LABEL_COUNT=6`
-
-Cause:
-
-It used repository-wide:
-
-`gh label list`
-
-instead of labels attached to Issue #12.
-
-Correct rule:
-
-State/role counts and uniqueness must use labels attached to the current
-canonical Issue only.
-
-Never use repository-wide label definitions as task-state evidence.
-
-Patch versions:
-
-- MASTER project-manager = v0.2.2
-- MASTER git-governance = v0.2.2
-- CODER git-governance = v0.2.2
-- REVIEWER git-governance = v0.2.2
+- Finding 1: GitHub native `open`/`closed` must never substitute for Orbis `state:*`.
+  Patched: project-manager v0.2.1, git-governance v0.2.1.
+- Finding 2: State/role label counts must use labels attached to the canonical
+  Issue only, never `gh label list` (repository-wide).
+  Patched: MASTER project-manager v0.2.2, MASTER git-governance v0.2.2,
+  CODER git-governance v0.2.2, REVIEWER git-governance v0.2.2.
 
 Latest runtime verification:
 
@@ -213,119 +133,86 @@ Latest runtime verification:
 - REVIEWER git-governance PASS
 - 4 / 4 source/runtime SHA256 matches
 
+B3 handoff flow validated: MASTER → CODER → REVIEWER with GitHub Issue
+labels and comments as canonical evidence.
+
+---
+
+## B4 — Hermes Desktop Integration
+
+STATUS: COMPLETE / PASS
+
+Architecture:
+
+Windows Hermes Desktop UI
+-> SSH 127.0.0.1:2222
+-> existing WSL2 Hermes / Orbis runtime
+
+Authentication:
+ED25519 key-only
+
+Validated:
+
+- Windows local Hermes backend = NO
+- Telegram remains independently operational
+- Desktop shutdown does not stop Orbis runtime = PASS
+- Desktop relaunch / reconnect = PASS
+- Desktop cannot bypass GitHub workflow
+- Desktop cannot bypass REVIEW_PASS authority
+- Desktop cannot authorize merge or Level 3
+
+Canonical test task:
+
+GitHub Issue #13
+Title: `WP-005B B4 — Hermes Desktop Integration`
+
+GitHub native Issue state: `closed`
+
+---
+
+## Completed Runtime Handoff
+
+MASTER successfully performed:
+`MASTER -> CODER`
+
+The durable Issue #12 handoff comment records:
+- FROM_STATE: `state:ready`
+- TO_STATE: `state:in-progress`
+- FROM_ROLE: `role:master`
+- TO_ROLE: `role:coder`
+
+ChatGPT independently verified the labels and Issue comment from GitHub.
+
 ---
 
 ## EXACT NEXT STEP
 
-Do NOT start CODER recovery yet.
+WP-005B final repository diff/review and merge approval preparation.
 
-First perform the final MASTER regression for the v0.2.2 label-scope patch.
-
-Required sequence:
-
-1. Restart `hermes-gateway.service`.
-2. Confirm gateway is active.
-3. Telegram: `/reset now`
-4. MASTER must re-read GitHub Issue #12.
-5. Do not tell MASTER expected state, role, or counts.
-
-Required result:
-
-ROLE=MASTER
-TASK_ID=12
-GITHUB_NATIVE_STATE=open
-CURRENT_STATE=state:in-progress
-CURRENT_ROLE=role:coder
-STATE_LABEL_COUNT=1
-ROLE_LABEL_COUNT=1
-LAST_HANDOFF_FROM=MASTER
-LAST_HANDOFF_TO=CODER
-VERDICT=PASS
-
-If STATE_LABEL_COUNT or ROLE_LABEL_COUNT is not 1:
-
-STOP B3 and investigate.
-
-If this regression passes:
-
-Proceed to CODER fresh-session recovery from GitHub Issue #12.
+WP-005C remains NOT STARTED.
 
 ---
 
-## Planned B3 Flow
+## Planned B4 Flow (Completed)
 
-Current:
+Issue #13 validated:
+- Hermes Desktop connects to existing WSL2 Hermes runtime via SSH
+- No duplicate Orbis runtime on Windows
+- Telegram independent throughout
+- Desktop shutdown/reconnect behavior confirmed
 
-Issue #12
-`state:in-progress`
-`role:coder`
-
-Next:
-
-CODER recovery
-→ CODER -> REVIEWER
-→ `state:runtime-review`
-→ `role:reviewer`
-
-Then validate:
-
-REVIEWER FAIL
-→ `state:changes-requested`
-→ `role:coder`
-
-and later:
-
-REVIEWER PASS
-→ `state:control-review`
-→ `role:control-plane`
-
-Restart/resume must recover from GitHub Issue state, labels, contract, and
+Restart/resume recovers from GitHub Issue state, labels, contract, and
 comments without depending on chat history.
-
----
-
-## B4 — Hermes Desktop
-
-STATUS: NOT STARTED
-
-Approved architecture:
-
-Hermes Desktop
-→ `hermes serve`
-→ existing WSL2 Hermes runtime
-
-Requirements:
-
-- no duplicate Orbis runtime;
-- Telegram remains independently operational;
-- Desktop cannot bypass GitHub workflow;
-- Desktop cannot bypass REVIEW_PASS authority;
-- Desktop cannot authorize merge;
-- Desktop cannot authorize Level 3;
-- backend should remain local/private unless explicitly approved.
-
-Do not start B4 until required B3 validation is complete.
 
 ---
 
 ## Current Source Changes
 
-Expected working-tree changes currently include:
+Working-tree changes include:
 
 `project-docs/AI_ACTIVE_TASK.md`
-
 `project-docs/12_KANBAN_HANDOFF.md`
-
-`skills/project-manager/SKILL.md`
-
-`skills/git-governance/SKILL.md`
-
-This file adds:
-
 `project-docs/CHAT_HANDOFF.md`
-
-Do not commit or merge simply because this document exists.
-Finish WP-005B validation first.
 
 ---
 
@@ -334,9 +221,7 @@ Finish WP-005B validation first.
 Local rollback backups include:
 
 `wp005b-core-skills-before-v020-*`
-
 `wp005b-b3-state-schema-before-v021-*`
-
 `wp005b-b3-issue-label-scope-before-v022-*`
 
 Do not commit Hermes runtime backups.
@@ -359,12 +244,13 @@ Never expose or commit:
 
 Do not store secret values in GitHub Issues or handoff comments.
 
+ED25519 key-only authentication is enforced for SSH connections.
+
 ---
 
 ## Scope Guard
 
 Current scope is WP-005B only.
-
 Do not start:
 
 - n8n/MCP
@@ -404,7 +290,6 @@ The new ChatGPT conversation must:
 Use this message in a new ChatGPT conversation:
 
 Continue Orbis AI.
-
 Repository: rebootob/Orbis-AI
 Working branch: ai/manual-wp-005b-hermes-runtime-desktop
 
@@ -416,7 +301,6 @@ NOT from develop:
 3. project-docs/12_KANBAN_HANDOFF.md
 
 Then inspect GitHub Issue #12 and its latest comments.
-
 Continue from EXACT NEXT STEP in CHAT_HANDOFF.md.
 If GitHub Issue evidence is newer, GitHub is authoritative.
 
@@ -431,12 +315,12 @@ Phase 4: COMPLETE
 
 Phase 5:
 - WP-005A: COMPLETE / MERGED
-- WP-005B B1: COMPLETE
-- WP-005B B2: COMPLETE
-- WP-005B B3: IN PROGRESS
-- WP-005B B4: NOT STARTED
+- WP-005B B1: COMPLETE / PASS
+- WP-005B B2: COMPLETE / PASS
+- WP-005B B3: COMPLETE / PASS
+- WP-005B B4: COMPLETE / PASS
+- WP-005B: COMPLETE pending repository closeout / merge
 - WP-005C: NOT STARTED
 
 Resume point:
-
-Final MASTER regression after v0.2.2 Issue-label-scope patch.
+WP-005B final repository diff/review and merge approval preparation.

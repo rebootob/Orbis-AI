@@ -206,6 +206,17 @@ Recovery procedure:
 
 If task state and evidence disagree, stop and report the inconsistency.
 
+## Phase 5 Validation Summary
+
+Phase 5 workflow was validated through WP-005B B3 and B4:
+
+- GitHub native `open`/`closed` and Orbis `state:*` are treated as separate
+  concepts in all runtime contexts.
+- State/role counts are calculated from labels attached to the canonical Issue
+  only.
+- Restart/resume recovers task context from GitHub Issue state, labels,
+  contract, and comments without depending on chat history.
+
 ## Phase 5 Scope Boundary
 
 Phase 5 does not implement:

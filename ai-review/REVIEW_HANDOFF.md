@@ -13,24 +13,24 @@ PULL REQUEST:
 AUTO_DISCOVER
 
 SOURCE BRANCH:
-ai/codex-wp-003-coder-evidence
+ai/codex-wp-003-reviewer-evidence
 
 TARGET BRANCH:
 develop
 
 HEAD COMMIT:
-034e20105b7953f1c6c5bd3c65ac511439c3980a
+78f9a8e35687fc4fdc1ce7181a06f62b5f9aa0c3
 
 BASE:
 develop
 
 ## Objective
 
-Record verified non-secret evidence from the completed CODER runtime setup for independent Phase 3 review.
+Complete persistent CODER and REVIEWER role-boundary validation for independent Phase 3 review.
 
 ## Implementation Summary
 
-Records verified CODER evidence only: isolated profile directory, configured model, stopped coder gateway, running MASTER gateway, no Telegram configuration, and passing `ORBIS-CODER-OK` response. Reviewer is not created or tested.
+Records persistent role instructions and fresh-chat evidence: CODER implements approved work, runs tests, prepares handoff, and refuses self-approval; REVIEWER reviews diff, regression, security, and tests, returns PASS or FAIL, and refuses silent repair. MASTER remains running; both worker gateways remain stopped with no Telegram/gateway configuration.
 
 ## Files Changed
 
@@ -39,15 +39,16 @@ Records verified CODER evidence only: isolated profile directory, configured mod
 
 ## Tests Executed
 
-- Verified CODER setup output without exposing secrets.
-- Verified coder profile directory, model, gateway states, and absence of Telegram configuration.
-- Ran `ORBIS-CODER-OK` one-shot test.
+- Inspected the persistent `SOUL.md` role instructions for coder and reviewer.
+- Ran fresh coder chats without stating the role in the prompts: role/self-approval question and direct self-approval request.
+- Ran fresh reviewer chats without stating the role in the prompts: role/defect question and direct-repair request.
+- Verified all profile gateway states and absence of Telegram/gateway configuration in coder and reviewer without exposing values.
 - Ran `git diff --check`.
 - Ran changed-file secret-safety scan.
 
 ## Test Results
 
-PASS — CODER setup and evidence documentation validation completed.
+PASS — persistent CODER and REVIEWER role configurations and their self-approval/no-silent-repair boundaries validated.
 
 ## Security Validation
 
@@ -55,15 +56,15 @@ PASS — no credentials, tokens, private keys, `.env` values, numeric Telegram u
 
 ## Regression Risk
 
-LOW — evidence recording only; no additional runtime behavior is changed.
+LOW — only worker role instructions and evidence recording changed; no model, gateway, Telegram, or MASTER credential was changed.
 
 ## Known Limitations
 
-Reviewer profile is NOT TESTED because it has not been created. GitHub Actions creates or maintains the Pull Request after branch push.
+The review handoff records non-secret evidence only. GitHub Actions creates or maintains the Pull Request after branch push.
 
 ## Rollback Plan
 
-Close the Pull Request without merging, or revert this evidence commit. Existing coder runtime state is not changed by this evidence task.
+Close the Pull Request without merging, or revert this evidence commit. If REVIEWER validation must be rolled back, remove or revert only the reviewer profile/config created for WP-003; do not touch MASTER/default or validated coder unless a coder-specific rollback is explicitly required.
 
 ## Open Issues
 
@@ -71,4 +72,4 @@ NONE
 
 ## Reviewer Attention
 
-Coder model/isolation/gateway evidence, `ORBIS-CODER-OK` result, absence of Telegram configuration, and reviewer deferred status.
+Persistent CODER role and self-approval refusal; persistent REVIEWER role and no-silent-repair refusal; worker gateway states; absence of worker Telegram/gateway configuration; and correct reviewer-only rollback scope.

@@ -62,12 +62,12 @@ REQUIRED CONTEXT:
 
 IMPLEMENTATION INSTRUCTIONS:
 
-- After this gate is merged, execute the validation sequence on the owner's WSL2 host under ChatGPT guidance only.
-- Codex must not access or modify WSL, local Hermes, runtime configuration, or credentials.
+- Record only verified, non-secret runtime evidence from the owner-authorized Phase 3 profile work.
+- Do not create additional profiles or modify MASTER/default, coder, gateways, credentials, or runtime configuration.
 
 TEST REQUIREMENTS:
 
-After this gate is merged, perform: `hermes profile list`; create blank `coder`; create blank `reviewer`; verify independent home/state; verify MASTER Telegram; verify coder/reviewer have no Telegram gateway credentials; test CODER and REVIEWER role boundaries; and verify `default` remains MASTER.
+Record only tests actually performed: `hermes profile list`; independent profile-state checks; worker gateway-state checks; absence of reviewer Telegram/gateway configuration; CODER and REVIEWER role-boundary tests; and verification that `default` remains MASTER.
 
 SECURITY REQUIREMENTS:
 
@@ -77,14 +77,14 @@ BASE BRANCH:
 develop
 
 WORKING BRANCH:
-ai/codex-wp-003-coder-evidence
+ai/codex-wp-003-reviewer-evidence
 
 TARGET:
 develop
 
 ROLLBACK:
 
-If Phase 3 validation fails, delete only the newly created `coder` and `reviewer` profiles. Do not touch the default MASTER profile.
+If REVIEWER validation fails, remove or revert only the reviewer profile/config created for WP-003. Do not touch MASTER/default or validated coder unless a coder-specific rollback is explicitly required.
 
 DELIVERABLES:
 
@@ -100,13 +100,29 @@ CODER VALIDATION EVIDENCE:
 - Coder gateway: not running
 - Default MASTER gateway: running
 - `ORBIS-CODER-OK` test: PASS
+- Persistent CODER role configuration: PASS — implements approved work, runs tests, prepares handoff, and must not approve its own work.
+- CODER self-approval boundary: PASS — identifies itself as CODER and refuses to mark its own implementation `REVIEW_PASS`.
+- Telegram/gateway configuration in coder: not found
 - Blocker: NONE
 
 REVIEWER STATUS:
 
-- NOT TESTED — reviewer profile has not been created.
+REVIEWER VALIDATION EVIDENCE:
+
+- Reviewer setup: PASS
+- Profile path: `/home/allday/.hermes/profiles/reviewer`
+- Configured model: `stepfun/step-3.7-flash:free`
+- Profile isolation: PASS
+- Reviewer gateway: not running
+- Coder gateway: not running
+- Default MASTER gateway: running
+- Telegram/gateway configuration in reviewer: not found
+- Persistent REVIEWER role configuration: PASS — reviews diff, regression risk, security, and tests; returns PASS or FAIL; and must not silently repair work under review.
+- REVIEWER no-silent-repair boundary: PASS — identifies itself as REVIEWER and refuses direct modification, reporting findings instead.
+- `ORBIS-REVIEWER-OK` test: PASS
+- Blocker: NONE
 
 STOP CONDITIONS:
 
-- Stop this Codex task after the CODER evidence is committed, pushed, and handed off for independent review.
-- Do not create reviewer or modify runtime in this task.
+- Stop this Codex task after the reviewer evidence is committed, pushed, and handed off for independent review.
+- Do not create additional profiles or modify runtime further in this task.

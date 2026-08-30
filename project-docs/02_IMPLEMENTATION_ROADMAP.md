@@ -26,11 +26,15 @@ The documents in this repository, an initial decision log, a gitignore policy, a
 
 **Phase 3 — Complete:** `default` = MASTER, `coder` = CODER, and `reviewer` = REVIEWER. Role boundaries are validated; the MASTER gateway is running, worker gateways are stopped, and Telegram remains MASTER-only.
 
-**Phase 4 — Next / Not Started:** Skills is the next planned phase. This closeout does not authorize Phase 4 execution.
+**Phase 4 — Complete:** The Core Skills `project-manager`, `code-development`, `code-review`, `git-governance`, and `security` are version-controlled, deployed to their intended Hermes profiles, and behaviorally validated. MASTER persistent identity is provided by the default profile `SOUL.md`; Skills provide operating guidance and do not change the active role.
 
-## Initial skills
+**Phase 5 — Next / Not Started:** Kanban and handoff is the next planned phase. This Phase 4 closeout does not authorize Phase 5 implementation.
 
-`project-manager`, `code-development`, `code-review`, `git-governance`, `security`, `n8n`, and `kintone`. Future project skills may include `MBO2026`, `OrgFlow`, and `COCE`.
+## Skills
+
+**Phase 4 Core:** `project-manager`, `code-development`, `code-review`, `git-governance`, and `security`.
+
+**Deferred:** `n8n` remains Phase 8 scope; `kintone` remains future approved integration scope; project-specific Skills such as `MBO2026`, `OrgFlow`, and `COCE` require separate authorization.
 
 ## Handoff flow
 

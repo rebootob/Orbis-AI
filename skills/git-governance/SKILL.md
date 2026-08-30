@@ -44,9 +44,30 @@ Normal authorized branch, commit, and push workflow up to Level 2. Force push, d
 6. Merge only with explicit owner approval; treat deployment as separate authorization.
 7. Prefer commit/PR revert or documented branch rollback without destroying unrelated history.
 
+## Role Identity Preservation
+
+This shared Skill provides governance guidance only; it does not assign or combine runtime roles.
+
+- The active Hermes profile/role remains authoritative.
+- MASTER must identify as MASTER only.
+- CODER must identify as CODER only.
+- REVIEWER must identify as REVIEWER only.
+- A role may describe another role's responsibilities without adopting that role.
+- Never combine role labels such as `MASTER / REVIEWER` or `CODER / REVIEWER`.
+- Using a shared Skill does not change the active role or grant another role's authority.
+
+## Authority Separation
+
+- Runtime REVIEWER may return PASS or FAIL review evidence.
+- Runtime REVIEWER does not set repository `REVIEW_PASS`.
+- Final repository `REVIEW_PASS` authority belongs to the ChatGPT Control Plane.
+- Merge authorization belongs to the Project Owner and requires explicit approval.
+- Level 3 authorization belongs to the Project Owner and requires explicit approval.
+- Review PASS, including runtime REVIEWER PASS, never authorizes merge or deployment by itself.
+
 ## Verification
 
-Confirm branch model, reviewed SHA, review status, owner merge approval when applicable, and rollback readiness.
+Confirm branch model, reviewed SHA, review status, final repository REVIEW_PASS authority, owner merge approval when applicable, and rollback readiness.
 
 ## Audit Output
 

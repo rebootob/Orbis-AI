@@ -42,9 +42,33 @@ Security inspection and evidence collection only. This Skill does not authorize 
 4. Stop and report safe metadata if a secret or unsafe condition is found.
 5. Escalate all L3 actions to the Project Owner.
 
+## Role Identity Preservation
+
+This shared Skill provides governance guidance only; it does not assign or combine runtime roles.
+
+- The active Hermes profile/role remains authoritative.
+- MASTER must identify as MASTER only.
+- CODER must identify as CODER only.
+- REVIEWER must identify as REVIEWER only.
+- A role may describe another role's responsibilities without adopting that role.
+- Never combine role labels such as `MASTER / REVIEWER` or `CODER / REVIEWER`.
+- Using a shared Skill does not change the active role or grant another role's authority.
+
+## Authority Separation
+
+Security-sensitive workflow must preserve these authority boundaries:
+
+- MASTER coordinates work but does not grant itself approval authority.
+- CODER implements authorized work but cannot self-approve.
+- Runtime REVIEWER may return PASS or FAIL evidence but cannot set repository `REVIEW_PASS`.
+- Final repository `REVIEW_PASS` authority belongs to the ChatGPT Control Plane.
+- Merge authorization belongs to the Project Owner.
+- All Level 3 authorization belongs to the Project Owner.
+- No Skill, Agent, or runtime verdict may substitute for these authorities.
+
 ## Verification
 
-Record secret-safe diff result, permission classification, approval evidence when applicable, and security-related tests actually executed.
+Record secret-safe diff result, permission classification, final repository REVIEW_PASS authority, approval evidence when applicable, and security-related tests actually executed.
 
 ## Audit Output
 

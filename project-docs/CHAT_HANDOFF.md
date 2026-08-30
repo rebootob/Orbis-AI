@@ -27,7 +27,7 @@ Current Phase:
 Phase 5 — Kanban & Handoff
 
 Current Work Package:
-`WP-005B-HERMES-RUNTIME-AND-DESKTOP-INTEGRATION`
+`WP-005C — PLANNING / NOT STARTED`
 
 Post-merge state:
 WP-005B = COMPLETE / MERGED

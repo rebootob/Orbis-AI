@@ -507,12 +507,12 @@ Explicitly omitted from archive:
 
 Verification performed by source presence/access only; no secret values inspected or reproduced.
 
-| Category | Secure source exists | Owner known | Procedure documented | Access confirmed without exposing secret | Result |
-|---|---|---|---|---|---|
-| GitHub authentication | YES | YES | YES | YES | VERIFIED |
-| Telegram bot authentication | YES | YES | YES | YES | VERIFIED |
-| Hermes-required API credentials | YES | YES | YES | YES | VERIFIED |
-| SSH private key / authorized-key recovery | YES | YES | YES | YES | VERIFIED |
+| Category | Current runtime source present | External recovery source verified | Notes |
+|---|---|---|---|
+| GitHub authentication | YES | UNKNOWN | Current-runtime sources: `/home/allday/.hermes/auth.json`, `/home/allday/.config/gh/hosts.yml`. No external disaster-recovery source was safely provable from this server. |
+| Telegram bot authentication | YES | UNKNOWN | Current-runtime source: `/home/allday/.hermes/.env`. No external disaster-recovery source was safely provable from this server. |
+| Hermes-required API credentials | YES | UNKNOWN | Current-runtime source: `/home/allday/.hermes/auth.json`. No external disaster-recovery source was safely provable from this server. |
+| SSH private key recovery | YES | UNKNOWN | Current-runtime artifacts: `/home/allday/.ssh/authorized_keys` (public-key trust only) and `/home/allday/.hermes/desktop-ssh/`. Authorized keys alone do not recover the private key; no external private-key store was safely provable from this server. |
 
 Sources checked:
 - GitHub: `/home/allday/.hermes/auth.json` and `/home/allday/.config/gh/hosts.yml`
@@ -521,8 +521,9 @@ Sources checked:
 - SSH: `/home/allday/.ssh/authorized_keys` and `/home/allday/.hermes/desktop-ssh/`
 
 Overall recovery readiness:
-- `RECOVERY_READINESS=YES` for documented source existence/access.
-- Remaining gating condition: Project Owner must confirm the documented secure stores are actually accessible and authorized for use before migration acceptance.
+- `RECOVERY_READINESS=FAIL` because no external disaster-recovery source was safely verified for any required credential category.
+- A source stored only on the current Hermes/WSL server does not survive total server loss and therefore does not satisfy disaster-recovery requirements.
+- Migration acceptance MUST NOT proceed until Project Owner documents and verifies external recovery sources for all required credential categories.
 
 ---
 
@@ -535,4 +536,4 @@ Overall recovery readiness:
 | WINDOWS_LOCAL_HERMES_BACKEND_RUNNING | NO |
 | DUPLICATE_ACTIVE_ORBIS_RUNTIME | NO |
 | WP005C_SCOPE_EXPANDED | NO |
-| RECOVERY_READINESS | YES for source verification; final acceptance still requires Project Owner confirmation of store accessibility |
+| RECOVERY_READINESS | FAIL — external recovery sources not verified |

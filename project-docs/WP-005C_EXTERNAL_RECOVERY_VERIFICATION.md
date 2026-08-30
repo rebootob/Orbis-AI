@@ -173,3 +173,43 @@ Stop if:
   and safe read-only inspection.
 - All categories remain UNKNOWN pending Project Owner verification of external
   recovery sources.
+
+## 12. Project Owner Verification Checklist
+
+Answer each question exactly. Do not infer answers on behalf of the Project Owner.
+
+### 12.1 GitHub
+
+- Can Project Owner sign in to the GitHub account from a device outside the Hermes server?
+- Can that account create/reissue the authentication needed by Hermes?
+- Is MFA/account recovery available independently of the Hermes server?
+
+OWNER_VERIFIED=
+STATUS_AFTER_OWNER_VERIFICATION=
+
+### 12.2 Telegram
+
+- Can Project Owner access the Telegram account that owns the Orbis bot?
+- Can Project Owner see/manage the bot through @BotFather?
+- Can the bot token be reset/reissued if the Hermes server is lost?
+
+OWNER_VERIFIED=
+STATUS_AFTER_OWNER_VERIFICATION=
+
+### 12.3 Hermes / Nous
+
+- Can Project Owner sign in to the required Nous account from outside the Hermes server?
+- Can authentication/token access be recreated without the current auth.json?
+- Is account recovery independent of the Hermes server?
+
+OWNER_VERIFIED=
+STATUS_AFTER_OWNER_VERIFICATION=
+
+### 12.4 SSH
+
+- Does the Windows/Desktop client or another protected external device hold the SSH private key?
+- OR: Can Project Owner create a new key pair and install the public key on a replacement Hermes server?
+- Does this recovery path require no file from the lost Hermes server?
+
+OWNER_VERIFIED=
+STATUS_AFTER_OWNER_VERIFICATION=

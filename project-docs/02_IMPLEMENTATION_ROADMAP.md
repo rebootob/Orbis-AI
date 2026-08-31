@@ -28,11 +28,48 @@ The documents in this repository, an initial decision log, a gitignore policy, a
 
 **Phase 4 — Complete:** The Core Skills `project-manager`, `code-development`, `code-review`, `git-governance`, and `security` are version-controlled, deployed to their intended Hermes profiles, and behaviorally validated. MASTER persistent identity is provided by the default profile `SOUL.md`; Skills provide operating guidance and do not change the active role.
 
-**Phase 5 — In Progress:** Kanban and Handoff is being implemented through WP-005A/WP-005B/WP-005C.
+**Phase 5 — Complete:** Kanban and Handoff is complete through WP-005A/WP-005B/WP-005C. GitHub Issues are the canonical task/Kanban source of truth.
+
+**Phase 6 — Complete / Merged:** Security gates, approvals, and audit logging are merged. Governance recovery completed.
+
+**Phase 7 — Complete / Merged:** Project Registry is merged and registered-project lookup works.
+
+**Phase 8 — In Progress / Blocked:** n8n via MCP read-only validation is blocked awaiting a proven local/dev/test n8n environment.
+
+- Planning: COMPLETE / MERGED PR #29
+- Read-only inventory/evidence: COMPLETE / MERGED PR #30
+- n8n installation/process/configuration: NOT FOUND
+- n8n target environment: UNKNOWN
+- MCP references in Hermes: FOUND
+- MCP runtime capability/version: UNKNOWN
+- no `mcp_servers` configured
+- n8n connection attempted: NO
+- production touched: NO
+- write operation executed: NO
+
+Phase 8 exit condition:
+A proven LOCAL/DEV/TEST n8n environment must exist before read-only MCP validation may continue.
+
+Phase 8 gate:
+WP-008 SAFE N8N SANDBOX PROVISIONING — NON-PRODUCTION ONLY is the next safe work package. SANDBOX_PROVISIONING_STARTED=NO.
+
+**Phase 9 — Not Started:** Automation/Cron.
+
+**Backup/Recovery — Partial Complete:**
+- runtime inventory / backup design = COMPLETE
+- external credential recovery verification = COMPLETE
+- backup execution / manifest validation = COMPLETE
+- Restore/DR validation = DEFERRED BY PROJECT OWNER
+
+RESTORE_VALIDATION=NOT_STARTED
+MIGRATION=NOT_STARTED
+CUTOVER=NOT_STARTED
+
+Do not claim full DR validation.
 
 - WP-005A: GitHub-Issue-based task state, handoff protocol, Issue template, governance, and Core Skill guidance.
 - WP-005B: Hermes runtime integration plus optional Hermes Desktop operator console connected to the existing WSL2 Hermes runtime.
-- WP-005C: end-to-end MASTER → CODER → REVIEWER → Control Plane workflow, FAIL return loop, Telegram/Desktop access, and restart/resume validation.
+- WP-005C: end-to-end MASTER → CODER → REVIEWER → Control Plane workflow, FAIL return loop, Telegram/Desktop access, and restart/resume validation. Restore/DR rehearsal was part of WP-005C scope but was DEFERRED BY PROJECT OWNER and is NOT STARTED.
 
 Hermes Desktop must not create a separate Orbis runtime. GitHub Issues remain the canonical task/Kanban source of truth.
 

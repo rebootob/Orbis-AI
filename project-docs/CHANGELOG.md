@@ -15,6 +15,7 @@ All notable repository changes will be recorded here.
 
 ### Fixed
 - Stale WP-008 planning state and outdated chat-handoff resume points replaced with current Phase 8 truth.
+- Roadmap reconciled through Phase 8; backup/recovery document reconciled to partial-complete / Restore-DR deferred; final documentation sync for new-chat handoff.
 
 ## [WP-008] - 2026-08-31
 

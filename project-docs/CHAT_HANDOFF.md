@@ -238,14 +238,21 @@ The new ChatGPT conversation must:
 
 1. Read `project-docs/CHAT_HANDOFF.md` from the current branch.
 2. Read `project-docs/AI_ACTIVE_TASK.md` from the current branch.
-3. Inspect current branch and working tree.
-4. Inspect GitHub Issue #28 and latest comments.
-5. Treat attached `state:*` / `role:*` labels as canonical.
-6. Treat GitHub evidence newer than this snapshot as authoritative.
-7. Continue from `## Exact Current Gate` / `## Next Step`.
-8. Do not repeat completed validation.
-9. Do not expand scope.
-10. Do not start sandbox provisioning unless Control Plane explicitly authorizes it.
+3. Read `project-docs/WP-008_TASK_CONTRACT.md` from the current branch.
+4. Read `project-docs/08_N8N_INTEGRATION.md` from the current branch.
+5. Read `project-docs/02_IMPLEMENTATION_ROADMAP.md` from the current branch.
+6. Read `project-docs/10_BACKUP_RECOVERY.md` from the current branch.
+7. Read `project-docs/12_KANBAN_HANDOFF.md` from the current branch.
+8. Read `project-docs/04_SECURITY_POLICY.md` from the current branch.
+9. Read `project-docs/05_APPROVAL_POLICY.md` from the current branch.
+10. Inspect current branch and working tree.
+11. Inspect GitHub Issue #28 and latest comments.
+12. Treat attached `state:*` / `role:*` labels as canonical.
+13. Treat GitHub evidence newer than this snapshot as authoritative.
+14. Continue from `## Exact Current Gate` / `## Next Step`.
+15. Do not repeat completed validation.
+16. Do not expand scope.
+17. Do not start sandbox provisioning unless Control Plane explicitly authorizes it.
 
 Default branch for new chats is `develop` unless a newer approved working
 branch exists.
@@ -265,6 +272,13 @@ branch is specified:
 
 1. project-docs/CHAT_HANDOFF.md
 2. project-docs/AI_ACTIVE_TASK.md
+3. project-docs/WP-008_TASK_CONTRACT.md
+4. project-docs/08_N8N_INTEGRATION.md
+5. project-docs/02_IMPLEMENTATION_ROADMAP.md
+6. project-docs/10_BACKUP_RECOVERY.md
+7. project-docs/12_KANBAN_HANDOFF.md
+8. project-docs/04_SECURITY_POLICY.md
+9. project-docs/05_APPROVAL_POLICY.md
 
 Then inspect GitHub Issue #28 and its latest comments.
 Continue from `Exact Current Gate` in CHAT_HANDOFF.md.

@@ -1,3 +1,7 @@
+# Archived Pre-Reorganization Active Task Snapshot
+
+> **SUPERSEDED — NOT CURRENT AUTHORIZATION.** Retained solely as historical evidence. Use `project-docs/00_CONTROL/ACTIVE_TASK.md` for the only active-task gate.
+
 # ORBIS AI — ACTIVE TASK
 
 PROJECT:
@@ -97,8 +101,8 @@ All n8n write operations remain disabled/not authorized:
 
 ## Security
 
-- Follow project-docs/04_SECURITY_POLICY.md.
-- Follow project-docs/05_APPROVAL_POLICY.md.
+- Follow project-docs/10_GOVERNANCE/SECURITY_POLICY.md.
+- Follow project-docs/10_GOVERNANCE/APPROVAL_POLICY.md.
 - Do not expose secrets/credentials in docs, issues, comments, or code.
 - No mutable current HEAD SHAs in tracked docs; GitHub PR metadata is authoritative.
 - Preserve audit evidence; distinguish pre-authorization state from authorized state.

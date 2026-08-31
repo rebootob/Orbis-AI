@@ -33,12 +33,12 @@ automation, or secret handling are authorized outside the defined docs scope.
 
 ## Scope
 
-- Define `project-docs/06_SECURITY_GATES_AUDIT_POLICY.md` for audit evidence,
+- Define `project-docs/90_ARCHIVE/06_SECURITY_GATES_AUDIT_POLICY.md` for audit evidence,
   retention, and fail-closed behavior.
-- Update `project-docs/04_SECURITY_POLICY.md` with the minimum Phase 6 security
+- Update `project-docs/10_GOVERNANCE/SECURITY_POLICY.md` with the minimum Phase 6 security
   policy surface.
-- Update `project-docs/05_APPROVAL_POLICY.md` with approval-record requirements.
-- Update `project-docs/12_KANBAN_HANDOFF.md` to record explicit blocked/fail
+- Update `project-docs/10_GOVERNANCE/APPROVAL_POLICY.md` with approval-record requirements.
+- Update `project-docs/10_GOVERNANCE/KANBAN_HANDOFF.md` to record explicit blocked/fail
   behavior when permission/approval gates are bypassed through Telegram,
   Desktop, GitHub comments, or Skills.
 - Preserve Phase 5 workflow, WP-005C backup semantics, and CHAT_HANDOFF resume
@@ -58,15 +58,15 @@ automation, or secret handling are authorized outside the defined docs scope.
 
 ## Acceptance Criteria
 
-- `project-docs/WP-006_TASK_CONTRACT.md` defines Objective, Scope, Out of Scope,
+- `project-docs/40_WORK_PACKAGES/WP-006/TASK_CONTRACT.md` defines Objective, Scope, Out of Scope,
   Acceptance Criteria, Permission Level, Required Evidence / Tests, Rollback,
   Stop Conditions, Project Owner approval gates, Level 3 protections, role
   boundary enforcement, audit evidence requirements, explicit blocked/fail
   behavior, no secret exposure, and no bypass via Telegram/Desktop/GitHub
   comments/Skills.
-- `project-docs/06_SECURITY_GATES_AUDIT_POLICY.md` exists and defines audit
+- `project-docs/90_ARCHIVE/06_SECURITY_GATES_AUDIT_POLICY.md` exists and defines audit
   evidence format, retention, and fail-closed behavior.
-- `project-docs/AI_ACTIVE_TASK.md` identifies WP-006 as active implementation
+- `project-docs/00_CONTROL/ACTIVE_TASK.md` identifies WP-006 as active implementation
   and stops all restore/migration/cutover/DR work.
 - No repository code, runtime files, or secrets are modified outside approved docs
   scope.

@@ -4,9 +4,11 @@
 
 Before repository work, read:
 
-1. `project-docs/AI_CONTROL_PLANE.md`
-2. `project-docs/AI_ACTIVE_TASK.md`
-3. Only files explicitly referenced by the Active Task, directly affected files, and additional files when technically necessary.
+1. `project-docs/00_CONTROL/START_HERE.md`
+2. `project-docs/00_CONTROL/CURRENT_STATE.md`
+3. `project-docs/00_CONTROL/ACTIVE_TASK.md`
+4. `project-docs/00_CONTROL/DOCUMENT_INDEX.md`
+5. Only files directly relevant to an authorized Active Task, directly affected files, and additional files when technically necessary.
 
 Do not study the complete repository by default.
 
@@ -18,9 +20,9 @@ ChatGPT remains the Orbis AI **CONTROL PLANE**, Project Lead, Architect, and ind
 
 ## ACTIVE TASK GATE
 
-`project-docs/AI_ACTIVE_TASK.md` is the canonical current instruction. Before implementation, inspect `STATUS`.
+`project-docs/00_CONTROL/ACTIVE_TASK.md` is the canonical current instruction. Before implementation, inspect `STATUS`.
 
-Codex may execute only when status is `READY_FOR_CODEX` or `CHANGES_REQUESTED`. If it is `NOT_READY`, `BLOCKED`, `REVIEW_REQUESTED`, `REVIEW_PASS`, or `COMPLETED`, do not start unrelated implementation. Follow the state rules in `AI_CONTROL_PLANE.md`.
+Codex may execute only when status is `READY_FOR_CODEX` or `CHANGES_REQUESTED`. If it is `IDLE`, `NOT_READY`, `BLOCKED`, `REVIEW_REQUESTED`, `REVIEW_PASS`, or `COMPLETED`, do not start unrelated implementation. Follow the state rules in `project-docs/10_GOVERNANCE/AUTHORITY_MODEL.md`.
 
 ## CODEX ECONOMY RULE
 

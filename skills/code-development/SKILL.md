@@ -46,7 +46,7 @@ Authorized development writes and normal branch push up to Level 2. Any Level 3 
 
 ## Kanban and Handoff
 
-For Phase 5 implementation work, CODER uses the canonical GitHub task Issue defined in `project-docs/12_KANBAN_HANDOFF.md`.
+For Phase 5 implementation work, CODER uses the canonical GitHub task Issue defined in `project-docs/10_GOVERNANCE/KANBAN_HANDOFF.md`.
 
 CODER responsibilities:
 

@@ -2,7 +2,7 @@
 
 > PERMANENT AI OPERATING CONTRACT
 
-This document defines permanent rules for AI work in Orbis AI. Current work instructions are in `AI_ACTIVE_TASK.md`; review handoff is in `ai-review/REVIEW_HANDOFF.md`; permanent decisions are in `DECISION_LOG.md`.
+This document defines permanent rules for AI work in Orbis AI. Current work instructions are in `project-docs/00_CONTROL/ACTIVE_TASK.md`; review handoff is in `ai-review/REVIEW_HANDOFF.md`; permanent decisions are in `project-docs/10_GOVERNANCE/CHANGE_GOVERNANCE.md`.
 
 ## 1. Authority model
 
@@ -20,11 +20,11 @@ Preferred model: minimum necessary read + minimum necessary change + targeted te
 
 ## 3. Mandatory startup sequence
 
-Before a Work Package: read `AGENTS.md`, this document, and `AI_ACTIVE_TASK.md`; verify task status and Git state; then read only required context and execute assigned scope. Do not read the complete repository by default.
+Before a Work Package: read `AGENTS.md`, `project-docs/00_CONTROL/START_HERE.md`, `project-docs/00_CONTROL/CURRENT_STATE.md`, `project-docs/00_CONTROL/ACTIVE_TASK.md`, and `project-docs/00_CONTROL/DOCUMENT_INDEX.md`; verify task status and Git state; then read only required context and execute assigned scope. Do not read the complete repository by default.
 
 ## 4. Active Task contract
 
-`AI_ACTIVE_TASK.md` is the Control Plane → authorized execution-path contract. A Work Package defines ID, status, objective, why, scope, out of scope, expected components, required context, implementation instructions, test/security requirements, branch, rollback, deliverables, and stop conditions. The authorized Hermes role, human-guided execution path, or explicitly assigned Codex worker executes only that contract. When critical information is missing, stop and identify the missing requirement.
+`project-docs/00_CONTROL/ACTIVE_TASK.md` is the Control Plane → authorized execution-path contract. A Work Package defines ID, status, objective, why, scope, out of scope, expected components, required context, implementation instructions, test/security requirements, branch, rollback, deliverables, and stop conditions. The authorized Hermes role, human-guided execution path, or explicitly assigned Codex worker executes only that contract. When critical information is missing, stop and identify the missing requirement.
 
 ## 5. Task status model
 
@@ -72,7 +72,7 @@ GitHub is the coordination and audit layer. The Project Owner should not manuall
 
 Execution handoffs report only Work Package, status, branch, commit, PR, test, security, and open issues as applicable. Rules: read the required governance and active task, use minimum necessary work/context, do not exceed scope, protect secrets, do not bypass approval/self-approve/force-push/destroy work, test affected scope, stop after handoff, and prefer simple existing capabilities.
 
-Priority is: Project Owner instruction; security/human-approval restrictions; `AGENTS.md`; this document; `AI_ACTIVE_TASK.md`; accepted ADRs; relevant documentation; skills; implementation assumptions. Security cannot be overridden for convenience.
+Priority is: Project Owner instruction; security/human-approval restrictions; `AGENTS.md`; `project-docs/00_CONTROL/START_HERE.md`; `project-docs/00_CONTROL/CURRENT_STATE.md`; `project-docs/00_CONTROL/ACTIVE_TASK.md`; accepted ADRs; relevant documentation; skills; implementation assumptions. Security cannot be overridden for convenience.
 
 ## 12. Platform target
 

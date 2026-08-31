@@ -2,7 +2,7 @@
 
 This directory is the permanent GitHub-based communication gateway between Codex (implementation/execution) and the independent ChatGPT Reviewer (project lead, architect, and reviewer). It contains review metadata only; source changes remain reviewable through Git commits and pull requests.
 
-Before executing a Work Package, Codex must read `AGENTS.md` → `project-docs/AI_CONTROL_PLANE.md` → `project-docs/AI_ACTIVE_TASK.md`, then execute only the assigned scope.
+Before executing a Work Package, Codex must read `AGENTS.md` → `project-docs/00_CONTROL/START_HERE.md` → `project-docs/00_CONTROL/CURRENT_STATE.md` → `project-docs/00_CONTROL/ACTIVE_TASK.md` → `project-docs/00_CONTROL/DOCUMENT_INDEX.md`, then execute only the assigned scope.
 
 ## Normal workflow
 

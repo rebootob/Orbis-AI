@@ -10,7 +10,28 @@ Back up Hermes configuration/state, Git repositories, n8n workflows/configuratio
 - Weekly: full backup.
 - Event-driven: before upgrades and major configuration changes.
 
-Backup location, retention, encryption, ownership, and restore environment are `<TO_BE_DEFINED>`.
+## Implementation status
+
+WP-005C Backup/Recovery: PARTIAL COMPLETE
+
+Completed:
+- runtime inventory / backup design
+- external credential recovery verification
+- backup execution / manifest validation
+
+Merged evidence:
+- PR #17 → `3e7b990f1fb88724f0266f5bd2fbcb7d6303bb44`
+- PR #18 → `a7789317931894366dba8f8d3e4b04d659ee6d4f`
+- PR #19 → `6ca8d28ee43bb20569a9e328204aa1c9ff003753`
+
+Restore/DR:
+DEFERRED BY PROJECT OWNER
+
+RESTORE_VALIDATION=NOT_STARTED
+MIGRATION=NOT_STARTED
+CUTOVER=NOT_STARTED
+
+Do not claim full DR validation, tested restore, migration readiness, or cutover readiness.
 
 ## Recovery procedure
 

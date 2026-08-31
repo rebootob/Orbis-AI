@@ -9,6 +9,7 @@ WP-008 — N8N VIA MCP READ-ONLY VALIDATION
 STATUS:
 WP-008 = IMPLEMENTATION BLOCKED / AWAITING ENVIRONMENT
 WP-008 Planning = COMPLETE / MERGED PR #29 (merge commit 2eec0883cff47456960983d062bbce8b52c77c89)
+WP-008 Read-Only Evidence = COMPLETE / MERGED PR #30 (merge commit ae9dc212bcc0e4fad78179e37e51a23625808261)
 WP-007 = COMPLETE / MERGED PR #27 (merge commit 6ed9a3ef1c2b7d0eed95728150315ccf7a9e3ccb)
 WP-006 = COMPLETE / MERGED PR #22 (merge commit 41fc3d270b6837bdfe88d39cdfdcdace1a839ac8)
 WP-005B = COMPLETE / MERGED (merge commit 5fe175efc4e4f9933299b14151919709c69769b3)
@@ -33,6 +34,11 @@ WP-005C Restore / DR Rehearsal = DEFERRED
 BLOCKER:
 n8n target environment cannot be identified. No n8n installation or configuration found on the runtime. Environment identity is UNKNOWN. Cannot prove local/dev/test target exists. Environment gate triggered: STOP before connection.
 
+SANDBOX_PROVISIONING:
+Status: NOT STARTED
+Authorization: AWAITING EXPLICIT CONTROL PLANE INSTRUCTION
+SANDBOX_PROVISIONING_STARTED=NO
+
 CONTROL PLANE:
 ChatGPT
 
@@ -43,9 +49,6 @@ Codex is not used.
 BASE BRANCH:
 develop
 
-WORKING BRANCH:
-ai/wp-008-n8n-mcp-readonly-implementation
-
 TARGET:
 develop
 
@@ -55,7 +58,7 @@ Validate read-only n8n via MCP capability safely. BLOCKED: environment identity 
 
 ## Authorization
 
-This read-only validation phase is explicitly authorized by ChatGPT Control Plane on 2026-08-31. Implementation may proceed only on branch `ai/wp-008-n8n-mcp-readonly-implementation` and only after Runtime REVIEWER PASS, Control Plane REVIEW_PASS, and explicit Project Owner approval.
+This read-only validation phase is explicitly authorized by ChatGPT Control Plane on 2026-08-31. Implementation may proceed only after Runtime REVIEWER PASS, Control Plane REVIEW_PASS, and explicit Project Owner approval.
 
 ## Scope
 
@@ -109,4 +112,5 @@ All n8n write operations remain disabled/not authorized:
 
 ## Next Step
 
-Await explicit Control Plane instruction to provide a proven local/dev/test n8n target or alternative validation approach.
+Await explicit Control Plane authorization for safe LOCAL_TEST sandbox provisioning.
+Do not auto-start sandbox work from this document.

@@ -7,7 +7,7 @@ WORK PACKAGE:
 WP-008 — N8N VIA MCP READ-ONLY VALIDATION
 
 STATUS:
-WP-008 = IMPLEMENTATION BLOCKED / AWAITING ENVIRONMENT
+WP-008 = SANDBOX PROVEN / AWAITING READ-ONLY VALIDATION AUTHORIZATION
 WP-008 Planning = COMPLETE / MERGED PR #29 (merge commit 2eec0883cff47456960983d062bbce8b52c77c89)
 WP-008 Read-Only Evidence = COMPLETE / MERGED PR #30 (merge commit ae9dc212bcc0e4fad78179e37e51a23625808261)
 WP-007 = COMPLETE / MERGED PR #27 (merge commit 6ed9a3ef1c2b7d0eed95728150315ccf7a9e3ccb)
@@ -18,7 +18,7 @@ WP-005C External Credential Recovery Verification = COMPLETE / MERGED (merge com
 WP-005C Backup Execution/Manifest Validation = COMPLETE / PASS
 
 CURRENT PHASE:
-Phase 8 — n8n via MCP = READ-ONLY VALIDATION BLOCKED
+Phase 8 — n8n via MCP = SANDBOX PROVEN / AWAITING READ-ONLY VALIDATION
 
 CURRENT PHASE DETAIL:
 Phase 7 — Project Registry = COMPLETE
@@ -31,13 +31,20 @@ PR #22 = MERGED
 MERGE_COMMIT = 41fc3d270b6837bdfe88d39cdfdcdace1a839ac8
 WP-005C Restore / DR Rehearsal = DEFERRED
 
-BLOCKER:
-n8n target environment cannot be identified. No n8n installation or configuration found on the runtime. Environment identity is UNKNOWN. Cannot prove local/dev/test target exists. Environment gate triggered: STOP before connection.
-
 SANDBOX_PROVISIONING:
-Status: NOT STARTED
-Authorization: AWAITING EXPLICIT CONTROL PLANE INSTRUCTION
-SANDBOX_PROVISIONING_STARTED=NO
+Local Node/npm-based n8n sandbox provisioned and proven.
+Status: COMPLETE
+Environment: LOCAL_TEST
+Bind: 127.0.0.1:5678
+Version: 2.36.9
+Storage: /home/allday/orbis-wp008-n8n-sandbox
+Production target used: NO
+Real credentials used: NO
+Real data used: NO
+Dummy workflows created: NO
+External side effects: NONE
+SANDBOX_PROVISIONING_STARTED=YES
+SANDBOX_PROVISIONING_COMPLETE=YES
 
 CONTROL PLANE:
 ChatGPT
@@ -54,7 +61,7 @@ develop
 
 ## Objective
 
-Validate read-only n8n via MCP capability safely. BLOCKED: environment identity cannot be proven.
+Validate read-only n8n via MCP capability safely. Local sandbox proven; awaiting explicit authorization for read-only MCP validation.
 
 ## Authorization
 
@@ -101,16 +108,19 @@ All n8n write operations remain disabled/not authorized:
 - production n8n may not be used for validation
 - If only production exists or environment is ambiguous: STOP and report blocker
 
-## Blocker
+## Sandbox Evidence
 
-- n8n installation: NOT FOUND
-- n8n process: NOT RUNNING
-- n8n configuration: NOT FOUND
-- n8n environment: UNKNOWN
+- n8n installation: FOUND
+- n8n process: PROVEN STARTABLE
+- n8n configuration: LOCAL_TEST
+- n8n environment: LOCAL_TEST
+- n8n version: 2.36.9
+- Listen address: 127.0.0.1:5678
+- Public exposure: NO
 - MCP references in Hermes: REFERENCE FOUND; runtime capability UNKNOWN (mcp Python package not importable; no MCP servers configured in config.yaml)
-- Action: STOP. Cannot connect without proven safe non-production target.
+- Action: SANDBOX PROVEN. Await explicit Control Plane authorization for read-only MCP validation.
 
 ## Next Step
 
-Await explicit Control Plane authorization for safe LOCAL_TEST sandbox provisioning.
-Do not auto-start sandbox work from this document.
+Await explicit Control Plane authorization for read-only MCP validation against proven LOCAL_TEST sandbox.
+Do not auto-start MCP validation from this document.

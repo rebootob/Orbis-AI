@@ -4,7 +4,7 @@ n8n is a future automation engine for deterministic workflows and integrations. 
 
 ## Current Phase 8 state
 
-Phase 8 is in read-only validation, but is currently blocked because no proven local/dev/test n8n environment exists yet.
+Phase 8 = SANDBOX PROVEN / AWAITING EXPLICIT CONTROL PLANE AUTHORIZATION FOR READ-ONLY MCP VALIDATION.
 
 ## Read-only-first architecture
 

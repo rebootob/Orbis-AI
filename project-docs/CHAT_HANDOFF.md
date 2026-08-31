@@ -161,17 +161,19 @@ Read-only validation inventory/evidence:
 PR #30 → `ae9dc212bcc0e4fad78179e37e51a23625808261`
 
 Current status:
-IMPLEMENTATION BLOCKED / AWAITING ENVIRONMENT
+SANDBOX PROVEN / AWAITING READ-ONLY VALIDATION AUTHORIZATION
 
 Issue #28 current phase:
 IMPLEMENTATION — READ-ONLY VALIDATION
 
-Current blocker:
-
-- n8n installation = NOT FOUND
-- n8n process = NOT RUNNING
-- n8n configuration = NOT FOUND
-- n8n target environment = UNKNOWN
+Sandbox evidence:
+- n8n installation = FOUND
+- n8n process = PROVEN STARTABLE
+- n8n configuration = LOCAL_TEST
+- n8n target environment = LOCAL_TEST
+- n8n version = 2.36.9
+- Listen address = 127.0.0.1:5678
+- Public exposure = NO
 - MCP references in Hermes = FOUND
 - MCP runtime capability = UNKNOWN
 - MCP Python package = not importable
@@ -187,35 +189,28 @@ Security result:
 Phase 8 exit condition:
 Read-only capabilities must actually pass testing before any write capability.
 
+Next safe step:
+Explicit Control Plane authorization for read-only MCP validation against proven LOCAL_TEST sandbox.
+
 PHASE8_COMPLETE=NO
 
 ---
 
 ## Exact Current Gate
 
-WP-008 requires a PROVEN NON-PRODUCTION n8n environment.
+A proven LOCAL_TEST n8n sandbox exists at 127.0.0.1:5678.
 
 Next safe work package:
+WP-008 READ-ONLY MCP VALIDATION AGAINST LOCAL_TEST SANDBOX
 
-WP-008 SAFE N8N SANDBOX PROVISIONING
-NON-PRODUCTION ONLY
-
-Goal:
-Create/prove the smallest isolated LOCAL_TEST n8n sandbox
-on the approved WSL2 Orbis environment.
-
-Required identity:
-
-ENVIRONMENT=LOCAL_TEST
-PURPOSE=WP008_READONLY_VALIDATION
-PRODUCTION=NO
+Required authorization:
+Explicit Control Plane authorization for read-only MCP validation.
 
 Important:
-THIS SANDBOX WORK HAS NOT STARTED YET.
+THIS SANDBOX WORK IS COMPLETE.
+Do not automatically start read-only MCP validation from documentation.
 
-Do not automatically start it from documentation.
-
-Future sandbox constraints:
+Future validation constraints:
 
 - loopback/local binding only
 - no public/LAN exposure
@@ -252,7 +247,7 @@ The new ChatGPT conversation must:
 14. Continue from `## Exact Current Gate` / `## Next Step`.
 15. Do not repeat completed validation.
 16. Do not expand scope.
-17. Do not start sandbox provisioning unless Control Plane explicitly authorizes it.
+17. Do not start read-only MCP validation unless Control Plane explicitly authorizes it.
 
 Default branch for new chats is `develop` unless a newer approved working
 branch exists.
@@ -286,7 +281,7 @@ If GitHub Issue evidence is newer, GitHub is authoritative.
 
 Do not repeat completed work.
 Do not expand scope.
-Do not auto-start WP-008 sandbox provisioning.
+Do not auto-start WP-008 read-only MCP validation.
 Wait for explicit Control Plane instruction.
 
 ---
@@ -300,9 +295,9 @@ Wait for explicit Control Plane instruction.
   - WP-005C: PARTIAL COMPLETE / DEFERRED Restore-DR
 - Phase 6: COMPLETE / MERGED
 - Phase 7: COMPLETE / MERGED
-- Phase 8: BLOCKED / AWAITING ENVIRONMENT
+- Phase 8: SANDBOX PROVEN / AWAITING READ-ONLY VALIDATION AUTHORIZATION
 - Phase 9: NOT STARTED
 - Restore/DR: NOT STARTED
 
 Resume point:
-Wait for explicit Control Plane instruction for WP-008 safe LOCAL_TEST sandbox provisioning.
+Wait for explicit Control Plane instruction for WP-008 read-only MCP validation against proven LOCAL_TEST sandbox.

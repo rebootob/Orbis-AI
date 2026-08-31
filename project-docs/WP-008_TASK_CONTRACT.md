@@ -1,23 +1,23 @@
 # WP-008 Task Contract
 
 WORK PACKAGE:
-WP-008 — N8N VIA MCP PLANNING
+WP-008 — N8N VIA MCP READ-ONLY VALIDATION
 
 STATUS:
-PLANNING AUTHORIZED
+IMPLEMENTATION AUTHORIZED — READ-ONLY VALIDATION ONLY
 
 ISSUE:
 #28
 
 BRANCH:
-ai/wp-008-n8n-via-mcp-planning
+ai/wp-008-n8n-mcp-readonly-implementation
 
 TARGET:
 develop
 
 ## Objective
 
-Plan the minimum safe n8n via MCP integration where read-only capability is validated before any write capability is considered.
+Validate read-only n8n via MCP capability safely. If environment identity cannot be proven, implementation is BLOCKED and must stop.
 
 ## Scope
 
@@ -51,14 +51,13 @@ D. Security
 - no secret values in logs/reports/issues/PRs
 
 E. Environment separation
-- local/dev/test n8n
-- production n8n
-If only production exists, planning must STOP before connection/write and report blocker.
+- local/dev/test n8n required for read-only validation
+- production n8n may not be used for validation
+- If only production exists or environment is ambiguous: STOP and report blocker
 
 F. Evidence
-Define required evidence for future implementation:
 - MCP availability/version
-- n8n target/environment identity
+- n8n environment identity
 - authentication method metadata
 - read-only permission proof
 - successful harmless read test

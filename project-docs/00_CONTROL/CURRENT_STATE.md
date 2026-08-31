@@ -6,7 +6,7 @@
 
 - **Repository:** `rebootob/Orbis-AI`
 - **Canonical branch:** `develop`
-- **Develop HEAD:** `555d25d843ca36fd6ff89721398a5d853d43f64a`
+- **Current develop HEAD:** resolve live from GitHub/repository truth. Do not treat a persisted SHA in this document as authoritative.
 
 ## Current phase and work
 
@@ -29,7 +29,10 @@
 - **PR #40 merge commit:** `4722ca6e2330c517b8bff1e5280b452e8f2f134f`
 - **PR #42:** MERGED
 - **Approved documentation HEAD:** `db19bbbf03d173e860df6d88943b99367f5b8694`
-- **PR #42 merge commit / current develop HEAD:** `555d25d843ca36fd6ff89721398a5d853d43f64a`
+- **PR #42 merge commit:** `555d25d843ca36fd6ff89721398a5d853d43f64a`
+- **PR #43:** MERGED
+- **Approved PR #43 HEAD:** `75ca49cd7fd4d621da5fc75cd302fbe8085ced08`
+- **PR #43 merge commit:** `8ac53685e5c39c6144af7340a5664586af2c2409`
 - **Issue #39:** CLOSED / COMPLETED
 
 ## Qualifications retained

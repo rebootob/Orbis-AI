@@ -25,7 +25,7 @@ Define the smallest complete Phase 7 Project Registry design required to satisfy
 This planning work is explicitly authorized by ChatGPT Control Plane on
 2026-08-31. Issue #24 and the original PR #25 head e094be4 were created before authorization and are
 preserved as pre-authorization audit evidence only. The original pre-authorization head does not
-constitute current authorization. The reconciled current head a1e700b is the authorized
+constitute current authorization. The reconciled current head d9c4e34 is the authorized
 planning evidence. It may proceed only through: Runtime REVIEWER PASS -> Control Plane REVIEW_PASS -> explicit Project Owner approval -> merge.
 
 ## Scope

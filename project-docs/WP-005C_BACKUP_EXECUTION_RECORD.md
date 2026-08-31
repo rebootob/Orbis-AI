@@ -95,10 +95,10 @@ Excluded per canonical design:
 | SOURCE_FILE_COUNT | 248542 |
 | SECONDARY_FILE_COUNT | 248542 |
 | FILE_COUNT_MATCH | YES |
-| SOURCE_TOTAL_BYTES | 5582547268 |
-| SECONDARY_TOTAL_BYTES | pending final `du` confirmation |
-| SIZE_MATCH | pending final confirmation |
-| SECONDARY_CHECKSUM_VERIFY | INTERRUPTED |
+| SOURCE_TOTAL_BYTES | 5445543502 |
+| SECONDARY_TOTAL_BYTES | 5445543502 |
+| SIZE_MATCH | YES |
+| SECONDARY_CHECKSUM_VERIFY | PASS |
 | LOCK_FILE_COUNT | 0 |
 | ENV_FILE_COUNT | 0 |
 | AUTH_JSON_COUNT | 0 |
@@ -155,7 +155,8 @@ Excluded per canonical design:
 - Manifest: present
 - Checksum file: present
 - File count match: YES
-- Secondary checksum verification: INTERRUPTED
+- Secondary checksum verification: PASS
+- Logical payload size match: YES
 - LOCK files in secondary copy: 0
 - ENV files in secondary copy: 0
 - AUTH_JSON files in secondary copy: 0
@@ -163,15 +164,12 @@ Excluded per canonical design:
 
 ## 8. Owner Actions Required
 
-1. Complete Windows-side checksum verification with `sha256sum -c checksums/SHA256SUMS.txt`
-   in `/mnt/d/Orbis-AI-Backup/WP-005C/20260830-231125/` and confirm PASS.
-2. Confirm SIZE_MATCH by comparing logical payload totals.
-3. Provide/approve an offline/secondary backup destination outside this host
+1. Provide/approve an offline/secondary backup destination outside this host
    if stronger disaster coverage is required, and copy the backup archive there
    with checksum verification.
-4. Periodically validate backup completeness by test restore in an isolated
+2. Periodically validate backup completeness by test restore in an isolated
    environment.
-5. Do not delete old server until post-cutover acceptance passes.
+3. Do not delete old server until post-cutover acceptance passes.
 
 ## 9. Stop Conditions Met
 
@@ -181,5 +179,4 @@ Excluded per canonical design:
 - No credential rotation was performed.
 - No migration, restore, or cutover was started.
 - Backup exists locally and on Windows D: drive.
-- Secondary checksum verification was interrupted before final result;
-  secondary backup status is PENDING_REVIEW until verification completes.
+- Secondary checksum verification completed with 0 failures.

@@ -31,16 +31,26 @@ Primary reuse targets:
 - Hermes gateway local Unix socket / localhost listener
 - `.hermes/bot_relay/{outbox,replies,claimed}` local file protocol
 
-Architecture:
+Transport model:
 
 ```
 ChatGPT Control Plane
--> authenticated task bridge
--> existing WSL2 Hermes MASTER
--> CODER / REVIEWER when required
--> structured evidence/result
--> ChatGPT Control Plane
+<-> reachable authenticated control queue/relay
+<-> Hermes outbound worker/poller
+<-> existing WSL2 Hermes MASTER
+<-> CODER / REVIEWER when required
+<-> structured evidence/result
+<-> ChatGPT Control Plane
 ```
+
+Hermes initiates outbound communication or polls the control/evidence queue.
+No public inbound port is opened on WSL.
+
+## Task Isolation
+
+WP-008A must not corrupt or overwrite WP-008 Issue #28 canonical workflow.
+WP-008 MCP validation remains paused/blocked separately.
+Do not reuse Issue #28 labels/state in a way that makes its workflow ambiguous.
 
 ## Security Model
 
@@ -51,6 +61,25 @@ ChatGPT Control Plane
 - secrets must remain outside Git
 - audit all bridge task submissions/results
 - fail closed on unknown/ambiguous action
+
+## Approval / Authorization Fields
+
+GitHub comments/labels/Telegram/Desktop/bridge identity are audit evidence only.
+They MUST NOT themselves grant Owner authority.
+
+Request fields:
+- `approval_required`: bool
+- `approval_level`: int
+- `owner_approval_reference`: string
+- `approval_scope`: string
+- `approved_action`: string
+- `approved_target`: string
+- `approved_head_sha`: string
+
+Enforcement:
+- Level 0/1/2: Control Plane may autonomously issue after review
+- Level 3: if exact valid Owner authorization cannot be proven, return `OWNER_APPROVAL_REQUIRED`
+- Fail-closed on unknown permission_level or missing Level 3 proof
 
 ## Bounded Task Schema
 
@@ -66,7 +95,13 @@ Request envelope (JSON):
   "forbidden_operations": ["write", "deploy", "merge", "execute"],
   "repository": "rebootob/Orbis-AI",
   "project": "Orbis AI",
-  "approval_evidence": "Owner authorization comment URL or explicit approval reference",
+  "approval_required": false,
+  "approval_level": 0,
+  "owner_approval_reference": "",
+  "approval_scope": "",
+  "approved_action": "",
+  "approved_target": "",
+  "approved_head_sha": "",
   "expected_result_format": "text",
   "payload": {}
 }
@@ -84,12 +119,6 @@ Response envelope (JSON):
   "approval_gate": "passed|blocked"
 }
 ```
-
-## Approval Enforcement
-
-- Level 0/1/2: Control Plane may autonomously issue after review
-- Level 3: STOP and return OWNER_APPROVAL_REQUIRED
-- Fail-closed on unknown permission_level
 
 ## Minimum Prototype Scope
 
@@ -119,14 +148,15 @@ Forbidden for test:
 
 ## Network Exposure
 
+No public inbound port on WSL.
+Hermes uses outbound/poll access only.
 Local-only by default.
-No public inbound exposure.
 No LAN exposure unless explicitly authorized.
 
 ## Authentication
 
 Reuse existing Hermes runtime authentication.
-Bridge requests must carry explicit approval_evidence.
+Bridge requests must carry explicit authorization fields.
 No anonymous task submission.
 
 ## Audit Mechanism
@@ -136,6 +166,8 @@ Every task submission and result is recorded with:
 - timestamp
 - requested_action
 - permission_level
+- approval_required
+- approval_level
 - status
 - result/evidence
 - failure_reason if any

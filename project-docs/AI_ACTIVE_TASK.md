@@ -42,7 +42,7 @@ automation, or secret handling are authorized outside the defined docs/scripts s
 
 ## Scope
 
-- Add `project-docs/13_SECURITY_GATES_AUDIT_POLICY.md` defining audit evidence
+- Add `project-docs/06_SECURITY_GATES_AUDIT_POLICY.md` defining audit evidence
   format, retention, and fail-closed behavior.
 - Update `project-docs/04_SECURITY_POLICY.md` with minimum Phase 6 security policy
   surface.

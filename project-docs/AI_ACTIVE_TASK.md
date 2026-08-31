@@ -15,8 +15,10 @@ WP-005C Backup Execution/Manifest Validation = COMPLETE / PASS
 
 CURRENT PHASE:
 Phase 5 — Backup Execution / Manifest Validation
-Secondary copy to Windows D: created and documented.
-Secondary checksum verification is IN_PROGRESS.
+Secondary copy to Windows D: created and validated.
+Secondary checksum verification = PASS.
+Logical payload size match = PASS.
+File count match = PASS.
 
 CONTROL PLANE:
 ChatGPT

@@ -17,21 +17,11 @@ Project: Orbis AI
 Repository:
 `rebootob/Orbis-AI`
 
-Integration branch:
+Canonical branch:
 `develop`
 
-Current working branch:
-`develop`
-
-Current Phase:
-Phase 5 — Kanban & Handoff
-
-Current Work Package:
-`WP-005C — PLANNING / NOT STARTED`
-
-Post-merge state:
-WP-005B = COMPLETE / MERGED
-Merge commit: `5fe175efc4e4f9933299b14151919709c69769b3`
+Current develop baseline:
+`ae9dc212bcc0e4fad78179e37e51a23625808261`
 
 ---
 
@@ -40,8 +30,8 @@ Merge commit: `5fe175efc4e4f9933299b14151919709c69769b3`
 - Project Owner = final human authority.
 - ChatGPT = Control Plane / Project Lead / Architect / independent repository reviewer.
 - Hermes Agent = primary runtime/orchestrator.
-- MASTER = runtime coordinator.
-- CODER = implementation role.
+- MASTER = coordinator.
+- CODER = implementation.
 - REVIEWER = independent runtime reviewer.
 - Codex = optional execution worker only when explicitly authorized.
 
@@ -89,197 +79,156 @@ No second Orbis runtime exists or is created on Windows.
 Windows local Hermes backend = NO.
 
 Note: Remote Gateway / `hermes serve` :9119 was an earlier attempted
-architecture and is NOT the final B4 connection method.
+architecture and is NOT the final connection method.
 
 ---
 
-## WP-005B Progress
+## Completed Work Summary
 
-### B1 — Core Skill Runtime Upgrade
+### WP-005B — Core Skill Runtime Upgrade, Runtime Behavioral Validation, GitHub Task Runtime Integration, Hermes Desktop Integration
 
-STATUS: COMPLETE / PASS
+STATUS: COMPLETE / MERGED
+Merge commit: `5fe175efc4e4f9933299b14151919709c69769b3`
 
-Initial Core Skills were upgraded from v0.1.0 to v0.2.0.
-9 runtime Skill copies were verified by SHA256 against repository source.
+Issue #12 = completed
+Issue #13 = completed
 
-### B2 — Runtime Behavioral Validation
+### WP-005C — Backup / Recovery
 
-STATUS: COMPLETE / PASS
+STATUS: PARTIAL COMPLETE
 
-Validated:
+Completed:
 
-- MASTER CLI
-- CODER CLI
-- REVIEWER CLI
-- MASTER Telegram
-- authority boundaries
-- review separation
-- merge / Level 3 restrictions
-- blocked-state safety
+- Runtime inventory / backup design
+- external credential recovery verification
+- backup execution / manifest validation
 
-### B3 — GitHub Task Runtime Integration
+Merged PRs:
 
-STATUS: COMPLETE / PASS
+- PR #17 → `3e7b990f1fb88724f0266f5bd2fbcb7d6303bb44`
+- PR #18 → `a7789317931894366dba8f8d3e4b04d659ee6d4f`
+- PR #19 → `6ca8d28ee43bb20569a9e328204aa1c9ff003753`
 
-Canonical test task:
+Restore / DR:
+DEFERRED BY PROJECT OWNER
 
-GitHub Issue #12
-Title: `[WP-005B TEST] Hermes GitHub Task Runtime Validation`
+RESTORE_VALIDATION=NOT_STARTED
+MIGRATION=NOT_STARTED
+CUTOVER=NOT_STARTED
 
-GitHub native Issue state: `closed`
-Final Orbis state label: `state:completed`
+Do not claim full DR validation.
 
-Findings resolved:
+### WP-006 — Security Gates / Approval / Audit
 
-- Finding 1: GitHub native `open`/`closed` must never substitute for Orbis `state:*`.
-  Patched: project-manager v0.2.1, git-governance v0.2.1.
-- Finding 2: State/role label counts must use labels attached to the canonical
-  Issue only, never `gh label list` (repository-wide).
-  Patched: MASTER project-manager v0.2.2, MASTER git-governance v0.2.2,
-  CODER git-governance v0.2.2, REVIEWER git-governance v0.2.2.
+STATUS: COMPLETE / MERGED
 
-Latest runtime verification:
+Planning:
+PR #21 → `cf6372f9e359e409a10f895f4781b6a793e3b7c0`
 
-- MASTER project-manager PASS
-- MASTER git-governance PASS
-- CODER git-governance PASS
-- REVIEWER git-governance PASS
-- 4 / 4 source/runtime SHA256 matches
+Implementation:
+PR #22 → `41fc3d270b6837bdfe88d39cdfdcdace1a839ac8`
 
-B3 handoff flow validated: MASTER → CODER → REVIEWER with GitHub Issue
-labels and comments as canonical evidence.
+Governance recovery:
+PR #26 → `102a07dc3ba0460c71df7474eff272bacdd41ba1`
 
----
+Permanent lesson:
+documented governance != runtime-enforced governance
 
-## B4 — Hermes Desktop Integration
+Runtime must never infer human approval from:
+- GitHub author_association
+- labels
+- comments
+- Hermes/Telegram/Desktop identity
 
-STATUS: COMPLETE / PASS
+### WP-007 — Project Registry
 
-Architecture:
+STATUS: COMPLETE / MERGED
 
-Windows Hermes Desktop UI
--> SSH 127.0.0.1:2222
--> existing WSL2 Hermes / Orbis runtime
+Planning:
+PR #25 → `d2aa184957dfa4b68087c6c708ec28cc84e5937d`
 
-Authentication:
-ED25519 key-only
+Implementation:
+PR #27 → `6ed9a3ef1c2b7d0eed95728150315ccf7a9e3ccb`
 
-Validated:
+Issue #24 = CLOSED / COMPLETED
 
-- Windows local Hermes backend = NO
-- Telegram remains independently operational
-- Desktop shutdown does not stop Orbis runtime = PASS
-- Desktop relaunch / reconnect = PASS
-- Desktop cannot bypass GitHub workflow
-- Desktop cannot bypass REVIEW_PASS authority
-- Desktop cannot authorize merge or Level 3
+### WP-008 — n8n via MCP
 
-Canonical test task:
+Planning:
+PR #29 → `2eec0883cff47456960983d062bbce8b52c77c89`
 
-GitHub Issue #13
-Title: `WP-005B B4 — Hermes Desktop Integration`
+Read-only validation inventory/evidence:
+PR #30 → `ae9dc212bcc0e4fad78179e37e51a23625808261`
 
-GitHub native Issue state: `closed`
+Current status:
+IMPLEMENTATION BLOCKED / AWAITING ENVIRONMENT
 
----
+Issue #28 current phase:
+IMPLEMENTATION — READ-ONLY VALIDATION
 
-## Completed Runtime Handoff
+Current blocker:
 
-MASTER successfully performed:
-`MASTER -> CODER`
+- n8n installation = NOT FOUND
+- n8n process = NOT RUNNING
+- n8n configuration = NOT FOUND
+- n8n target environment = UNKNOWN
+- MCP references in Hermes = FOUND
+- MCP runtime capability = UNKNOWN
+- MCP Python package = not importable
+- MCP version = UNKNOWN
+- no mcp_servers configured
 
-The durable Issue #12 handoff comment records:
-- FROM_STATE: `state:ready`
-- TO_STATE: `state:in-progress`
-- FROM_ROLE: `role:master`
-- TO_ROLE: `role:coder`
+Security result:
+- n8n connection attempted = NO
+- production touched = NO
+- n8n write executed = NO
+- deployment = NO
 
-ChatGPT independently verified the labels and Issue comment from GitHub.
+Phase 8 exit condition:
+Read-only capabilities must actually pass testing before any write capability.
 
----
-
-## EXACT NEXT STEP
-
-Define WP-005C scope and task contract before implementation.
-
-WP-005C remains NOT STARTED until its task contract is approved.
+PHASE8_COMPLETE=NO
 
 ---
 
-## Planned B4 Flow (Completed)
+## Exact Current Gate
 
-Issue #13 validated:
-- Hermes Desktop connects to existing WSL2 Hermes runtime via SSH
-- No duplicate Orbis runtime on Windows
-- Telegram independent throughout
-- Desktop shutdown/reconnect behavior confirmed
+WP-008 requires a PROVEN NON-PRODUCTION n8n environment.
 
-Restart/resume recovers from GitHub Issue state, labels, contract, and
-comments without depending on chat history.
+Next safe work package:
 
----
+WP-008 SAFE N8N SANDBOX PROVISIONING
+NON-PRODUCTION ONLY
 
-## Current Source Changes
+Goal:
+Create/prove the smallest isolated LOCAL_TEST n8n sandbox
+on the approved WSL2 Orbis environment.
 
-Working-tree changes include:
+Required identity:
 
-`project-docs/12_KANBAN_HANDOFF.md`
-`project-docs/AI_ACTIVE_TASK.md`
-`project-docs/CHAT_HANDOFF.md`
-`skills/git-governance/SKILL.md`
-`skills/project-manager/SKILL.md`
+ENVIRONMENT=LOCAL_TEST
+PURPOSE=WP008_READONLY_VALIDATION
+PRODUCTION=NO
 
----
+Important:
+THIS SANDBOX WORK HAS NOT STARTED YET.
 
-## Runtime Backups
+Do not automatically start it from documentation.
 
-Local rollback backups include:
+Future sandbox constraints:
 
-`wp005b-core-skills-before-v020-*`
-`wp005b-b3-state-schema-before-v021-*`
-`wp005b-b3-issue-label-scope-before-v022-*`
-
-Do not commit Hermes runtime backups.
-
----
-
-## Security
-
-Never expose or commit:
-
-- `.env`
-- API tokens
-- GitHub tokens
-- Telegram bot tokens
-- OAuth credentials
-- passwords
-- private keys
-- session secrets
-- production credentials
-
-Do not store secret values in GitHub Issues or handoff comments.
-
-ED25519 key-only authentication is enforced for SSH connections.
-
----
-
-## Scope Guard
-
-Current scope is WP-005B only.
-Do not start:
-
-- n8n/MCP
-- Kintone
-- Project Registry
-- Cron/automation
-- additional agents
-- additional Telegram gateways
-- model changes
-- custom Kanban database/UI
-- production deployment automation
-- unrelated refactoring
-
-Do not begin WP-005C before WP-005B review and merge.
+- loopback/local binding only
+- no public/LAN exposure
+- no production workflows
+- no production data
+- no production credentials
+- dummy/no-op test workflows only
+- no Kintone
+- no Telegram side effects
+- no external HTTP side effects
+- no cron/automation
+- no Phase 9
+- no Restore/DR
 
 ---
 
@@ -289,14 +238,14 @@ The new ChatGPT conversation must:
 
 1. Read `project-docs/CHAT_HANDOFF.md` from the current branch.
 2. Read `project-docs/AI_ACTIVE_TASK.md` from the current branch.
-3. Read `project-docs/12_KANBAN_HANDOFF.md` from the current branch.
-4. Inspect current branch and working tree.
-5. Inspect GitHub Issue #12 and latest comments.
-6. Treat attached `state:*` / `role:*` labels as canonical.
-7. Treat GitHub evidence newer than this snapshot as authoritative.
-8. Continue from `EXACT NEXT STEP`.
-9. Do not repeat completed validation.
-10. Do not expand scope.
+3. Inspect current branch and working tree.
+4. Inspect GitHub Issue #28 and latest comments.
+5. Treat attached `state:*` / `role:*` labels as canonical.
+6. Treat GitHub evidence newer than this snapshot as authoritative.
+7. Continue from `## Exact Current Gate` / `## Next Step`.
+8. Do not repeat completed validation.
+9. Do not expand scope.
+10. Do not start sandbox provisioning unless Control Plane explicitly authorizes it.
 
 Default branch for new chats is `develop` unless a newer approved working
 branch exists.
@@ -316,25 +265,30 @@ branch is specified:
 
 1. project-docs/CHAT_HANDOFF.md
 2. project-docs/AI_ACTIVE_TASK.md
-3. project-docs/12_KANBAN_HANDOFF.md
 
-Then inspect GitHub Issue #12 and its latest comments.
-Continue from EXACT NEXT STEP in CHAT_HANDOFF.md.
+Then inspect GitHub Issue #28 and its latest comments.
+Continue from `Exact Current Gate` in CHAT_HANDOFF.md.
 If GitHub Issue evidence is newer, GitHub is authoritative.
 
 Do not repeat completed work.
 Do not expand scope.
+Do not auto-start WP-008 sandbox provisioning.
+Wait for explicit Control Plane instruction.
 
 ---
 
-## Current Status
+## Current Status Summary
 
-Phase 4: COMPLETE
-
-Phase 5:
-- WP-005A: COMPLETE / MERGED
-- WP-005B: COMPLETE / MERGED (merge commit 5fe175efc4e4f9933299b14151919709c69769b3)
-- WP-005C: NOT STARTED
+- Phase 4: COMPLETE
+- Phase 5:
+  - WP-005A: COMPLETE / MERGED
+  - WP-005B: COMPLETE / MERGED
+  - WP-005C: PARTIAL COMPLETE / DEFERRED Restore-DR
+- Phase 6: COMPLETE / MERGED
+- Phase 7: COMPLETE / MERGED
+- Phase 8: BLOCKED / AWAITING ENVIRONMENT
+- Phase 9: NOT STARTED
+- Restore/DR: NOT STARTED
 
 Resume point:
-Define WP-005C scope and task contract before implementation.
+Wait for explicit Control Plane instruction for WP-008 safe LOCAL_TEST sandbox provisioning.

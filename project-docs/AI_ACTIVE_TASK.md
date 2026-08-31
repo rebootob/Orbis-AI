@@ -23,6 +23,7 @@ Issue #20 = state:completed
 PR #22 = MERGED
 MERGE_COMMIT = 41fc3d270b6837bdfe88d39cdfdcdace1a839ac8
 WP-005C Restore / DR Rehearsal = DEFERRED
+WP-007 = PAUSED / AWAITING CONTROL PLANE AUTHORIZATION
 
 CONTROL PLANE:
 ChatGPT
@@ -64,6 +65,31 @@ Restore canonical governance merge/approval gates and pause WP-007 without delet
 - Force push
 - Unrelated refactoring
 
+## Runtime Architecture
+
+- WSL2 Hermes = primary Orbis runtime.
+- MASTER = default Hermes profile.
+- CODER = `coder` Hermes profile.
+- REVIEWER = `reviewer` Hermes profile.
+- Telegram = remote command interface.
+- Hermes Desktop = optional operator console connected via SSH.
+- GitHub Issues = canonical task/Kanban source of truth.
+- GitHub/Git = implementation and audit evidence.
+
+Hermes Desktop connects to the approved WSL2 Hermes backend via SSH:
+
+Windows Hermes Desktop UI
+-> Connect via SSH
+-> allday@127.0.0.1:2222
+-> existing WSL2 Hermes / Orbis runtime
+
+Authentication:
+ED25519 key-only.
+
+No second Orbis runtime exists or is created on Windows.
+Windows local Hermes backend = NO.
+Telegram remains independently operational.
+
 ## Authority Model
 
 - Runtime REVIEWER returns PASS/FAIL evidence only.
@@ -80,12 +106,42 @@ Restore canonical governance merge/approval gates and pause WP-007 without delet
 - Do not enable additional worker gateways unless explicitly required and approved.
 - ED25519 key-only authentication is enforced for SSH connections.
 
+## WP-005B Summary
+
+All blocks complete and merged into develop:
+
+- B1: COMPLETE / PASS
+- B2: COMPLETE / PASS
+- B3: COMPLETE / PASS (Issues #12 closed)
+- B4: COMPLETE / PASS (Issue #13 closed)
+
+Merge commit: 5fe175efc4e4f9933299b14151919709c69769b3
+
 ## Rollback
 
 - Revert the recovery branch or delete the branch if scope drifts.
 - Repository changes can be reverted through Git.
 - Existing valid backups must not be deleted.
 - No runtime state is modified by this WP.
+
+## Out of Scope
+
+- n8n/MCP
+- Kintone
+- Project Registry
+- Cron/background automation additions
+- additional agents
+- additional Telegram gateways
+- model changes
+- custom Kanban UI/database
+- production deployment automation
+- broad LAN/Internet exposure of Hermes backend
+- WP-005D or later work packages
+- restore execution
+- server migration
+- cutover
+- credential reissue/rotation
+- changing approved Phase 6 architecture unless required by migration
 
 ## Stop Conditions
 
@@ -97,6 +153,10 @@ Stop if:
 - a Level 3 action is reached without explicit Project Owner approval;
 - restore, migration, cutover, or DR rehearsal is started;
 - n8n/MCP/Kintone or automation is started;
+- CHAT_HANDOFF resume behavior is broken;
+- WP-005C backup semantics are altered;
+- Hermes Desktop attempts Windows-local backend bootstrap/installation;
+- A second Hermes/Orbis runtime becomes active on Windows;
 - WP-007 implementation continues;
 - PR #25 is merged;
 - recovery PR is merged without Control Plane and Project Owner authorization.

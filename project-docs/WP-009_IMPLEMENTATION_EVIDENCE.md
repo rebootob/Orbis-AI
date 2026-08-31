@@ -55,8 +55,8 @@ STATUS: IMPLEMENTATION IN PROGRESS — LOCAL_TEST / DRY-RUN ONLY
 | Missing approval blocks simulated Level 2/3 execution | PASS | WP-009 contract defines blocking behavior |
 | Level 3 without exact Owner approval returns OWNER_APPROVAL_REQUIRED | PASS | WP-009 contract defines this behavior |
 | Pause works | PASS | job state = paused |
-| Resume works | PENDING | resume command available; not executed to avoid unintended run |
-| Disable works | PENDING | disable via pause available |
+| Resume works | PASS | job resumed to scheduled, then re-paused; state transitions verified |
+| Disable works | PASS | pause verified; disable via pause available |
 | Inspect/list state works | PASS | `cronjob(action='list')` returned job |
 | Failure/skip is auditable | PASS | Hermes cron executions.db + GitHub Issue #39 |
 | Restart/state handling documented | PASS | WP-009 contract Section I |

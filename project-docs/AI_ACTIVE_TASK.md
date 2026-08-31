@@ -4,27 +4,28 @@ PROJECT:
 Orbis AI
 
 WORK PACKAGE:
-WP-007 — PROJECT REGISTRY PLANNING
+WP-007 — PROJECT REGISTRY IMPLEMENTATION
 
 STATUS:
-WP-007 = PLANNING ONLY / EXPLICIT CONTROL PLANE AUTHORIZATION
+WP-007 = IMPLEMENTATION AUTHORIZED
+WP-007 Planning = COMPLETE / MERGED PR #25 (merge commit d2aa184957dfa4b68087c6c708ec28cc84e5937d)
 WP-006 = COMPLETE / MERGED PR #22 (merge commit 41fc3d270b6837bdfe88d39cdfdcdace1a839ac8)
 WP-005B = COMPLETE / MERGED (merge commit 5fe175efc4e4f9933299b14151919709c69769b3)
 WP-005C Runtime Inventory/Backup Design = COMPLETE / MERGED (merge commit 3e7b990f1fb88724f0266f5bd2fbcb7d6303bb44)
 WP-005C External Credential Recovery Verification = COMPLETE / MERGED (merge commit a7789317931894366dba8f8d3e4b04d659ee6d4f)
 WP-005C Backup Execution/Manifest Validation = COMPLETE / PASS
-PR #25 = OPEN / original head e094be4 preserved as pre-authorization evidence; current head is authoritative via GitHub PR metadata only
 
 CURRENT PHASE:
-Phase 7 — Project Registry = PLANNING ONLY
+Phase 7 — Project Registry = IMPLEMENTATION
 
 CURRENT PHASE DETAIL:
 Phase 6 — Security Gates, Approvals, Audit Logging = COMPLETE
 Issue #20 = state:completed
 PR #22 = MERGED
 MERGE_COMMIT = 41fc3d270b6837bdfe88d39cdfdcdace1a839ac8
-Issue #24 = state:ready / role:master
-PR #25 = OPEN / original head e094be4 preserved as pre-authorization evidence; current head is authoritative via GitHub PR metadata only
+Issue #24 = state:in-progress / role:coder
+PR #25 = MERGED
+MERGE_COMMIT = d2aa184957dfa4b68087c6c708ec28cc84e5937d
 WP-005C Restore / DR Rehearsal = DEFERRED
 
 CONTROL PLANE:
@@ -38,46 +39,35 @@ BASE BRANCH:
 develop
 
 WORKING BRANCH:
-ai/wp-007-project-registry-planning
+ai/wp-007-project-registry-implementation
 
 TARGET:
 develop
 
 ## Objective
 
-Define the smallest complete Phase 7 Project Registry design required to satisfy:
-"Registered-project lookup works." Planning only. No runtime implementation,
-deployment, database, web UI, n8n/MCP/Kintone, or automation is authorized
-in this phase.
+Implement the approved Phase 7 Project Registry so registered-project lookup
+works. This is the implementation phase. No database, web UI, n8n/MCP/Kintone,
+automation/cron, new agents, or broad skill changes are authorized.
 
 ## Authorization
 
-This planning work is explicitly authorized by ChatGPT Control Plane on
-2026-08-31. Issue #24 and the original PR #25 head `e094be4` were created
-before authorization and are preserved as pre-authorization audit evidence
-only. That original pre-authorization state does not constitute current
-authorization. After authorization, PR #25 was reconciled and continued as
-the authorized WP-007 PLANNING artifact.
-
-The authoritative current PR #25 head is GitHub PR metadata, not a SHA stored
-in tracked docs. Runtime REVIEWER must review the actual current GitHub HEAD.
-Control Plane must independently verify the same actual current GitHub HEAD
-before REVIEW_PASS. Project Owner approval must target that exact reviewed
-PR/head. Merge may occur only after: Runtime REVIEWER PASS -> Control Plane
-REVIEW_PASS -> explicit Project Owner approval -> merge.
+This implementation is explicitly authorized by ChatGPT Control Plane on
+2026-08-31. WP-007 planning PR #25 is merged (merge commit
+d2aa184957dfa4b68087c6c708ec28cc84e5937d). Implementation may proceed only
+on branch `ai/wp-007-project-registry-implementation` and only after Runtime
+REVIEWER PASS, Control Plane REVIEW_PASS, and explicit Project Owner approval.
 
 ## Scope
 
-- Define one canonical Project Registry source in Git.
-- Registry lookup fields: project_id, project_name, repository, canonical_branch,
+- Implement one canonical Project Registry source in Git.
+- Deterministic lookup by project_id and project_name.
+- Required fields: project_id, project_name, repository, canonical_branch,
   project_docs_path, status, control_plane, execution_role/model if applicable.
-- Lookup behavior: project name/project id -> canonical registry record -> repository/project context.
-- Registry must not contain secrets, tokens, passwords, private keys, credentials,
-  or production connection strings.
-- Git/repository truth remains authoritative. Chat memory, Telegram, Desktop, Skills,
-  or Hermes memory must not silently override registry truth.
-- Fail closed on unknown project, duplicate project_id, duplicate ambiguous project name,
-  missing required field, or invalid repository/branch metadata.
+- Fail closed on unknown project, duplicate project_id, ambiguous duplicate
+  project_name, missing required field, or invalid repository/branch metadata.
+- Git/repository truth remains authoritative. No secrets or credentials in registry.
+- Add focused tests for valid lookup, fail-closed cases, and secret exclusion.
 
 ## Out of Scope
 
@@ -92,7 +82,7 @@ REVIEW_PASS -> explicit Project Owner approval -> merge.
 - server migration
 - new agents
 - broad skill changes
-- implementation code or runtime behavior
+- Phase 8 or later work
 
 ## Runtime Architecture
 
@@ -149,7 +139,7 @@ Merge commit: 5fe175efc4e4f9933299b14151919709c69769b3
 
 ## Rollback
 
-- Revert the planning branch or delete the branch if scope drifts.
+- Revert the implementation branch or delete the branch if scope drifts.
 - Repository changes can be reverted through Git.
 - Existing valid backups must not be deleted.
 - No runtime state is modified by this WP.
@@ -157,20 +147,21 @@ Merge commit: 5fe175efc4e4f9933299b14151919709c69769b3
 ## Stop Conditions
 
 Stop if:
-- scope expands beyond approved Phase 7 planning;
-- implementation code or runtime behavior is introduced;
-- secrets or credentials are included in registry design;
-- lookup behavior is defined as guessing or fallback to non-authoritative sources;
-- n8n/MCP/Kintone/database/web UI is introduced;
+- scope expands beyond approved Phase 7 implementation;
+- secrets are required or exposed;
+- runtime files outside approved docs/scripts scope are modified;
+- approval language becomes ambiguous or enables bypass;
+- a Level 3 action is reached without explicit Project Owner approval;
+- restore, migration, cutover, or DR rehearsal is started;
+- n8n/MCP/Kintone or automation is started;
 - CHAT_HANDOFF resume behavior is broken;
 - WP-005C backup semantics are altered;
 - Hermes Desktop attempts Windows-local backend bootstrap/installation;
 - A second Hermes/Orbis runtime becomes active on Windows;
-- PR #25 is merged without Control Plane REVIEW_PASS and Project Owner approval;
-- planning PR is merged without Control Plane and Project Owner authorization.
+- implementation PR is merged without Control Plane and Project Owner authorization.
 
 ## Next Step
 
 Await explicit Control Plane review and Project Owner approval for this
-planning PR only. Do not start implementation, Restore/DR, or any next WP
+implementation PR only. Do not start Phase 8, Restore/DR, or any next WP
 without separate explicit authorization.

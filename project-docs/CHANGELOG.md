@@ -11,4 +11,5 @@ All notable repository changes will be recorded here.
 - Completed the safe local backup, secret-safety audit, `main` baseline, official GitHub connection, and `develop` branch creation.
 - WP-006 governance recovery: `GOVERNANCE_INCIDENTS.md`, canonical policy updates in `04_SECURITY_POLICY.md` and `05_APPROVAL_POLICY.md`, and `AI_ACTIVE_TASK.md` paused/recovery state.
 - Recorded incident INCIDENT-2026-08-31-WP006 for PREMATURE_MERGE_BEFORE_CONTROL_PLANE_REVIEW_PASS.
-- WP-007 paused/awaiting Control Plane authorization with Issue #24 and PR #25 preserved as evidence.
+- WP-007 planning completed and merged as PR #25 (merge commit d2aa184957dfa4b68087c6c708ec28cc84e5937d).
+- WP-007 implementation authorized: `scripts/wp007_registry.py`, `scripts/wp007_registry.txt`, and `tests/test_wp007_registry.py`.

@@ -4,7 +4,7 @@ n8n is a future automation engine for deterministic workflows and integrations. 
 
 ## Current Phase 8 state
 
-Phase 8 = SANDBOX PROVEN / AWAITING EXPLICIT CONTROL PLANE AUTHORIZATION FOR READ-ONLY MCP VALIDATION.
+Phase 8 = READ-ONLY VALIDATION COMPLETE — EMPTY-SANDBOX READ OPERATIONS = NOT TESTABLE WITHOUT WRITE — OWNER ACCEPTED
 
 ## Read-only-first architecture
 
@@ -30,10 +30,11 @@ Phase 8 = SANDBOX PROVEN / AWAITING EXPLICIT CONTROL PLANE AUTHORIZATION FOR REA
 
 ## Current runtime evidence
 
-- MCP references in Hermes/runtime: FOUND
-- MCP runtime capability: UNKNOWN
-- MCP version: UNKNOWN
-- MCP Python package: not importable in current runtime
+- MCP runtime in Hermes/runtime: PROVEN
+- MCP package/distribution/version: mcp 2.0.0 + mcp-types 2.0.0
+- Python executable: /home/allday/.hermes/hermes-agent/venv/bin/python
+- venv: /home/allday/.hermes/hermes-agent/venv
+- Import test: SUCCESS
 - configured MCP servers: none
 
 ## Credential and endpoint policy
@@ -43,13 +44,8 @@ Phase 8 = SANDBOX PROVEN / AWAITING EXPLICIT CONTROL PLANE AUTHORIZATION FOR REA
 - Only metadata-level location/type information is recorded in docs.
 - All real secrets must remain outside source control.
 
-## Next step
+## Closeout status
 
-The next safe step is sandbox provisioning only after explicit Control Plane authorization:
-
-- provision an isolated LOCAL_TEST n8n sandbox on the approved WSL2 host,
-- bind to loopback/local interface only,
-- use dummy/no-op test workflows,
-- then proceed to harmless read-only MCP validation.
-
-Do not auto-start sandbox work from this document.
+- Read-only validation result: EMPTY-SANDBOX READ OPERATIONS = NOT TESTABLE WITHOUT WRITE — OWNER ACCEPTED
+- Write-capable phases: NOT AUTHORIZED
+- Production integration: NOT COMPLETE

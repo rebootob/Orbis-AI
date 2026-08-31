@@ -25,9 +25,17 @@ All notable repository changes will be recorded here.
 - WP-008 planning branch: `ai/wp-008-n8n-via-mcp-planning`
 - PR #29 merged at `2eec0883cff47456960983d062bbce8b52c77c89`
 
-## [WP-008 Evidence] - 2026-08-31
+## [WP-008 Closeout] - 2026-08-31
 
 ### Added
-- Issue #28 canonical truth updated to IMPLEMENTATION — READ-ONLY VALIDATION / BLOCKED AWAITING ENVIRONMENT.
-- `project-docs/WP-008_TASK_CONTRACT.md` Section F updated with explicit MCP availability/version/mechanism evidence.
-- PR #30 merged at `ae9dc212bcc0e4fad78179e37e51a23625808261`
+- WP-008 read-only validation evidence docs: `project-docs/WP-008_MCP_VALIDATION_EVIDENCE.md`
+- WP-008 MCP runtime proven in Hermes venv: mcp 2.0.0 + mcp-types 2.0.0
+- PR #35 merged at `7fa62e1f38583d703782f14907faa2238f2a3c22`
+
+### Changed
+- `project-docs/AI_ACTIVE_TASK.md` updated to READ-ONLY VALIDATION COMPLETE with Owner-accepted empty-sandbox qualification.
+- `project-docs/CHAT_HANDOFF.md` updated to closeout state.
+- `project-docs/08_N8N_INTEGRATION.md` updated to reflect proven MCP runtime and read-only validation closeout.
+
+### Fixed
+- Stale MCP runtime evidence reconciled across canonical docs.

@@ -7,9 +7,10 @@ WORK PACKAGE:
 WP-008 — N8N VIA MCP READ-ONLY VALIDATION
 
 STATUS:
-WP-008 = SANDBOX PROVEN / AWAITING READ-ONLY VALIDATION AUTHORIZATION
+WP-008 = READ-ONLY VALIDATION COMPLETE — EMPTY-SANDBOX READ OPERATIONS = NOT TESTABLE WITHOUT WRITE — OWNER ACCEPTED
 WP-008 Planning = COMPLETE / MERGED PR #29 (merge commit 2eec0883cff47456960983d062bbce8b52c77c89)
 WP-008 Read-Only Evidence = COMPLETE / MERGED PR #30 (merge commit ae9dc212bcc0e4fad78179e37e51a23625808261)
+WP-008 MCP Runtime/Evidence = COMPLETE / MERGED PR #35 (merge commit 7fa62e1f38583d703782f14907faa2238f2a3c22)
 WP-007 = COMPLETE / MERGED PR #27 (merge commit 6ed9a3ef1c2b7d0eed95728150315ccf7a9e3ccb)
 WP-006 = COMPLETE / MERGED PR #22 (merge commit 41fc3d270b6837bdfe88d39cdfdcdace1a839ac8)
 WP-005B = COMPLETE / MERGED (merge commit 5fe175efc4e4f9933299b14151919709c69769b3)
@@ -18,7 +19,7 @@ WP-005C External Credential Recovery Verification = COMPLETE / MERGED (merge com
 WP-005C Backup Execution/Manifest Validation = COMPLETE / PASS
 
 CURRENT PHASE:
-Phase 8 — n8n via MCP = SANDBOX PROVEN / AWAITING READ-ONLY VALIDATION
+Phase 8 — n8n via MCP = READ-ONLY VALIDATION COMPLETE — EMPTY-SANDBOX READ OPERATIONS = NOT TESTABLE WITHOUT WRITE — OWNER ACCEPTED
 
 CURRENT PHASE DETAIL:
 Phase 7 — Project Registry = COMPLETE
@@ -61,11 +62,11 @@ develop
 
 ## Objective
 
-Validate read-only n8n via MCP capability safely. Local sandbox proven; awaiting explicit authorization for read-only MCP validation.
+WP-008 read-only MCP validation is complete with Owner-accepted qualification.
 
 ## Authorization
 
-This read-only validation phase is explicitly authorized by ChatGPT Control Plane on 2026-08-31. Implementation may proceed only after Runtime REVIEWER PASS, Control Plane REVIEW_PASS, and explicit Project Owner approval.
+This read-only validation phase is explicitly authorized by ChatGPT Control Plane and accepted by Project Owner on 2026-08-31. Implementation may proceed only after Runtime REVIEWER PASS, Control Plane REVIEW_PASS, and explicit Project Owner approval.
 
 ## Scope
 
@@ -117,8 +118,13 @@ All n8n write operations remain disabled/not authorized:
 - n8n version: 2.36.9
 - Listen address: 127.0.0.1:5678
 - Public exposure: NO
-- MCP references in Hermes: REFERENCE FOUND; runtime capability UNKNOWN (mcp Python package not importable; no MCP servers configured in config.yaml)
-- Action: SANDBOX PROVEN. Await explicit Control Plane authorization for read-only MCP validation.
+- MCP runtime: PROVEN in Hermes venv
+- MCP package/distribution/version: mcp 2.0.0 + mcp-types 2.0.0
+- Python executable/path: /home/allday/.hermes/hermes-agent/venv/bin/python
+- venv path: /home/allday/.hermes/hermes-agent/venv
+- Import test: SUCCESS
+- mcp_servers configured: NO
+- Action: READ-ONLY VALIDATION COMPLETE — EMPTY-SANDBOX READ OPERATIONS = NOT TESTABLE WITHOUT WRITE — OWNER ACCEPTED
 
 ## Next Step
 

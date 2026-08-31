@@ -13,7 +13,7 @@ WP-005B = COMPLETE / MERGED (merge commit 5fe175efc4e4f9933299b14151919709c69769
 WP-005C Runtime Inventory/Backup Design = COMPLETE / MERGED (merge commit 3e7b990f1fb88724f0266f5bd2fbcb7d6303bb44)
 WP-005C External Credential Recovery Verification = COMPLETE / MERGED (merge commit a7789317931894366dba8f8d3e4b04d659ee6d4f)
 WP-005C Backup Execution/Manifest Validation = COMPLETE / PASS
-PR #25 = OPEN / original head e094be4 preserved as pre-authorization evidence; current reconciled head b4a60a1 is authorized planning evidence pending standard merge gates
+PR #25 = OPEN / original head e094be4 preserved as pre-authorization evidence; current reconciled head 9ba9499 is authorized planning evidence pending standard merge gates
 
 CURRENT PHASE:
 Phase 7 — Project Registry = PLANNING ONLY
@@ -24,7 +24,7 @@ Issue #20 = state:completed
 PR #22 = MERGED
 MERGE_COMMIT = 41fc3d270b6837bdfe88d39cdfdcdace1a839ac8
 Issue #24 = state:ready / role:master
-PR #25 = OPEN / original head e094be4 preserved as pre-authorization evidence; current reconciled head b4a60a1 is authorized planning evidence pending standard merge gates
+PR #25 = OPEN / original head e094be4 preserved as pre-authorization evidence; current reconciled head 9ba9499 is authorized planning evidence pending standard merge gates
 WP-005C Restore / DR Rehearsal = DEFERRED
 
 CONTROL PLANE:
@@ -56,7 +56,7 @@ This planning work is explicitly authorized by ChatGPT Control Plane on
 2026-08-31. Issue #24 and the original PR #25 head `e094be4` were created
 before authorization and are preserved as pre-authorization audit evidence
 only. That original pre-authorization state does not constitute current
-authorization. The reconciled current head `a1e700b` on branch
+authorization. The reconciled current head `9ba9499` on branch
 `ai/wp-007-project-registry-planning` is the authorized planning evidence
 and may proceed only through the standard merge gates: Runtime REVIEWER
 PASS -> Control Plane REVIEW_PASS -> explicit Project Owner approval -> merge.

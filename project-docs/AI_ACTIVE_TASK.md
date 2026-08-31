@@ -7,16 +7,21 @@ WORK PACKAGE:
 WP-006 — SECURITY GATES, APPROVALS, AND AUDIT LOGGING
 
 STATUS:
-IMPLEMENTATION ACTIVE
+CONTROL PLANE REVIEW
 WP-005B = COMPLETE / MERGED (merge commit 5fe175efc4e4f9933299b14151919709c69769b3)
 WP-005C Runtime Inventory/Backup Design = COMPLETE / MERGED (merge commit 3e7b990f1fb88724f0266f5bd2fbcb7d6303bb44)
 WP-005C External Credential Recovery Verification = COMPLETE / MERGED (merge commit a7789317931894366dba8f8d3e4b04d659ee6d4f)
 WP-005C Backup Execution/Manifest Validation = COMPLETE / PASS
+WP-006 = COMPLETE / RUNTIME_REVIEWER_PASS / AWAITING_CONTROL_PLANE_REVIEW
 
 CURRENT PHASE:
 Phase 6 — Security Gates, Approvals, Audit Logging
-WP-006 implementation is in progress.
-WP-005C Restore / DR Rehearsal remains DEFERRED and must not be started.
+Issue #20 = state:control-review / role:control-plane
+IMPLEMENTATION = COMPLETE
+RUNTIME_REVIEWER = PASS
+WAITING_FOR = ChatGPT Control Plane review
+MERGE_REQUIRES_OWNER_APPROVAL = YES
+WP-005C Restore / DR Rehearsal = DEFERRED
 
 CONTROL PLANE:
 ChatGPT

@@ -5,17 +5,19 @@ All notable repository changes will be recorded here.
 ## [Unreleased]
 
 ### Added
-- WP-008 planning docs: `project-docs/WP-008_TASK_CONTRACT.md`
-- WP-008 planning branch: `ai/wp-008-n8n-via-mcp-planning`
+- WP-008 implementation blocker evidence: `project-docs/AI_ACTIVE_TASK.md` updated to IMPLEMENTATION BLOCKED / AWAITING ENVIRONMENT.
+- WP-008 MCP inventory evidence: `project-docs/WP-008_TASK_CONTRACT.md` updated with explicit MCP availability/version/mechanism evidence and READ-ONLY VALIDATION blocker.
+- Issue #28 canonical truth updated to reflect IMPLEMENTATION — READ-ONLY VALIDATION phase and BLOCKED/AWAITING status.
 
 ### Changed
-- `project-docs/AI_ACTIVE_TASK.md`: reconciled post-WP-007 state; Phase 8 planning authorized; WP-007 = COMPLETE / MERGED PR #27 at 6ed9a3ef1c2b7d0eed95728150315ccf7a9e3ccb; Issue #24 closed as completed.
+- `project-docs/AI_ACTIVE_TASK.md`: transitioned to WP-008 IMPLEMENTATION AUTHORIZED — READ-ONLY VALIDATION ONLY; recorded merge commit 2eec0883cff47456960983d062bbce8b52c77c89; recorded blocker: n8n environment UNKNOWN, installation/config not found; MCP references explicitly recorded as REFERENCE FOUND / runtime capability UNKNOWN.
 
 ### Fixed
-- Stale WP-007 implementation state replaced with completed merge state.
+- Stale WP-008 planning state replaced with implementation blocked state.
 
-## [WP-007] - 2026-08-31
+## [WP-008] - 2026-08-31
 
 ### Added
-- Project Registry implementation: `scripts/wp007_registry.py`, `scripts/wp007_registry.txt`, `tests/test_wp007_registry.py`
-- PR #27 merged at `6ed9a3ef1c2b7d0eed95728150315ccf7a9e3ccb`
+- WP-008 planning docs: `project-docs/WP-008_TASK_CONTRACT.md`
+- WP-008 planning branch: `ai/wp-008-n8n-via-mcp-planning`
+- PR #29 merged at `2eec0883cff47456960983d062bbce8b52c77c89`

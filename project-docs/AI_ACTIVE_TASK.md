@@ -4,10 +4,11 @@ PROJECT:
 Orbis AI
 
 WORK PACKAGE:
-WP-008 — N8N VIA MCP PLANNING
+WP-008 — N8N VIA MCP READ-ONLY VALIDATION
 
 STATUS:
-WP-008 = PLANNING AUTHORIZED
+WP-008 = IMPLEMENTATION BLOCKED / AWAITING ENVIRONMENT
+WP-008 Planning = COMPLETE / MERGED PR #29 (merge commit 2eec0883cff47456960983d062bbce8b52c77c89)
 WP-007 = COMPLETE / MERGED PR #27 (merge commit 6ed9a3ef1c2b7d0eed95728150315ccf7a9e3ccb)
 WP-006 = COMPLETE / MERGED PR #22 (merge commit 41fc3d270b6837bdfe88d39cdfdcdace1a839ac8)
 WP-005B = COMPLETE / MERGED (merge commit 5fe175efc4e4f9933299b14151919709c69769b3)
@@ -16,7 +17,7 @@ WP-005C External Credential Recovery Verification = COMPLETE / MERGED (merge com
 WP-005C Backup Execution/Manifest Validation = COMPLETE / PASS
 
 CURRENT PHASE:
-Phase 8 — n8n via MCP = PLANNING
+Phase 8 — n8n via MCP = READ-ONLY VALIDATION BLOCKED
 
 CURRENT PHASE DETAIL:
 Phase 7 — Project Registry = COMPLETE
@@ -29,6 +30,9 @@ PR #22 = MERGED
 MERGE_COMMIT = 41fc3d270b6837bdfe88d39cdfdcdace1a839ac8
 WP-005C Restore / DR Rehearsal = DEFERRED
 
+BLOCKER:
+n8n target environment cannot be identified. No n8n installation or configuration found on the runtime. Environment identity is UNKNOWN. Cannot prove local/dev/test target exists. Environment gate triggered: STOP before connection.
+
 CONTROL PLANE:
 ChatGPT
 
@@ -40,77 +44,45 @@ BASE BRANCH:
 develop
 
 WORKING BRANCH:
-ai/wp-008-n8n-via-mcp-planning
+ai/wp-008-n8n-mcp-readonly-implementation
 
 TARGET:
 develop
 
 ## Objective
 
-Plan the minimum safe n8n via MCP integration with read-only validation before any write capability is considered.
+Validate read-only n8n via MCP capability safely. BLOCKED: environment identity cannot be proven.
 
 ## Authorization
 
-This planning phase is explicitly authorized by ChatGPT Control Plane on 2026-08-31. WP-008 planning may proceed only on branch `ai/wp-008-n8n-via-mcp-planning` and only after Runtime REVIEWER PASS, Control Plane REVIEW_PASS, and explicit Project Owner approval.
+This read-only validation phase is explicitly authorized by ChatGPT Control Plane on 2026-08-31. Implementation may proceed only on branch `ai/wp-008-n8n-mcp-readonly-implementation` and only after Runtime REVIEWER PASS, Control Plane REVIEW_PASS, and explicit Project Owner approval.
 
 ## Scope
 
-- Define connection architecture: Hermes/Orbis -> MCP -> n8n.
-- Identify MCP server/client responsibility.
-- Define minimum read-only capability set: list workflows, read metadata, inspect status, inspect executions.
-- Define write gate: all writes disabled/not authorized until explicit future authorization.
-- Define security requirements: no secrets in Git, least privilege, fail closed on ambiguity.
-- Define environment separation requirements: local/dev/test vs production.
-- Define required evidence for future implementation.
-- Define governance and approval requirements for future implementation.
+- Inventory MCP capability in Hermes/runtime
+- Inventory n8n installation/configuration
+- Identify n8n environment as local/dev/test/production/UNKNOWN
+- Document endpoint/auth method metadata only
+- If non-production target proven safe: implement minimum read-only MCP connection
+- If environment ambiguous or only production exists: STOP and record blocker
 
-## Out of Scope
+## Read-Only Capability Set (if environment proven)
 
-- actual n8n write operations
-- workflow creation/editing
-- workflow execution with side effects
-- Kintone integration
-- cron/automation
-- production deployment
-- credential rotation
-- Restore/DR
-- server migration/cutover
-- new agents
-- broad skill refactor
-- Phase 9+
+- list workflows
+- read workflow metadata
+- inspect workflow status
+- read workflow definition/configuration only if confirmed read-only
+- inspect execution metadata/history only if confirmed read-only
 
-## Runtime Architecture
+## Write Gate
 
-- WSL2 Hermes = primary Orbis runtime.
-- MASTER = default Hermes profile.
-- CODER = `coder` Hermes profile.
-- REVIEWER = `reviewer` Hermes profile.
-- Telegram = remote command interface.
-- Hermes Desktop = optional operator console connected via SSH.
-- GitHub Issues = canonical task/Kanban source of truth.
-- GitHub/Git = implementation and audit evidence.
-
-Hermes Desktop connects to the approved WSL2 Hermes backend via SSH:
-
-Windows Hermes Desktop UI
--> Connect via SSH
--> allday@127.0.0.1:2222
--> existing WSL2 Hermes / Orbis runtime
-
-Authentication:
-ED25519 key-only.
-
-No second Orbis runtime exists or is created on Windows.
-Windows local Hermes backend = NO.
-Telegram remains independently operational.
-
-## Authority Model
-
-- Runtime REVIEWER returns PASS/FAIL evidence only.
-- Final repository `REVIEW_PASS` belongs to ChatGPT Control Plane.
-- Merge requires explicit Project Owner approval for the exact PR and head SHA.
-- Level 3 actions require explicit Project Owner approval.
-- Skills, labels, task comments, Desktop, and Telegram do not grant additional authority.
+All n8n write operations remain disabled/not authorized:
+- create/update/delete workflow
+- activate/deactivate workflow
+- execute workflow with side effects
+- credential changes
+- webhook creation/change
+- production changes
 
 ## Security
 
@@ -120,6 +92,21 @@ Telegram remains independently operational.
 - No mutable current HEAD SHAs in tracked docs; GitHub PR metadata is authoritative.
 - Preserve audit evidence; distinguish pre-authorization state from authorized state.
 
+## Environment Separation
+
+- local/dev/test n8n required for read-only validation
+- production n8n may not be used for validation
+- If only production exists or environment is ambiguous: STOP and report blocker
+
+## Blocker
+
+- n8n installation: NOT FOUND
+- n8n process: NOT RUNNING
+- n8n configuration: NOT FOUND
+- n8n environment: UNKNOWN
+- MCP references in Hermes: REFERENCE FOUND; runtime capability UNKNOWN (mcp Python package not importable; no MCP servers configured in config.yaml)
+- Action: STOP. Cannot connect without proven safe non-production target.
+
 ## Next Step
 
-Await explicit Control Plane instruction after planning PR review/approval.
+Await explicit Control Plane instruction to provide a proven local/dev/test n8n target or alternative validation approach.

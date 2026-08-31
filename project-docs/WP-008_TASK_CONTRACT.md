@@ -1,23 +1,23 @@
 # WP-008 Task Contract
 
 WORK PACKAGE:
-WP-008 — N8N VIA MCP PLANNING
+WP-008 — N8N VIA MCP READ-ONLY VALIDATION
 
 STATUS:
-PLANNING AUTHORIZED
+IMPLEMENTATION AUTHORIZED — READ-ONLY VALIDATION ONLY
 
 ISSUE:
 #28
 
 BRANCH:
-ai/wp-008-n8n-via-mcp-planning
+ai/wp-008-n8n-mcp-readonly-implementation
 
 TARGET:
 develop
 
 ## Objective
 
-Plan the minimum safe n8n via MCP integration where read-only capability is validated before any write capability is considered.
+Validate read-only n8n via MCP capability safely. If environment identity cannot be proven, implementation is BLOCKED and must stop.
 
 ## Scope
 
@@ -51,19 +51,21 @@ D. Security
 - no secret values in logs/reports/issues/PRs
 
 E. Environment separation
-- local/dev/test n8n
-- production n8n
-If only production exists, planning must STOP before connection/write and report blocker.
+- local/dev/test n8n required for read-only validation
+- production n8n may not be used for validation
+- If only production exists or environment is ambiguous: STOP and report blocker
 
 F. Evidence
-Define required evidence for future implementation:
-- MCP availability/version
-- n8n target/environment identity
-- authentication method metadata
-- read-only permission proof
-- successful harmless read test
-- evidence that writes remain unavailable/not authorized
-- rollback/disconnect procedure
+- MCP availability: REFERENCE FOUND in Hermes/runtime; runtime capability UNKNOWN because `mcp` Python package is NOT installed/importable in this environment.
+- MCP version: UNKNOWN (package not importable).
+- MCP mechanism: REFERENCE FOUND. Hermes runtime includes MCP client tooling (`mcp_tool.py`, `mcp_oauth.py`, `mcp_schema_cache.py`, `mcp_stdio_watchdog.py`, `setup_mcp_tool.py`) and docs describe config under `mcp_servers` in `~/.hermes/config.yaml` supporting stdio and HTTP transports. Current config has no `mcp_servers` section; no MCP server is configured.
+- Distinction: "reference found" ≠ "runtime capability proven".
+- n8n environment identity: UNKNOWN
+- authentication method metadata: NOT AVAILABLE
+- read-only permission proof: NOT AVAILABLE (blocked by environment)
+- successful harmless read test: NOT EXECUTED
+- evidence that writes remain unavailable/not authorized: WRITE GATE DEFINED IN THIS CONTRACT; no write operations executed or planned during validation phase.
+- rollback/disconnect procedure: defined in this contract; no connection made so rollback not exercised
 
 G. Governance
 - Runtime REVIEWER = evidence only

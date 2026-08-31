@@ -4,10 +4,10 @@ PROJECT:
 Orbis AI
 
 WORK PACKAGE:
-WP-006 — PLANNING ONLY — SECURITY GATES, APPROVALS, AND AUDIT LOGGING
+WP-006 — SECURITY GATES, APPROVALS, AND AUDIT LOGGING
 
 STATUS:
-PLANNING ONLY
+IMPLEMENTATION ACTIVE
 WP-005B = COMPLETE / MERGED (merge commit 5fe175efc4e4f9933299b14151919709c69769b3)
 WP-005C Runtime Inventory/Backup Design = COMPLETE / MERGED (merge commit 3e7b990f1fb88724f0266f5bd2fbcb7d6303bb44)
 WP-005C External Credential Recovery Verification = COMPLETE / MERGED (merge commit a7789317931894366dba8f8d3e4b04d659ee6d4f)
@@ -15,8 +15,8 @@ WP-005C Backup Execution/Manifest Validation = COMPLETE / PASS
 
 CURRENT PHASE:
 Phase 6 — Security Gates, Approvals, Audit Logging
-WP-006 is PLANNING ONLY.
-WP-005C Restore / DR Rehearsal is DEFERRED and must not be started.
+WP-006 implementation is in progress.
+WP-005C Restore / DR Rehearsal remains DEFERRED and must not be started.
 
 CONTROL PLANE:
 ChatGPT
@@ -29,43 +29,38 @@ BASE BRANCH:
 develop
 
 WORKING BRANCH:
-ai/wp-006-security-gates-planning
+ai/wp-006-security-gates-implementation
 
 TARGET:
 develop
 
 ## Objective
 
-Define the smallest complete Phase 6 governance package that makes permission
-gates, approval requirements, audit evidence, and role boundary enforcement
-explicit and reviewable. This work package is planning/docs-only: no runtime
-code changes, no deployment, no automation, and no secret handling are
-authorized.
+Execute the approved Phase 6 security gates, approvals, audit evidence,
+and role boundary enforcement package. No runtime code changes, deployment,
+automation, or secret handling are authorized outside the defined docs/scripts scope.
 
 ## Scope
 
-- Define the canonical WP-006 task contract in `project-docs/WP-006_TASK_CONTRACT.md`.
-- Define the smallest Phase 6 security policy surface in `project-docs/04_SECURITY_POLICY.md`.
-- Define approval-record requirements in `project-docs/05_APPROVAL_POLICY.md`.
-- Define audit evidence format and retention requirements in a new document
-  under `project-docs/`.
+- Add `project-docs/13_SECURITY_GATES_AUDIT_POLICY.md` defining audit evidence
+  format, retention, and fail-closed behavior.
+- Update `project-docs/04_SECURITY_POLICY.md` with minimum Phase 6 security policy
+  surface.
+- Update `project-docs/05_APPROVAL_POLICY.md` with approval-record requirements.
 - Update `project-docs/12_KANBAN_HANDOFF.md` to record explicit blocked/fail
   behavior when permission/approval gates are bypassed through Telegram,
   Desktop, GitHub comments, or Skills.
-- Update `project-docs/AI_ACTIVE_TASK.md` to identify WP-006 as PLANNING ONLY
-  and stop all WP-005C restore/migration/cutover/DR work.
 - Preserve Phase 5 workflow, WP-005C backup semantics, and CHAT_HANDOFF resume
   behavior.
 
 ## Out of Scope
 
-- Runtime code changes
-- Hermes skill code changes
-- n8n/MCP/Kintone
+- Runtime code changes outside approved docs scope
+- n8n/MCP/Kintone implementation or deployment
 - Deployment or production changes
 - Secret rotation or credential changes
 - Restore, migration, cutover, or DR rehearsal
-- WP-005D or later
+- WP-005D or later work
 - Force push
 - Unrelated refactoring
 

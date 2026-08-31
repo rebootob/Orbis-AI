@@ -7,7 +7,7 @@ All notable repository changes will be recorded here.
 ### Added
 - Documentation consolidation for new-chat resume: `project-docs/CHAT_HANDOFF.md` updated to exact current repository truth through Phase 8 blocker.
 - `project-docs/08_N8N_INTEGRATION.md` updated to current Phase 8 read-only-first state and local-test requirement.
-- WP-008 sandbox provisioning failure evidence documented.
+- WP-008 sandbox provisioning remains NOT STARTED and awaits explicit Control Plane authorization.
 
 ### Changed
 - `project-docs/AI_ACTIVE_TASK.md` reflects merged PR #29/PR #30, current blocker, and await-next-instruction state.

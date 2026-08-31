@@ -35,8 +35,8 @@ BLOCKER:
 n8n target environment cannot be identified. No n8n installation or configuration found on the runtime. Environment identity is UNKNOWN. Cannot prove local/dev/test target exists. Environment gate triggered: STOP before connection.
 
 SANDBOX_PROVISIONING:
-Prior local sandbox install attempt failed.
-Status: BLOCKED / AWAITING CONTROL PLANE INSTRUCTION FOR ALTERNATIVE SANDBOX PATH.
+Status: NOT STARTED
+Authorization: AWAITING EXPLICIT CONTROL PLANE INSTRUCTION
 SANDBOX_PROVISIONING_STARTED=NO
 
 CONTROL PLANE:

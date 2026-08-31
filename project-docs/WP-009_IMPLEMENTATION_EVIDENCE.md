@@ -18,6 +18,7 @@ STATUS: IMPLEMENTATION IN PROGRESS — LOCAL_TEST / DRY-RUN ONLY
 - Prompt: dry-run only; no external side effects, no n8n writes, no production connection
 - Workdir: `/home/allday/Orbis-AI`
 - Deliver: local only
+- Execution: submitted as background dry-run; result pending from Hermes runtime
 
 ### 2. LOCAL_TEST health check
 - Target: 127.0.0.1:5678 (n8n LOCAL_TEST sandbox)
@@ -32,7 +33,8 @@ STATUS: IMPLEMENTATION IN PROGRESS — LOCAL_TEST / DRY-RUN ONLY
 - Level 2: requires review evidence
 - Level 3: returns `OWNER_APPROVAL_REQUIRED` unless exact Owner approval exists
 - Simulated job created: `92f1ace778c9` (phase9-approval-gate-simulation)
-- Status: paused; simulation scheduled but not executed to avoid unintended actions
+- State: submitted as background dry-run simulation; result pending from Hermes runtime
+- No real protected action executed
 
 ### 4. Pause/resume/disable/inspect
 - Pause: PASS via `cronjob(action='pause', job_id='ae4ba6898a92')`
@@ -57,12 +59,12 @@ STATUS: IMPLEMENTATION IN PROGRESS — LOCAL_TEST / DRY-RUN ONLY
 | Dry-run scheduled job can be created safely | PASS | cron job `ae4ba6898a92` created; state transitions verified |
 | Dry-run job produces no external side effect | PASS | prompt explicitly forbids side effects; no external writes observed |
 | LOCAL_TEST health check works | FAIL | HTTP 000 from 127.0.0.1:5678/healthz; sandbox not reachable from this runtime |
-| Missing approval blocks simulated Level 2/3 execution | PASS | WP-009 contract defines blocking behavior |
-| Level 3 without exact Owner approval returns OWNER_APPROVAL_REQUIRED | PASS | WP-009 contract defines this behavior |
+| Missing approval blocks simulated Level 2/3 execution | PENDING | simulation job `92f1ace778c9` submitted as background dry-run; awaiting Hermes result |
+| Level 3 without exact Owner approval returns OWNER_APPROVAL_REQUIRED | PENDING | awaiting simulation job result |
 | Pause works | PASS | job state = paused |
 | Resume works | PASS | job resumed to scheduled, then re-paused; state transitions verified |
 | Disable works | PASS | pause verified; disable via pause available |
-| Inspect/list state works | PASS | `cronjob(action='list')` returned job |
+| Inspect/list state works | PASS | `cronjob(action='list')` returned jobs |
 | Failure/skip is auditable | PASS | Hermes cron executions.db + GitHub Issue #39 |
 | Restart/state handling documented | PASS | WP-009 contract Section I |
 
@@ -76,5 +78,5 @@ STATUS: IMPLEMENTATION IN PROGRESS — LOCAL_TEST / DRY-RUN ONLY
 
 ## Next Step
 
-Await ChatGPT Control Plane review.
-Implementation remains paused until explicit Project Owner authorization to resume/run.
+Await background dry-run/simulation results from Hermes runtime.
+Then update evidence, run Runtime REVIEWER on new exact HEAD, update Issue #39, and STOP for ChatGPT Control Plane review.

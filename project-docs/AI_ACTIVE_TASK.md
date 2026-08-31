@@ -84,8 +84,11 @@ Telegram remains independently operational.
 ### WP-005C Backup Status
 
 - PRIMARY_BACKUP=PASS
-- SECONDARY_BACKUP=PASS
-- BACKUP_REDUNDANCY=PASS
+- SECONDARY_BACKUP=PENDING_REVIEW
+- BACKUP_REDUNDANCY=PENDING_REVIEW
+- OUTSIDE_WSL_COPY=YES
+- SEPARATE_PHYSICAL_DEVICE_VERIFIED=UNKNOWN
+- INDEPENDENT_OFFLINE_DR_COPY=NO_OR_UNKNOWN
 
 ### WP-005C Scope Guard
 
@@ -133,7 +136,7 @@ Do not start:
   - `DUPLICATE_ACTIVE_ORBIS_RUNTIME=NO`
   - `WINDOWS_LOOPBACK_FORWARDING_MECHANISM=UNKNOWN`
 
-STATUS: WP-005C secondary copy in progress.
+STATUS: WP-005C secondary copy validation pending final checksum/size verification.
 
 ## WP-005B Summary
 
@@ -208,8 +211,8 @@ Stop if:
 Complete Project Owner review of:
 - backup execution record
 - manifest validation
-- secondary copy checksum verification
-- file count/size reconciliation
+- secondary copy final checksum/size verification
+- file count reconciliation
 
 Only after approval proceed to restore execution, migration validation,
 or cutover planning.

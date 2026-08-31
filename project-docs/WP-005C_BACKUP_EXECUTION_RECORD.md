@@ -83,40 +83,11 @@ Excluded per canonical design:
 | PRIVATE_KEY_COUNT | 0 |
 | SECRET_FILE_POLICY | PASS |
 
-## 5. Secret Exclusion
-
-The following credential categories were intentionally excluded from the backup
-archive and recorded in the manifest as `SECRET_RECOVERY_REQUIRED`:
-
-- GitHub authentication
-- Telegram bot authentication
-- Hermes-required API credentials
-- SSH private key recovery
-
-No secret values were copied into Git, manifest, checksum report, terminal output,
-or chat output.
-
-## 6. SQLite Consistency
-
-Databases were backed up using SQLite online backup API (`sqlite3.Connection.backup`)
-to avoid inconsistent WAL copies.
-
-- MASTER `state.db` backup: PASS
-- CODER `state.db` backup: PASS
-- REVIEWER `state.db` backup: PASS
-- MASTER `kanban.db` backup: PASS
-- MASTER `projects.db` backup: PASS
-- CODER `projects.db` backup: PASS
-- REVIEWER `projects.db` backup: PASS
-- CODER `verification_evidence.db` backup: PASS
-
-No Hermes services were stopped or restarted during backup.
-
-## 7. Secondary Copy
+## 5. Secondary Copy
 
 | Field | Value |
 |---|---|
-| SECONDARY_COPY_STATUS | PASS |
+| SECONDARY_COPY_STATUS | COPY_COMPLETE |
 | SECONDARY_BACKUP_ID | `20260830-231125` |
 | WINDOWS_DRIVE_SELECTED | `D:` |
 | WINDOWS_DESTINATION | `D:\Orbis-AI-Backup\WP-005C\20260830-231125\` |
@@ -127,12 +98,15 @@ No Hermes services were stopped or restarted during backup.
 | SOURCE_TOTAL_BYTES | 5582547268 |
 | SECONDARY_TOTAL_BYTES | pending final `du` confirmation |
 | SIZE_MATCH | pending final confirmation |
-| SECONDARY_CHECKSUM_VERIFY | IN_PROGRESS |
+| SECONDARY_CHECKSUM_VERIFY | INTERRUPTED |
 | LOCK_FILE_COUNT | 0 |
 | ENV_FILE_COUNT | 0 |
 | AUTH_JSON_COUNT | 0 |
 | PRIVATE_KEY_COUNT | 0 |
 | SECRET_FILE_POLICY | PASS |
+| OUTSIDE_WSL_COPY | YES |
+| SEPARATE_PHYSICAL_DEVICE_VERIFIED | UNKNOWN |
+| INDEPENDENT_OFFLINE_DR_COPY | NO_OR_UNKNOWN |
 | SOURCE_BACKUP_MODIFIED | NO |
 | ATTEMPT1_MODIFIED | NO |
 | SERVICE_STOPPED | NO |
@@ -142,14 +116,14 @@ No Hermes services were stopped or restarted during backup.
 | RESTORE_STARTED | NO |
 | MIGRATION_STARTED | NO |
 
-## 8. Restoration Status
+## 6. Restoration Status
 
 - Restore execution: NOT STARTED
 - Migration: NOT STARTED
 - Cutover: NOT STARTED
 - Rollback execution: NOT STARTED
 
-## 9. Evidence
+## 7. Evidence
 
 ### Attempt 1 (REJECTED)
 - Backup ID: `20260830-224459`
@@ -181,23 +155,25 @@ No Hermes services were stopped or restarted during backup.
 - Manifest: present
 - Checksum file: present
 - File count match: YES
-- Secondary checksum verification: IN_PROGRESS
+- Secondary checksum verification: INTERRUPTED
 - LOCK files in secondary copy: 0
 - ENV files in secondary copy: 0
 - AUTH_JSON files in secondary copy: 0
 - PRIVATE_KEY files in secondary copy: 0
 
-## 10. Owner Actions Required
+## 8. Owner Actions Required
 
-1. Confirm final secondary checksum verification completes with PASS.
-2. Provide/approve an offline/secondary backup destination outside this host
+1. Complete Windows-side checksum verification with `sha256sum -c checksums/SHA256SUMS.txt`
+   in `/mnt/d/Orbis-AI-Backup/WP-005C/20260830-231125/` and confirm PASS.
+2. Confirm SIZE_MATCH by comparing logical payload totals.
+3. Provide/approve an offline/secondary backup destination outside this host
    if stronger disaster coverage is required, and copy the backup archive there
    with checksum verification.
-3. Periodically validate backup completeness by test restore in an isolated
+4. Periodically validate backup completeness by test restore in an isolated
    environment.
-4. Do not delete old server until post-cutover acceptance passes.
+5. Do not delete old server until post-cutover acceptance passes.
 
-## 11. Stop Conditions Met
+## 9. Stop Conditions Met
 
 - No secret values were exposed.
 - No runtime files were deleted or modified outside the approved backup scope.
@@ -205,5 +181,5 @@ No Hermes services were stopped or restarted during backup.
 - No credential rotation was performed.
 - No migration, restore, or cutover was started.
 - Backup exists locally and on Windows D: drive.
-- Secondary checksum verification is still running and has shown 0 failures
-  through the observed portion.
+- Secondary checksum verification was interrupted before final result;
+  secondary backup status is PENDING_REVIEW until verification completes.

@@ -40,6 +40,15 @@ class RegistryRecord:
                 errors.append(f"missing required field: {field}")
         if not self.repository.startswith("http://") and not self.repository.startswith("https://"):
             errors.append("invalid repository metadata: repository must be http(s)")
+        branch = self.canonical_branch.strip()
+        if not branch:
+            errors.append("invalid branch metadata: canonical_branch is missing/blank")
+        elif any(ch.isspace() for ch in branch):
+            errors.append("invalid branch metadata: canonical_branch contains whitespace")
+        elif any(ord(ch) < 0x20 or ord(ch) > 0x7E for ch in branch):
+            errors.append("invalid branch metadata: canonical_branch contains control/non-printable characters")
+        elif branch.startswith("-") or branch.endswith(".") or ".." in branch:
+            errors.append("invalid branch metadata: canonical_branch is malformed")
         return errors
 
 

@@ -33,6 +33,7 @@ def main():
     results.append(("ambiguous_duplicate_project_name", _test_ambiguous_duplicate_project_name()))
     results.append(("missing_required_field", _test_missing_required_field()))
     results.append(("invalid_repository_metadata", _test_invalid_repository_metadata()))
+    results.append(("invalid_branch_metadata", _test_invalid_branch_metadata()))
     results.append(("secret_exclusion_from_registry", _test_secret_exclusion_from_registry()))
     results.append(("lookup_helper", _test_lookup_helper()))
     for name, ok in results:
@@ -101,9 +102,34 @@ def _test_invalid_repository_metadata():
     return False
 
 
+def _test_invalid_branch_metadata():
+    bad_branches = ["", "   ", "-bad", "bad.", "bad..ref", "bad\nref", "bad\rref"]
+    for branch in bad_branches:
+        try:
+            ProjectRegistry([_record(canonical_branch=branch)])
+        except ValueError:
+            continue
+        return False
+    return True
+
+
 def _test_secret_exclusion_from_registry():
     record = _record()
-    return not any(secret in record.project_id or secret in record.repository for secret in ("password", "token", "secret", "credential"))
+    forbidden = ("password", "token", "secret", "credential", "private key", "oauth")
+    fields = []
+    for field in (
+        record.project_id,
+        record.project_name,
+        record.repository,
+        record.canonical_branch,
+        record.project_docs_path,
+        record.status,
+        record.control_plane,
+        record.execution_role or "",
+        record.execution_model or "",
+    ):
+        fields.append(field)
+    return not any(any(secret in field.lower() for secret in forbidden) for field in fields if field)
 
 
 def _test_lookup_helper():

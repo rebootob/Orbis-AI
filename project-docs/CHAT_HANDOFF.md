@@ -21,7 +21,7 @@ Canonical branch:
 `develop`
 
 Current develop baseline:
-`ae9dc212bcc0e4fad78179e37e51a23625808261`
+`75bd715d6ce07d86ae38bee617288d7973a546f5`
 
 ---
 
@@ -161,6 +161,8 @@ Read-only validation inventory/evidence:
 PR #30 → `ae9dc212bcc0e4fad78179e37e51a23625808261`
 MCP runtime/evidence:
 PR #35 → `7fa62e1f38583d703782f14907faa2238f2a3c22`
+Closeout:
+PR #36 → `75bd715d6ce07d86ae38bee617288d7973a546f5`
 Issue #28 = state:control-review
 
 Current status:
@@ -199,20 +201,18 @@ PHASE8_COMPLETE=YES — WITH QUALIFICATION
 
 ## Exact Current Gate
 
+STOP — awaiting explicit Project Owner authorization for Phase 9 planning.
+
+Do not start Phase 9.
+Do not start Restore/DR.
+Do not start n8n writes or production integration.
+
 A proven LOCAL_TEST n8n sandbox exists at 127.0.0.1:5678.
+WP-008 is complete with qualification: EMPTY-SANDBOX READ OPERATIONS = NOT TESTABLE WITHOUT WRITE — OWNER ACCEPTED.
+Write-capable n8n/MCP phases remain NOT AUTHORIZED.
+Production n8n integration remains NOT COMPLETE.
 
-Next safe work package:
-WP-008 READ-ONLY MCP VALIDATION AGAINST LOCAL_TEST SANDBOX
-
-Required authorization:
-Explicit Control Plane authorization for read-only MCP validation.
-
-Important:
-THIS SANDBOX WORK IS COMPLETE.
-Do not automatically start read-only MCP validation from documentation.
-
-Future validation constraints:
-
+Future work constraints:
 - loopback/local binding only
 - no public/LAN exposure
 - no production workflows
@@ -223,7 +223,7 @@ Future validation constraints:
 - no Telegram side effects
 - no external HTTP side effects
 - no cron/automation
-- no Phase 9
+- no Phase 9 unless separately authorized
 - no Restore/DR
 
 ---
@@ -296,9 +296,12 @@ Wait for explicit Control Plane instruction.
   - WP-005C: PARTIAL COMPLETE / DEFERRED Restore-DR
 - Phase 6: COMPLETE / MERGED
 - Phase 7: COMPLETE / MERGED
-- Phase 8: SANDBOX PROVEN / AWAITING READ-ONLY VALIDATION AUTHORIZATION
+- Phase 8: COMPLETE WITH QUALIFICATION
 - Phase 9: NOT STARTED
 - Restore/DR: NOT STARTED
 
 Resume point:
-Wait for explicit Control Plane instruction for WP-008 read-only MCP validation against proven LOCAL_TEST sandbox.
+STOP — awaiting explicit Project Owner authorization for Phase 9 planning.
+Do not start Phase 9.
+Do not start Restore/DR.
+Do not start n8n writes or production integration.

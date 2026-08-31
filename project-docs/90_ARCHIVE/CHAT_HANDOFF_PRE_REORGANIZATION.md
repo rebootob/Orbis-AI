@@ -1,3 +1,7 @@
+# Archived Pre-Reorganization Chat Handoff Snapshot
+
+> **SUPERSEDED — NOT CURRENT STATE.** Retained solely as historical evidence. Use `project-docs/00_CONTROL/START_HERE.md` and `project-docs/00_CONTROL/CURRENT_STATE.md` for current session startup and status.
+
 # ORBIS AI — CHAT HANDOFF
 
 > NEW CHAT START HERE
@@ -232,15 +236,15 @@ Future work constraints:
 
 The new ChatGPT conversation must:
 
-1. Read `project-docs/CHAT_HANDOFF.md` from the current branch.
-2. Read `project-docs/AI_ACTIVE_TASK.md` from the current branch.
-3. Read `project-docs/WP-008_TASK_CONTRACT.md` from the current branch.
-4. Read `project-docs/08_N8N_INTEGRATION.md` from the current branch.
-5. Read `project-docs/02_IMPLEMENTATION_ROADMAP.md` from the current branch.
-6. Read `project-docs/10_BACKUP_RECOVERY.md` from the current branch.
-7. Read `project-docs/12_KANBAN_HANDOFF.md` from the current branch.
-8. Read `project-docs/04_SECURITY_POLICY.md` from the current branch.
-9. Read `project-docs/05_APPROVAL_POLICY.md` from the current branch.
+1. Read `project-docs/90_ARCHIVE/CHAT_HANDOFF_PRE_REORGANIZATION.md` from the current branch.
+2. Read `project-docs/00_CONTROL/ACTIVE_TASK.md` from the current branch.
+3. Read `project-docs/40_WORK_PACKAGES/WP-008/TASK_CONTRACT.md` from the current branch.
+4. Read `project-docs/30_INTEGRATIONS/N8N.md` from the current branch.
+5. Read `project-docs/50_PLANNING/ROADMAP.md` from the current branch.
+6. Read `project-docs/30_INTEGRATIONS/BACKUP_RECOVERY.md` from the current branch.
+7. Read `project-docs/10_GOVERNANCE/KANBAN_HANDOFF.md` from the current branch.
+8. Read `project-docs/10_GOVERNANCE/SECURITY_POLICY.md` from the current branch.
+9. Read `project-docs/10_GOVERNANCE/APPROVAL_POLICY.md` from the current branch.
 10. Inspect current branch and working tree.
 11. Inspect GitHub Issue #28 and latest comments.
 12. Treat attached `state:*` / `role:*` labels as canonical.
@@ -266,15 +270,15 @@ Working branch: develop
 Read these files from the current branch unless a newer approved working
 branch is specified:
 
-1. project-docs/CHAT_HANDOFF.md
-2. project-docs/AI_ACTIVE_TASK.md
-3. project-docs/WP-008_TASK_CONTRACT.md
-4. project-docs/08_N8N_INTEGRATION.md
-5. project-docs/02_IMPLEMENTATION_ROADMAP.md
-6. project-docs/10_BACKUP_RECOVERY.md
-7. project-docs/12_KANBAN_HANDOFF.md
-8. project-docs/04_SECURITY_POLICY.md
-9. project-docs/05_APPROVAL_POLICY.md
+1. project-docs/90_ARCHIVE/CHAT_HANDOFF_PRE_REORGANIZATION.md
+2. project-docs/00_CONTROL/ACTIVE_TASK.md
+3. project-docs/40_WORK_PACKAGES/WP-008/TASK_CONTRACT.md
+4. project-docs/30_INTEGRATIONS/N8N.md
+5. project-docs/50_PLANNING/ROADMAP.md
+6. project-docs/30_INTEGRATIONS/BACKUP_RECOVERY.md
+7. project-docs/10_GOVERNANCE/KANBAN_HANDOFF.md
+8. project-docs/10_GOVERNANCE/SECURITY_POLICY.md
+9. project-docs/10_GOVERNANCE/APPROVAL_POLICY.md
 
 Then inspect GitHub Issue #28 and its latest comments.
 Continue from `Exact Current Gate` in CHAT_HANDOFF.md.

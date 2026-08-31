@@ -42,7 +42,7 @@ Every Codex work package should:
 
 ### ADR-015 — Mandatory AI Control Plane
 
-**Decision:** All AI implementation work must follow the permanent governance in `AGENTS.md` and `project-docs/AI_CONTROL_PLANE.md`. Current implementation scope is defined by `project-docs/AI_ACTIVE_TASK.md`; completed implementation is handed to the independent reviewer through `ai-review/REVIEW_HANDOFF.md`.
+**Decision:** All AI implementation work must follow the permanent governance in `AGENTS.md` and `project-docs/10_GOVERNANCE/AUTHORITY_MODEL.md`. Current implementation scope is defined by `project-docs/00_CONTROL/ACTIVE_TASK.md`; completed implementation is handed to the independent reviewer through `ai-review/REVIEW_HANDOFF.md`.
 
 **Status:** Accepted
 

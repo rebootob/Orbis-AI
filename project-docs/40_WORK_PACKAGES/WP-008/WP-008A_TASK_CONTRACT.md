@@ -185,7 +185,7 @@ Every task submission and result is recorded with:
 
 ## Test Evidence Location
 
-`project-docs/WP-008A_TEST_EVIDENCE.md`
+No standalone WP-008A test-evidence document was created. WP-008A is retained as historical contract evidence; it is not an active work package.
 
 ## Out of Scope
 

@@ -44,7 +44,7 @@ Review, read, and evidence operations only, plus explicitly authorized review me
 
 ## Kanban and Handoff
 
-For Phase 5 review work, REVIEWER uses the canonical GitHub task Issue defined in `project-docs/12_KANBAN_HANDOFF.md`.
+For Phase 5 review work, REVIEWER uses the canonical GitHub task Issue defined in `project-docs/10_GOVERNANCE/KANBAN_HANDOFF.md`.
 
 REVIEWER responsibilities:
 

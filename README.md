@@ -27,19 +27,19 @@ flowchart TD
 
 ## Documentation index
 
-- [Project overview](project-docs/00_PROJECT_OVERVIEW.md)
-- [Architecture](project-docs/01_ARCHITECTURE.md)
-- [Implementation roadmap](project-docs/02_IMPLEMENTATION_ROADMAP.md)
-- [Agent roles](project-docs/03_AGENT_ROLES.md)
-- [Security policy](project-docs/04_SECURITY_POLICY.md)
-- [Approval policy](project-docs/05_APPROVAL_POLICY.md)
-- [Project registry](project-docs/06_PROJECT_REGISTRY.md)
-- [Skill architecture](project-docs/07_SKILL_ARCHITECTURE.md)
-- [n8n integration](project-docs/08_N8N_INTEGRATION.md)
-- [Telegram design](project-docs/09_TELEGRAM_DESIGN.md)
-- [Backup and recovery](project-docs/10_BACKUP_RECOVERY.md)
-- [Acceptance tests](project-docs/11_TEST_ACCEPTANCE.md)
-- [Active task](project-docs/AI_ACTIVE_TASK.md) · [Decisions](project-docs/DECISION_LOG.md) · [Changelog](project-docs/CHANGELOG.md)
+- [Start here](project-docs/00_CONTROL/START_HERE.md) · [Current state](project-docs/00_CONTROL/CURRENT_STATE.md) · [Document index](project-docs/00_CONTROL/DOCUMENT_INDEX.md)
+- [Architecture](project-docs/20_ARCHITECTURE/SYSTEM_ARCHITECTURE.md)
+- [Implementation roadmap](project-docs/50_PLANNING/ROADMAP.md)
+- [Agent roles](project-docs/20_ARCHITECTURE/AGENT_ROLES.md)
+- [Security policy](project-docs/10_GOVERNANCE/SECURITY_POLICY.md)
+- [Approval policy](project-docs/10_GOVERNANCE/APPROVAL_POLICY.md)
+- [Project registry](project-docs/20_ARCHITECTURE/PROJECT_REGISTRY.md)
+- [Skill architecture](project-docs/20_ARCHITECTURE/SKILL_ARCHITECTURE.md)
+- [n8n integration](project-docs/30_INTEGRATIONS/N8N.md)
+- [Telegram design](project-docs/30_INTEGRATIONS/TELEGRAM.md)
+- [Backup and recovery](project-docs/30_INTEGRATIONS/BACKUP_RECOVERY.md)
+- [Acceptance tests](project-docs/50_PLANNING/TEST_ACCEPTANCE.md)
+- [Active task](project-docs/00_CONTROL/ACTIVE_TASK.md) · [Current state](project-docs/00_CONTROL/CURRENT_STATE.md) · [Document index](project-docs/00_CONTROL/DOCUMENT_INDEX.md)
 
 ## Boundaries
 

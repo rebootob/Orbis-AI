@@ -110,12 +110,12 @@ PASS:
 ## Files In Scope
 
 - `.github/ISSUE_TEMPLATE/orbis-task.md`
-- `project-docs/01_ARCHITECTURE.md`
-- `project-docs/02_IMPLEMENTATION_ROADMAP.md`
-- `project-docs/03_AGENT_ROLES.md`
-- `project-docs/05_APPROVAL_POLICY.md`
-- `project-docs/AI_ACTIVE_TASK.md`
-- `project-docs/12_KANBAN_HANDOFF.md`
+- `project-docs/20_ARCHITECTURE/SYSTEM_ARCHITECTURE.md`
+- `project-docs/50_PLANNING/ROADMAP.md`
+- `project-docs/20_ARCHITECTURE/AGENT_ROLES.md`
+- `project-docs/10_GOVERNANCE/APPROVAL_POLICY.md`
+- `project-docs/00_CONTROL/ACTIVE_TASK.md`
+- `project-docs/10_GOVERNANCE/KANBAN_HANDOFF.md`
 - `skills/project-manager/SKILL.md`
 - `skills/code-development/SKILL.md`
 - `skills/code-review/SKILL.md`

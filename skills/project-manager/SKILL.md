@@ -46,7 +46,7 @@ Coordination and planning through an authorized Level 2 workflow. Level 3 always
 
 ## Kanban and Handoff
 
-For Phase 5 task coordination, MASTER uses the canonical GitHub Issue workflow defined in `project-docs/12_KANBAN_HANDOFF.md`.
+For Phase 5 task coordination, MASTER uses the canonical GitHub Issue workflow defined in `project-docs/10_GOVERNANCE/KANBAN_HANDOFF.md`.
 
 MASTER responsibilities:
 

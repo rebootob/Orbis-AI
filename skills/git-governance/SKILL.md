@@ -67,7 +67,7 @@ This shared Skill provides governance guidance only; it does not assign or combi
 
 ## Kanban Task Linkage
 
-For Phase 5, Git evidence must remain traceable to the canonical GitHub task Issue defined in `project-docs/12_KANBAN_HANDOFF.md`.
+For Phase 5, Git evidence must remain traceable to the canonical GitHub task Issue defined in `project-docs/10_GOVERNANCE/KANBAN_HANDOFF.md`.
 
 Canonical task interpretation:
 

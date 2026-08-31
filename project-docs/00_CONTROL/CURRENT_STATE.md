@@ -18,7 +18,7 @@
 
 | Scope | Status | Evidence |
 |---|---|---|
-| Phase 8 / WP-008 n8n via MCP | COMPLETE WITH QUALIFICATION | Issue #28 closed/completed; empty-sandbox read operations are `NOT TESTABLE WITHOUT WRITE — OWNER ACCEPTED`. |
+| Phase 8 / WP-008 n8n via MCP | COMPLETE WITH QUALIFICATION | Issue #28 OPEN / `state:control-review`, `role:control-plane`; empty-sandbox read operations are `NOT TESTABLE WITHOUT WRITE — OWNER ACCEPTED`. |
 | Phase 9 planning | COMPLETE / MERGED | PR #38 merged. |
 | Phase 9 implementation | COMPLETE — LOCAL_TEST / DRY-RUN ONLY | PR #40 merged; Issue #39 closed/completed. |
 

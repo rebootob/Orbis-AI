@@ -1,7 +1,7 @@
 # WP-008A — ChatGPT ↔ Hermes Control Plane Bridge
 
 STATUS: PLANNING + MINIMUM SAFE PROTOTYPE
-TASK_ID: 28
+TASK_ID: 34
 PHASE: 8A
 BRANCH: ai/wp-008a-chatgpt-hermes-bridge
 TARGET: develop
@@ -31,17 +31,27 @@ Primary reuse targets:
 - Hermes gateway local Unix socket / localhost listener
 - `.hermes/bot_relay/{outbox,replies,claimed}` local file protocol
 
-Transport model:
+Transport model — V1 via GitHub Issue #34:
+
+GitHub Issue #34 is the WP-008A prototype v1 control/evidence queue.
 
 ```
 ChatGPT Control Plane
-<-> reachable authenticated control queue/relay
-<-> Hermes outbound worker/poller
-<-> existing WSL2 Hermes MASTER
-<-> CODER / REVIEWER when required
-<-> structured evidence/result
-<-> ChatGPT Control Plane
+-> structured bounded task comment on GitHub Issue #34
+-> Hermes outbound GitHub poller
+-> existing WSL2 Hermes MASTER
+-> allowlisted bounded action executor
+-> structured result/evidence comment on Issue #34
+-> ChatGPT Control Plane retrieves result directly
 ```
+
+GitHub Issue #34 is transport/audit only.
+GitHub comment author, label, issue state, Telegram, Desktop, or bridge identity MUST NOT grant Project Owner authority.
+Prototype v1 action allowlist contains ONLY: read_repo_head.
+No arbitrary shell.
+No generic command/action passthrough.
+No user-supplied shell arguments.
+Level 3 always requires separately validated exact Owner approval; otherwise OWNER_APPROVAL_REQUIRED.
 
 Hermes initiates outbound communication or polls the control/evidence queue.
 No public inbound port is opened on WSL.
@@ -51,6 +61,7 @@ No public inbound port is opened on WSL.
 WP-008A must not corrupt or overwrite WP-008 Issue #28 canonical workflow.
 WP-008 MCP validation remains paused/blocked separately.
 Do not reuse Issue #28 labels/state in a way that makes its workflow ambiguous.
+GitHub Issue #34 is the dedicated WP-008A prototype v1 control/evidence queue.
 
 ## Security Model
 

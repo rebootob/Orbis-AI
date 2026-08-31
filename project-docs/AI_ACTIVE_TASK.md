@@ -169,6 +169,6 @@ Stop if:
 
 ## Next Step
 
-Await Project Owner approval to create the WP-006 Issue and begin Phase 6
-implementation on the approved branch. Do not expand scope beyond approved
-Phase 6 planning without explicit approval.
+Issue #20 exists with `state:ready` and `role:master`. Planning is awaiting
+ChatGPT Control Plane review and Project Owner merge approval only. Do not
+expand scope beyond approved Phase 6 planning without explicit approval.

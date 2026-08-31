@@ -154,17 +154,17 @@ Issue #24 = CLOSED / COMPLETED
 
 ### WP-008 — n8n via MCP
 
+STATUS: COMPLETE WITH QUALIFICATION
 Planning:
 PR #29 → `2eec0883cff47456960983d062bbce8b52c77c89`
-
 Read-only validation inventory/evidence:
 PR #30 → `ae9dc212bcc0e4fad78179e37e51a23625808261`
+MCP runtime/evidence:
+PR #35 → `7fa62e1f38583d703782f14907faa2238f2a3c22`
+Issue #28 = state:control-review
 
 Current status:
-SANDBOX PROVEN / AWAITING READ-ONLY VALIDATION AUTHORIZATION
-
-Issue #28 current phase:
-IMPLEMENTATION — READ-ONLY VALIDATION
+READ-ONLY VALIDATION COMPLETE — EMPTY-SANDBOX READ OPERATIONS = NOT TESTABLE WITHOUT WRITE — OWNER ACCEPTED
 
 Sandbox evidence:
 - n8n installation = FOUND
@@ -174,11 +174,12 @@ Sandbox evidence:
 - n8n version = 2.36.9
 - Listen address = 127.0.0.1:5678
 - Public exposure = NO
-- MCP references in Hermes = FOUND
-- MCP runtime capability = UNKNOWN
-- MCP Python package = not importable
-- MCP version = UNKNOWN
-- no mcp_servers configured
+- MCP runtime = PROVEN
+- MCP package = mcp 2.0.0 + mcp-types 2.0.0
+- Python executable = /home/allday/.hermes/hermes-agent/venv/bin/python
+- venv = /home/allday/.hermes/hermes-agent/venv
+- MCP import = SUCCESS
+- mcp_servers configured = NO
 
 Security result:
 - n8n connection attempted = NO
@@ -187,12 +188,12 @@ Security result:
 - deployment = NO
 
 Phase 8 exit condition:
-Read-only capabilities must actually pass testing before any write capability.
+Read-only operations evaluated; empty-sandbox reads accepted as NOT TESTABLE WITHOUT WRITE by Project Owner. Write-capable phases remain unauthorized.
 
 Next safe step:
-Explicit Control Plane authorization for read-only MCP validation against proven LOCAL_TEST sandbox.
+Explicit Control Plane/Project Owner authorization for any write-capable n8n/MCP phase.
 
-PHASE8_COMPLETE=NO
+PHASE8_COMPLETE=YES — WITH QUALIFICATION
 
 ---
 

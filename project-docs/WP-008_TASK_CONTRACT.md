@@ -4,20 +4,22 @@ WORK PACKAGE:
 WP-008 — N8N VIA MCP READ-ONLY VALIDATION
 
 STATUS:
-IMPLEMENTATION AUTHORIZED — READ-ONLY VALIDATION ONLY
+WP-008 READ-ONLY VALIDATION = COMPLETE WITH QUALIFICATION
+READ-ONLY VALIDATION RESULT: EMPTY-SANDBOX READ OPERATIONS = NOT TESTABLE WITHOUT WRITE — OWNER ACCEPTED
 
 ISSUE:
 #28
 
 BRANCH:
-ai/wp-008-n8n-mcp-readonly-implementation
+ai/wp-008-readonly-closeout
 
 TARGET:
 develop
 
 ## Objective
 
-Validate read-only n8n via MCP capability safely. If environment identity cannot be proven, implementation is BLOCKED and must stop.
+WP-008 read-only MCP validation is complete with Owner-accepted qualification.
+The empty LOCAL_TEST sandbox does not contain workflows/data, so read-only workflow/execution operations cannot be exercised without first creating test content, which would constitute an n8n write operation.
 
 ## Scope
 
@@ -66,12 +68,25 @@ F. Evidence
   - `/home/allday/.hermes/hermes-agent/venv/bin/python -c "import mcp"`
 - mcp_servers configured: NO
 - n8n environment identity: LOCAL_TEST
-- authentication method metadata: NOT YET CONFIGURED
-- read-only permission proof: PENDING VALIDATION
-- successful harmless read test: PENDING
-- evidence that writes remain unavailable/not authorized: WRITE GATE DEFINED IN THIS CONTRACT; no write operations executed or planned during validation phase.
-- rollback/disconnect procedure: defined in this contract; no connection made so rollback not exercised
+- authentication method metadata: LOCAL_TEST target identified; no production credentials used
+- read-only permission proof: EMPTY-SANDBOX READ OPERATIONS = NOT TESTABLE WITHOUT WRITE — OWNER ACCEPTED
+- successful harmless read test: NOT TESTABLE WITHOUT WRITE — OWNER ACCEPTED
+- evidence that writes remain unavailable/not authorized: No n8n writes performed
+- rollback/disconnect procedure: No dummy workflow/data created; no Phase 9; no Restore/DR
 - no secrets committed to Git
+
+## Closeout
+
+- WP-008 READ-ONLY VALIDATION = COMPLETE WITH QUALIFICATION
+- EMPTY-SANDBOX READ OPERATIONS = NOT TESTABLE WITHOUT WRITE — OWNER ACCEPTED
+- MCP runtime = PROVEN
+- Environment = LOCAL_TEST only
+- Write-capable phases = NOT AUTHORIZED
+- Production integration = NOT COMPLETE
+- No n8n writes
+- No dummy workflow/data
+- No Phase 9
+- No Restore/DR
 
 G. Governance
 - Runtime REVIEWER = evidence only

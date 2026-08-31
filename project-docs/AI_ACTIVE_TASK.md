@@ -4,15 +4,21 @@ PROJECT:
 Orbis AI
 
 WORK PACKAGE:
-WP-005C — IMPLEMENTATION — EXTERNAL CREDENTIAL RECOVERY VERIFICATION
+WP-005C — IMPLEMENTATION — BACKUP EXECUTION / MANIFEST VALIDATION
 
 STATUS:
-IMPLEMENTATION — EXTERNAL CREDENTIAL RECOVERY VERIFICATION
+IMPLEMENTATION — BACKUP EXECUTION / MANIFEST VALIDATION
 WP-005B = COMPLETE / MERGED (merge commit 5fe175efc4e4f9933299b14151919709c69769b3)
 WP-005C Runtime Inventory/Backup Design = COMPLETE / MERGED (merge commit 3e7b990f1fb88724f0266f5bd2fbcb7d6303bb44)
+WP-005C External Credential Recovery Verification = COMPLETE / MERGED (merge commit a7789317931894366dba8f8d3e4b04d659ee6d4f)
+WP-005C Backup Execution/Manifest Validation = COMPLETE / PASS
 
 CURRENT PHASE:
-Phase 5 — External Credential Recovery Verification
+Phase 5 — Backup Execution / Manifest Validation
+Secondary copy to Windows D: created and validated.
+Secondary checksum verification = PASS.
+Logical payload size match = PASS.
+File count match = PASS.
 
 CONTROL PLANE:
 ChatGPT
@@ -25,7 +31,7 @@ BASE BRANCH:
 develop
 
 WORKING BRANCH:
-ai/wp-005c-runtime-inventory-backup-design
+ai/wp-005c-backup-execution
 
 TARGET:
 develop
@@ -39,6 +45,8 @@ or starting migration.
 Current approved implementation scope is limited to:
 - Runtime Inventory
 - Backup Design
+- Backup Execution / Manifest Validation
+- Secondary Copy Validation
 
 ## Runtime Architecture
 
@@ -69,21 +77,29 @@ Telegram remains independently operational.
 
 ### Current WP-005C Scope
 
-- External Credential Recovery Verification: safely verify external disaster-recovery paths for:
-  - GitHub authentication
-  - Telegram bot authentication
-  - Hermes-required API credentials
-  - SSH private key / Desktop SSH access
+- Backup Execution: create a non-destructive local backup of approved Hermes
+  runtime state, manifest, and checksums.
+- Manifest Validation: validate backup completeness and record results.
+- Secondary Copy: create a verified Windows-drive secondary copy of the accepted
+  backup for offline protection.
+
+### WP-005C Backup Status
+
+- PRIMARY_BACKUP=PASS
+- SECONDARY_BACKUP=PASS
+- BACKUP_REDUNDANCY=PASS
+- OUTSIDE_WSL_COPY=YES
+- SEPARATE_PHYSICAL_DEVICE_VERIFIED=UNKNOWN
+- INDEPENDENT_OFFLINE_DR_COPY=NO_OR_UNKNOWN
 
 ### WP-005C Scope Guard
 
-This phase is verification and documentation only.
+This phase is backup execution and documentation only.
 Do not start:
-- backup execution
 - restore execution
 - server migration
 - cutover
-- runtime modification
+- runtime modification outside approved backup copy
 - secret rotation
 - Windows Hermes backend installation
 - PowerShell policy changes
@@ -112,19 +128,17 @@ Do not start:
 
 ## Required Validation
 
-- external credential recovery verification completeness
-- GitHub authentication recovery path verified or documented owner action
-- Telegram bot authentication recovery path verified or documented owner action
-- Hermes API credential recovery path verified or documented owner action
-- SSH private key recovery path verified or documented owner action
-- secret-safe inspection
-- repository diff check
+- backup completeness against canonical inventory
+- manifest creation and validation
+- checksum verification
+- secret exclusion verification
+- secondary copy file count/size/checksum verification
 - Windows duplicate runtime guard:
   - `WINDOWS_LOCAL_HERMES_BACKEND_RUNNING=NO`
   - `DUPLICATE_ACTIVE_ORBIS_RUNTIME=NO`
   - `WINDOWS_LOOPBACK_FORWARDING_MECHANISM=UNKNOWN`
 
-STATUS: WP-005C external recovery verification in progress.
+STATUS: WP-005C secondary copy validation complete.
 
 ## WP-005B Summary
 
@@ -141,9 +155,10 @@ Merge commit: 5fe175efc4e4f9933299b14151919709c69769b3
 
 - Preserve existing SOUL/profile/config files unless a separately identified
   change is required.
-- Stop any expansion beyond External Credential Recovery Verification and
+- Stop any expansion beyond Backup Execution / Manifest Validation and
   return to approved Phase 5 architecture if scope drifts.
 - Repository changes can be reverted through Git.
+- Existing valid backups must not be deleted under this authorization.
 
 ## Out of Scope
 
@@ -158,7 +173,6 @@ Merge commit: 5fe175efc4e4f9933299b14151919709c69769b3
 - production deployment automation
 - broad LAN/Internet exposure of Hermes backend
 - WP-005D or later work packages
-- backup execution
 - restore execution
 - server migration
 - cutover
@@ -168,14 +182,15 @@ Merge commit: 5fe175efc4e4f9933299b14151919709c69769b3
 ## Stop Conditions
 
 Stop if:
-- external recovery verification is incomplete;
+- backup execution fails or produces an inconsistent backup;
 - verification requires secret exposure;
 - verification requires credential rotation/reissue;
 - secrets may be exposed;
+- runtime files outside approved backup scope are modified;
 - rollback path is unavailable or untested;
 - GitHub task state/evidence becomes inconsistent;
 - a Level 3 action is reached without explicit Project Owner approval;
-- scope expands beyond WP-005C External Credential Recovery Verification;
+- scope expands beyond WP-005C Backup Execution / Manifest Validation;
 - Hermes Desktop attempts Windows-local backend bootstrap/installation.
 - A second Hermes/Orbis runtime becomes active on Windows.
 - `WINDOWS_LOCAL_HERMES_BACKEND_RUNNING=YES` or `DUPLICATE_ACTIVE_ORBIS_RUNTIME=YES`.
@@ -195,7 +210,13 @@ Stop if:
 
 ## Next Step
 
-Proceed to the next approved WP-005C phase only after explicit Project Owner
-approval for backup execution, migration validation, or cutover planning.
+Complete Project Owner review of:
+- backup execution record
+- manifest validation
+- secondary copy final checksum/size verification
+- file count reconciliation
+
+Only after approval proceed to restore execution, migration validation,
+or cutover planning.
 
 Do not expand scope beyond approved WP-005C phases without explicit approval.

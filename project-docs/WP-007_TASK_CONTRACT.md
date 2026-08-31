@@ -23,10 +23,18 @@ Define the smallest complete Phase 7 Project Registry design required to satisfy
 ## Authorization
 
 This planning work is explicitly authorized by ChatGPT Control Plane on
-2026-08-31. Issue #24 and the original PR #25 head e094be4 were created before authorization and are
-preserved as pre-authorization audit evidence only. The original pre-authorization head does not
-constitute current authorization. The reconciled current head 9ba9499 is the authorized
-planning evidence. It may proceed only through: Runtime REVIEWER PASS -> Control Plane REVIEW_PASS -> explicit Project Owner approval -> merge.
+2026-08-31. Issue #24 and the original PR #25 head `e094be4` were created
+before authorization and are preserved as pre-authorization audit evidence
+only. That original pre-authorization state does not constitute current
+authorization. After authorization, PR #25 was reconciled and continued as
+the authorized WP-007 PLANNING artifact.
+
+The authoritative current PR #25 head is GitHub PR metadata, not a SHA stored
+in tracked docs. Runtime REVIEWER must review the actual current GitHub HEAD.
+Control Plane must independently verify the same actual current GitHub HEAD
+before REVIEW_PASS. Project Owner approval must target that exact reviewed
+PR/head. Merge may occur only after: Runtime REVIEWER PASS -> Control Plane
+REVIEW_PASS -> explicit Project Owner approval -> merge.
 
 ## Scope
 
@@ -46,19 +54,6 @@ planning evidence. It may proceed only through: Runtime REVIEWER PASS -> Control
   - invalid repository/branch metadata
   must return explicit lookup failure, not guess.
 - G. Keep design minimal. Prefer a single version-controlled registry file unless strong evidence requires otherwise.
-
-## Merge authorization rule
-
-A merge may occur only after this exact sequence:
-1. Runtime REVIEWER returns PASS.
-2. STOP.
-3. ChatGPT Control Plane independently reviews the current GitHub repository/PR head SHA.
-4. ChatGPT explicitly issues `REVIEWER PASS` / `REVIEW_PASS`.
-5. STOP.
-6. Project Owner explicitly approves the exact PR merge.
-7. The merge may then occur.
-
-No earlier step authorizes a later step. Absence of any step invalidates merge authorization.
 
 ## Out of Scope
 
@@ -111,5 +106,5 @@ Stop if:
 - secrets or credentials are included in registry design;
 - lookup behavior is defined as guessing or fallback to non-authoritative sources;
 - n8n/MCP/Kintone/database/web UI is introduced;
-- PR #25 is merged;
+- PR #25 is merged without Control Plane REVIEW_PASS and Project Owner approval;
 - planning PR is merged without Control Plane and Project Owner authorization.

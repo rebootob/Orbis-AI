@@ -44,7 +44,14 @@ STATUS: FOCUSED VALIDATION COMPLETE — LOCAL_TEST / DRY-RUN ONLY
 - Prompt: dry-run only; report Level 2 => BLOCKED, Level 3 => OWNER_APPROVAL_REQUIRED; no real protected action taken
 - Workdir: `/home/allday/Orbis-AI`
 - Deliver: local only
-- Actual runtime output: job executed successfully in dry-run mode; no protected action executed
+- Actual runtime output:
+```
+- level2_result: BLOCKED
+- level3_result: OWNER_APPROVAL_REQUIRED
+- real_action_taken: NONE
+- side_effects: NONE
+```
+- Execution result: completed with status ok; runtime returned exact BLOCKED/OWNER_APPROVAL_REQUIRED values; no protected action executed
 
 ### 4. True disable/remove validation
 - Job ID: `33fb1de5ca50`

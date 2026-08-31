@@ -20,7 +20,7 @@ Phase 8 — n8n via MCP = PLANNING
 
 CURRENT PHASE DETAIL:
 Phase 7 — Project Registry = COMPLETE
-Issue #24 = state:runtime-review / role:control-plane
+Issue #24 = CLOSED / COMPLETED
 PR #27 = MERGED
 MERGE_COMMIT = 6ed9a3ef1c2b7d0eed95728150315ccf7a9e3ccb
 Phase 6 — Security Gates, Approvals, Audit Logging = COMPLETE

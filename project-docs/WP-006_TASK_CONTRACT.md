@@ -77,14 +77,21 @@ automation, or secret handling are authorized outside the defined docs scope.
 - Level 0 reads: allowed automatically.
 - Level 1 development writes: allowed only inside approved WP-006 planning/docs
   scope on branch `ai/wp-006-security-gates-implementation`.
-- Level 2 writes: not authorized in this WP.
+- Level 2 integration writes: authorized only for the following
+  implementation actions on branch `ai/wp-006-security-gates-implementation`:
+  - push the implementation branch,
+  - create/update PR #22,
+  - run approved tests,
+  - record Issue #20 audit/handoff evidence.
+- Level 2 does NOT authorize merge, deploy, production change, credential change,
+  restore, migration, cutover, DR rehearsal, or any Level 3 action.
 - Level 3 actions: not authorized in this WP; restore, migration, cutover, DR,
   deployment, and production changes remain explicitly deferred and require
   explicit Project Owner approval per phase.
 
 ## Required Evidence / Tests
 
-- Planning docs completeness check: required files exist and cover required
+- Implementation/docs completeness check: required files exist and cover required
   sections.
 - No-secret check: no `.env`, tokens, passwords, private keys, OAuth secrets,
   or session secrets are introduced.
@@ -93,7 +100,7 @@ automation, or secret handling are authorized outside the defined docs scope.
 
 ## Rollback
 
-- Revert the planning branch or delete the branch if scope drifts.
+- Revert the implementation branch or delete the branch if scope drifts.
 - Repository changes can be reverted through Git.
 - Existing valid backups must not be deleted.
 - No runtime state is modified by this WP.
@@ -102,7 +109,7 @@ automation, or secret handling are authorized outside the defined docs scope.
 
 Stop if:
 
-- scope expands beyond Phase 6 planning/docs;
+- scope expands beyond approved WP-006 implementation scope;
 - secrets are required or exposed;
 - runtime files outside approved docs scope are modified;
 - approval language becomes ambiguous or enables bypass;

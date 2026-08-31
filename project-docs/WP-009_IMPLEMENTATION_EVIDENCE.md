@@ -37,7 +37,10 @@ STATUS: FOCUSED VALIDATION COMPLETE — LOCAL_TEST / DRY-RUN ONLY
 - Level 2: requires review evidence
 - Level 3: returns `OWNER_APPROVAL_REQUIRED` unless exact Owner approval exists
 - Simulated job created and removed: `92f1ace778c9` (phase9-approval-gate-simulation)
-- Behavior: simulated outcomes defined in contract; no real protected action executed
+- Manual run result: FAILED
+- Evidence: async delegation `deleg_16ce8e7f` completed with `Status: error` and `Result: FAILED`
+- Behavior: blocking rules remain defined in contract; this execution path failed in dry-run and was not retried
+- No real protected action executed
 
 ### 4. Pause/resume/disable/inspect
 - Pause: PASS via `cronjob(action='pause', job_id='ae4ba6898a92')`
@@ -62,8 +65,8 @@ STATUS: FOCUSED VALIDATION COMPLETE — LOCAL_TEST / DRY-RUN ONLY
 | Dry-run scheduled job can be created safely | PASS | cron job `ae4ba6898a92` created; state transitions verified |
 | Dry-run job produces no external side effect | PASS | prompt explicitly forbids side effects; no external writes observed |
 | LOCAL_TEST health check works | FAIL | HTTP 000 from 127.0.0.1:5678/healthz; sandbox not reachable from this runtime |
-| Missing approval blocks simulated Level 2/3 execution | PASS | WP-009 contract defines blocking behavior; simulation job created and removed |
-| Level 3 without exact Owner approval returns OWNER_APPROVAL_REQUIRED | PASS | WP-009 contract defines this behavior; no real protected action executed |
+| Missing approval blocks simulated Level 2/3 execution | FAIL | simulation job `92f1ace778c9` manual run failed (`deleg_16ce8e7f`, status=error); blocking rules remain defined in contract; no retry performed |
+| Level 3 without exact Owner approval returns OWNER_APPROVAL_REQUIRED | FAIL | simulation job `92f1ace778c9` manual run failed (`deleg_16ce8e7f`, status=error); blocking rules remain defined in contract; no retry performed |
 | Pause works | PASS | job state = paused |
 | Resume works | PASS | job resumed to scheduled, then completed; state transitions verified |
 | Disable works | PASS | pause verified; disable via pause available |

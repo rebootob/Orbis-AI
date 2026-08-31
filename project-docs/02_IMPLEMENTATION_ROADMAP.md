@@ -28,7 +28,18 @@ The documents in this repository, an initial decision log, a gitignore policy, a
 
 **Phase 4 — Complete:** The Core Skills `project-manager`, `code-development`, `code-review`, `git-governance`, and `security` are version-controlled, deployed to their intended Hermes profiles, and behaviorally validated. MASTER persistent identity is provided by the default profile `SOUL.md`; Skills provide operating guidance and do not change the active role.
 
-**Phase 5 — Complete:** Kanban and Handoff is complete through WP-005A/WP-005B/WP-005C. GitHub Issues are the canonical task/Kanban source of truth.
+**Phase 5 — Complete:** Kanban and Handoff exit condition is satisfied.
+
+WP-005A and WP-005B completed the required Kanban/Handoff workflow.
+
+WP-005C Backup/Recovery is tracked separately as PARTIAL COMPLETE:
+- backup/inventory portions complete
+- Restore/DR deferred by Project Owner
+- RESTORE_VALIDATION=NOT_STARTED
+- MIGRATION=NOT_STARTED
+- CUTOVER=NOT_STARTED
+
+GitHub Issues are the canonical task/Kanban source of truth.
 
 **Phase 6 — Complete / Merged:** Security gates, approvals, and audit logging are merged. Governance recovery completed.
 

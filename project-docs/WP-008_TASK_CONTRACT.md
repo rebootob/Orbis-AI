@@ -57,15 +57,21 @@ E. Environment separation
 
 F. Evidence
 - MCP availability: PROVEN in Hermes runtime venv (`/home/allday/.hermes/hermes-agent/venv/lib/python3.11/site-packages/mcp`).
-- MCP package distribution found: `mcp-types 2.0.0`
-- MCP mechanism: Hermes runtime includes MCP client/server tooling (`mcp_tool.py`, `mcp_oauth.py`, `mcp_schema_cache.py`, `mcp_stdio_watchdog.py`, `setup_mcp_tool.py`) and docs describe config under `mcp_servers` in `~/.hermes/config.yaml` supporting stdio and HTTP transports. Current config has no `mcp_servers` section; no MCP server is configured yet.
-- Distinction: "reference found" ≠ "runtime capability proven".
+- MCP package/distribution/version: `mcp` 2.0.0; `mcp-types` 2.0.0
+- Python executable/path: `/home/allday/.hermes/hermes-agent/venv/bin/python`
+- venv path: `/home/allday/.hermes/hermes-agent/venv`
+- import test result: SUCCESS
+- minimal command/evidence:
+  - `/home/allday/.hermes/hermes-agent/venv/bin/python -m pip show mcp`
+  - `/home/allday/.hermes/hermes-agent/venv/bin/python -c "import mcp"`
+- mcp_servers configured: NO
 - n8n environment identity: LOCAL_TEST
 - authentication method metadata: NOT YET CONFIGURED
 - read-only permission proof: PENDING VALIDATION
 - successful harmless read test: PENDING
 - evidence that writes remain unavailable/not authorized: WRITE GATE DEFINED IN THIS CONTRACT; no write operations executed or planned during validation phase.
 - rollback/disconnect procedure: defined in this contract; no connection made so rollback not exercised
+- no secrets committed to Git
 
 G. Governance
 - Runtime REVIEWER = evidence only

@@ -7,20 +7,17 @@ WORK PACKAGE:
 WP-006 — SECURITY GATES, APPROVALS, AND AUDIT LOGGING
 
 STATUS:
-CONTROL PLANE REVIEW
+WP-006 = COMPLETE / MERGED PR #22 (merge commit 41fc3d270b6837bdfe88d39cdfdcdace1a839ac8)
 WP-005B = COMPLETE / MERGED (merge commit 5fe175efc4e4f9933299b14151919709c69769b3)
 WP-005C Runtime Inventory/Backup Design = COMPLETE / MERGED (merge commit 3e7b990f1fb88724f0266f5bd2fbcb7d6303bb44)
 WP-005C External Credential Recovery Verification = COMPLETE / MERGED (merge commit a7789317931894366dba8f8d3e4b04d659ee6d4f)
 WP-005C Backup Execution/Manifest Validation = COMPLETE / PASS
-WP-006 = COMPLETE / RUNTIME_REVIEWER_PASS / AWAITING_CONTROL_PLANE_REVIEW
 
 CURRENT PHASE:
-Phase 6 — Security Gates, Approvals, Audit Logging
-Issue #20 = state:control-review / role:control-plane
-IMPLEMENTATION = COMPLETE
-RUNTIME_REVIEWER = PASS
-WAITING_FOR = ChatGPT Control Plane review
-MERGE_REQUIRES_OWNER_APPROVAL = YES
+Phase 6 — Security Gates, Approvals, Audit Logging = COMPLETE
+Issue #20 = state:completed
+PR #22 = MERGED
+MERGE_COMMIT = 41fc3d270b6837bdfe88d39cdfdcdace1a839ac8
 WP-005C Restore / DR Rehearsal = DEFERRED
 
 CONTROL PLANE:
@@ -169,4 +166,4 @@ Stop if:
 
 ## Next Step
 
-Issue #20 exists with `state:in-progress` and `role:coder`. Implementation is in progress for ChatGPT Control Plane review and Project Owner merge approval only. Do not expand scope beyond approved WP-006 implementation without explicit approval.
+Phase 7 — Project Registry planning only.

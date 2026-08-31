@@ -2,14 +2,20 @@
 
 All notable repository changes will be recorded here.
 
-## Unreleased
+## [Unreleased]
 
 ### Added
+- WP-008 planning docs: `project-docs/WP-008_TASK_CONTRACT.md`
+- WP-008 planning branch: `ai/wp-008-n8n-via-mcp-planning`
 
-- Phase 0 project foundation documentation, governance policies, decision log, and repository guidance.
-- Phase 0B Git baseline controls: branch governance, safe configuration template, `.gitignore`, `.gitattributes`, and pre-Git backup policy.
-- Completed the safe local backup, secret-safety audit, `main` baseline, official GitHub connection, and `develop` branch creation.
-- WP-006 governance recovery: `GOVERNANCE_INCIDENTS.md`, canonical policy updates in `04_SECURITY_POLICY.md` and `05_APPROVAL_POLICY.md`, and `AI_ACTIVE_TASK.md` paused/recovery state.
-- Recorded incident INCIDENT-2026-08-31-WP006 for PREMATURE_MERGE_BEFORE_CONTROL_PLANE_REVIEW_PASS.
-- WP-007 planning completed and merged as PR #25 (merge commit d2aa184957dfa4b68087c6c708ec28cc84e5937d).
-- WP-007 implementation authorized: `scripts/wp007_registry.py`, `scripts/wp007_registry.txt`, and `tests/test_wp007_registry.py`.
+### Changed
+- `project-docs/AI_ACTIVE_TASK.md`: reconciled post-WP-007 state; Phase 8 planning authorized; WP-007 = COMPLETE / MERGED PR #27 at 6ed9a3ef1c2b7d0eed95728150315ccf7a9e3ccb; Issue #24 closed as completed.
+
+### Fixed
+- Stale WP-007 implementation state replaced with completed merge state.
+
+## [WP-007] - 2026-08-31
+
+### Added
+- Project Registry implementation: `scripts/wp007_registry.py`, `scripts/wp007_registry.txt`, `tests/test_wp007_registry.py`
+- PR #27 merged at `6ed9a3ef1c2b7d0eed95728150315ccf7a9e3ccb`

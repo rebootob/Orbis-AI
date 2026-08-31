@@ -104,7 +104,7 @@ All n8n write operations remain disabled/not authorized:
 - n8n process: NOT RUNNING
 - n8n configuration: NOT FOUND
 - n8n environment: UNKNOWN
-- MCP references in Hermes: FOUND
+- MCP references in Hermes: REFERENCE FOUND; runtime capability UNKNOWN (mcp Python package not importable; no MCP servers configured in config.yaml)
 - Action: STOP. Cannot connect without proven safe non-production target.
 
 ## Next Step

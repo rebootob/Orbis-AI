@@ -56,13 +56,16 @@ E. Environment separation
 - If only production exists or environment is ambiguous: STOP and report blocker
 
 F. Evidence
-- MCP availability/version
-- n8n environment identity
-- authentication method metadata
-- read-only permission proof
-- successful harmless read test
-- evidence that writes remain unavailable/not authorized
-- rollback/disconnect procedure
+- MCP availability: REFERENCE FOUND in Hermes/runtime; runtime capability UNKNOWN because `mcp` Python package is NOT installed/importable in this environment.
+- MCP version: UNKNOWN (package not importable).
+- MCP mechanism: REFERENCE FOUND. Hermes runtime includes MCP client tooling (`mcp_tool.py`, `mcp_oauth.py`, `mcp_schema_cache.py`, `mcp_stdio_watchdog.py`, `setup_mcp_tool.py`) and docs describe config under `mcp_servers` in `~/.hermes/config.yaml` supporting stdio and HTTP transports. Current config has no `mcp_servers` section; no MCP server is configured.
+- Distinction: "reference found" ≠ "runtime capability proven".
+- n8n environment identity: UNKNOWN
+- authentication method metadata: NOT AVAILABLE
+- read-only permission proof: NOT AVAILABLE (blocked by environment)
+- successful harmless read test: NOT EXECUTED
+- evidence that writes remain unavailable/not authorized: WRITE GATE DEFINED IN THIS CONTRACT; no write operations executed or planned during validation phase.
+- rollback/disconnect procedure: defined in this contract; no connection made so rollback not exercised
 
 G. Governance
 - Runtime REVIEWER = evidence only

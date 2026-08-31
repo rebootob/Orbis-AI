@@ -21,6 +21,27 @@ Level 3 production, destructive, credential, permission, migration, or force-pus
 
 Runtime REVIEWER PASS and repository `REVIEW_PASS` are separate decisions.
 
+## Mandatory merge sequence
+
+A merge may occur only after this exact sequence:
+
+1. Runtime REVIEWER returns PASS.
+2. STOP.
+3. ChatGPT Control Plane independently reviews the current GitHub repository/PR head SHA.
+4. ChatGPT explicitly issues `REVIEWER PASS` / `REVIEW_PASS`.
+5. STOP.
+6. Project Owner explicitly approves the exact PR merge.
+7. The merge may then occur.
+
+No earlier step authorizes a later step. Absence of any step invalidates merge authorization.
+
+## Non-authoritative signals
+
+These are never merge approval and cannot be inferred as such:
+- prior approval of a different action;
+- task state, labels, comments, or memory;
+- Telegram, Desktop, or workflow progression.
+
 ## Approval Record
 
 For actions requiring review or explicit owner approval, retain sufficient evidence to identify:

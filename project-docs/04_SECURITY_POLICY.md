@@ -48,3 +48,14 @@ No agent may bypass Level 3 approval. A reviewer PASS does not replace a Level 3
 ## Secret Protection
 
 Do not display, copy, commit, transmit, or persist `.env`, tokens, passwords, credentials, private keys, OAuth secrets, Telegram IDs, session secrets, approval tokens, or production credentials in docs, Issues, comments, or handoffs. If discovered, stop and report only file, risk category, and corrective action.
+
+## Merge and advance controls
+
+- After merge or closeout, MASTER must STOP.
+- MASTER must never automatically start the next work package.
+- The next work package requires a new explicit Control Plane instruction.
+- Runtime REVIEWER cannot issue repository `REVIEWER PASS` / `REVIEW_PASS`.
+- MASTER cannot infer or manufacture Control Plane `REVIEWER PASS` / `REVIEW_PASS`.
+- MASTER cannot infer Project Owner approval from prior approval, task state, labels, comments, memory, Telegram, Desktop, or workflow progression.
+- Owner implementation approval is not merge approval.
+- Approval for one phase/action cannot authorize another phase/action.

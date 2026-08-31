@@ -51,7 +51,7 @@ develop
 
 ## Objective
 
-Validate read-only n8n via MCP capability. BLOCKED: environment identity cannot be proven.
+Validate read-only n8n via MCP capability safely. BLOCKED: environment identity cannot be proven.
 
 ## Authorization
 

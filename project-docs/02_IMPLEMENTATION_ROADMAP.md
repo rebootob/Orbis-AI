@@ -67,7 +67,17 @@ Phase 8 gate:
 Write-capable phases remain NOT AUTHORIZED.
 Production n8n integration remains NOT COMPLETE.
 
-**Phase 9 — Not Started:** Automation/Cron.
+**Phase 9 — Complete With Qualification:** Automation/Cron is complete with Owner-accepted LOCAL_TEST/dry-run qualification.
+
+- Planning: COMPLETE / MERGED PR #38
+- Implementation: COMPLETE / MERGED PR #40
+- Merge commit: `4722ca6e2330c517b8bff1e5280b452e8f2f134f`
+- Qualification retained:
+  - LOCAL_TEST health check FAIL / HTTP 000 — sandbox unreachable
+- automation write operations: NOT AUTHORIZED
+- production automation: NO
+- n8n writes: NO
+- external side effects: NONE
 
 **Backup/Recovery — Partial Complete:**
 - runtime inventory / backup design = COMPLETE

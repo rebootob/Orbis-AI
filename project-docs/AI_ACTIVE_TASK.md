@@ -11,6 +11,9 @@ WP-008 = READ-ONLY VALIDATION COMPLETE — EMPTY-SANDBOX READ OPERATIONS = NOT T
 WP-008 Planning = COMPLETE / MERGED PR #29 (merge commit 2eec0883cff47456960983d062bbce8b52c77c89)
 WP-008 Read-Only Evidence = COMPLETE / MERGED PR #30 (merge commit ae9dc212bcc0e4fad78179e37e51a23625808261)
 WP-008 MCP Runtime/Evidence = COMPLETE / MERGED PR #35 (merge commit 7fa62e1f38583d703782f14907faa2238f2a3c22)
+WP-008 Closeout = COMPLETE / MERGED PR #36 (merge commit 75bd715d6ce07d86ae38bee617288d7973a546f5)
+WP-009 Planning = COMPLETE / MERGED PR #38 (merge commit 9991f1bcd503b99577686be62b16556473093f9b)
+WP-009 Implementation = COMPLETE / MERGED PR #40 (merge commit 4722ca6e2330c517b8bff1e5280b452e8f2f134f)
 WP-007 = COMPLETE / MERGED PR #27 (merge commit 6ed9a3ef1c2b7d0eed95728150315ccf7a9e3ccb)
 WP-006 = COMPLETE / MERGED PR #22 (merge commit 41fc3d270b6837bdfe88d39cdfdcdace1a839ac8)
 WP-005B = COMPLETE / MERGED (merge commit 5fe175efc4e4f9933299b14151919709c69769b3)
@@ -19,9 +22,12 @@ WP-005C External Credential Recovery Verification = COMPLETE / MERGED (merge com
 WP-005C Backup Execution/Manifest Validation = COMPLETE / PASS
 
 CURRENT PHASE:
-Phase 8 — n8n via MCP = READ-ONLY VALIDATION COMPLETE — EMPTY-SANDBOX READ OPERATIONS = NOT TESTABLE WITHOUT WRITE — OWNER ACCEPTED
+Phase 8/9 — COMPLETE WITH QUALIFICATION
 
 CURRENT PHASE DETAIL:
+Phase 8/9 closeout complete.
+WP-008 Issue #28 = CLOSED / COMPLETED
+WP-009 Issue #39 = CLOSED / COMPLETED
 Phase 7 — Project Registry = COMPLETE
 Issue #24 = CLOSED / COMPLETED
 PR #27 = MERGED
@@ -62,38 +68,21 @@ develop
 
 ## Objective
 
-WP-008 read-only MCP validation is complete with Owner-accepted qualification.
+WP-008 and WP-009 are complete with Owner-accepted qualifications.
+WP-008: empty LOCAL_TEST sandbox read operations are NOT TESTABLE WITHOUT WRITE.
+WP-009: Phase 9 implementation validated within LOCAL_TEST/dry-run scope only.
 
 ## Authorization
 
-This read-only validation phase is explicitly authorized by ChatGPT Control Plane and accepted by Project Owner on 2026-08-31. Implementation may proceed only after Runtime REVIEWER PASS, Control Plane REVIEW_PASS, and explicit Project Owner approval.
+WP-008 and WP-009 closeout are explicitly authorized by ChatGPT Control Plane and accepted by Project Owner on 2026-08-31.
+Further implementation may proceed only after Runtime REVIEWER PASS, Control Plane REVIEW_PASS, and explicit Project Owner approval for a new authorized phase.
 
 ## Scope
 
-- Inventory MCP capability in Hermes/runtime
-- Inventory n8n installation/configuration
-- Identify n8n environment as local/dev/test/production/UNKNOWN
-- Document endpoint/auth method metadata only
-- If non-production target proven safe: implement minimum read-only MCP connection
-- If environment ambiguous or only production exists: STOP and record blocker
-
-## Read-Only Capability Set (if environment proven)
-
-- list workflows
-- read workflow metadata
-- inspect workflow status
-- read workflow definition/configuration only if confirmed read-only
-- inspect execution metadata/history only if confirmed read-only
-
-## Write Gate
-
-All n8n write operations remain disabled/not authorized:
-- create/update/delete workflow
-- activate/deactivate workflow
-- execute workflow with side effects
-- credential changes
-- webhook creation/change
-- production changes
+- Record WP-008 closeout evidence and governance handoff
+- Record WP-009 planning/implementation evidence and governance handoff
+- Reconcile canonical documentation with current repository truth
+- Preserve audit evidence and qualification notes
 
 ## Security
 
@@ -102,12 +91,6 @@ All n8n write operations remain disabled/not authorized:
 - Do not expose secrets/credentials in docs, issues, comments, or code.
 - No mutable current HEAD SHAs in tracked docs; GitHub PR metadata is authoritative.
 - Preserve audit evidence; distinguish pre-authorization state from authorized state.
-
-## Environment Separation
-
-- local/dev/test n8n required for read-only validation
-- production n8n may not be used for validation
-- If only production exists or environment is ambiguous: STOP and report blocker
 
 ## Sandbox Evidence
 
@@ -126,7 +109,38 @@ All n8n write operations remain disabled/not authorized:
 - mcp_servers configured: NO
 - Action: READ-ONLY VALIDATION COMPLETE — EMPTY-SANDBOX READ OPERATIONS = NOT TESTABLE WITHOUT WRITE — OWNER ACCEPTED
 
+## Automation Evidence
+
+- Hermes cron dry-run job: ae4ba6898a92
+- Job state: completed
+- Last status: ok
+- Approval-gate simulation: BLOCKED / OWNER_APPROVAL_REQUIRED returned in dry-run
+- Disable/remove validation: passed via Hermes cron remove
+- Local test health check: FAIL / HTTP 000 — sandbox unreachable from runtime
+
+## Write Gate
+
+All n8n write operations remain disabled/not authorized:
+- create/update/delete workflow
+- activate/deactivate workflow
+- execute workflow with side effects
+- credential changes
+- webhook creation/change
+- production changes
+
+All automation write operations remain disabled/not authorized until explicit Project Owner authorization.
+
+## Environment Separation
+
+- local/dev/test n8n required for read-only validation
+- production n8n may not be used for validation
+- If only production exists or environment is ambiguous: STOP and report blocker
+
 ## Next Step
 
-Await explicit Control Plane authorization for read-only MCP validation against proven LOCAL_TEST sandbox.
-Do not auto-start MCP validation from this document.
+STOP — awaiting explicit Project Owner decision on next authorized phase.
+Do not start Phase 10.
+Do not start Restore/DR.
+Do not start production automation.
+Do not start n8n writes.
+Do not create new runtime jobs without separate authorization.

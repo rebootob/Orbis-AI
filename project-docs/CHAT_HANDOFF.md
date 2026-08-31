@@ -21,7 +21,7 @@ Canonical branch:
 `develop`
 
 Current develop baseline:
-`75bd715d6ce07d86ae38bee617288d7973a546f5`
+`4722ca6e2330c517b8bff1e5280b452e8f2f134f`
 
 ---
 
@@ -152,63 +152,56 @@ PR #27 → `6ed9a3ef1c2b7d0eed95728150315ccf7a9e3ccb`
 
 Issue #24 = CLOSED / COMPLETED
 
-### WP-008 — n8n via MCP
+### WP-009 — Automation / Cron
 
-STATUS: COMPLETE WITH QUALIFICATION
+STATUS: COMPLETE — LOCAL_TEST / DRY-RUN ONLY
 Planning:
-PR #29 → `2eec0883cff47456960983d062bbce8b52c77c89`
-Read-only validation inventory/evidence:
-PR #30 → `ae9dc212bcc0e4fad78179e37e51a23625808261`
-MCP runtime/evidence:
-PR #35 → `7fa62e1f38583d703782f14907faa2238f2a3c22`
-Closeout:
-PR #36 → `75bd715d6ce07d86ae38bee617288d7973a546f5`
-Issue #28 = state:control-review
+PR #38 → `9ea73e186421b3e1ca400cda64473c1c104413d5`
+Implementation:
+PR #40 → `29f0b10f8af193bd139ce01bf374c7bfefb65ef8`
+Merge commit:
+`4722ca6e2330c517b8bff1e5280b452e8f2f134f`
+Issue #39 = CLOSED / COMPLETED
 
 Current status:
-READ-ONLY VALIDATION COMPLETE — EMPTY-SANDBOX READ OPERATIONS = NOT TESTABLE WITHOUT WRITE — OWNER ACCEPTED
+IMPLEMENTATION COMPLETE — LOCAL_TEST / DRY-RUN ONLY
 
-Sandbox evidence:
-- n8n installation = FOUND
-- n8n process = PROVEN STARTABLE
-- n8n configuration = LOCAL_TEST
-- n8n target environment = LOCAL_TEST
-- n8n version = 2.36.9
-- Listen address = 127.0.0.1:5678
-- Public exposure = NO
-- MCP runtime = PROVEN
-- MCP package = mcp 2.0.0 + mcp-types 2.0.0
-- Python executable = /home/allday/.hermes/hermes-agent/venv/bin/python
-- venv = /home/allday/.hermes/hermes-agent/venv
-- MCP import = SUCCESS
-- mcp_servers configured = NO
+Validation evidence:
+- dry-run Hermes cron job completed with status=ok
+- approval-gate runtime simulation returned exact BLOCKED / OWNER_APPROVAL_REQUIRED
+- true disable/remove validation passed
+- LOCAL_TEST health check: FAIL / HTTP 000 — sandbox unreachable from runtime
 
 Security result:
-- n8n connection attempted = NO
-- production touched = NO
-- n8n write executed = NO
-- deployment = NO
+- automation created: NO
+- cron activated: NO
+- n8n writes: NO
+- production touched: NO
+- deployment: NO
 
-Phase 8 exit condition:
-Read-only operations evaluated; empty-sandbox reads accepted as NOT TESTABLE WITHOUT WRITE by Project Owner. Write-capable phases remain unauthorized.
+Phase 9 exit condition:
+Phase 9 implementation validated within LOCAL_TEST/dry-run scope only. Write-capable automation, production automation, and Phase 10 remain unauthorized until explicit Project Owner authorization.
 
 Next safe step:
-Explicit Control Plane/Project Owner authorization for any write-capable n8n/MCP phase.
+Explicit Project Owner authorization for any write-capable automation, production automation, or Phase 10.
 
-PHASE8_COMPLETE=YES — WITH QUALIFICATION
+PHASE9_COMPLETE=YES — LOCAL_TEST / DRY-RUN ONLY
 
 ---
 
 ## Exact Current Gate
 
-STOP — awaiting explicit Project Owner authorization for Phase 9 planning.
+STOP — awaiting explicit Project Owner decision on next authorized phase.
 
-Do not start Phase 9.
+Do not start Phase 10.
 Do not start Restore/DR.
-Do not start n8n writes or production integration.
+Do not start production automation.
+Do not start n8n writes.
+Do not create new runtime jobs without separate authorization.
 
 A proven LOCAL_TEST n8n sandbox exists at 127.0.0.1:5678.
 WP-008 is complete with qualification: EMPTY-SANDBOX READ OPERATIONS = NOT TESTABLE WITHOUT WRITE — OWNER ACCEPTED.
+WP-009 is complete with qualification: LOCAL_TEST / DRY-RUN ONLY; LOCAL_TEST health check FAIL / HTTP 000 — sandbox unreachable.
 Write-capable n8n/MCP phases remain NOT AUTHORIZED.
 Production n8n integration remains NOT COMPLETE.
 
@@ -222,8 +215,8 @@ Future work constraints:
 - no Kintone
 - no Telegram side effects
 - no external HTTP side effects
-- no cron/automation
-- no Phase 9 unless separately authorized
+- no cron/automation unless separately authorized
+- no Phase 10 unless separately authorized
 - no Restore/DR
 
 ---
@@ -297,11 +290,13 @@ Wait for explicit Control Plane instruction.
 - Phase 6: COMPLETE / MERGED
 - Phase 7: COMPLETE / MERGED
 - Phase 8: COMPLETE WITH QUALIFICATION
-- Phase 9: NOT STARTED
+- Phase 9: COMPLETE — LOCAL_TEST / DRY-RUN ONLY
+- Phase 10: NOT STARTED
 - Restore/DR: NOT STARTED
 
 Resume point:
-STOP — awaiting explicit Project Owner authorization for Phase 9 planning.
-Do not start Phase 9.
+STOP — awaiting explicit Project Owner decision on next authorized phase.
+Do not start Phase 10.
 Do not start Restore/DR.
-Do not start n8n writes or production integration.
+Do not start production automation.
+Do not start n8n writes.

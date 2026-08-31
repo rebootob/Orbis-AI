@@ -39,3 +39,25 @@ All notable repository changes will be recorded here.
 
 ### Fixed
 - Stale MCP runtime evidence reconciled across canonical docs.
+
+## [WP-009 Planning] - 2026-08-31
+
+### Added
+- WP-009 planning docs: `project-docs/WP-009_TASK_CONTRACT.md`
+- WP-009 planning branch: `ai/wp-009-automation-cron-planning`
+- PR #38 merged at `9991f1bcd503b99577686be62b16556473093f9b`
+
+## [WP-009 Implementation] - 2026-08-31
+
+### Added
+- WP-009 implementation evidence docs: `project-docs/WP-009_IMPLEMENTATION_EVIDENCE.md`
+- WP-009 implementation branch: `ai/wp-009-automation-cron-implementation`
+- PR #40 merged at `29f0b10f8af193bd139ce01bf374c7bfefb65ef8`
+
+### Changed
+- `project-docs/AI_ACTIVE_TASK.md` updated to Phase 8/9 complete with qualifications.
+- `project-docs/CHAT_HANDOFF.md` updated to post-Phase 8/9 handoff state.
+- `project-docs/02_IMPLEMENTATION_ROADMAP.md` updated to Phase 9 complete.
+
+### Fixed
+- Stale Phase 9 planning-only state reconciled to implementation-complete state.

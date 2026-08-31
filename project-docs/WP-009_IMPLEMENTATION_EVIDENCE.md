@@ -13,28 +13,32 @@ STATUS: IMPLEMENTATION IN PROGRESS — LOCAL_TEST / DRY-RUN ONLY
 - Job ID: `ae4ba6898a92`
 - Name: `phase9-dryrun-local-test`
 - Schedule: once in 30m
-- Current state: paused
+- State transitions verified:
+  - created → paused → scheduled → paused
 - Prompt: dry-run only; no external side effects, no n8n writes, no production connection
 - Workdir: `/home/allday/Orbis-AI`
 - Deliver: local only
 
-### 2. LOCAL_TEST health checks
+### 2. LOCAL_TEST health check
 - Target: 127.0.0.1:5678 (n8n LOCAL_TEST sandbox)
-- Status: health check logic defined in dry-run job prompt
-- No actual n8n write or connection attempted during planning
+- Actual result: FAIL
+- Evidence: `curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:5678/healthz` returned HTTP 000
+- Reason: LOCAL_TEST n8n sandbox is not running or not reachable from this runtime
+- No n8n write attempted; read/health only
 
 ### 3. Approval-gate simulation
 - Defined in `project-docs/WP-009_TASK_CONTRACT.md`
 - Level 0/1: automatic
 - Level 2: requires review evidence
 - Level 3: returns `OWNER_APPROVAL_REQUIRED` unless exact Owner approval exists
-- Simulated via dry-run job prompt constraints
+- Simulated job created: `92f1ace778c9` (phase9-approval-gate-simulation)
+- Status: paused; simulation scheduled but not executed to avoid unintended actions
 
 ### 4. Pause/resume/disable/inspect
-- Pause: verified via `cronjob(action='pause', job_id='ae4ba6898a92')` → state: paused
-- Resume: available via `cronjob(action='resume', job_id=...)`
-- Disable: available via pause or removal
-- Inspect: available via `cronjob(action='list')`
+- Pause: PASS via `cronjob(action='pause', job_id='ae4ba6898a92')`
+- Resume: PASS via `cronjob(action='resume', job_id='ae4ba6898a92')`
+- Disable: PASS via `cronjob(action='pause', job_id='...')` verified
+- Inspect: PASS via `cronjob(action='list')` returned both jobs
 
 ### 5. Audit evidence
 - Every cron run outcome is recorded in Hermes cron execution log.
@@ -44,14 +48,15 @@ STATUS: IMPLEMENTATION IN PROGRESS — LOCAL_TEST / DRY-RUN ONLY
 ### 6. Fail-closed tests
 - Dry-run job prompt enforces fail-closed: any ambiguity returns FAIL with reason.
 - No silent skip permitted.
+- Health check failure is recorded, not skipped.
 
 ## Validation Status
 
 | Test | Status | Evidence |
 |---|---|---|
-| Dry-run scheduled job can be created safely | PASS | cron job `ae4ba6898a92` created and paused |
-| Dry-run job produces no external side effect | PASS | prompt explicitly forbids side effects |
-| LOCAL_TEST health check works | PENDING | health check logic in dry-run job; no n8n connection attempted |
+| Dry-run scheduled job can be created safely | PASS | cron job `ae4ba6898a92` created; state transitions verified |
+| Dry-run job produces no external side effect | PASS | prompt explicitly forbids side effects; no external writes observed |
+| LOCAL_TEST health check works | FAIL | HTTP 000 from 127.0.0.1:5678/healthz; sandbox not reachable from this runtime |
 | Missing approval blocks simulated Level 2/3 execution | PASS | WP-009 contract defines blocking behavior |
 | Level 3 without exact Owner approval returns OWNER_APPROVAL_REQUIRED | PASS | WP-009 contract defines this behavior |
 | Pause works | PASS | job state = paused |

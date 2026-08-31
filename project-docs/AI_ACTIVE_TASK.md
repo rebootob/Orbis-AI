@@ -4,21 +4,19 @@ PROJECT:
 Orbis AI
 
 WORK PACKAGE:
-WP-005C — IMPLEMENTATION — BACKUP EXECUTION / MANIFEST VALIDATION
+WP-006 — PLANNING ONLY — SECURITY GATES, APPROVALS, AND AUDIT LOGGING
 
 STATUS:
-IMPLEMENTATION — BACKUP EXECUTION / MANIFEST VALIDATION
+PLANNING ONLY
 WP-005B = COMPLETE / MERGED (merge commit 5fe175efc4e4f9933299b14151919709c69769b3)
 WP-005C Runtime Inventory/Backup Design = COMPLETE / MERGED (merge commit 3e7b990f1fb88724f0266f5bd2fbcb7d6303bb44)
 WP-005C External Credential Recovery Verification = COMPLETE / MERGED (merge commit a7789317931894366dba8f8d3e4b04d659ee6d4f)
 WP-005C Backup Execution/Manifest Validation = COMPLETE / PASS
 
 CURRENT PHASE:
-Phase 5 — Backup Execution / Manifest Validation
-Secondary copy to Windows D: created and validated.
-Secondary checksum verification = PASS.
-Logical payload size match = PASS.
-File count match = PASS.
+Phase 6 — Security Gates, Approvals, Audit Logging
+WP-006 is PLANNING ONLY.
+WP-005C Restore / DR Rehearsal is DEFERRED and must not be started.
 
 CONTROL PLANE:
 ChatGPT
@@ -31,22 +29,45 @@ BASE BRANCH:
 develop
 
 WORKING BRANCH:
-ai/wp-005c-backup-execution
+ai/wp-006-security-gates-planning
 
 TARGET:
 develop
 
 ## Objective
 
-Document the current Hermes/Orbis runtime state and design the backup/restore
-architecture for WP-005C without modifying runtime behavior, creating backups,
-or starting migration.
+Define the smallest complete Phase 6 governance package that makes permission
+gates, approval requirements, audit evidence, and role boundary enforcement
+explicit and reviewable. This work package is planning/docs-only: no runtime
+code changes, no deployment, no automation, and no secret handling are
+authorized.
 
-Current approved implementation scope is limited to:
-- Runtime Inventory
-- Backup Design
-- Backup Execution / Manifest Validation
-- Secondary Copy Validation
+## Scope
+
+- Define the canonical WP-006 task contract in `project-docs/WP-006_TASK_CONTRACT.md`.
+- Define the smallest Phase 6 security policy surface in `project-docs/04_SECURITY_POLICY.md`.
+- Define approval-record requirements in `project-docs/05_APPROVAL_POLICY.md`.
+- Define audit evidence format and retention requirements in a new document
+  under `project-docs/`.
+- Update `project-docs/12_KANBAN_HANDOFF.md` to record explicit blocked/fail
+  behavior when permission/approval gates are bypassed through Telegram,
+  Desktop, GitHub comments, or Skills.
+- Update `project-docs/AI_ACTIVE_TASK.md` to identify WP-006 as PLANNING ONLY
+  and stop all WP-005C restore/migration/cutover/DR work.
+- Preserve Phase 5 workflow, WP-005C backup semantics, and CHAT_HANDOFF resume
+  behavior.
+
+## Out of Scope
+
+- Runtime code changes
+- Hermes skill code changes
+- n8n/MCP/Kintone
+- Deployment or production changes
+- Secret rotation or credential changes
+- Restore, migration, cutover, or DR rehearsal
+- WP-005D or later
+- Force push
+- Unrelated refactoring
 
 ## Runtime Architecture
 
@@ -73,39 +94,6 @@ No second Orbis runtime exists or is created on Windows.
 Windows local Hermes backend = NO.
 Telegram remains independently operational.
 
-## Scope
-
-### Current WP-005C Scope
-
-- Backup Execution: create a non-destructive local backup of approved Hermes
-  runtime state, manifest, and checksums.
-- Manifest Validation: validate backup completeness and record results.
-- Secondary Copy: create a verified Windows-drive secondary copy of the accepted
-  backup for offline protection.
-
-### WP-005C Backup Status
-
-- PRIMARY_BACKUP=PASS
-- SECONDARY_BACKUP=PASS
-- BACKUP_REDUNDANCY=PASS
-- OUTSIDE_WSL_COPY=YES
-- SEPARATE_PHYSICAL_DEVICE_VERIFIED=UNKNOWN
-- INDEPENDENT_OFFLINE_DR_COPY=NO_OR_UNKNOWN
-
-### WP-005C Scope Guard
-
-This phase is backup execution and documentation only.
-Do not start:
-- restore execution
-- server migration
-- cutover
-- runtime modification outside approved backup copy
-- secret rotation
-- Windows Hermes backend installation
-- PowerShell policy changes
-- deployment
-- credential reissue/rotation
-
 ## Authority Model
 
 - Runtime REVIEWER returns PASS/FAIL evidence only.
@@ -126,20 +114,6 @@ Do not start:
   approved.
 - ED25519 key-only authentication is enforced for SSH connections.
 
-## Required Validation
-
-- backup completeness against canonical inventory
-- manifest creation and validation
-- checksum verification
-- secret exclusion verification
-- secondary copy file count/size/checksum verification
-- Windows duplicate runtime guard:
-  - `WINDOWS_LOCAL_HERMES_BACKEND_RUNNING=NO`
-  - `DUPLICATE_ACTIVE_ORBIS_RUNTIME=NO`
-  - `WINDOWS_LOOPBACK_FORWARDING_MECHANISM=UNKNOWN`
-
-STATUS: WP-005C secondary copy validation complete.
-
 ## WP-005B Summary
 
 All blocks complete and merged into develop:
@@ -153,12 +127,10 @@ Merge commit: 5fe175efc4e4f9933299b14151919709c69769b3
 
 ## Rollback
 
-- Preserve existing SOUL/profile/config files unless a separately identified
-  change is required.
-- Stop any expansion beyond Backup Execution / Manifest Validation and
-  return to approved Phase 5 architecture if scope drifts.
+- Revert the planning branch or delete the branch if scope drifts.
 - Repository changes can be reverted through Git.
-- Existing valid backups must not be deleted under this authorization.
+- Existing valid backups must not be deleted.
+- No runtime state is modified by this WP.
 
 ## Out of Scope
 
@@ -177,46 +149,26 @@ Merge commit: 5fe175efc4e4f9933299b14151919709c69769b3
 - server migration
 - cutover
 - credential reissue/rotation
-- changing approved Phase 5 architecture unless required by migration
+- changing approved Phase 6 architecture unless required by migration
 
 ## Stop Conditions
 
 Stop if:
-- backup execution fails or produces an inconsistent backup;
-- verification requires secret exposure;
-- verification requires credential rotation/reissue;
-- secrets may be exposed;
-- runtime files outside approved backup scope are modified;
-- rollback path is unavailable or untested;
-- GitHub task state/evidence becomes inconsistent;
+
+- scope expands beyond WP-006 planning/docs;
+- secrets are required or exposed;
+- runtime files outside approved docs scope are modified;
+- approval language becomes ambiguous or enables bypass;
 - a Level 3 action is reached without explicit Project Owner approval;
-- scope expands beyond WP-005C Backup Execution / Manifest Validation;
-- Hermes Desktop attempts Windows-local backend bootstrap/installation.
+- restore, migration, cutover, or DR rehearsal is started;
+- n8n/MCP/Kintone or automation is started;
+- CHAT_HANDOFF resume behavior is broken;
+- WP-005C backup semantics are altered;
+- Hermes Desktop attempts Windows-local backend bootstrap/installation;
 - A second Hermes/Orbis runtime becomes active on Windows.
-- `WINDOWS_LOCAL_HERMES_BACKEND_RUNNING=YES` or `DUPLICATE_ACTIVE_ORBIS_RUNTIME=YES`.
-
-## Recovery Readiness
-
-- External credential recovery verification is COMPLETE / PASS.
-- RECOVERY_READINESS=YES
-- All four required credential categories have external recovery paths verified
-  by explicit Project Owner confirmation:
-  - GitHub authentication = VERIFIED
-  - Telegram bot authentication = VERIFIED
-  - Hermes API credentials = VERIFIED
-  - SSH private key recovery = VERIFIED
-- Documentation alone is no longer the limiting factor; subsequent WP-005C phases
-  still require separate approval before execution.
 
 ## Next Step
 
-Complete Project Owner review of:
-- backup execution record
-- manifest validation
-- secondary copy final checksum/size verification
-- file count reconciliation
-
-Only after approval proceed to restore execution, migration validation,
-or cutover planning.
-
-Do not expand scope beyond approved WP-005C phases without explicit approval.
+Await Project Owner approval to create the WP-006 Issue and begin Phase 6
+implementation on the approved branch. Do not expand scope beyond approved
+Phase 6 planning without explicit approval.

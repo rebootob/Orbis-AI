@@ -6,7 +6,7 @@
 
 - **Repository:** `rebootob/Orbis-AI`
 - **Canonical branch:** `develop`
-- **Develop HEAD:** `4722ca6e2330c517b8bff1e5280b452e8f2f134f`
+- **Develop HEAD:** `555d25d843ca36fd6ff89721398a5d853d43f64a`
 
 ## Current phase and work
 
@@ -26,7 +26,10 @@
 
 - **PR #40:** MERGED
 - **Approved implementation HEAD:** `29f0b10f8af193bd139ce01bf374c7bfefb65ef8`
-- **PR #40 merge commit / current develop HEAD:** `4722ca6e2330c517b8bff1e5280b452e8f2f134f`
+- **PR #40 merge commit:** `4722ca6e2330c517b8bff1e5280b452e8f2f134f`
+- **PR #42:** MERGED
+- **Approved documentation HEAD:** `db19bbbf03d173e860df6d88943b99367f5b8694`
+- **PR #42 merge commit / current develop HEAD:** `555d25d843ca36fd6ff89721398a5d853d43f64a`
 - **Issue #39:** CLOSED / COMPLETED
 
 ## Qualifications retained

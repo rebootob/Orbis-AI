@@ -45,24 +45,27 @@ GitHub Issues are the canonical task/Kanban source of truth.
 
 **Phase 7 — Complete / Merged:** Project Registry is merged and registered-project lookup works.
 
-**Phase 8 — In Progress / Blocked:** n8n via MCP read-only validation is blocked awaiting a proven local/dev/test n8n environment.
+**Phase 8 — Complete With Qualification:** n8n via MCP read-only validation is complete with Owner-accepted empty-sandbox qualification.
 
 - Planning: COMPLETE / MERGED PR #29
 - Read-only inventory/evidence: COMPLETE / MERGED PR #30
-- n8n installation/process/configuration: NOT FOUND
-- n8n target environment: UNKNOWN
-- MCP references in Hermes: FOUND
-- MCP runtime capability/version: UNKNOWN
-- no `mcp_servers` configured
+- MCP runtime/evidence: COMPLETE / MERGED PR #35
+- Closeout: COMPLETE / MERGED PR #36 → `75bd715d6ce07d86ae38bee617288d7973a546f5`
+- n8n installation/process/configuration: LOCAL_TEST sandbox provisioned and proven at 127.0.0.1:5678 (n8n 2.36.9)
+- n8n target environment: LOCAL_TEST
+- MCP runtime in Hermes: PROVEN
+- MCP package/distribution/version: mcp 2.0.0 + mcp-types 2.0.0
+- configured MCP servers: none
 - n8n connection attempted: NO
 - production touched: NO
 - write operation executed: NO
 
 Phase 8 exit condition:
-A proven LOCAL/DEV/TEST n8n environment must exist before read-only MCP validation may continue.
+EMPTY-SANDBOX READ OPERATIONS = NOT TESTABLE WITHOUT WRITE — OWNER ACCEPTED.
 
 Phase 8 gate:
-WP-008 SAFE N8N SANDBOX PROVISIONING — NON-PRODUCTION ONLY is the next safe work package. SANDBOX_PROVISIONING_STARTED=NO.
+Write-capable phases remain NOT AUTHORIZED.
+Production n8n integration remains NOT COMPLETE.
 
 **Phase 9 — Not Started:** Automation/Cron.
 

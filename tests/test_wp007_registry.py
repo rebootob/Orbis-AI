@@ -114,22 +114,17 @@ def _test_invalid_branch_metadata():
 
 
 def _test_secret_exclusion_from_registry():
-    record = _record()
+    registry_path = os.path.join(
+        os.path.dirname(os.path.dirname(__file__)), "scripts", "wp007_registry.txt"
+    )
+    with open(registry_path, "r", encoding="utf-8") as handle:
+        content = handle.read()
     forbidden = ("password", "token", "secret", "credential", "private key", "oauth")
-    fields = []
-    for field in (
-        record.project_id,
-        record.project_name,
-        record.repository,
-        record.canonical_branch,
-        record.project_docs_path,
-        record.status,
-        record.control_plane,
-        record.execution_role or "",
-        record.execution_model or "",
-    ):
-        fields.append(field)
-    return not any(any(secret in field.lower() for secret in forbidden) for field in fields if field)
+    lowered = content.lower()
+    matches = [term for term in forbidden if term in lowered]
+    if matches:
+        return False
+    return True
 
 
 def _test_lookup_helper():

@@ -4,14 +4,11 @@
 
 Level 0 read actions may normally proceed automatically.
 
-Level 1 development writes may proceed only inside the explicitly approved
-development scope or workspace.
+Level 1 development writes may proceed only inside the explicitly approved development scope or workspace.
 
-A normal non-protected development-branch push may occur when the current Work
-Package authorizes it and the push is required to create reviewable evidence.
+A normal non-protected development-branch push may occur when the current Work Package authorizes it and the push is required to create reviewable evidence.
 
-That push does not authorize merge, deployment, production change, or
-repository `REVIEW_PASS`.
+That push does not authorize merge, deployment, production change, or repository `REVIEW_PASS`.
 
 For repository integration such as merge:
 
@@ -20,16 +17,13 @@ For repository integration such as merge:
 3. After runtime PASS, ChatGPT Control Plane independently determines repository `REVIEW_PASS`.
 4. Explicit Project Owner approval is required before merge.
 
-Level 3 production, destructive, credential, permission, migration, or
-force-push actions always require explicit Project Owner approval for the exact
-action and target.
+Level 3 production, destructive, credential, permission, migration, or force-push actions always require explicit Project Owner approval for the exact action and target.
 
 Runtime REVIEWER PASS and repository `REVIEW_PASS` are separate decisions.
 
 ## Approval Record
 
-For actions requiring review or explicit owner approval, retain sufficient
-evidence to identify:
+For actions requiring review or explicit owner approval, retain sufficient evidence to identify:
 
 - Task ID
 - Target project or environment
@@ -42,11 +36,16 @@ evidence to identify:
 - Timestamp
 - Outcome
 
-During Phase 5 the GitHub task Issue and linked Git / Pull Request evidence
-provide the canonical workflow and audit record.
+During Phase 5 and Phase 6 the GitHub task Issue and linked Git / Pull Request evidence provide the canonical workflow and audit record.
 
-Future Project Registry work may add cross-project indexing but does not replace
-the Phase 5 task record.
+Future Project Registry work may add cross-project indexing but does not replace the Phase 5/6 task record.
+
+## Owner Approval Gates
+
+- Merge requires explicit Project Owner approval even after ChatGPT Control Plane `REVIEW_PASS`.
+- Approval evidence must record Task ID, requested action, permission/risk level, actor, timestamp, and outcome.
+- Level 3 actions require explicit Project Owner approval for the exact action and target.
+- Runtime REVIEWER PASS does not replace Project Owner approval.
 
 ## Examples
 
@@ -64,5 +63,4 @@ the Phase 5 task record.
 
 Review PASS never authorizes deployment automatically.
 
-If scope, environment, authority, or impact is unclear, stop and request
-clarification. Do not infer approval.
+If scope, environment, authority, or impact is unclear, stop and request clarification. Do not infer approval.

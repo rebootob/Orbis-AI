@@ -1,13 +1,13 @@
 # ORBIS AI — WP-006 TASK CONTRACT
 
 WORK PACKAGE:
-WP-006 — SECURITY GATES, APPROVALS, AND AUDIT LOGGING
+WP-006 — Security Gates, Approvals, and Audit Logging
 
 STATUS:
-PLANNING ONLY
+IMPLEMENTATION APPROVED
 
 CURRENT PHASE:
-Phase 6 — Security Gates, Approvals, Audit Logging
+Phase 6 — Security Gates, Approvals, Audit Logging — Implementation
 
 CONTROL PLANE:
 ChatGPT
@@ -20,31 +20,27 @@ BASE BRANCH:
 develop
 
 WORKING BRANCH:
-ai/wp-006-security-gates-planning
+ai/wp-006-security-gates-implementation
 
 TARGET:
 develop
 
 ## Objective
 
-Define the smallest complete Phase 6 governance package that makes permission
-gates, approval requirements, audit evidence, and role boundary enforcement
-explicit and reviewable. This work package is planning/docs-only: no runtime
-code changes, no deployment, no automation, and no secret handling are
-authorized.
+Execute the approved Phase 6 security gates, approvals, audit evidence,
+and role boundary enforcement package. No runtime code changes, deployment,
+automation, or secret handling are authorized outside the defined docs scope.
 
 ## Scope
 
-- Define the canonical WP-006 task contract in `project-docs/WP-006_TASK_CONTRACT.md`.
-- Define the smallest Phase 6 security policy surface in `project-docs/04_SECURITY_POLICY.md`.
-- Define approval-record requirements in `project-docs/05_APPROVAL_POLICY.md`.
-- Define audit evidence format and retention requirements in a new document
-  under `project-docs/`.
+- Define `project-docs/06_SECURITY_GATES_AUDIT_POLICY.md` for audit evidence,
+  retention, and fail-closed behavior.
+- Update `project-docs/04_SECURITY_POLICY.md` with the minimum Phase 6 security
+  policy surface.
+- Update `project-docs/05_APPROVAL_POLICY.md` with approval-record requirements.
 - Update `project-docs/12_KANBAN_HANDOFF.md` to record explicit blocked/fail
   behavior when permission/approval gates are bypassed through Telegram,
   Desktop, GitHub comments, or Skills.
-- Update `project-docs/AI_ACTIVE_TASK.md` to identify WP-006 as PLANNING ONLY
-  and stop all WP-005C restore/migration/cutover/DR work.
 - Preserve Phase 5 workflow, WP-005C backup semantics, and CHAT_HANDOFF resume
   behavior.
 
@@ -62,30 +58,39 @@ authorized.
 
 ## Acceptance Criteria
 
-- `project-docs/WP-006_TASK_CONTRACT.md` exists and defines Objective, Scope,
-  Out of Scope, Acceptance Criteria, Permission Level, Required Evidence /
-  Tests, Rollback, Stop Conditions, Project Owner approval gates, Level 3
-  protections, role boundary enforcement, audit evidence requirements, explicit
-  blocked/fail behavior, no secret exposure, and no bypass via
-  Telegram/Desktop/GitHub comments/Skills.
-- `project-docs/AI_ACTIVE_TASK.md` identifies WP-006 as PLANNING ONLY and
-  stops all restore/migration/cutover/DR work.
-- No repository code, runtime files, or secrets are modified.
-- The contract is reviewable as docs-only evidence on the planning branch.
+- `project-docs/WP-006_TASK_CONTRACT.md` defines Objective, Scope, Out of Scope,
+  Acceptance Criteria, Permission Level, Required Evidence / Tests, Rollback,
+  Stop Conditions, Project Owner approval gates, Level 3 protections, role
+  boundary enforcement, audit evidence requirements, explicit blocked/fail
+  behavior, no secret exposure, and no bypass via Telegram/Desktop/GitHub
+  comments/Skills.
+- `project-docs/06_SECURITY_GATES_AUDIT_POLICY.md` exists and defines audit
+  evidence format, retention, and fail-closed behavior.
+- `project-docs/AI_ACTIVE_TASK.md` identifies WP-006 as active implementation
+  and stops all restore/migration/cutover/DR work.
+- No repository code, runtime files, or secrets are modified outside approved docs
+  scope.
+- The contract is reviewable as docs-only evidence on the implementation branch.
 
 ## Permission Level
 
 - Level 0 reads: allowed automatically.
-- Level 1 development writes: allowed only inside approved WP-006 planning/docs
-  scope on branch `ai/wp-006-security-gates-planning`.
-- Level 2 writes: not authorized in this WP.
+- Level 1 development writes: allowed only inside approved WP-006 docs/implementation scope on branch `ai/wp-006-security-gates-implementation`.
+- Level 2 integration writes: authorized only for the following
+  implementation actions on branch `ai/wp-006-security-gates-implementation`:
+  - push the implementation branch,
+  - create/update PR #22,
+  - run approved tests,
+  - record Issue #20 audit/handoff evidence.
+- Level 2 does NOT authorize merge, deploy, production change, credential change,
+  restore, migration, cutover, DR rehearsal, or any Level 3 action.
 - Level 3 actions: not authorized in this WP; restore, migration, cutover, DR,
   deployment, and production changes remain explicitly deferred and require
   explicit Project Owner approval per phase.
 
 ## Required Evidence / Tests
 
-- Planning docs completeness check: required files exist and cover required
+- Implementation/docs completeness check: required files exist and cover required
   sections.
 - No-secret check: no `.env`, tokens, passwords, private keys, OAuth secrets,
   or session secrets are introduced.
@@ -94,7 +99,7 @@ authorized.
 
 ## Rollback
 
-- Revert the planning branch or delete the branch if scope drifts.
+- Revert the implementation branch or delete the branch if scope drifts.
 - Repository changes can be reverted through Git.
 - Existing valid backups must not be deleted.
 - No runtime state is modified by this WP.
@@ -103,7 +108,7 @@ authorized.
 
 Stop if:
 
-- scope expands beyond Phase 6 planning/docs;
+- scope expands beyond approved WP-006 implementation scope;
 - secrets are required or exposed;
 - runtime files outside approved docs scope are modified;
 - approval language becomes ambiguous or enables bypass;
@@ -152,8 +157,7 @@ Stop if:
 - Approval record must include Task ID, target, requested action, permission
   level, runtime reviewer result, ChatGPT Control Plane review decision, Project
   Owner approval where required, actor, timestamp, and outcome.
-- During Phase 6 planning, the planning branch commit and PR are the reviewable
-  evidence.
+- During Phase 6 implementation, the implementation branch commit and PR are the reviewable evidence.
 
 ## Explicit Blocked / Fail Behavior
 
@@ -174,3 +178,12 @@ Stop if:
   production credentials, or approval tokens in docs, Issues, comments, or
   handoffs.
 - If found, stop and report only file, risk category, and corrective action.
+
+## Project Owner Approval Record
+
+- Task ID: 20
+- Action: WP-006 implementation
+- Branch: ai/wp-006-security-gates-implementation
+- Approval: Project Owner approved implementation via chat authorization.
+- Timestamp: 2026-08-31
+- Outcome: APPROVED

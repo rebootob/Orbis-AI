@@ -122,7 +122,7 @@ Merge commit: 5fe175efc4e4f9933299b14151919709c69769b3
 
 ## Rollback
 
-- Revert the planning branch or delete the branch if scope drifts.
+- Revert the implementation branch or delete the branch if scope drifts.
 - Repository changes can be reverted through Git.
 - Existing valid backups must not be deleted.
 - No runtime state is modified by this WP.
@@ -150,7 +150,7 @@ Merge commit: 5fe175efc4e4f9933299b14151919709c69769b3
 
 Stop if:
 
-- scope expands beyond WP-006 planning/docs;
+- scope expands beyond approved WP-006 implementation scope;
 - secrets are required or exposed;
 - runtime files outside approved docs scope are modified;
 - approval language becomes ambiguous or enables bypass;
@@ -164,6 +164,4 @@ Stop if:
 
 ## Next Step
 
-Issue #20 exists with `state:ready` and `role:master`. Planning is awaiting
-ChatGPT Control Plane review and Project Owner merge approval only. Do not
-expand scope beyond approved Phase 6 planning without explicit approval.
+Issue #20 exists with `state:in-progress` and `role:coder`. Implementation is in progress for ChatGPT Control Plane review and Project Owner merge approval only. Do not expand scope beyond approved WP-006 implementation without explicit approval.

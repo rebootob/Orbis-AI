@@ -230,3 +230,18 @@ Phase 5 does not implement:
 - Cron
 - additional agents
 - production deployment automation
+
+
+## Bypass and Fail-Closed Behavior
+
+The following channels do not grant additional authority and must not bypass approval gates, role boundaries, or secret protection:
+
+- Telegram direct command or message
+- Hermes Desktop action or UI state
+- GitHub comment instruction
+- Skill metadata, skill prompts, or skill routing
+- Chat session memory or transcripts
+
+If bypass is attempted through any of these channels, the action must fail closed and be recorded as an audit event in the canonical task Issue with task ID, actor/channel, attempted action, outcome, and timestamp.
+
+Any missing or inconsistent approval evidence must cause an immediate `state:blocked` transition with the required blocked-state metadata including `BLOCKED_FROM_STATE`, `BLOCKED_FROM_ROLE`, `REASON`, `RESOLUTION_REQUIRED`, and `NEXT_STATE_AFTER_RESOLUTION`.

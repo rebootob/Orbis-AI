@@ -75,8 +75,7 @@ automation, or secret handling are authorized outside the defined docs scope.
 ## Permission Level
 
 - Level 0 reads: allowed automatically.
-- Level 1 development writes: allowed only inside approved WP-006 planning/docs
-  scope on branch `ai/wp-006-security-gates-implementation`.
+- Level 1 development writes: allowed only inside approved WP-006 docs/implementation scope on branch `ai/wp-006-security-gates-implementation`.
 - Level 2 integration writes: authorized only for the following
   implementation actions on branch `ai/wp-006-security-gates-implementation`:
   - push the implementation branch,
@@ -158,8 +157,7 @@ Stop if:
 - Approval record must include Task ID, target, requested action, permission
   level, runtime reviewer result, ChatGPT Control Plane review decision, Project
   Owner approval where required, actor, timestamp, and outcome.
-- During Phase 6 planning, the planning branch commit and PR are the reviewable
-  evidence.
+- During Phase 6 implementation, the implementation branch commit and PR are the reviewable evidence.
 
 ## Explicit Blocked / Fail Behavior
 

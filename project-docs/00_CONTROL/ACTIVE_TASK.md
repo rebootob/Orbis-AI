@@ -2,16 +2,35 @@
 
 > Canonical execution gate. This document identifies exactly one authorized work package or none.
 
-ACTIVE_WORK_PACKAGE: NONE
-STATUS: IDLE
-CURRENT_GATE: STOP — awaiting Project Owner authorization.
+ACTIVE_WORK_PACKAGE: WP-010
+STATUS: PLANNING
+CURRENT_GATE: BOUNDARY_C_MIGRATION_PLANNING_AUTHORIZED — execution NOT authorized.
 
 ## Current instruction
 
-No work package is authorized. Do not begin Phase 10, Restore/DR, production automation, n8n writes, deployment, credential changes, or new runtime jobs.
+Phase 10 Boundary C migration planning is authorized.
+Create minimum necessary migration planning documentation for WP-010.
+Do not execute migration, cutover, deployment, credential changes, n8n writes, Telegram production changes, or runtime service changes.
+
+## Authorized scope
+
+- Documentation/evidence updates for Phase 10 Boundary C migration planning
+- Migration plan creation/update
+- Required governance/docs reconciliation
+
+## Explicitly not authorized
+
+- Migration execution
+- Boundary D cutover
+- Deployment
+- Production service changes
+- Credential rotation/change
+- n8n production connection/write
+- Telegram production change
+- GitHub production credential changes
 
 ## Resume condition
 
-A Project Owner decision must explicitly authorize a new work package with scope, target environment, required approvals, validation criteria, and stop conditions. Record that authorization here before execution begins.
+A separate explicit Owner authorization is required before migration execution, Boundary D cutover, or any production-changing action.
 
 For repository context, read `project-docs/00_CONTROL/CURRENT_STATE.md`; use `project-docs/00_CONTROL/DOCUMENT_INDEX.md` to locate only task-relevant documents.

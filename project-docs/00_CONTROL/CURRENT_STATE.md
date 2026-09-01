@@ -10,30 +10,22 @@
 
 ## Current phase and work
 
-- **Current phase:** Phase 9 closed; Phase 10 not started.
-- **ACTIVE_WORK_PACKAGE:** NONE
-- **Exact current gate:** **STOP — awaiting Project Owner decision on next authorized phase.**
+- **Current phase:** Phase 10 Backup/Recovery
+- **ACTIVE_WORK_PACKAGE:** WP-010
+- **Exact current gate:** **PLANNING — Boundary C migration planning authorized; execution NOT authorized.**
 
-## Completed phase summary
+## Completed boundary summary
 
-| Scope | Status | Evidence |
+| Boundary | Status | Evidence |
 |---|---|---|
-| Phase 8 / WP-008 n8n via MCP | COMPLETE WITH QUALIFICATION | Issue #28 OPEN / `state:control-review`, `role:control-plane`; empty-sandbox read operations are `NOT TESTABLE WITHOUT WRITE — OWNER ACCEPTED`. |
-| Phase 9 planning | COMPLETE / MERGED | PR #38 merged. |
-| Phase 9 implementation | COMPLETE — LOCAL_TEST / DRY-RUN ONLY | PR #40 merged; Issue #39 closed/completed. |
+| Phase 10 Boundary A: Planning | COMPLETE | PR #46 merged; WP-010 TASK_CONTRACT and backup design/docs in place. |
+| Phase 10 Boundary B: Isolated restore rehearsal | COMPLETE | PR #46 merged; corrective backup `20260830-231125-corrective` created; isolated restore validation PASS in `Orbis-Recovery-Test`. |
 
 ## Latest merged evidence
 
-- **PR #40:** MERGED
-- **Approved implementation HEAD:** `29f0b10f8af193bd139ce01bf374c7bfefb65ef8`
-- **PR #40 merge commit:** `4722ca6e2330c517b8bff1e5280b452e8f2f134f`
-- **PR #42:** MERGED
-- **Approved documentation HEAD:** `db19bbbf03d173e860df6d88943b99367f5b8694`
-- **PR #42 merge commit:** `555d25d843ca36fd6ff89721398a5d853d43f64a`
-- **PR #43:** MERGED
-- **Approved PR #43 HEAD:** `75ca49cd7fd4d621da5fc75cd302fbe8085ced08`
-- **PR #43 merge commit:** `8ac53685e5c39c6144af7340a5664586af2c2409`
-- **Issue #39:** CLOSED / COMPLETED
+- **PR #46:** MERGED
+- **Approved documentation HEAD:** `05b77ab8c4a572e66945e911da984f71218a3726`
+- **PR #46 merge commit:** `49d17b88cfba4d7f3ab8f00a4066772d1252c4a4`
 
 ## Qualifications retained
 
@@ -47,10 +39,15 @@
 - n8n writes: **NOT AUTHORIZED**
 - Production n8n integration: **NOT COMPLETE**
 - Production automation: **NOT AUTHORIZED**
-- Restore/DR: **NOT STARTED / DEFERRED**
-- Phase 10: **NOT STARTED**
+- Migration execution: **NOT AUTHORIZED**
+- Boundary D cutover: **NOT AUTHORIZED**
 - Deployment, credential changes, and new runtime jobs: **NOT AUTHORIZED**
 
-## Next Project Owner decision required
+## Next required authorization
 
-Explicitly authorize the next phase, including its scope, environment, approval level, validation criteria, and stop conditions. Until then, no work package is active.
+Explicit Owner authorization is required before:
+- migration execution
+- Boundary D cutover
+- any production service change
+- any credential rotation/change
+- any n8n/Telegram/GitHub production integration change

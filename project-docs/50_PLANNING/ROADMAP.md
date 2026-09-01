@@ -12,7 +12,7 @@
 | 7 | Project Registry | Registered-project lookup works |
 | 8 | n8n via MCP | Read-only capabilities pass testing before writes |
 | 9 | Automation/Cron | Approved operational jobs are monitored |
-| 10 | Backup/Recovery | Recovery procedure is tested |
+| 10 | Backup/Recovery | Recovery readiness proven for current scope; migration/cutover deferred |
 
 ## Phase 0 deliverables
 
@@ -32,14 +32,16 @@ The documents in this repository, an initial decision log, a gitignore policy, a
 
 WP-005A and WP-005B completed the required Kanban/Handoff workflow.
 
-WP-005C Backup/Recovery is tracked separately as PARTIAL COMPLETE:
+WP-005C Backup/Recovery is tracked separately as COMPLETE FOR CURRENT RECOVERY SCOPE:
 - backup/inventory portions complete
-- Restore/DR deferred by Project Owner
-- RESTORE_VALIDATION=NOT_STARTED
-- MIGRATION=NOT_STARTED
-- CUTOVER=NOT_STARTED
+- isolated restore rehearsal / recovery validation = PASS
+- corrective backup coverage complete
+- Restore/DR validation = PASS
+- recovery readiness = PROVEN
+- Migration = DEFERRED / NOT_STARTED
+- Cutover = DEFERRED / NOT_STARTED
 
-GitHub Issues are the canonical task/Kanban source of truth.
+Do not claim migration or cutover readiness has been executed.
 
 **Phase 6 — Complete / Merged:** Security gates, approvals, and audit logging are merged. Governance recovery completed.
 
@@ -77,19 +79,23 @@ Production n8n integration remains NOT COMPLETE.
 - n8n writes: NOT AUTHORIZED
 - production automation: NOT AUTHORIZED
 - external side effects: NONE
-- Phase 10: NOT STARTED
+|- Phase 10: COMPLETE FOR CURRENT SCOPE
 
-**Backup/Recovery — Partial Complete:**
+**Backup/Recovery — Complete for current scope:**
 - runtime inventory / backup design = COMPLETE
 - external credential recovery verification = COMPLETE
 - backup execution / manifest validation = COMPLETE
-- Restore/DR validation = DEFERRED BY PROJECT OWNER
+- isolated restore rehearsal / recovery validation = PASS
+- corrective backup coverage = COMPLETE
+- original accepted backup preserved: `20260830-231125`
+- corrective backup: `20260830-231125-corrective`
+- recovery readiness = PROVEN
 
-RESTORE_VALIDATION=NOT_STARTED
-MIGRATION=NOT_STARTED
-CUTOVER=NOT_STARTED
+RESTORE_VALIDATION=PASS
+MIGRATION=DEFERRED / NOT_STARTED
+CUTOVER=DEFERRED / NOT_STARTED
 
-Do not claim full DR validation.
+Do not claim migration or cutover readiness has been executed.
 
 - WP-005A: GitHub-Issue-based task state, handoff protocol, Issue template, governance, and Core Skill guidance.
 - WP-005B: Hermes runtime integration plus optional Hermes Desktop operator console connected to the existing WSL2 Hermes runtime.

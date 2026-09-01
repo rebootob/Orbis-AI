@@ -12,26 +12,28 @@ Back up Hermes configuration/state, Git repositories, n8n workflows/configuratio
 
 ## Implementation status
 
-WP-005C Backup/Recovery: PARTIAL COMPLETE
+WP-005C / Phase 10 recovery path: COMPLETE FOR CURRENT RECOVERY SCOPE
 
 Completed:
 - runtime inventory / backup design
 - external credential recovery verification
 - backup execution / manifest validation
+- isolated restore rehearsal / recovery validation: PASS
+- corrective backup coverage: COMPLETE
+- original accepted backup preserved: `20260830-231125`
+- corrective backup: `20260830-231125-corrective`
+- secret safety: PASS
+- recovery isolation: PASS
 
 Merged evidence:
-- PR #17 → `3e7b990f1fb88724f0266f5bd2fbcb7d6303bb44`
-- PR #18 → `a7789317931894366dba8f8d3e4b04d659ee6d4f`
-- PR #19 → `6ca8d28ee43bb20569a9e328204aa1c9ff003753`
+- PR #46 → `49d17b88cfba4d7f3ab8f00a4066772d1252c4a4`
 
-Restore/DR:
-DEFERRED BY PROJECT OWNER
-
-RESTORE_VALIDATION=NOT_STARTED
+Current state:
+RESTORE_VALIDATION=PASS
 MIGRATION=NOT_STARTED
 CUTOVER=NOT_STARTED
 
-Do not claim full DR validation, tested restore, migration readiness, or cutover readiness.
+Do not claim migration or cutover readiness has been executed.
 
 ## Recovery procedure
 

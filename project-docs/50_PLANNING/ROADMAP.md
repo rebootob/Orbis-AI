@@ -79,7 +79,7 @@ Production n8n integration remains NOT COMPLETE.
 - n8n writes: NOT AUTHORIZED
 - production automation: NOT AUTHORIZED
 - external side effects: NONE
-|- Phase 10: COMPLETE FOR CURRENT SCOPE
+- Phase 10: COMPLETE FOR CURRENT SCOPE
 
 **Backup/Recovery — Complete for current scope:**
 - runtime inventory / backup design = COMPLETE

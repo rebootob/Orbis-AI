@@ -97,6 +97,24 @@ BASE: origin/develop
 
 ## 7. Boundary B Isolated Restore Rehearsal
 
+### 7.1 Corrective Backup Coverage
+
+Owner authorized corrective backup coverage for the 3 required missing assets and the `verification_evidence.db` path defect.
+
+| Field | Value |
+|---|---|
+| Corrective backup ID | `20260830-231125-corrective` |
+| Primary path | `/home/allday/.hermes/backups/wp005c-runtime-backup/20260830-231125-corrective` |
+| Windows handoff path | `/mnt/c/Users/allda/Downloads/Orbis-WP010-Corrective-Backup-20260830-231125-corrective` |
+| Old accepted backup preserved | YES — `20260830-231125` unchanged |
+| Added assets | `profiles/MASTER/SOUL.md`, `services/hermes-gateway.service`, `system/authorized_keys` |
+| Path defect corrected | `verification_evidence.db` validated at actual manifest path `profiles/CODER/verification_evidence.db` |
+| Checksum verification | PASS — zero FAILED entries in corrective set |
+| Secret safety gate | PASS — no prohibited credential material in corrective set |
+| Primary-side result | READY_FOR_RECOVERY_VALIDATION — restore validation pending isolated target |
+
+### 7.2 Rehearsal target
+
 - Rehearsal target: /tmp/orbis-wp010-rehearsal
 - Restored assets:
   - profiles/CODER/SOUL.md: COPIED
@@ -107,11 +125,11 @@ BASE: origin/develop
   - runtime/databases/kanban.db: COPIED
   - runtime/databases/projects.db: COPIED
   - runtime/.skills_prompt_snapshot.json: COPIED
-- Missing in accepted backup set:
-  - profiles/MASTER/SOUL.md: MISSING_IN_BACKUP
-  - services/hermes-gateway.service: MISSING_IN_BACKUP
-  - system/authorized_keys: MISSING_IN_BACKUP
-  - runtime/databases/verification_evidence.db: NOT_MISSING_IN_BACKUP; accepted manifest contains `profiles/CODER/verification_evidence.db`; rehearsal evidence path mismatch causes recorded FAIL.
+- Original missing assets:
+  - profiles/MASTER/SOUL.md: MISSING_IN_BACKUP — corrected in `20260830-231125-corrective`
+  - services/hermes-gateway.service: MISSING_IN_BACKUP — corrected in `20260830-231125-corrective`
+  - system/authorized_keys: MISSING_IN_BACKUP — corrected in `20260830-231125-corrective`
+  - runtime/databases/verification_evidence.db: NOT_MISSING_IN_BACKUP; accepted manifest contains `profiles/CODER/verification_evidence.db`; rehearsal evidence path mismatch caused recorded FAIL; corrective backup preserves actual path
 
 ## 8. Recovery Criteria Validation
 
@@ -143,12 +161,16 @@ Minimum corrective follow-up required:
 | KANBAN_DB_RESTORED | PASS |
 | PROJECTS_DB_RESTORED | PASS |
 | SKILL_SNAPSHOT_RESTORED | PASS |
-| MASTER_SOUL_RESTORED | FAIL |
-| GATEWAY_SERVICE_RESTORED | FAIL |
-| AUTHORIZED_KEYS_RESTORED | FAIL |
-| VERIFICATION_EVIDENCE_DB_RESTORED | FAIL |
+| MASTER_SOUL_RESTORED | FAIL — corrective backup `20260830-231125-corrective` added; isolated restore validation pending |
+| GATEWAY_SERVICE_RESTORED | FAIL — corrective backup `20260830-231125-corrective` added; isolated restore validation pending |
+| AUTHORIZED_KEYS_RESTORED | FAIL — corrective backup `20260830-231125-corrective` added; isolated restore validation pending |
+| VERIFICATION_EVIDENCE_DB_RESTORED | FAIL — rehearsal evidence path mismatch corrected; actual path `profiles/CODER/verification_evidence.db` preserved in corrective backup; isolated restore validation pending |
+| CORRECTIVE_BACKUP_CREATED | PASS |
+| CORRECTIVE_BACKUP_CHECKSUM_VERIFY | PASS |
+| WINDOWS_HANDOFF_SYNC | PASS |
 | RECOVERY_TARGET_CREDENTIAL_ISOLATION | PASS |
 | NO_SECRETS_COMMITTED | PASS |
+| PRIMARY_SIDE_RESULT | READY_FOR_RECOVERY_VALIDATION |
 
 ## 9. Rehearsal Stop Conditions
 

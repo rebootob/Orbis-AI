@@ -32,7 +32,7 @@ flowchart TB
 
 ## Responsibilities at the boundary
 
-Hermes is the primary decision-making and orchestration layer. Telegram only transports authenticated remote commands and responses. n8n, when introduced, handles deterministic workflows and integrations; it is not the AI brain. Git records changes and enables rollback. GitHub Issues are the canonical task store: Issue labels represent Kanban state and current responsibility, while Issue comments retain handoff and audit evidence. No custom Kanban database or web application is required.
+Hermes is the primary decision-making and orchestration layer. Telegram only transports authenticated remote commands and responses. n8n handles deterministic workflows and integrations; current validation is LOCAL_TEST with qualification and production integration remains NOT COMPLETE. It is not the AI brain. Git records changes and enables rollback. GitHub Issues are the canonical task store: Issue labels represent Kanban state and current responsibility, while Issue comments retain handoff and audit evidence. No custom Kanban database or web application is required.
 
 ## Design constraints
 

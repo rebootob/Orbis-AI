@@ -10,7 +10,7 @@
 
 ## Current phase and work
 
-- **Current phase:** Phase 10 Backup/Recovery
+- **Current phase:** Phase 10 Backup/Recovery — COMPLETE FOR CURRENT SCOPE
 - **ACTIVE_WORK_PACKAGE:** NONE
 - **Exact current gate:** STOP — recovery readiness achieved; await future Owner decision if migration/cutover becomes necessary.
 
@@ -25,9 +25,12 @@
 
 ## Latest merged evidence
 
-- **PR #46:** MERGED
+- **PR #46:** MERGED — Boundary B recovery evidence
 - **Approved documentation HEAD:** `05b77ab8c4a572e66945e911da984f71218a3726`
 - **PR #46 merge commit:** `49d17b88cfba4d7f3ab8f00a4066772d1252c4a4`
+- **PR #48:** MERGED — Phase 10 closeout sync
+- **Approved PR #48 HEAD:** `43c4757b5ffc146903d0e28534fe75b615b22d07`
+- **PR #48 merge commit:** `23e70dfde1ee25aa32aeffa877b26bc37fde5c31`
 
 ## Qualifications retained
 

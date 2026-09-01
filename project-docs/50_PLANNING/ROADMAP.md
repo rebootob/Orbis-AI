@@ -112,7 +112,9 @@ Hermes Desktop must not create a separate Orbis runtime. GitHub Issues remain th
 
 **Phase 4 Core:** `project-manager`, `code-development`, `code-review`, `git-governance`, and `security`.
 
-**Deferred:** `n8n` remains Phase 8 scope; `kintone` remains future approved integration scope; project-specific Skills such as `MBO2026`, `OrgFlow`, and `COCE` require separate authorization.
+**Current n8n/skills status:**
+- Phase 8 n8n integration validation is COMPLETE WITH QUALIFICATION; production/write-capable n8n remains NOT AUTHORIZED.
+- Kintone and project-specific Skills remain future separately-authorized work.
 
 ## Handoff flow
 

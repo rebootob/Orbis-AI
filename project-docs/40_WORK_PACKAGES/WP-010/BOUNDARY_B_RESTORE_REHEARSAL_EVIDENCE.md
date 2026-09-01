@@ -161,10 +161,16 @@ Resolved against WP-010 TASK_CONTRACT, WP-005C BACKUP_DESIGN, WP-005C BACKUP_EXE
 | `AUTHORIZED_KEYS_RESTORED` | REQUIRED_BY_WP010_AND_MISSING_FROM_BACKUP | TASK_CONTRACT §4/§8 and BACKUP_DESIGN §2/§5/§10 explicitly include SSH `authorized_keys`; accepted backup tree does not include `system/authorized_keys`. |
 | `VERIFICATION_EVIDENCE_DB_RESTORED` | PRESENT_IN_BACKUP — actual manifest path `profiles/CODER/verification_evidence.db`; initial rehearsal FAIL was caused by evidence path mismatch/internal consistency defect; corrective backup preserves actual path and isolated restore validation PASS |
 
-Minimum corrective follow-up required:
-- Re-run restore rehearsal against accepted backup set `20260830-231125` using the actual restored file paths from the manifest (`profiles/CODER/verification_evidence.db`).
-- Correct rehearsal evidence so `verification_evidence.db` is checked at the actual restored path.
-- Treat `MASTER_SOUL_RESTORED`, `GATEWAY_SERVICE_RESTORED`, and `AUTHORIZED_KEYS_RESTORED` as backup coverage gaps against the accepted backup manifest; do not mark PASS without restoring those assets or updating canonical backup design to explicitly exclude them.
+Corrective follow-up completed:
+- All 4 targeted restore validations PASS:
+  - `profiles/MASTER/SOUL.md`: PASS
+  - `services/hermes-gateway.service`: PASS
+  - `system/authorized_keys`: PASS
+  - `profiles/CODER/verification_evidence.db`: PASS
+- Corrective backup package `20260830-231125-corrective` created and validated
+- Original accepted backup `20260830-231125` preserved unchanged
+- Windows handoff repaired and verified
+- No further corrective follow-up required
 
 ### 8.2 Validation Checklist
 
@@ -211,7 +217,8 @@ Minimum corrective follow-up required:
 - n8n writes: NONE
 - Migration/cutover/deployment: NONE
 - Credential rotation/change: NONE
-- Primary Ubuntu modification: NONE
+- Primary runtime modification: NONE
+- Primary backup artifact activity: corrective backup package created under authorized Boundary B scope
 
 ## 11. Next Step
 

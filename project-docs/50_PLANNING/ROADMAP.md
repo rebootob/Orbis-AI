@@ -99,7 +99,12 @@ Do not claim migration or cutover readiness has been executed.
 
 - WP-005A: GitHub-Issue-based task state, handoff protocol, Issue template, governance, and Core Skill guidance.
 - WP-005B: Hermes runtime integration plus optional Hermes Desktop operator console connected to the existing WSL2 Hermes runtime.
-- WP-005C: end-to-end MASTER → CODER → REVIEWER → Control Plane workflow, FAIL return loop, Telegram/Desktop access, and restart/resume validation. Restore/DR rehearsal was part of WP-005C scope but was DEFERRED BY PROJECT OWNER and is NOT STARTED.
+- WP-005C: end-to-end MASTER → CODER → REVIEWER → Control Plane workflow,
+  FAIL return loop, Telegram/Desktop access, restart/resume validation,
+  backup/recovery inventory and execution evidence.
+- Phase 10 later completed the isolated restore rehearsal and validation.
+- RESTORE_VALIDATION=PASS.
+- Migration/Cutover remain DEFERRED / NOT_STARTED.
 
 Hermes Desktop must not create a separate Orbis runtime. GitHub Issues remain the canonical task/Kanban source of truth.
 
@@ -107,7 +112,9 @@ Hermes Desktop must not create a separate Orbis runtime. GitHub Issues remain th
 
 **Phase 4 Core:** `project-manager`, `code-development`, `code-review`, `git-governance`, and `security`.
 
-**Deferred:** `n8n` remains Phase 8 scope; `kintone` remains future approved integration scope; project-specific Skills such as `MBO2026`, `OrgFlow`, and `COCE` require separate authorization.
+**Current n8n/skills status:**
+- Phase 8 n8n integration validation is COMPLETE WITH QUALIFICATION; production/write-capable n8n remains NOT AUTHORIZED.
+- Kintone and project-specific Skills remain future separately-authorized work.
 
 ## Handoff flow
 

@@ -40,13 +40,18 @@ Core skill implementation: COMPLETE FOR PHASE 4 — repository definitions exist
 
 There is no exact installed-name collision with the Core 5. The built-ins `github-code-review` and `requesting-code-review` have related scope; `code-review` must remain focused on the Orbis independent-review boundary.
 
-## DEFERRED
+## DEFERRED — historical and current
 
-- `n8n` — Phase 8 only.
-- `kintone` — future approved integration work.
-- Project-specific skills — later approved projects only.
+Historical Phase 4 deferred items:
+- `n8n` was deferred at Phase 4.
 
-No deferred Skill is implemented by Phase 4.
+Current state:
+- Phase 8 n8n integration validation is complete with qualification.
+- Do not claim a production/write-capable n8n Skill unless repository evidence confirms one exists.
+- `kintone` remains future approved work.
+- Project-specific Skills such as `MBO2026`, `OrgFlow`, and `COCE` remain separately authorized.
+
+No deferred Skill is installed as a production-capable integration by the current repository state unless explicitly evidenced.
 
 ## Runtime verification executed in WP-004C
 

@@ -111,9 +111,27 @@ BASE: origin/develop
   - profiles/MASTER/SOUL.md: MISSING_IN_BACKUP
   - services/hermes-gateway.service: MISSING_IN_BACKUP
   - system/authorized_keys: MISSING_IN_BACKUP
-  - runtime/databases/verification_evidence.db: MISSING_IN_BACKUP
+  - runtime/databases/verification_evidence.db: NOT_MISSING_IN_BACKUP; accepted manifest contains `profiles/CODER/verification_evidence.db`; rehearsal evidence path mismatch causes recorded FAIL.
 
 ## 8. Recovery Criteria Validation
+
+### 8.1 Authoritative Disposition
+
+Resolved against WP-010 TASK_CONTRACT, WP-005C BACKUP_DESIGN, WP-005C BACKUP_EXECUTION_RECORD, and accepted backup manifest for backup set `20260830-231125`:
+
+| Item | Authoritative disposition | Canonical evidence |
+|---|---|---|
+| `MASTER_SOUL_RESTORED` | REQUIRED_BY_WP010_AND_MISSING_FROM_BACKUP | TASK_CONTRACT §4 lists Hermes runtime profiles for root/MASTER; BACKUP_DESIGN §2/§5 includes root/MASTER profile coverage; accepted backup structure and rehearsal evidence show no `profiles/MASTER/SOUL.md` in the accepted backup tree. |
+| `GATEWAY_SERVICE_RESTORED` | REQUIRED_BY_WP010_AND_MISSING_FROM_BACKUP | TASK_CONTRACT §4/§8 and BACKUP_DESIGN §2/§5/§10 explicitly include `hermes-gateway.service`; accepted backup tree does not include `services/hermes-gateway.service`. |
+| `AUTHORIZED_KEYS_RESTORED` | REQUIRED_BY_WP010_AND_MISSING_FROM_BACKUP | TASK_CONTRACT §4/§8 and BACKUP_DESIGN §2/§5/§10 explicitly include SSH `authorized_keys`; accepted backup tree does not include `system/authorized_keys`. |
+| `VERIFICATION_EVIDENCE_DB_RESTORED` | INTENTIONALLY_EXCLUDED_BY_CANONICAL_BACKUP_DESIGN | BACKUP_EXECUTION_RECORD §3/§5/§6 documents `verification_evidence.db` under runtime profile databases and shows the accepted backup contains `profiles/CODER/verification_evidence.db`; the rehearsal `MISSING_IN_BACKUP` note is incorrect/contradicts the accepted manifest. Canonical backup design treats this asset as included, so rehearsal FAIL indicates an internal consistency defect in the evidence record, not a design exclusion. |
+
+Minimum corrective follow-up required:
+- Re-run restore rehearsal against accepted backup set `20260830-231125` using the actual restored file paths from the manifest (`profiles/CODER/verification_evidence.db`).
+- Correct rehearsal evidence so `verification_evidence.db` is checked at the actual restored path.
+- Treat `MASTER_SOUL_RESTORED`, `GATEWAY_SERVICE_RESTORED`, and `AUTHORIZED_KEYS_RESTORED` as backup coverage gaps against the accepted backup manifest; do not mark PASS without restoring those assets or updating canonical backup design to explicitly exclude them.
+
+### 8.2 Validation Checklist
 
 | Check | Result |
 |---|---|
@@ -145,7 +163,7 @@ BASE: origin/develop
 ## 10. Final State
 
 - Exact HEAD at time of initial submission: c6f53720adacb8a7615f7955fc614ee598ff6ee2
-- Final exact HEAD after Control Plane findings and isolation/rehearsal: HEAD
+- Current exact PR HEAD is authoritative from GitHub PR metadata and must be resolved at review time; do not store a mutable current HEAD in this evidence file.
 - Working branch: ai/wp-010-boundary-b-restore-rehearsal
 - Unsaved working tree changes: NONE after commit
 - Merge state: open PR only, no merge

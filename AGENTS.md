@@ -19,7 +19,7 @@ This file is the mandatory entry point when Codex is explicitly assigned reposit
 ChatGPT remains the Orbis AI **CONTROL PLANE**, Project Lead, Architect, and independent repository reviewer. Hermes Agent is the primary Orbis runtime/orchestrator. Codex is an optional execution worker for explicitly authorized, clearly scoped tasks and must not replace MASTER, CODER, REVIEWER, or the Control Plane.
 
 ## ACTIVE TASK GATE
-ฝ
+
 `project-docs/00_CONTROL/ACTIVE_TASK.md` is the canonical current instruction. Before implementation, inspect `STATUS`.
 
 Codex may execute only when status is `READY_FOR_CODEX` or `CHANGES_REQUESTED`. If it is `IDLE`, `NOT_READY`, `BLOCKED`, `REVIEW_REQUESTED`, `REVIEW_PASS`, or `COMPLETED`, do not start unrelated implementation. Follow the state rules in `project-docs/10_GOVERNANCE/AUTHORITY_MODEL.md`.
